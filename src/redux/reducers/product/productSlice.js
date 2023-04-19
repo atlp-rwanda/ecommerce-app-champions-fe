@@ -1,17 +1,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import url from "../../../constants/url";
+import keys from "../../../constants/keys"
 
 const initialState = {
   loading: false,
   products: [],
   error: '',
 };
-
 export const getAvailableProducts = createAsyncThunk('user/fetchUsers', async () => {
-  const prods = await axios.get(`${url}/api/product/getAvailable`);
-  return prods;
+  const prods = await axios.get(`${keys.APP_URL}/api/product/getAvailable`);
+  return prods.data;
 });
 
 const productSlice = createSlice({
