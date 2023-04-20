@@ -3,20 +3,44 @@
 		"browser": true,
 		"es2021": true
 	},
-	"extends": ["plugin:react/recommended", "airbnb"],
-	"globals": {
-		"document": true
-	},
+	"extends": [
+		"airbnb",
+		"airbnb/hooks",
+		"plugin:react/recommended",
+		"plugin:prettier/recommended",
+		"plugin:storybook/recommended"
+	],
 	"overrides": [],
 	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
 		"ecmaVersion": "latest",
 		"sourceType": "module"
 	},
-	"plugins": ["react"],
+	"plugins": ["react", "prettier"],
 	"rules": {
-		"react/react-in-jsx-scope": ["off"],
+		"prettier/prettier": "error",
+		"arrow-body-style": "off",
+		"prefer-arrow-callback": "off",
+		"react/react-in-jsx-scope": 0,
+		"react/function-component-definition": 0,
+		"global-require": 0,
+		"import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
 		"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
 		"quotes": "off",
-		"allowArrowFunctions": true
+		"import/prefer-default-export": 0,
+		"jsx-a11y/label-has-associated-control": 0,
+		"jsx-a11y/label-has-for": 0,
+		"react/prop-types": 0,
+		"react/jsx-props-no-spreading": 0,
+		"react/self-closing-comp": [
+			"error",
+			{
+				"component": true,
+				"html": true
+			}
+		],
+		"react/no-unescaped-entities": ["error", { "forbid": [">", "}"] }]
 	}
 }

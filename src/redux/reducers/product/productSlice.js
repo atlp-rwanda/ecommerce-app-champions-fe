@@ -1,7 +1,7 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import keys from '../../../constants/keys';
+import varKeys from '../../../constants/keys';
 
 const initialState = {
 	loading: false,
@@ -11,7 +11,9 @@ const initialState = {
 export const getAvailableProducts = createAsyncThunk(
 	'user/fetchUsers',
 	async () => {
-		const prods = await axios.get(`${keys.APP_URL}/api/product/getAvailable`);
+		const prods = await axios.get(
+			`${varKeys.APP_URL}/api/product/getAvailable`
+		);
 		return prods.data;
 	}
 );
