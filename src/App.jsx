@@ -1,16 +1,21 @@
-import React from 'react';
+import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { Login } from './pages/Login';
+import { Home } from './pages/Home';
+import { Header } from './components/Header';
+
 import './App.css';
-import Test from './components/Test';
-import Test2 from './components/Test2';
 
 function App() {
+  const [count, setCount] = useState(0);
+
   return (
     <div className="App">
-      {/* <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1> */}
-      <Test />
-      <Test2 />
+      <Header />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/Login" element={<Login />} />
+      </Routes>
     </div>
   );
 }

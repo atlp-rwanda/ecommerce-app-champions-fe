@@ -2,24 +2,23 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render, screen } from '@testing-library/react';
 import { expect, describe, it } from 'vitest';
-import Test from '../components/Test';
-// eslint-disable-next-line no-unused-vars
-// import App from '../App';
-import Test2 from '../components/Test2';
 
-describe('Test', () => {
-  it('should render Hello world!', () => {
-    render(<Test />);
+import { Home } from '../pages/Home';
+import { Login } from '../pages/Login';
 
-    const headline = screen.getByText('Test');
+describe('Home', () => {
+  it('should render Welcome to champion\'s ecommerce app', () => {
+    render(<Home />);
+
+    const headline = screen.getByText(/Welcome to champion's ecommerce app/i);
 
     expect(headline).toBeInTheDocument();
   });
 
-  it('should render Hello world!', () => {
-    render(<Test2 />);
+  it('should render This is login page', () => {
+    render(<Login />);
 
-    const headline = screen.getByText('Test2');
+    const headline = screen.getByText(/This is login page/i);
 
     expect(headline).toBeInTheDocument();
   });
