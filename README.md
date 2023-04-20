@@ -1,4 +1,3 @@
-
 # ecommerce-app-champions-fe
 
 ## Installation & required steps
