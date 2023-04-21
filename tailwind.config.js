@@ -3,6 +3,7 @@ export default {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
 		colors: {
+			transparent: 'transparent',
 			forest_green: '#225F33',
 			wheat: '#D9CC9F',
 			gray85: '#D9D9D9',
@@ -28,6 +29,7 @@ export default {
 			xl: '1280px',
 			'2xl': '1536px',
 		},
+		separator: '-',
 		extend: {
 			spacing: {
 				'8xl': '96rem',
