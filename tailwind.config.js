@@ -3,20 +3,22 @@ export default {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
 		colors: {
-			color1: '#225F33',
-			color2: '#D9CC9F',
-			color3: '#D9D9D9',
-			color4: '#BA6E6E',
+			forest_green: '#225F33',
+			wheat: '#D9CC9F',
+			gray85: '#D9D9D9',
+			grayish_blue: '#2F2E41',
+			oxford_blue: '#263238',
+			cyan_lime_green: '#92E3A9',
+			gray33: '#545454',
 			red: '#ff0000',
-			wheat: '#F5DEB3',
-			'rosy brown': '#BC8F8F',
+			rosy_brown: '#A0616A',
 			blue: '#1fb6ff',
 			black: '#000000',
 		},
 		fontFamily: {
 			font: ['Inter', 'sans-serif'],
 		},
-		fontWeight: {},
+		fontWeight: { big: '700', med: '500', small: '400' },
 		fontSize: {},
 
 		screens: {
