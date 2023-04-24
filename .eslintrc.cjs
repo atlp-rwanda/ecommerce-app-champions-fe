@@ -25,6 +25,8 @@ module.exports = {
 		'arrow-body-style': 'off',
 		'prefer-arrow-callback': 'off',
 		'react/react-in-jsx-scope': 0,
+		'no-param-reassign': 0,
+		'import/no-named-as-default': 0,
 		'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 		'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
 		quotes: 'off',
