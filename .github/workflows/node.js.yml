@@ -1,4 +1,4 @@
-name: Deploy using Github Action
+name: Github Actions
 
 on:
   push:
@@ -26,3 +26,4 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
+      - run: npm run coverage

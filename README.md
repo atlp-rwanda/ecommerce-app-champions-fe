@@ -1,5 +1,7 @@
 # ecommerce-app-champions-fe
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/aeb4bd8b881c7e0588e5/maintainability)](https://codeclimate.com/github/atlp-rwanda/ecommerce-app-champions-fe/maintainability) [![Actions Status](https://github.com/atlp-rwanda/ecommerce-app-champions-fe/actions/workflows/node.js.yml/badge.svg)](https://github.com/atlp-rwanda/ecommerce-app-champions-fe/actions/workflows/node.js.yml)
+
 ## Installation & required steps
 
 1. Clone this repository using the command : `git clone  `
