@@ -1,9 +1,5 @@
-import { useState } from 'react'
-import AllProducts from './components/allProducts';
-import { useState } from 'react';
-
 import { Routes, Route } from 'react-router-dom';
-
+import AllProducts from './components/allProducts';
 import Login from './pages/Login';
 import Home from './pages/Home';
 
@@ -12,8 +8,6 @@ import { Header } from './components/Header';
 import './App.css';
 
 function App() {
-	const [count, setCount] = useState(0);
-
 	return (
 		<div className="App">
 			<Header />
@@ -21,7 +15,7 @@ function App() {
 				<Route exact path="/" element={<Home />} />
 				<Route path="/Login" element={<Login />} />
 			</Routes>
-      <AllProducts/>
+			<AllProducts />
 		</div>
 	);
 }

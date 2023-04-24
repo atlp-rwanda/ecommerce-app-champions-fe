@@ -19,6 +19,8 @@ module.exports = {
 	},
 	plugins: ['react', 'prettier'],
 	rules: {
+		'no-param-reassign': 0,
+		'import/no-named-as-default': 0,
 		'prettier/prettier': 'error',
 		'arrow-body-style': 'off',
 		'prefer-arrow-callback': 'off',
