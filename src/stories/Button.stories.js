@@ -1,4 +1,3 @@
-// import MyButton from './MyButton';
 import Button from '../components/Button/Button';
 
 export default {
@@ -12,7 +11,7 @@ export default {
 export const Primary = {
 	args: {
 		label: 'Button',
-		className: 'bg-primary text-white',
+		className: 'bg-primaryGreen text-white',
 		primary: true,
 	},
 };
@@ -21,14 +20,14 @@ export const Secondary = {
 	args: {
 		label: 'Button',
 		secondary: true,
-		className: 'text-black border border-primary',
+		className: 'text-black border border-primaryGreen',
 	},
 };
 
 export const Danger = {
 	args: {
 		label: 'Button',
-		className: 'bg-light-red text-white',
+		className: 'bg-lightRed text-white',
 		secondary: true,
 	},
 };
