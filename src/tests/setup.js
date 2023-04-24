@@ -1,8 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { expect, afterEach } from 'vitest';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { cleanup } from '@testing-library/react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import matchers from '@testing-library/jest-dom/matchers';
 
 // extends Vitest's expect method with methods from react-testing-library
