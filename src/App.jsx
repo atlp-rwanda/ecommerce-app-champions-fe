@@ -1,6 +1,5 @@
-import { useState } from 'react'
-import AllProducts from './components/allProducts';
 import { useState } from 'react';
+import AllProducts from './components/allProducts';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -21,7 +20,7 @@ function App() {
 				<Route exact path="/" element={<Home />} />
 				<Route path="/Login" element={<Login />} />
 			</Routes>
-      <AllProducts/>
+			<AllProducts />
 		</div>
 	);
 }
