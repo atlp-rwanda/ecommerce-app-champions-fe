@@ -5,15 +5,12 @@ export default {
 		fontFamily: {
 			font: ['Inter', 'sans-serif'],
 		},
-		fontWeight: { big: '700', med: '500', small: '400' },
-		fontSize: {},
-
+		fontWeight: { bold: '700', medium: '500', normal: '400' },
 		screens: {
 			sm: '640px',
 			md: '768px',
 			lg: '1024px',
 			xl: '1280px',
-			'2xl': '1536px',
 		},
 		separator: '-',
 		extend: {
@@ -30,7 +27,9 @@ export default {
 				primaryGreen: '#225F33',
 				lightRed: '#BA6E6E',
 				black: '#2D2D2D',
+				yellow: '#DAAB33',
 				secondary: 'rgba(217, 204, 159, 0.75)',
+				brightGray: 'rgba(217, 217, 217, 0.3)',
 				white: '#fff',
 				wheat: '#D9CC9F',
 				gray85: '#D9D9D9',
@@ -41,6 +40,7 @@ export default {
 				red: '#ff0000',
 				rosy_brown: '#A0616A',
 				blue: '#1fb6ff',
+				lightBlue: '#4E5BD7',
 			},
 		},
 	},

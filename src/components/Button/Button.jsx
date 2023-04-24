@@ -1,6 +1,6 @@
 const Button = ({ label, className }) => {
 	return (
-		<button type="button" className={`px-8 py-1 ${className} rounded-2xl`}>
+		<button type="submit" className={`px-8 py-1 ${className} rounded-2xl`}>
 			{label}
 		</button>
 	);
