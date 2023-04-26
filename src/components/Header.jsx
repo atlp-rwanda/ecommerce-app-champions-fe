@@ -18,6 +18,8 @@ const Header = () => {
 			<Link to="/signup" className="px-4">
 				Signup
 			</Link>
+			<Link to="/ForgotPassword">Forget password</Link>
+			<Link to="/ResetPassword">Reset Password</Link>
 		</div>
 	);
 };

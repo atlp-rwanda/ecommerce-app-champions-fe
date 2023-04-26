@@ -17,6 +17,7 @@
 		"coverage": "vitest run --coverage "
 	},
 	"dependencies": {
+		"@emotion/react": "^11.10.6",
 		"@reduxjs/toolkit": "^1.9.5",
 		"@storybook/addon-postcss": "^2.0.0",
 		"@testing-library/jest-dom": "^5.16.5",
