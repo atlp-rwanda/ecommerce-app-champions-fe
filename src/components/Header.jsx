@@ -15,6 +15,8 @@ const Header = () => {
 			<Link to="/vendor" className="px-4">
 				Vendor
 			</Link>
+			<Link to="/ForgotPassword">Forget password</Link>
+			<Link to="/ResetPassword">Reset Password</Link>
 		</div>
 	);
 };
