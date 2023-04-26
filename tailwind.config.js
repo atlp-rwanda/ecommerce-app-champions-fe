@@ -7,10 +7,10 @@ export default {
 		},
 		fontWeight: { bold: '700', medium: '500', normal: '400' },
 		screens: {
-			sm: '640px',
+			sm: '480px',
 			md: '768px',
-			lg: '1024px',
-			xl: '1280px',
+			lg: '976px',
+			xl: '1440px',
 		},
 		separator: '-',
 		extend: {
@@ -25,6 +25,7 @@ export default {
 			colors: {
 				transparent: 'transparent',
 				primaryGreen: '#225F33',
+				secondaryGreen: '#92E3A9',
 				lightRed: '#BA6E6E',
 				black: '#2D2D2D',
 				yellow: '#DAAB33',

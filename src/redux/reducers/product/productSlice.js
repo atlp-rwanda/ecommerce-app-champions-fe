@@ -9,7 +9,7 @@ const initialState = {
 	error: '',
 };
 export const getAvailableProducts = createAsyncThunk(
-	'user/fetchUsers',
+	'product/allproducts',
 	async () => {
 		const prods = await axios.get(
 			`${varKeys.APP_URL}/api/product/getAvailable`

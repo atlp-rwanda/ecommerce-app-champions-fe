@@ -7,7 +7,8 @@ const Header = () => {
 			<Link to="/Login" style={{ marginLeft: '10px' }}>
 				Login
 			</Link>
-			<Link to="/signup">Signup</Link>
+			<Link to="/buyer">Buyer</Link>
+			<Link to="/vendor">Vendor</Link>
 		</div>
 	);
 };

@@ -1,13 +1,49 @@
 import React from 'react';
+import InputError from './InputError';
 
-const Input = ({ placeholder }) => {
+/**
+ * this is the input componennt where the user can pass the values
+ *
+ * @param {string} firstname
+ * @param {string} lastname
+ * @param {string} email
+ * @param {string} password
+ * @returns
+ */
+
+const Input = ({
+	placeholder,
+	type,
+	error,
+	name,
+	id,
+	isRequired,
+	handleChange,
+	className,
+	labelFor,
+	labelText,
+	autoComplete,
+	value,
+}) => {
 	return (
-		<div>
+		<div className="flex flex-col">
+			{labelText && (
+				<label htmlFor={labelFor} className="px-1 text-grayish_blue text-sm">
+					{labelText}
+				</label>
+			)}
 			<input
-				type="text"
+				autoComplete={autoComplete}
+				type={type}
+				id={id}
+				name={name}
+				required={isRequired}
 				placeholder={placeholder}
-				className="py-2 px-2 my-3 rounded-md w-2/4"
+				onChange={handleChange}
+				className={className}
+				value={value}
 			/>
+			{error && <InputError error={error} />}
 		</div>
 	);
 };

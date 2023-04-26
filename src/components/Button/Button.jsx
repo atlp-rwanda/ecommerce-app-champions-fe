@@ -1,7 +1,9 @@
-const Button = ({ label, className }) => {
+import LoadingSpinner from '../LoadingSpinner';
+
+const Button = ({ label, className, loading }) => {
 	return (
-		<button type="submit" className={`px-8 py-1 ${className} rounded-2xl`}>
-			{label}
+		<button type="submit" className={className}>
+			{loading ? <LoadingSpinner /> : label}
 		</button>
 	);
 };
