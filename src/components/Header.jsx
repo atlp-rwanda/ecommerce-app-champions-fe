@@ -10,6 +10,25 @@ const Header = () => {
 					{link.name}
 				</Link>
 			))}
+			<Link to="/" className="px-4">
+				Home
+			</Link>
+			<Link to="/Login" className="px-4">
+				Login
+			</Link>
+			<Link to="/buyer" className="px-4">
+				Buyer
+			</Link>
+			<Link to="/vendor" className="px-4">
+				Vendor
+			</Link>
+			<Link to="/signup" className="px-4">
+				Signup
+			</Link>
+			<Link to="/ForgotPassword">Forget password</Link>
+			<Link to="/ResetPassword">Reset Password</Link>
+			<Link to="/signup">Signup</Link>
+			<Link to="/auth">Auth</Link>
 		</div>
 	);
 };
