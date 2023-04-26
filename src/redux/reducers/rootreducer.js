@@ -8,6 +8,7 @@ import productSlice from './product/productSlice';
 import registerSlice from './auth/authSlice';
 import password from './auth/ForgotSlice';
 import resetPassword from './auth/ResetPasswordSlice';
+import AuthSlice from './Auth/AuthSlice';
 
 const rootReducer = combineReducers({
 	cart: cartSlice,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
 	resetPassword,
 	register: registerSlice,
 	login: loginSlice,
+	auth: AuthSlice,
 });
 
 export default rootReducer;

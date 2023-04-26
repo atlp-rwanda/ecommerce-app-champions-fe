@@ -15,4 +15,8 @@ const store = configureStore({
 		getDefaultMiddleware({ serializableCheck: false }).concat(logger),
 });
 
+// store.subscribe(() => {
+// 	console.log('state updated \n', store.getState());
+// });
+
 export default store;

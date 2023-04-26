@@ -4,22 +4,24 @@ export default {
 	theme: {
 		fontFamily: {
 			font: ['Inter', 'sans-serif'],
+			sans: ['Open Sans', 'sans-serif'],
 		},
-		fontWeight: { bold: '700', medium: '500', normal: '400' },
+		fontWeight: { big: '700', med: '500', small: '400' },
+		fontSize: {
+			iphoneSE: ['12px', '14px'],
+			middle: '15px',
+			samsung: ['12px', '14px'],
+		},
+
 		screens: {
 			sm: '480px',
+			samsung: '359px',
+			iphoneSE: '375px',
+			middle: '376px',
 			md: '768px',
-<<<<<<< HEAD
 			lg: '976px',
 			xl: '1440px',
-=======
-			lg: '1024px',
-			xl: '1280px',
->>>>>>> 6d8c28b (ft(two-factor-auth for sellers))
-		},
-		separator: '-',
-		extend: {
-			spacing: {
+			extend: {
 				'8xl': '96rem',
 				'9xl': '128rem',
 			},
