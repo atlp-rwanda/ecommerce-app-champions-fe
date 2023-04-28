@@ -24,6 +24,8 @@ export const login = (userData) => async (dispatch) => {
 			dispatch(loginSuccess(res));
 		} else if (res.passwordExpired) {
 			dispatch(passwordExpired(res));
+			Cookies.set('token', res.loginOTP);
+			dispatch(loginSuccess(res));
 		}
 		toast.success('login successful', {
 			position: toast.POSITION.TOP_RIGHT,
@@ -51,5 +53,13 @@ export const login = (userData) => async (dispatch) => {
 			});
 			return dispatch(loginFail('Invalid Credentials.'));
 		}
+		if (error) {
+			toast.error('invalid credentials', {
+				position: toast.POSITION.TOP_RIGHT,
+			});
+			return dispatch(loginFail(error.message));
+		}
+		toast.error('invalid credentials', { position: toast.POSITION.TOP_RIGHT });
+		return dispatch(loginFail(error.Error));
 	}
 };

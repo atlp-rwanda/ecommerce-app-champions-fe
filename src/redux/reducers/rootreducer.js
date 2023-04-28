@@ -16,6 +16,7 @@ const rootReducer = combineReducers({
 	password,
 	resetPassword,
 	register: registerSlice,
+	login: loginSlice,
 });
 
 export default rootReducer;
