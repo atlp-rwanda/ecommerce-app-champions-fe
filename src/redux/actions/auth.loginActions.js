@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import { Userlogin } from '../../api/userApi';
