@@ -30,3 +30,16 @@ export const vendorSignup = (vendorData) => {
 			});
 	});
 };
+export const Userlogin = (userData) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(`${url}/api/user/login`, userData)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};

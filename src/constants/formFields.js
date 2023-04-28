@@ -19,6 +19,9 @@ export const buyerSignUpFields = [
 		isRequired: true,
 		autoComplete: 'true',
 	},
+];
+
+export const userloginFields = [
 	{
 		labelFor: 'Email',
 		labelText: 'Email',
