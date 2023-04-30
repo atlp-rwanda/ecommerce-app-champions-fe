@@ -2,8 +2,8 @@ import React from 'react';
 import { expect, describe, it } from 'vitest';
 import { render, screen } from './setup';
 
-import HomePage from '../pages/HomePage';
-import LoginPage from '../pages/LoginPage';
+import HomePage from '../src/pages/HomePage';
+import LoginPage from '../src/pages/LoginPage';
 
 describe('Home', () => {
 	it("should render Welcome to champion's ecommerce app", () => {

@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import userEvent from '@testing-library/user-event';
-import reducers from '../redux/reducers/rootreducer';
+import reducers from '../src/redux/reducers/rootreducer';
 
 function render(
 	ui,

@@ -15,7 +15,8 @@ buyerSignUpFields.forEach((field) => (fieldState[field.id] = ''));
 
 const BuyerSignupPage = () => {
 	const [signupState, setSignupState] = useState(fieldState);
-	const { loading, user } = useSelector((state) => state.register);
+	const userDetails = useSelector((state) => state.register || {});
+	const { loading, user } = userDetails;
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const handleChange = (e) =>
