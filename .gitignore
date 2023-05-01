@@ -9,8 +9,10 @@ lerna-debug.log*
 
 node_modules
 dist
+coverage
 dist-ssr
 *.local
+
 
 
 # Editor directories and files
@@ -24,5 +26,3 @@ dist-ssr
 *.sln
 *.sw?
 .env
-
-package-lock.json

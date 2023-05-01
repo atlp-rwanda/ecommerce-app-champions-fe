@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-return-assign */
 /* eslint-disable consistent-return */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -78,7 +79,7 @@ const Login = () => {
 					className="bg-wheat text-white font-bold w-full md:w-80"
 				/>
 				<div className="flex flex-row space-x-3 mt-6 py-2">
-					<Link to="/signup" className="text-lightBlue underline">
+					<Link to="/BuyerSignupPage" className="text-lightBlue underline">
 						Signup
 					</Link>
 					<Link to="/Reset" className="text-lightBlue underline">

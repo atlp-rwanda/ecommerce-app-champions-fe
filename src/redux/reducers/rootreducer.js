@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import loginSlice from './Auth/loginSlice';
+import loginSlice from './auth/loginSlice';
 import cartSlice from './cart/cartSlice';
 import productSlice from './product/productSlice';
 import registerSlice from './auth/authSlice';
