@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-return-assign */
 /* eslint-disable consistent-return */
 /* eslint-disable react-hooks/exhaustive-deps */
