@@ -1,22 +1,19 @@
-import { Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
-import Home from './pages/Home';
-
-import { Header } from './components/Header';
-
-import './App.css';
-import ProductList from './components/product/ProductList';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import BuyerSignupPage from './pages/BuyerSignupPage';
+import VendorSignupPage from './pages/VendorSignupPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
 	return (
-		<>
-			<Header />
+		<BrowserRouter>
 			<Routes>
-				<Route exact path="/" element={<Home />} />
-				<Route path="/Login" element={<Login />} />
+				<Route exact path="/" element={<HomePage />} />
+				<Route path="/buyer" element={<BuyerSignupPage />} />
+				<Route path="/vendor" element={<VendorSignupPage />} />
+				<Route path="/Login" element={<LoginPage />} />
 			</Routes>
-			<ProductList />
-		</>
+		</BrowserRouter>
 	);
 }
 
