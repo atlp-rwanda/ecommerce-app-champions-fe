@@ -25,7 +25,7 @@
 					<div class="fl pad1y space-right2">
 						<span class="strong">100% </span>
 						<span class="quiet">Statements</span>
-						<span class="fraction">13/13</span>
+						<span class="fraction">15/15</span>
 					</div>
 
 					<div class="fl pad1y space-right2">
@@ -43,7 +43,7 @@
 					<div class="fl pad1y space-right2">
 						<span class="strong">100% </span>
 						<span class="quiet">Lines</span>
-						<span class="fraction">13/13</span>
+						<span class="fraction">15/15</span>
 					</div>
 				</div>
 				<p class="quiet">
@@ -72,7 +72,11 @@
 <a name='L11'></a><a href='#L11'>11</a>
 <a name='L12'></a><a href='#L12'>12</a>
 <a name='L13'></a><a href='#L13'>13</a>
-<a name='L14'></a><a href='#L14'>14</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -87,13 +91,15 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { combineReducers } from '@reduxjs/toolkit';
 &nbsp;
-import loginSlice from './Auth/loginSlice';
+import loginSlice from './auth/loginSlice';
 import cartSlice from './cart/cartSlice';
 import productSlice from './product/productSlice';
+import registerSlice from './auth/authSlice';
 &nbsp;
 const rootReducer = combineReducers({
 	cart: cartSlice,
 	product: productSlice,
+	register: registerSlice,
 	login: loginSlice,
 });
 &nbsp;
@@ -112,7 +118,7 @@ export default rootReducer;
 				rel="noopener noreferrer"
 				>istanbul</a
 			>
-			at 2023-05-01T10:20:21.216Z
+			at 2023-05-02T07:28:11.756Z
 		</div>
 		<script src="../../prettify.js"></script>
 		<script>

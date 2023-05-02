@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { expect, describe, it } from 'vitest';
-import Login from '../src/pages/Login';
+import Login from '../src/pages/LoginPage';
 import store from '../src/redux/store';
 
 describe('Home', () => {
@@ -19,7 +19,7 @@ describe('Home', () => {
 		const passwordInput = screen.getByPlaceholderText('Password');
 		const loginButton = screen.getByText('Login');
 		const googleButton = screen.getByText('Sign in with Google');
-		const signupLink = screen.getByText('Signup');
+		const signupLink = screen.getByText('Buyer Signup');
 		const forgotPasswordLink = screen.getByText('Forgot password');
 
 		expect(emailInput).toBeInTheDocument();

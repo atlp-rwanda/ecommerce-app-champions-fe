@@ -63,7 +63,7 @@ const Login = () => {
 							labelFor={field.labelFor}
 							autoComplete={field.autoComplete}
 							handleChange={handleChange}
-							className="appearance-none py-2 px-2 my-2 rounded-md w-11/12"
+							className="appearance-none py-2 px-2 my-2 rounded-md w-9/12"
 						/>
 					))}
 					<Button

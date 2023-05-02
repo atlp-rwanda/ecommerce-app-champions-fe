@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Code coverage report for pages/Login.jsx</title>
+		<title>Code coverage report for pages/LoginPage.jsx</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="../prettify.css" />
 		<link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 			<div class="pad1">
 				<h1>
 					<a href="../index.html">All files</a> /
-					<a href="index.html">pages</a> Login.jsx
+					<a href="index.html">pages</a> LoginPage.jsx
 				</h1>
 				<div class="clearfix">
 					<div class="fl pad1y space-right2">
-						<span class="strong">90.21% </span>
+						<span class="strong">90.62% </span>
 						<span class="quiet">Statements</span>
-						<span class="fraction">83/92</span>
+						<span class="fraction">87/96</span>
 					</div>
 
 					<div class="fl pad1y space-right2">
@@ -41,9 +41,9 @@
 					</div>
 
 					<div class="fl pad1y space-right2">
-						<span class="strong">90.21% </span>
+						<span class="strong">90.62% </span>
 						<span class="quiet">Lines</span>
-						<span class="fraction">83/92</span>
+						<span class="fraction">87/96</span>
 					</div>
 				</div>
 				<p class="quiet">
@@ -151,7 +151,11 @@
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
 <a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -218,6 +222,10 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -320,11 +328,14 @@ const Login = () =&gt; {
 				&lt;ToastContainer /&gt;
 				&lt;GoogleButton
 					label="Sign in with Google"
-					className="bg-wheat text-white font-bold w-full md:w-80"
+					className="bg-wheat text-white font-bold "
 				/&gt;
 				&lt;div className="flex flex-row space-x-3 mt-6 py-2"&gt;
-					&lt;Link to="/signup" className="text-lightBlue underline"&gt;
-						Signup
+					&lt;Link to="/Buyer" className="text-lightBlue underline"&gt;
+						Buyer Signup
+					&lt;/Link&gt;
+					&lt;Link to="/Vendor" className="text-lightBlue underline"&gt;
+						Vendor Signup
 					&lt;/Link&gt;
 					&lt;Link to="/Reset" className="text-lightBlue underline"&gt;
 						Forgot password
@@ -334,6 +345,7 @@ const Login = () =&gt; {
 		&lt;/div&gt;
 	);
 };
+&nbsp;
 export default Login;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -349,7 +361,7 @@ export default Login;
 				rel="noopener noreferrer"
 				>istanbul</a
 			>
-			at 2023-05-01T10:20:21.216Z
+			at 2023-05-02T07:28:11.756Z
 		</div>
 		<script src="../prettify.js"></script>
 		<script>

@@ -6,7 +6,7 @@ import {
 	loginStart,
 	loginSuccess,
 	loginFail,
-} from '../reducers/auth/loginSlice';
+} from '../reducers/auth/authLoginSlice';
 
 export const login = (userData) => async (dispatch) => {
 	try {

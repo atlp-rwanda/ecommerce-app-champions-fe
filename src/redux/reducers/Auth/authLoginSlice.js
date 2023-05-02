@@ -21,7 +21,7 @@ const loginSlice = createSlice({
 		},
 		loginFail: (state, action) => {
 			state.loading = false;
-			state.user = '';
+			state.user = null;
 			state.error = action.payload;
 		},
 	},

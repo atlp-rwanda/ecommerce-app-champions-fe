@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Code coverage report for pages/Signup.jsx</title>
+		<title>Code coverage report for components/Header.jsx</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="../prettify.css" />
 		<link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 			<div class="pad1">
 				<h1>
 					<a href="../index.html">All files</a> /
-					<a href="index.html">pages</a> Signup.jsx
+					<a href="index.html">components</a> Header.jsx
 				</h1>
 				<div class="clearfix">
 					<div class="fl pad1y space-right2">
 						<span class="strong">100% </span>
 						<span class="quiet">Statements</span>
-						<span class="fraction">9/9</span>
+						<span class="fraction">25/25</span>
 					</div>
 
 					<div class="fl pad1y space-right2">
@@ -43,7 +43,7 @@
 					<div class="fl pad1y space-right2">
 						<span class="strong">100% </span>
 						<span class="quiet">Lines</span>
-						<span class="fraction">9/9</span>
+						<span class="fraction">25/25</span>
 					</div>
 				</div>
 				<p class="quiet">
@@ -68,7 +68,23 @@
 <a name='L7'></a><a href='#L7'>7</a>
 <a name='L8'></a><a href='#L8'>8</a>
 <a name='L9'></a><a href='#L9'>9</a>
-<a name='L10'></a><a href='#L10'>10</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -77,15 +93,47 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const LoginPage = () =&gt; {
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Link } from 'react-router-dom';
+&nbsp;
+const Header = () =&gt; {
 	return (
-		&lt;div&gt;
-			&lt;h1&gt;This is login page&lt;/h1&gt;
+		&lt;div className="link"&gt;
+			&lt;Link to="/" className="px-4"&gt;
+				Home
+			&lt;/Link&gt;
+			&lt;Link to="/Login" className="px-4"&gt;
+				Login
+			&lt;/Link&gt;
+			&lt;Link to="/buyer" className="px-4"&gt;
+				Buyer
+			&lt;/Link&gt;
+			&lt;Link to="/vendor" className="px-4"&gt;
+				Vendor
+			&lt;/Link&gt;
+			&lt;Link to="/signup" className="px-4"&gt;
+				Signup
+			&lt;/Link&gt;
 		&lt;/div&gt;
 	);
 };
 &nbsp;
-export default LoginPage;
+export default Header;
 &nbsp;</pre></td></tr></table></pre>
 
 			<div class="push"></div>
@@ -100,7 +148,7 @@ export default LoginPage;
 				rel="noopener noreferrer"
 				>istanbul</a
 			>
-			at 2023-05-01T10:20:21.216Z
+			at 2023-05-02T07:28:11.756Z
 		</div>
 		<script src="../prettify.js"></script>
 		<script>

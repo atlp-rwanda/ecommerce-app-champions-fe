@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Code coverage report for redux/store.js</title>
+		<title>Code coverage report for pages/HomePage.jsx</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="../prettify.css" />
 		<link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 			<div class="pad1">
 				<h1>
 					<a href="../index.html">All files</a> /
-					<a href="index.html">redux</a> store.js
+					<a href="index.html">pages</a> HomePage.jsx
 				</h1>
 				<div class="clearfix">
 					<div class="fl pad1y space-right2">
 						<span class="strong">100% </span>
 						<span class="quiet">Statements</span>
-						<span class="fraction">18/18</span>
+						<span class="fraction">13/13</span>
 					</div>
 
 					<div class="fl pad1y space-right2">
@@ -43,7 +43,7 @@
 					<div class="fl pad1y space-right2">
 						<span class="strong">100% </span>
 						<span class="quiet">Lines</span>
-						<span class="fraction">18/18</span>
+						<span class="fraction">13/13</span>
 					</div>
 				</div>
 				<p class="quiet">
@@ -72,12 +72,7 @@
 <a name='L11'></a><a href='#L11'>11</a>
 <a name='L12'></a><a href='#L12'>12</a>
 <a name='L13'></a><a href='#L13'>13</a>
-<a name='L14'></a><a href='#L14'>14</a>
-<a name='L15'></a><a href='#L15'>15</a>
-<a name='L16'></a><a href='#L16'>16</a>
-<a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L14'></a><a href='#L14'>14</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -90,29 +85,19 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { configureStore } from '@reduxjs/toolkit';
-import { createLogger } from 'redux-logger';
-import varKeys from '../constants/keys';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Header from '../components/Header';
+// import ProductList from '../components/product/ProductList';
 &nbsp;
-import rootReducer from './reducers/rootreducer';
+const HomePage = () =&gt; {
+	return (
+		&lt;div&gt;
+			&lt;Header /&gt;
+			{/* &lt;ProductList /&gt; */}
+		&lt;/div&gt;
+	);
+};
 &nbsp;
-const { NODE_ENV } = varKeys;
-&nbsp;
-const logger = createLogger({});
-&nbsp;
-const store = configureStore({
-	reducer: rootReducer,
-	devTools: NODE_ENV !== 'production',
-	middleware: (getDefaultMiddleware) =&gt;
-		getDefaultMiddleware({ serializableCheck: false }).concat(logger),
-});
-&nbsp;
-export default store;
+export default HomePage;
 &nbsp;</pre></td></tr></table></pre>
 
 			<div class="push"></div>
