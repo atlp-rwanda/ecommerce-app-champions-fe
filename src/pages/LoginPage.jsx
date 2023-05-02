@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-return-assign */
 /* eslint-disable consistent-return */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -87,6 +86,7 @@ const Login = () => {
 							Vendor Signup
 						</Link>
 						<Link to="/ForgotPassword" className="text-lightBlue underline">
+						<Link to="/Reset" className="text-lightBlue underline">
 							Forgot password
 						</Link>
 					</div>
