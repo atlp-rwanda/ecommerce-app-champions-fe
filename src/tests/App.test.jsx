@@ -1,40 +1,167 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { expect, describe, it } from 'vitest';
-
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-
-// import Home from '../pages/Home';
+import {
+	render,
+	screen,
+	fireEvent,
+	waitFor,
+	waitForElementToBeRemoved,
+} from '@testing-library/react';
+import { expect, describe, it, vitest } from 'vitest';
+import store from '../redux/store';
+import TwoFactorAuth from '../pages/Two-factor-auth';
 import Login from '../pages/Login';
-import LoginPage from '../pages/Signup';
+import { act } from 'react-dom/test-utils';
+import AllPages from '../pages/index';
+import SuccessCheckmark from '../components/checkMark/successCheckMark';
+import FailCheckmark from '../components/checkMark/errorCheckMark';
+
+// import axios from 'axios';
+
+// vitest.mock('axios');
+
+// axios.post.mockImplementation((url) => {
+// 	switch (url) {
+// 		case 'https://ecommerce-champions.onrender.com/api/user/login':
+// 			return Promise.resolve({
+// 				data: {
+// 					firstName: 'matabaro',
+// 					hashedOTP: 'xdvdvdxv',
+// 					encodedOTP: 'dvdvdvdvsvdvddv',
+// 					user: 1,
+// 					token: 'dsfsetryjukji',
+// 				},
+// 			});
+// 		case `http://localhost:5050/api/user/validate/dsfsetryjukji`:
+// 			return Promise.resolve({
+// 				data: {
+// 					status: 'success',
+// 					token: 'kiuhuininuihiuiu',
+// 					message: 'authentication was success',
+// 					firstName: 'matabaro',
+// 					email: 'bob@yopmail.com',
+// 					RoleId: 2,
+// 					role: 'vendor',
+// 				},
+// 			});
+// 		default:
+// 			return Promise.reject(new Error('request fail'));
+// 	}
+// });
+
+describe('TwoFactorAuth', () => {
+	it('should render TwoFactorAuth component', () => {
+		act(() => {
+			render(
+				<Provider store={store}>
+					<BrowserRouter>
+						<TwoFactorAuth />
+					</BrowserRouter>
+				</Provider>
+			);
+		});
+		const twofactorpage = screen.getByTestId('twofactorpage');
+		expect(twofactorpage).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('0')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('1')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('2')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('3')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('4')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('5')).toBeInTheDocument();
+	});
+	it('should render success check mark', () => {
+		act(() => {
+			render(
+				<Provider store={store}>
+					<BrowserRouter>
+						<SuccessCheckmark />
+					</BrowserRouter>
+				</Provider>
+			);
+		});
+		expect(screen.getByText(/verification success/i)).toBeInTheDocument();
+	});
+	it('should render fail check mark', () => {
+		act(() => {
+			render(
+				<Provider store={store}>
+					<BrowserRouter>
+						<FailCheckmark error="failed" />
+					</BrowserRouter>
+				</Provider>
+			);
+		});
+		expect(screen.getByText(/failed/i)).toBeInTheDocument();
+	});
+
+	it('should test for Two Factor Requests', async () => {
+		act(() => {
+			render(
+				<Provider store={store}>
+					<BrowserRouter>
+						<AllPages />
+					</BrowserRouter>
+				</Provider>
+			);
+		});
+		expect(screen.getByTestId('homePage')).toBeInTheDocument();
+		act(() => fireEvent.click(screen.getByRole('link', { name: /Login/i })));
+		await waitFor(() => {
+			expect(screen.getByTestId('login')).toBeInTheDocument();
+		});
+		expect(screen.getByPlaceholderText('Email Address')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
+		act(() => {
+			fireEvent.change(screen.getByPlaceholderText('Email Address'), {
+				target: {
+					value: 'bob@yopmail.com',
+				},
+			});
+		});
+		expect(screen.getByPlaceholderText('Email Address').value).toBe(
+			'bob@yopmail.com'
+		);
+		act(() => {
+			fireEvent.change(screen.getByPlaceholderText('Password'), {
+				target: {
+					value: 'bob@yopmail.com',
+				},
+			});
+		});
+		expect(screen.getByPlaceholderText('Password').value).toBe(
+			'bob@yopmail.com'
+		);
+		expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument();
+		// act(() => {
+		// 	fireEvent.submit(screen.getByRole('button', { name: /login/i }));
+		// });
+		// await waitFor(() =>
+		// 	expect(screen.getByTestId('twofactorpage')).toBeInTheDocument()
+		// );
+	});
+});
 
 describe('Home', () => {
-	// it('should render This is login page', () => {
-	// 	render(
-	// 		<BrowserRouter>
-	// 			<Login />
-	// 		</BrowserRouter>
-	// 	);
-	// 	const emailInput = screen.getByPlaceholderText('Email');
-	// 	const passwordInput = screen.getByPlaceholderText('Password');
-	// 	const loginButton = screen.getByText('Login');
-	// 	const googleButton = screen.getByText('Sign in with Google');
-	// 	const signupLink = screen.getByText('Signup');
-	// 	const forgotPasswordLink = screen.getByText('Forgot password');
-
-	// 	expect(emailInput).toBeInTheDocument();
-	// 	expect(passwordInput).toBeInTheDocument();
-	// 	expect(loginButton).toBeInTheDocument();
-	// 	expect(googleButton).toBeInTheDocument();
-	// 	expect(signupLink).toBeInTheDocument();
-	// 	expect(forgotPasswordLink).toBeInTheDocument();
-	// });
-
-	it('should render This is login page', () => {
-		render(<LoginPage />);
-
-		const headline = screen.getByText(/This is login page/i);
-
-		expect(headline).toBeInTheDocument();
+	it('should render This is login ', () => {
+		render(
+			<Provider store={store}>
+				<BrowserRouter>
+					<Login />
+				</BrowserRouter>
+			</Provider>
+		);
+		const emailInput = screen.getByPlaceholderText('Email Address');
+		const passwordInput = screen.getByPlaceholderText('Password');
+		const loginButton = screen.getByText('Login');
+		const googleButton = screen.getByText('Sign in with Google');
+		const signupLink = screen.getByText('Signup');
+		const forgotPasswordLink = screen.getByText('Forgot password');
+		expect(emailInput).toBeInTheDocument();
+		expect(passwordInput).toBeInTheDocument();
+		expect(loginButton).toBeInTheDocument();
+		expect(googleButton).toBeInTheDocument();
+		expect(signupLink).toBeInTheDocument();
+		expect(forgotPasswordLink).toBeInTheDocument();
 	});
 });

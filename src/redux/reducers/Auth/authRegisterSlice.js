@@ -4,13 +4,17 @@ import authAction from '../../actions/authAction';
 const initialState = {
 	loading: false,
 	error: null,
-	token: null,
+	user: null,
 };
 
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
-	reducers: {},
+	reducers: {
+		setError: (state) => {
+			return { ...state, error: null };
+		},
+	},
 	extraReducers: {
 		[authAction.pending]: (state) => {
 			// eslint-disable-next-line no-param-reassign
@@ -31,15 +35,14 @@ const authSlice = createSlice({
 			}
 		},
 		[authAction.fulfilled]: (state, { payload }) => {
-			const { token } = payload;
 			return {
 				...state,
 				loading: false,
-				token,
 				error: null,
+				user: payload,
 			};
 		},
 	},
 });
-
+export const { setError } = authSlice.actions;
 export default authSlice.reducer;

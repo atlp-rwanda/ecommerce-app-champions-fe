@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.otpInput {
+	width: 50px !important;
+	height: 60px;
+	margin: 4px;
+	background-color: #def7e5;
+	color: black;
+	outline: none;
+	font-size: 20px;
+}
+@media screen and (max-width: 375px) {
+	.otpInput {
+		margin: 2px;
+		width: 40px !important;
+		height: 50px !important;
+	}
+	.otpContainer {
+		width: 180px;
+	}
+}
+.otpContainer {
+	justify-content: center;
+	width: 200px;
+	align-items: center;
+	margin: auto;
+}

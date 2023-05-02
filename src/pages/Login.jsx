@@ -36,12 +36,15 @@ const Login = () => {
 
 			if (user?.data?.others?.RoleId === 3) return navigate('/');
 
-			if (user?.loginOTP) return navigate('/vendor');
+			if (user?.hashedOTP) return navigate('/auth');
 		}, 9000);
 	}, [user]);
 
 	return (
-		<div className="w-screen h-screen flex flex-col md:flex-row">
+		<div
+			data-testid="login"
+			className="w-screen h-screen flex flex-col md:flex-row"
+		>
 			<div className="md:w-2/5 flex items-center justify-center">
 				<img src={Loginphoto} alt="secureloginphoto" className="w-9/12" />
 			</div>

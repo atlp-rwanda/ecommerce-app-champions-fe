@@ -28,7 +28,6 @@ const Header = () => {
 			<Link to="/ForgotPassword">Forget password</Link>
 			<Link to="/ResetPassword">Reset Password</Link>
 			<Link to="/signup">Signup</Link>
-			<Link to="/auth">Auth</Link>
 		</div>
 	);
 };

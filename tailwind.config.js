@@ -21,7 +21,10 @@ export default {
 			md: '768px',
 			lg: '976px',
 			xl: '1440px',
-			extend: {
+			xd: '1279',
+		separator: '-',
+		extend: {
+			spacing: {
 				'8xl': '96rem',
 				'9xl': '128rem',
 			},

@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable consistent-return */
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
@@ -16,7 +15,7 @@ export const login = (userData) => async (dispatch) => {
 	try {
 		dispatch(loginStart());
 		const res = await Userlogin(userData);
-		if (res.token) {
+		if (res.token && !res.encodedOTP) {
 			Cookies.set('token', res.token, { expires: 7 });
 			dispatch(loginSuccess(res));
 		} else if (res.loginOTP) {
@@ -25,6 +24,10 @@ export const login = (userData) => async (dispatch) => {
 		} else if (res.passwordExpired) {
 			dispatch(passwordExpired(res));
 			Cookies.set('token', res.loginOTP);
+		} else if (res.encodedOTP) {
+			Cookies.set('loginVendorid', res.user);
+			Cookies.set('loginOTP', res.encodedOTP);
+			Cookies.set('vendorToken', res.token);
 			dispatch(loginSuccess(res));
 		}
 		toast.success('login successful', {
