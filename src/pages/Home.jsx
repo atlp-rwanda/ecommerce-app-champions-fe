@@ -1,10 +1,11 @@
 import Header from '../components/Header';
+import ProductList from '../components/product/ProductList';
 
 const Home = () => {
 	return (
 		<div>
 			<Header />
-			<h1>Welcome to champion's ecommerce app</h1>
+			{/* <ProductList /> */}
 		</div>
 	);
 };

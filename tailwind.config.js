@@ -9,8 +9,13 @@ export default {
 		screens: {
 			sm: '480px',
 			md: '768px',
+<<<<<<< HEAD
 			lg: '976px',
 			xl: '1440px',
+=======
+			lg: '1024px',
+			xl: '1280px',
+>>>>>>> 6d8c28b (ft(two-factor-auth for sellers))
 		},
 		separator: '-',
 		extend: {
