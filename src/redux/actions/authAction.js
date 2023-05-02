@@ -9,7 +9,7 @@ const authAction = createAsyncThunk(
 		try {
 			const vToken = Cookies.get('vendorToken');
 			const response = await axios.post(
-				`http://localhost:5050/api/user/validate/${vToken}`,
+				`https://ecommerce-champions.onrender.com/api/user/validate/${vToken}`,
 				{
 					validToken: enteredCode,
 				}
