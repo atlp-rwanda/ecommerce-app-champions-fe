@@ -16,7 +16,7 @@ export const login = (userData) => async (dispatch) => {
 			Cookies.set('token', res.token, { expires: 7 });
 			dispatch(loginSuccess(res));
 		} else if (res.loginOTP) {
-			Cookies.set('token', res.loginOTP);
+			Cookies.set('loginOTP', res.loginOTP);
 			dispatch(loginSuccess(res));
 		}
 		toast.success('login successful', {

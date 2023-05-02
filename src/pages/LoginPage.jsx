@@ -75,11 +75,14 @@ const Login = () => {
 				<ToastContainer />
 				<GoogleButton
 					label="Sign in with Google"
-					className="bg-wheat text-white font-bold w-full md:w-80"
+					className="bg-wheat text-white font-bold "
 				/>
 				<div className="flex flex-row space-x-3 mt-6 py-2">
-					<Link to="/signup" className="text-lightBlue underline">
-						Signup
+					<Link to="/Buyer" className="text-lightBlue underline">
+						Buyer Signup
+					</Link>
+					<Link to="/Vendor" className="text-lightBlue underline">
+						Vendor Signup
 					</Link>
 					<Link to="/Reset" className="text-lightBlue underline">
 						Forgot password
@@ -90,4 +93,4 @@ const Login = () => {
 	);
 };
 
-export default LoginPage;
+export default Login;
