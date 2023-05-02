@@ -10,7 +10,7 @@ const GoogleButton = ({ label, className }) => {
 			<form action={`${url}/auth/google`} method="get">
 				<button
 					type="submit"
-					className={`px-8 py-1 ${className} my-2 rounded-2xl flex items-center `}
+					className={`px-8 py-1 ${className}  mt-3 rounded-2xl flex items-center `}
 				>
 					<img src={googleIcon} className="w-7 h-7 mr-4" />
 					{label}

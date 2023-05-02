@@ -41,52 +41,54 @@ const Login = () => {
 	}, [user]);
 
 	return (
-		<div className="w-screen h-screen flex flex-col md:flex-row">
-			<div className="md:w-2/5 flex items-center justify-center">
+		<div className="w-screen h-screen flex flex-row space-x-0 md:space-x-0 items-center">
+			<div className="hidden w-2/5 md:3/5 md:flex items-center justify-center">
 				<img src={Loginphoto} alt="secureloginphoto" className="w-9/12" />
 			</div>
-			<div className="w-full md:w-3/5 flex flex-col justify-center p-4 md:p-9 bg-brightGray">
-				<h3 className="text-left font-extrabold text-2xl font-bold text-yellow py-4">
-					Sign Into Your Account
-				</h3>
-				<form onSubmit={handleLogin} id="loginForm">
-					{userloginFields.map((field) => (
-						<Input
-							key={field.id}
-							placeholder={field.placeholder}
-							type={field.type}
-							id={field.id}
-							name={field.name}
-							value={loginState[field.id]}
-							isRequired={field.isRequired}
-							labelText={field.labelText}
-							labelFor={field.labelFor}
-							autoComplete={field.autoComplete}
-							handleChange={handleChange}
-							className="appearance-none py-2 px-2 my-2 rounded-md w-9/12"
+			<div className="w-full md:w-3/5 flex flex-col h-full bg-brightGray p-9">
+				<div className="w-full md:w-4/5 h-4/5 px-3 flex flex-col justify-center">
+					<h3 className="text-left font-extrabold text-2xl font-bold text-yellow my-2">
+						Sign Into Your Account
+					</h3>
+					<form onSubmit={handleLogin} id="loginForm">
+						{userloginFields.map((field) => (
+							<Input
+								key={field.id}
+								placeholder={field.placeholder}
+								type={field.type}
+								id={field.id}
+								name={field.name}
+								value={loginState[field.id]}
+								isRequired={field.isRequired}
+								labelText={field.labelText}
+								labelFor={field.labelFor}
+								autoComplete={field.autoComplete}
+								handleChange={handleChange}
+								className="appearance-none py-2 px-2 my-2 rounded-md w-11/12"
+							/>
+						))}
+						<Button
+							loading={loading}
+							label="Login"
+							className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-2 w-28"
 						/>
-					))}
-					<Button
-						loading={loading}
-						label="Login"
-						className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-2 w-28"
+					</form>
+					<ToastContainer />
+					<GoogleButton
+						label="Sign in with Google"
+						className="bg-wheat text-white font-bold "
 					/>
-				</form>
-				<ToastContainer />
-				<GoogleButton
-					label="Sign in with Google"
-					className="bg-wheat text-white font-bold "
-				/>
-				<div className="flex flex-row space-x-3 mt-6 py-2">
-					<Link to="/Buyer" className="text-lightBlue underline">
-						Buyer Signup
-					</Link>
-					<Link to="/Vendor" className="text-lightBlue underline">
-						Vendor Signup
-					</Link>
-					<Link to="/Reset" className="text-lightBlue underline">
-						Forgot password
-					</Link>
+					<div className="flex flex-row space-x-3 py-2 my-2">
+						<Link to="/Buyer" className="text-lightBlue underline">
+							Buyer Signup
+						</Link>
+						<Link to="/Vendor" className="text-lightBlue underline">
+							Vendor Signup
+						</Link>
+						<Link to="/Reset" className="text-lightBlue underline">
+							Forgot password
+						</Link>
+					</div>
 				</div>
 			</div>
 		</div>
