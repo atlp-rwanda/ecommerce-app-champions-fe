@@ -6,7 +6,7 @@ import {
 	registerPending,
 	registerSuccess,
 	registerFail,
-} from '../reducers/auth/authSlice';
+} from '../reducers/auth/authRegisterSlice';
 import { buyerSignup, vendorSignup } from '../../api/userApi';
 
 export const registerBuyer = (buyerData) => async (dispatch) => {

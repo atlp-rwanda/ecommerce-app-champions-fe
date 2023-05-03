@@ -5,6 +5,9 @@ import VendorSignupPage from './pages/VendorSignupPage';
 import LoginPage from './pages/LoginPage';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import TwoFactorAuth from './pages/Two-factor-auth';
+import AdminDashboard from './pages/adminDashboard';
+import VendorDashboard from './pages/vendorDashboard';
 
 function App() {
 	return (
@@ -16,6 +19,9 @@ function App() {
 				<Route path="/Login" element={<LoginPage />} />
 				<Route path="/ForgotPassword" element={<ForgotPassword />} />
 				<Route path="/ResetPassword" element={<ResetPassword />} />
+				<Route path="/auth" element={<TwoFactorAuth />} />
+				<Route path="/admin" element={<AdminDashboard />} />
+				<Route path="/vendors" element={<VendorDashboard />} />
 			</Routes>
 		</BrowserRouter>
 	);

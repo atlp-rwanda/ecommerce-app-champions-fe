@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
-import { setError } from '../../redux/reducers/Auth/AuthSlice';
+import { setError } from '../../redux/reducers/auth/twoFactorAuthSlice';
 
 const FailCheckmark = ({ error }) => {
 	const pathVariants = {

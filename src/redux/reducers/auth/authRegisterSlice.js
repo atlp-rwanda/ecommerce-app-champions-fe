@@ -2,29 +2,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-	user: null,
-	error: null,
 	loading: false,
+	error: '',
+	user: '',
 };
-const loginSlice = createSlice({
-	name: 'login',
+
+const registerSlice = createSlice({
+	name: 'register',
 	initialState,
 	reducers: {
-		loginStart: (state) => {
+		registerPending: (state) => {
 			state.loading = true;
-			state.error = null;
 		},
-		loginSuccess: (state, action) => {
+		registerSuccess: (state, action) => {
 			state.loading = false;
-			state.error = null;
 			state.user = action.payload;
+			state.error = '';
 		},
-		loginFail: (state, action) => {
+		registerFail: (state, action) => {
 			state.loading = false;
 			state.user = '';
 			state.error = action.payload;
 		},
 	},
 });
-export const { loginStart, loginSuccess, loginFail } = loginSlice.actions;
-export default loginSlice.reducer;
+
+export const { registerPending, registerSuccess, registerFail } =
+	registerSlice.actions;
+
+export default registerSlice.reducer;

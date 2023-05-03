@@ -4,15 +4,13 @@ export default {
 	theme: {
 		fontFamily: {
 			font: ['Inter', 'sans-serif'],
-			sans: ['Open Sans', 'sans-serif'],
 		},
-		fontWeight: { big: '700', med: '500', small: '400' },
+		fontWeight: { bold: '700', medium: '500', normal: '400' },
 		fontSize: {
 			iphoneSE: ['12px', '14px'],
 			middle: '15px',
 			samsung: ['12px', '14px'],
 		},
-
 		screens: {
 			sm: '480px',
 			samsung: '359px',
@@ -20,8 +18,9 @@ export default {
 			middle: '376px',
 			md: '768px',
 			lg: '976px',
-			xl: '1440px',
 			xd: '1279',
+			xl: '1440px',
+		},
 		separator: '-',
 		extend: {
 			spacing: {

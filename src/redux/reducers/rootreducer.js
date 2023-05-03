@@ -5,10 +5,10 @@ import { combineReducers } from '@reduxjs/toolkit';
 import loginSlice from './auth/loginSlice';
 import cartSlice from './cart/cartSlice';
 import productSlice from './product/productSlice';
-import registerSlice from './auth/authSlice';
+import registerSlice from './auth/authRegisterSlice';
 import password from './auth/ForgotSlice';
 import resetPassword from './auth/ResetPasswordSlice';
-import AuthSlice from './Auth/AuthSlice';
+import authSlice from './auth/twoFactorAuthSlice';
 
 const rootReducer = combineReducers({
 	cart: cartSlice,
@@ -17,8 +17,7 @@ const rootReducer = combineReducers({
 	password,
 	resetPassword,
 	register: registerSlice,
-	login: loginSlice,
-	auth: AuthSlice,
+	auth: authSlice,
 });
 
 export default rootReducer;

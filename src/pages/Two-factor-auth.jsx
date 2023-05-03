@@ -43,7 +43,7 @@ const TwoFactorAuth = () => {
 	}, [seconds, dispatch, navigate]);
 	// eslint-disable-next-line consistent-return
 	useEffect(() => {
-		if (user?.RoleId === 2) return navigate('/vendor');
+		if (user?.RoleId === 2) return navigate('/vendors');
 		if (user?.RoleId === 1) return navigate('/admin');
 	}, [user, navigate]);
 

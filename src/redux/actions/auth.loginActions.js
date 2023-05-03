@@ -8,8 +8,7 @@ import {
 	loginStart,
 	loginSuccess,
 	loginFail,
-	passwordExpired,
-} from '../reducers/auth/loginSlice';
+} from '../reducers/auth/authLoginSlice';
 
 export const login = (userData) => async (dispatch) => {
 	try {
