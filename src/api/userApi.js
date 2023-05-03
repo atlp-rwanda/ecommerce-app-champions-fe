@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import axios from 'axios';
 import varkeys from '../constants/keys';
 
@@ -21,6 +22,20 @@ export const vendorSignup = (vendorData) => {
 	return new Promise((resolve, reject) => {
 		axios
 			.post(`${url}/api/vendor/signup`, vendorData)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
+export const Userlogin = (userData) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(`${url}/api/user/login`, userData)
 			.then((response) => resolve(response.data))
 			.catch((error) => {
 				if (error.response.data !== undefined) {
