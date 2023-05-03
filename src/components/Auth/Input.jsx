@@ -11,20 +11,21 @@ import InputError from './InputError';
  * @returns
  */
 
-const Input = ({
-	placeholder,
-	type,
-	error,
-	name,
-	id,
-	isRequired,
-	handleChange,
-	className,
-	labelFor,
-	labelText,
-	autoComplete,
-	value,
-}) => {
+const Input = (props) => {
+	const {
+		placeholder,
+		type,
+		error,
+		name,
+		id,
+		isRequired,
+		handleChange,
+		className,
+		labelFor,
+		labelText,
+		autoComplete,
+		value,
+	} = props;
 	return (
 		<div className="flex flex-col">
 			{labelText && (

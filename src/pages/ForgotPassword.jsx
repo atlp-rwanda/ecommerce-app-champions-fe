@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import Input from '../components/Auth/PasswordInput';
 import Button from '../components/Button/PasswordButton';
 import LoginIllustation from '../assets/login-illustration.svg';
-import { requestReset } from '../redux/reducers/Auth/ForgotSlice';
+import { requestReset } from '../redux/reducers/auth/ForgotSlice';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const ForgotPassword = () => {

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../components/Auth/PasswordInput';
 import Button from '../components/Button/PasswordButton';
 import LoginIllustation from '../assets/login-illustration.svg';
-import { processReset } from '../redux/reducers/Auth/ResetPasswordSlice';
+import { processReset } from '../redux/reducers/auth/ResetPasswordSlice';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const ResetPassword = () => {

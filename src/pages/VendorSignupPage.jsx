@@ -27,9 +27,16 @@ const VendorSignupPage = () => {
 	};
 
 	useEffect(() => {
+		if (user) {
+			setSignupState({
+				firstName: '',
+				lastName: '',
+				email: '',
+			});
+		}
 		setTimeout(() => {
 			if (user) return navigate('/login');
-		}, 9000);
+		}, 7000);
 	}, [user]);
 
 	return (
