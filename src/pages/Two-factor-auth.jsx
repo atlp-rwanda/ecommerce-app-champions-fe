@@ -28,7 +28,6 @@ const TwoFactorAuth = () => {
 				return dispatch(authAction(OTP));
 			}
 		} catch (error) {
-			console.log(error.errors);
 			setotpErrors(error.errors);
 		}
 	};
