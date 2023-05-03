@@ -1,8 +1,8 @@
 import React from 'react';
 import { screen, fireEvent } from '@testing-library/react';
 import { expect, describe, it } from 'vitest';
-import ForgotPassword from '../pages/ForgotPassword';
-import { render } from '../../tests/setup';
+import ForgotPassword from '../src/pages/ForgotPassword';
+import { render } from './setup';
 
 describe('Forgot Password Component', () => {
 	it('should render forgot password correctly', () => {

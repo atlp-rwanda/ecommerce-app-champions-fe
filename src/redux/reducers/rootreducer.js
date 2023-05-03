@@ -2,7 +2,7 @@
 /* eslint-disable import/no-unresolved */
 import { combineReducers } from '@reduxjs/toolkit';
 
-import loginSlice from './auth/loginSlice';
+import loginSlice from './auth/authLoginSlice';
 import cartSlice from './cart/cartSlice';
 import productSlice from './product/productSlice';
 import registerSlice from './auth/authRegisterSlice';

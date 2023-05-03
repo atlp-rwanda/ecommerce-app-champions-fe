@@ -86,7 +86,6 @@ const Login = () => {
 							Vendor Signup
 						</Link>
 						<Link to="/ForgotPassword" className="text-lightBlue underline">
-						<Link to="/Reset" className="text-lightBlue underline">
 							Forgot password
 						</Link>
 					</div>
