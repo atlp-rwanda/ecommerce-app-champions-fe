@@ -31,7 +31,6 @@ export const vendorSignup = (vendorData) => {
 			});
 	});
 };
-
 export const Userlogin = (userData) => {
 	return new Promise((resolve, reject) => {
 		axios
