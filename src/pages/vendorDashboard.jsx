@@ -1,12 +1,14 @@
+import React from 'react';
+
 import Products from '../components/dashboard/products';
 
-const vendorDashboard = () => {
+function VendorDashboard() {
 	return (
-		<div className="bg-brightGray h-screen pt-5">
-			{' '}
+		<div className="h-screen pt-5 bg-brightGray">
+			<h1>Vendor dashboard</h1>
 			<Products />
 		</div>
 	);
-};
+}
 
-export default vendorDashboard;
+export default VendorDashboard;
