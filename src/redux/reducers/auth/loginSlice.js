@@ -14,19 +14,16 @@ const loginSlice = createSlice({
 		loginStart: (state) => {
 			state.loading = true;
 			state.error = null;
-			state.passwordExpired = false;
 		},
 		loginSuccess: (state, action) => {
 			state.loading = false;
 			state.error = null;
 			state.user = action.payload;
-			state.passwordExpired = action.payload.passwordExpired;
 		},
 		loginFail: (state, action) => {
 			state.loading = false;
-			state.user = '';
+			state.user = null;
 			state.error = action.payload;
-			state.passwordExpired = true;
 		},
 		passwordExpired: (state) => {
 			state.passwordExpired = true;

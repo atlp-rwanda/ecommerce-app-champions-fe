@@ -1,5 +1,4 @@
 name: Github Actions
-
 on:
   push:
     branches:
@@ -7,17 +6,15 @@ on:
   pull_request:
     branches:
       - develop
-
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ubuntu-latest]
         node-version: [16.x]
     env:
       VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
-
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}

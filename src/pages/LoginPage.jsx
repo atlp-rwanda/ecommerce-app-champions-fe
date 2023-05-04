@@ -1,7 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-return-assign */
-/* eslint-disable consistent-return */
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable */
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -17,10 +14,10 @@ import 'react-toastify/dist/ReactToastify.css';
 const fieldState = {};
 userloginFields.forEach((field) => (fieldState[field.id] = ''));
 
-const Login = () => {
+const LoginPage = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const { user, loading } = useSelector((state) => state.login);
+	const { user, loading } = useSelector((state) => state.login || {});
 	const [loginState, setLoginState] = useState(fieldState);
 
 	const handleChange = (e) =>
@@ -81,10 +78,7 @@ const Login = () => {
 					/>
 					<div className="flex flex-row space-x-3 py-2 my-2">
 						<Link to="/Buyer" className="text-lightBlue underline">
-							Buyer Signup
-						</Link>
-						<Link to="/Vendor" className="text-lightBlue underline">
-							Vendor Signup
+							Signup
 						</Link>
 						<Link to="/ForgotPassword" className="text-lightBlue underline">
 							Forgot password
@@ -95,4 +89,5 @@ const Login = () => {
 		</div>
 	);
 };
-export default Login;
+
+export default LoginPage;

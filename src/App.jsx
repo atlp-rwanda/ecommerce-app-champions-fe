@@ -5,6 +5,10 @@ import VendorSignupPage from './pages/VendorSignupPage';
 import LoginPage from './pages/LoginPage';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import TwoFactorAuth from './pages/Two-factor-auth';
+import Profile from './pages/Profile';
+import Modal from './components/setting/Modal';
+import UserProfile from './components/setting/UserProfile';
 
 function App() {
 	return (
@@ -16,6 +20,10 @@ function App() {
 				<Route path="/Login" element={<LoginPage />} />
 				<Route path="/ForgotPassword" element={<ForgotPassword />} />
 				<Route path="/ResetPassword" element={<ResetPassword />} />
+				<Route path="/auth" element={<TwoFactorAuth />} />
+				<Route path="/Profile" element={<Profile />} />
+				<Route path="/modal" element={<Modal />} />
+				<Route path="/userProfile" element={<UserProfile />} />
 			</Routes>
 		</BrowserRouter>
 	);

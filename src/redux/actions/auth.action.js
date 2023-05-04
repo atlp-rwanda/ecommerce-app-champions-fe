@@ -1,6 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable consistent-return */
 import { toast } from 'react-toastify';
 import {
 	registerPending,

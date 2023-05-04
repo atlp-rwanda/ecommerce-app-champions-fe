@@ -1,10 +1,8 @@
-/* eslint-disable jsx-a11y/alt-text */
-import varkeys from '../../constants/keys';
 import googleIcon from '../../assets/googleicon.svg';
-
-const url = varkeys.APP_URL;
+import envKeys from '../../constants/keys';
 
 const GoogleButton = ({ label, className }) => {
+	const url = envKeys.APP_URL;
 	return (
 		<div>
 			<form action={`${url}/auth/google`} method="get">
@@ -12,7 +10,7 @@ const GoogleButton = ({ label, className }) => {
 					type="submit"
 					className={`px-8 py-1 ${className}  mt-3 rounded-2xl flex items-center `}
 				>
-					<img src={googleIcon} className="w-7 h-7 mr-4" />
+					<img src={googleIcon} className="w-7 h-7 mr-4" alt="" />
 					{label}
 				</button>
 			</form>
