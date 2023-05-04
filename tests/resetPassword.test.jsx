@@ -3,8 +3,8 @@
 import React from 'react';
 import { screen, fireEvent } from '@testing-library/react';
 import { expect, describe, it } from 'vitest';
-import { render } from '../../tests/setup';
-import ResetPassword from '../pages/ResetPassword';
+import { render } from './setup';
+import ResetPassword from '../src/pages/ResetPassword';
 
 describe('Reset Password component', () => {
 	it('should dispay password input field', () => {

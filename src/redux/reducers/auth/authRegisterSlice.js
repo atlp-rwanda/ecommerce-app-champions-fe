@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	loading: false,
-	error: null,
-	user: null,
+	error: '',
+	user: '',
 };
 
 const registerSlice = createSlice({
@@ -17,11 +17,11 @@ const registerSlice = createSlice({
 		registerSuccess: (state, action) => {
 			state.loading = false;
 			state.user = action.payload;
-			state.error = null;
+			state.error = '';
 		},
 		registerFail: (state, action) => {
 			state.loading = false;
-			state.user = null;
+			state.user = '';
 			state.error = action.payload;
 		},
 	},

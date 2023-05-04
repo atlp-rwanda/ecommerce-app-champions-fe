@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-return-assign */
 /* eslint-disable consistent-return */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -37,7 +36,7 @@ const Login = () => {
 
 			if (user?.data?.others?.RoleId === 3) return navigate('/');
 
-			if (user?.loginOTP) return navigate('/vendor');
+			if (user?.hashedOTP) return navigate('/auth');
 		}, 9000);
 	}, [user]);
 
