@@ -4,26 +4,12 @@ import { navLinks } from '../constants/navLinks';
 
 const Header = () => {
 	return (
-		<div className="link">
+		<div className="link bg-[#92E3A9] block text-center fixed w-full z-10 h-[3.5em] leading-[3.5em] inline-block mb-0 pl-0 left-0">
 			{navLinks.map((link, index) => (
-				<Link key={index} to={link.path} className="px-4">
+				<Link key={index} to={link.path} className="nav px-4">
 					{link.name}
 				</Link>
 			))}
-			<Link to="/" className="px-4">
-				Home
-			</Link>
-			<Link to="/Login" className="px-4">
-				Login
-			</Link>
-			<Link to="/buyer" className="px-4">
-				Buyer
-			</Link>
-			<Link to="/vendor" className="px-4">
-				Vendor
-			</Link>
-			<Link to="/ForgotPassword">Forget password</Link>
-			<Link to="/ResetPassword">Reset Password</Link>
 		</div>
 	);
 };

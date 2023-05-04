@@ -1,5 +1,5 @@
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+import authAction from '../../actions/authAction';
 
 const initialState = {
 	loading: false,
@@ -7,27 +7,42 @@ const initialState = {
 	user: null,
 };
 
-const registerSlice = createSlice({
-	name: 'register',
+const authSlice = createSlice({
+	name: 'auth',
 	initialState,
 	reducers: {
-		registerPending: (state) => {
+		setError: (state) => {
+			return { ...state, error: null };
+		},
+	},
+	extraReducers: {
+		[authAction.pending]: (state) => {
+			// eslint-disable-next-line no-param-reassign
 			state.loading = true;
 		},
-		registerSuccess: (state, action) => {
-			state.loading = false;
-			state.user = action.payload;
-			state.error = null;
+		// eslint-disable-next-line consistent-return
+		[authAction.rejected]: (state, { payload }) => {
+			const { status, message } = payload;
+			if (status === 'fail') {
+				return {
+					...state,
+					loading: false,
+					error: 'Invalid veification code number',
+				};
+			}
+			if (message && !status) {
+				return { ...state, loading: false, error: message };
+			}
 		},
-		registerFail: (state, action) => {
-			state.loading = false;
-			state.user = null;
-			state.error = action.payload;
+		[authAction.fulfilled]: (state, { payload }) => {
+			return {
+				...state,
+				loading: false,
+				error: null,
+				user: payload,
+			};
 		},
 	},
 });
-
-export const { registerPending, registerSuccess, registerFail } =
-	registerSlice.actions;
-
-export default registerSlice.reducer;
+export const { setError } = authSlice.actions;
+export default authSlice.reducer;
