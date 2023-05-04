@@ -34,7 +34,7 @@ const LoginPage = () => {
 
 			if (user?.data?.others?.RoleId === 3) return navigate('/');
 
-			if (user?.loginOTP) return navigate('/vendor');
+			if (user?.hashedOTP) return navigate('/auth');
 		}, 9000);
 	}, [user]);
 

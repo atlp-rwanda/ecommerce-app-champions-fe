@@ -8,14 +8,13 @@ import {
 	loginStart,
 	loginSuccess,
 	loginFail,
-	passwordExpired,
 } from '../reducers/auth/loginSlice';
 
 export const login = (userData) => async (dispatch) => {
 	try {
 		dispatch(loginStart());
 		const res = await Userlogin(userData);
-		if (res.token) {
+		if (res.token && !res.encodedOTP) {
 			Cookies.set('token', res.token, { expires: 7 });
 			dispatch(loginSuccess(res));
 		} else if (res.loginOTP) {
@@ -23,6 +22,12 @@ export const login = (userData) => async (dispatch) => {
 			dispatch(loginSuccess(res));
 		} else if (res.passwordExpired) {
 			dispatch(passwordExpired(res));
+			Cookies.set('token', res.loginOTP);
+		} else if (res.encodedOTP) {
+			Cookies.set('loginVendorid', res.user);
+			Cookies.set('loginOTP', res.encodedOTP);
+			Cookies.set('vendorToken', res.token);
+			dispatch(loginSuccess(res));
 		}
 		toast.success('login successful', {
 			position: toast.POSITION.TOP_RIGHT,
@@ -50,5 +55,13 @@ export const login = (userData) => async (dispatch) => {
 			});
 			return dispatch(loginFail('Invalid Credentials.'));
 		}
+		if (error) {
+			toast.error('invalid credentials', {
+				position: toast.POSITION.TOP_RIGHT,
+			});
+			return dispatch(loginFail(error.message));
+		}
+		toast.error('invalid credentials', { position: toast.POSITION.TOP_RIGHT });
+		return dispatch(loginFail(error.Error));
 	}
 };

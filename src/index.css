@@ -1,3 +1,76 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.otpInput {
+	width: 50px !important;
+	height: 60px;
+	margin: 4px;
+	background-color: #def7e5;
+	color: black;
+	outline: none;
+	font-size: 20px;
+}
+@media screen and (max-width: 375px) {
+	.otpInput {
+		margin: 2px;
+		width: 40px !important;
+		height: 50px !important;
+	}
+	.otpContainer {
+		width: 180px;
+	}
+}
+.otpContainer {
+	justify-content: center;
+	width: 200px;
+	align-items: center;
+	margin: auto;
+}
+.link {
+	background-color: #92e3a9;
+	display: block;
+	text-align: center;
+	position: fixed;
+	left: 0;
+	width: 100%;
+	z-index: 10;
+	height: 3.5em;
+	line-height: 3.5em;
+	margin-bottom: 0;
+	list-style: none;
+	padding-left: 0;
+	display: inline-block;
+	padding-left: 0;
+}
+
+.nav:hover {
+	color: black !important;
+	background: #def7e5;
+}
+.nav {
+	transition: background-color 0.2s ease-in-out;
+	position: relative;
+	color: black;
+	text-decoration: none;
+	outline: 0;
+	font-weight: 400;
+	border-radius: 8px;
+	height: 2.5em;
+	line-height: 2.5em;
+	padding: 0.7em;
+}
+.nav:active {
+	background: #484848;
+}
+.link:active:before {
+	content: '';
+	display: block;
+	position: absolute;
+	bottom: -0.6em;
+	left: 50%;
+	margin-left: -0.75em;
+	border-left: solid 0.75em transparent;
+	border-right: solid 0.75em transparent;
+	border-home: solid 0.6em #282828;
+}

@@ -9,6 +9,9 @@ import TwoFactorAuth from './pages/Two-factor-auth';
 import Profile from './pages/Profile';
 import Modal from './components/setting/Modal';
 import UserProfile from './components/setting/UserProfile';
+import AdminDashboard from './pages/adminDashboard';
+import VendorDashboard from './pages/vendorDashboard';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
 	return (
@@ -24,6 +27,9 @@ function App() {
 				<Route path="/Profile" element={<Profile />} />
 				<Route path="/modal" element={<Modal />} />
 				<Route path="/userProfile" element={<UserProfile />} />
+				<Route path="/admin" element={<AdminDashboard />} />
+				<Route path="/vendors" element={<VendorDashboard />} />
+				<Route path="*" element={<PageNotFound />} />
 			</Routes>
 		</BrowserRouter>
 	);
