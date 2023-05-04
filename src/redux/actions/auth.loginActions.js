@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable import/no-extraneous-dependencies */
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
@@ -8,7 +9,7 @@ import {
 	loginStart,
 	loginSuccess,
 	loginFail,
-} from '../reducers/auth/authLoginSlice';
+} from '../reducers/auth/loginSlice';
 
 export const login = (userData) => async (dispatch) => {
 	try {
