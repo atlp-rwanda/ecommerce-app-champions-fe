@@ -27,9 +27,19 @@ const BuyerSignupPage = () => {
 	};
 
 	useEffect(() => {
+		if (user) {
+			setSignupState({
+				firstName: '',
+				lastName: '',
+				email: '',
+				password: '',
+			});
+		}
 		setTimeout(() => {
-			if (user) return navigate('/login');
-		}, 9000);
+			if (user) {
+				return navigate('/login');
+			}
+		}, 7000);
 	}, [user]);
 
 	return (
@@ -60,6 +70,7 @@ const BuyerSignupPage = () => {
 							/>
 						))}
 						<Button
+							user={user}
 							loading={loading}
 							label="Register"
 							className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-2 w-28"
