@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdEdit, MdOutlineDeleteOutline } from 'react-icons/md';
 import Button from '../Button/Button';
-import { fetchProducts } from '../../redux/reducers/product/productsSlice';
+import { fetchProducts } from '../../redux/reducers/product/productSlice';
 
 function Products() {
 	const dispatch = useDispatch();
