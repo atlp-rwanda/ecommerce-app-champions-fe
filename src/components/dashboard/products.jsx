@@ -6,7 +6,7 @@ import { fetchProducts } from '../../redux/reducers/product/productsSlice';
 
 function Products() {
 	const dispatch = useDispatch();
-	const { loading, error, products } = useSelector((state) => state.products);
+	const { loading, error, items } = useSelector((state) => state.products);
 
 	useEffect(() => {
 		dispatch(fetchProducts());
@@ -39,7 +39,7 @@ function Products() {
 								<td>Edit</td>
 								<td>Delete</td>
 							</tr>
-							{products?.items?.map((item) => (
+							{items?.map((item) => (
 								<tr key={item.productId} className="h-20 pl-10 pr-20">
 									<td>{item.productName}</td>
 									<td>{item.productPrice}</td>

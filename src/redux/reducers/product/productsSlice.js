@@ -15,7 +15,7 @@ export const fetchProducts = createAsyncThunk(
 const initialState = {
 	loading: false,
 	error: null,
-	products: [],
+	items: [],
 };
 
 const productsSlice = createSlice({
