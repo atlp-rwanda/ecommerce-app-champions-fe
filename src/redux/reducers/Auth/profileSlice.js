@@ -7,7 +7,7 @@ const initialState = {
 	loading: false,
 };
 const profileSlice = createSlice({
-	name: 'login',
+	name: 'profile',
 	initialState,
 	reducers: {
 		updateProfileStart: (state) => {
