@@ -1,9 +1,22 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import fs from 'fs/promises';
+import { resolve } from 'path';
 
 export default defineConfig({
 	plugins: [react()],
+	build: {
+		rollupOptions: {
+			input: {
+				main: resolve(__dirname, 'index.html'),
+			},
+			output: {
+				globals: {
+					react: 'React',
+				},
+			},
+		},
+	},
 	esbuild: {
 		loader: 'jsx',
 		include: /\/.*\.jsx?$/,
