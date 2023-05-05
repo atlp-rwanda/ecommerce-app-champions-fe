@@ -1,5 +1,5 @@
 const vendorDashboard = () => {
-	return <div className="justify-center">This is vendor Dashboard</div>;
+	return <div className="bg-brightGray h-screen pt-5">VendorDashboard</div>;
 };
 
 export default vendorDashboard;
