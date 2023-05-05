@@ -8,4 +8,16 @@ const Button = ({ label, className, loading }) => {
 	);
 };
 
+export const DangerButton = ({ label, className, loading, onClick }) => {
+	return (
+		<button
+			type="button"
+			onClick={onClick}
+			className={className}
+			disabled={loading && loading}
+		>
+			{loading ? <LoadingSpinner /> : label}
+		</button>
+	);
+};
 export default Button;

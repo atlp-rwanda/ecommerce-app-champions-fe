@@ -11,7 +11,7 @@ export const createproduct = (productData) => {
 		axios
 			.post(`${url}/api/product/create`, productData, {
 				headers: {
-					Token: `Bearer ${token}`,
+					token: `Bearer ${token}`,
 				},
 			})
 			.then((response) => resolve(response.data))
