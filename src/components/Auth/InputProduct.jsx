@@ -9,7 +9,6 @@ const InputProduct = ({
 	id,
 	isRequired,
 	handleChange,
-	className,
 	labelFor,
 	labelText,
 	autoComplete,
@@ -31,8 +30,8 @@ const InputProduct = ({
 				required={isRequired}
 				placeholder={placeholder}
 				onChange={handleChange}
-				className={className}
-				value={value}
+				className="appearance-none py-2 px-2 my-6 rounded-md w-full md:w-8/12"
+				value={value || ''}
 				multiple={multiple}
 			/>
 			{error && <InputError error={error} />}

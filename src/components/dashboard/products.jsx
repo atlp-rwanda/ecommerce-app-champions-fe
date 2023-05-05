@@ -17,6 +17,9 @@ function Products() {
 		(state) => state.products.products
 	);
 	const [selectedProduct, setSelectedProduct] = useState(null);
+	const navigate = useNavigate();
+	// const { loading, error, items } = useSelector((state) => state.products);
+	const [editProduct, setEditProduct] = useState({ isOpen: false, data: {} });
 
 	const token = Cookies.get('token');
 	useEffect(() => {
@@ -36,6 +39,10 @@ function Products() {
 	if (error) {
 		return <p>{error}</p>;
 	}
+
+	const handleEditProduct = (product) => {
+		setEditProduct({ isOpen: true, data: product });
+	};
 
 	return (
 		<div className="container mx-auto mt-10">
@@ -67,7 +74,12 @@ function Products() {
 										<td>{item.productName}</td>
 										<td>{item.productPrice}</td>
 										<td>
-											<MdEdit className="text-blue-500" />
+											<MdEdit
+												className="text-blue-500"
+												onClick={() =>
+													navigate(`/vendors/update/${item.productId}`)
+												}
+											/>
 										</td>
 										<td>
 											<MdOutlineDeleteOutline
