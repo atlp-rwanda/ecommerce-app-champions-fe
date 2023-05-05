@@ -1,18 +1,9 @@
 import React from 'react';
 
-function Select({
-	labelFor,
-	labelText,
-	name,
-	id,
-	className,
-	value,
-	options,
-	onChange,
-}) {
+function Select({ labelText, name, id, className, value, options, onChange }) {
 	return (
-		<div>
-			<label htmlFor={labelFor}>{labelText}</label>
+		<div className="flex flex-col">
+			<label htmlFor={id}>{labelText}</label>
 			<select
 				name={name}
 				id={id}

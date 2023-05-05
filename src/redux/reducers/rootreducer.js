@@ -12,11 +12,11 @@ const rootReducer = combineReducers({
 	cart: cartSlice,
 	product: productSlice,
 	login: loginSlice,
-	password,
-	resetPassword,
 	register: registerSlice,
 	profile: profileSlice,
 	auth: authSlice,
+	password,
+	resetPassword,
 });
 
 export default rootReducer;

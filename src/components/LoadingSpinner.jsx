@@ -1,11 +1,11 @@
 /* eslint-disable */
 import React from 'react';
 
-const LoadingSpinner = () => {
+const LoadingSpinner = ({ className }) => {
 	return (
 		<svg
 			aria-hidden="true"
-			className="w-6 h-6 mr-2 text-gray-200 animate-spin fill-white"
+			className={className}
 			viewBox="0 0 100 101"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"

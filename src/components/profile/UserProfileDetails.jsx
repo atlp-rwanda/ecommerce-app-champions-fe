@@ -7,8 +7,9 @@ import Button from '../Button/Button';
 const fieldState = {};
 buyerSignUpFields.forEach((field) => (fieldState[field.id] = ''));
 
-const UserProfileDetails = () => {
+const UserProfileDetails = ({ profile }) => {
 	const [signupState, setSignupState] = useState(fieldState);
+	console.log(profile);
 	const handleChange = (e) =>
 		setSignupState({ ...signupState, [e.target.id]: e.target.value });
 	return (
@@ -22,7 +23,11 @@ const UserProfileDetails = () => {
 						type={field.type}
 						id={field.id}
 						name={field.name}
-						value={signupState[field.id]}
+						value={
+							field.name === 'password'
+								? signupState[field.d]
+								: profile[`${field.name}`]
+						}
 						isRequired={field.isRequired}
 						labelText={field.labelText}
 						labelFor={field.labelFor}

@@ -17,7 +17,11 @@ const Button = (props) => {
 			onClick={handleClick}
 			{...otherProps}
 		>
-			{loading ? <LoadingSpinner /> : label}
+			{loading ? (
+				<LoadingSpinner className="w-6 h-6 mr-2 text-gray-200 animate-spin fill-white" />
+			) : (
+				label
+			)}
 		</button>
 	);
 };
