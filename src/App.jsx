@@ -8,7 +8,6 @@ import ResetPassword from './pages/ResetPassword';
 import TwoFactorAuth from './pages/Two-factor-auth';
 import AdminDashboard from './pages/adminDashboard';
 import VendorDashboard from './pages/vendorDashboard';
-import Products from './pages/products';
 
 function App() {
 	return (
@@ -23,7 +22,6 @@ function App() {
 				<Route path="/auth" element={<TwoFactorAuth />} />
 				<Route path="/admin" element={<AdminDashboard />} />
 				<Route path="/vendors" element={<VendorDashboard />} />
-				<Route path="/products" element={<Products />} />
 			</Routes>
 		</BrowserRouter>
 	);
