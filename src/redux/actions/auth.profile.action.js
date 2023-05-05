@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { toast } from 'react-toastify';
 import {
 	updateProfileStart,
@@ -5,83 +6,81 @@ import {
 	updateProfileFail,
 } from '../reducers/auth/profileSlice';
 import {
+	getProfileStart,
+	getProfileSuccess,
+	getProfileFail,
+} from '../reducers/auth/userProfileSlice';
+import {
 	updateBuyer,
 	updateVendor,
 	singleBuyerProfile,
 	singleVendorProfile,
 } from '../../api/userApi';
-import { getStoredValues } from '../../constants/storedValues';
 
-const data = getStoredValues();
-let token = null;
-let decodedToken = null;
-if (data) {
-	token = data.token;
-	decodedToken = data.decodedToken;
-}
+export const updateBuyerProfile =
+	(buyerData, token, id) => async (dispatch) => {
+		try {
+			dispatch(updateProfileStart());
+			const res = await updateBuyer(buyerData, token, id);
+			dispatch(updateProfileSuccess(res));
+			toast.success('profile updated', {
+				position: toast.POSITION.TOP_RIGHT,
+			});
+			return res;
+		} catch (error) {
+			if (error) {
+				toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+				return dispatch(updateProfileFail(error.message));
+			}
+			toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+			return dispatch(updateProfileFail(error.Error));
+		}
+	};
 
-export const updateBuyerProfile = (buyerData) => async (dispatch) => {
+export const updateVendorProfile =
+	(vendorData, token, id) => async (dispatch) => {
+		try {
+			dispatch(updateProfileStart());
+			const res = await updateVendor(vendorData, token, id);
+			dispatch(updateProfileSuccess(res));
+			toast.success('profile updated', {
+				position: toast.POSITION.TOP_RIGHT,
+			});
+			return res;
+		} catch (error) {
+			if (error) {
+				toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+				return dispatch(updateProfileFail(error.message));
+			}
+			toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+			return dispatch(updateProfileFail(error.Error));
+		}
+	};
+
+export const getBuyerProfile = (id) => async (dispatch) => {
 	try {
-		dispatch(updateProfileStart());
-		const res = await updateBuyer(buyerData, token, decodedToken.id);
-		dispatch(updateProfileSuccess(res));
-		toast.success('profile updated', {
-			position: toast.POSITION.TOP_RIGHT,
-		});
+		dispatch(getProfileStart());
+		const res = await singleBuyerProfile(id);
+		dispatch(getProfileSuccess(res));
 		return res;
 	} catch (error) {
 		if (error) {
-			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
-			return dispatch(updateProfileFail(error.message));
+			return dispatch(getProfileFail(error.message));
 		}
-		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
-		return dispatch(updateProfileFail(error.Error));
+		return dispatch(getProfileFail(error.Error));
 	}
 };
 
-export const updateVendorProfile = (vendorData) => async (dispatch) => {
+export const getVendorProfile = (id) => async (dispatch) => {
 	try {
-		dispatch(updateProfileStart());
-		const res = await updateVendor(vendorData, token, decodedToken.id);
-		dispatch(updateProfileSuccess(res));
-		toast.success('profile updated', {
-			position: toast.POSITION.TOP_RIGHT,
-		});
+		dispatch(getProfileStart());
+		const res = await singleVendorProfile(id);
+		dispatch(getProfileSuccess(res));
 		return res;
 	} catch (error) {
 		if (error) {
-			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
-			return dispatch(updateProfileFail(error.message));
+			return dispatch(getProfileFail(error.message));
 		}
-		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
-		return dispatch(updateProfileFail(error.Error));
-	}
-};
-
-export const getBuyerProfile = () => async (dispatch) => {
-	try {
-		dispatch(updateProfileStart());
-		const res = await singleBuyerProfile(decodedToken.id);
-		dispatch(updateProfileSuccess(res));
-		return res;
-	} catch (error) {
-		if (error) {
-			return dispatch(updateProfileFail(error.message));
-		}
-		return dispatch(updateProfileFail(error.Error));
-	}
-};
-
-export const getVendorProfile = () => async (dispatch) => {
-	try {
-		dispatch(updateProfileStart());
-		const res = await singleVendorProfile(decodedToken.id);
-		dispatch(updateProfileSuccess(res));
-		return res;
-	} catch (error) {
-		if (error) {
-			return dispatch(updateProfileFail(error.message));
-		}
-		return dispatch(updateProfileFail(error.Error));
+		return dispatch(getProfileFail(error.Error));
 	}
 };

@@ -1,6 +1,7 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-return-assign */
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Input from '../Auth/Input';
 import Button from '../Button/Button';
 import {
@@ -8,7 +9,6 @@ import {
 	updateVendorProfileFields,
 	genderOptions,
 } from '../../constants/formFields';
-import { getStoredValues } from '../../constants/storedValues';
 import Select from '../Auth/Select';
 import {
 	updateBuyerProfile,
@@ -16,17 +16,13 @@ import {
 } from '../../redux/actions/auth.profile.action';
 
 const ProfileDetails = ({ userInfo }) => {
-	console.log(userInfo[4]);
-	const data = getStoredValues();
-	let decodedToken = null;
-	if (data) {
-		decodedToken = data.decodedToken;
-	}
+	const { token, decodedToken } = useSelector((state) => state.token);
 	const profileInfo =
 		decodedToken.role.roleName === 'buyer'
 			? updateBuyerProfileFields
 			: updateVendorProfileFields;
 	const fieldState = {};
+	const { profile, loading } = useSelector((state) => state.profile);
 	profileInfo.forEach((field) => (fieldState[field.id] = ''));
 	const [profileData, setProfileData] = useState(fieldState);
 	const [gender, setGender] = useState('male');
@@ -39,10 +35,21 @@ const ProfileDetails = ({ userInfo }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (decodedToken.role.roleName === 'buyer') {
-			dispatch(updateBuyerProfile({ ...profileData, gender }));
-		}
-		if (decodedToken.role.roleName === 'vendor') {
-			dispatch(updateVendorProfile({ profileData }));
+			dispatch(
+				updateBuyerProfile({ ...profileData, gender }, token, decodedToken.id)
+			);
+		} else if (decodedToken.role.roleName === 'vendor') {
+			dispatch(
+				updateVendorProfile({ ...profileData, gender }, token, decodedToken.id)
+			);
+			if (profile) {
+				setProfileData({
+					businessName: '',
+					businessAddress: '',
+					accountNumber: '',
+					taxIdNumber: '',
+				});
+			}
 		}
 	};
 	return (
@@ -65,23 +72,22 @@ const ProfileDetails = ({ userInfo }) => {
 							className="w-full rounded-md appearance-none border-1 border-primaryGreen"
 						/>
 					))}
-					{decodedToken.role.roleName === 'buyer' && (
-						<Select
-							labelFor="gender"
-							labelText="Gender"
-							name="gender"
-							id="gender"
-							className="w-full rounded-md appearance-none border-1 border-primaryGreen"
-							value={userInfo[4]}
-							options={genderOptions}
-							onChange={handleGenderChange}
-						/>
-					)}
+					<Select
+						labelFor="gender"
+						labelText="Gender"
+						name="gender"
+						id="gender"
+						className="w-full rounded-md appearance-none border-1 border-primaryGreen"
+						value={userInfo[4]}
+						options={genderOptions}
+						onChange={handleGenderChange}
+					/>
 				</div>
 
 				<Button
 					label="Save"
 					className="bg-primaryGreen text-white rounded-2xl p-1 w-28"
+					loading={loading}
 				/>
 			</form>
 		</div>

@@ -7,6 +7,8 @@ import password from './auth/ForgotSlice';
 import resetPassword from './auth/ResetPasswordSlice';
 import profileSlice from './auth/profileSlice';
 import authSlice from './auth/twoFactorAuthSlice';
+import fetchTokenSlice from './fetchTokenSlice';
+import singleProfileSlice from './auth/userProfileSlice';
 
 const rootReducer = combineReducers({
 	cart: cartSlice,
@@ -14,6 +16,8 @@ const rootReducer = combineReducers({
 	login: loginSlice,
 	register: registerSlice,
 	profile: profileSlice,
+	userProfile: singleProfileSlice,
+	token: fetchTokenSlice,
 	auth: authSlice,
 	password,
 	resetPassword,
