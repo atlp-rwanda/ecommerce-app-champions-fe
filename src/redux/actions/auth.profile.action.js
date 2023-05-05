@@ -12,7 +12,13 @@ import {
 } from '../../api/userApi';
 import { getStoredValues } from '../../constants/storedValues';
 
-const { token, decodedToken } = getStoredValues();
+const data = getStoredValues();
+let token = null;
+let decodedToken = null;
+if (data) {
+	token = data.token;
+	decodedToken = data.decodedToken;
+}
 
 export const updateBuyerProfile = (buyerData) => async (dispatch) => {
 	try {

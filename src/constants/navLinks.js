@@ -28,7 +28,7 @@ export const navLinks = [
 		path: '/auth',
 	},
 	{
-		name: 'Setting',
+		name: 'Profile',
 		path: '/Profile',
 	},
 ];

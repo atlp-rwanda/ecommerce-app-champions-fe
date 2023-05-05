@@ -3,8 +3,10 @@ import jwtDecode from 'jwt-decode';
 import Cookies from 'js-cookie';
 
 export const getStoredValues = () => {
-	const token = Cookies.get('token');
-	if (!token) return;
-	const decodedToken = jwtDecode(token);
-	return { token, decodedToken };
+	if (Cookies.get('token') && Cookies.get('token') !== '') {
+		const token = Cookies.get('token');
+		const decodedToken = jwtDecode(token);
+		const data = { token, decodedToken };
+		return data;
+	}
 };
