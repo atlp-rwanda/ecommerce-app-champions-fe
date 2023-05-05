@@ -10,10 +10,10 @@ const fieldState = {};
 updateProductField.forEach((field) => (fieldState[field.id] = ''));
 
 export const UpdateProduct = () => {
-	const dispatch = useDispatch();
-	const { loading, error, success } = useSelector(
-		(state) => state.updateProduct
-	);
+	// const dispatch = useDispatch();
+	// const { loading, error, success } = useSelector(
+	// 	(state) => state.updateProduct
+	// );
 
 	return (
 		<div className="flex flex-col  bg-lightBlue items-center justify-center h-screen">

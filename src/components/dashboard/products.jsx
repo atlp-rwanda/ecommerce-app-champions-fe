@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+/* eslint-disable react/button-has-type */
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdEdit, MdOutlineDeleteOutline } from 'react-icons/md';
 import Button from '../Button/Button';
@@ -8,6 +9,7 @@ import { UpdateProduct } from '../../pages/UpdateProduct';
 function Products() {
 	const dispatch = useDispatch();
 	const { loading, error, items } = useSelector((state) => state.products);
+	const [editProduct, setEditProduct] = useState({ isOpen: false, data: {} });
 
 	useEffect(() => {
 		dispatch(fetchProducts());
@@ -20,6 +22,10 @@ function Products() {
 	if (error) {
 		return <p>{error}</p>;
 	}
+
+	const handleEditProduct = (product) => {
+		setEditProduct({ isOpen: true, data: product });
+	};
 
 	return (
 		<div className="pt-40 pl-32 w-3/4 ">
@@ -45,7 +51,7 @@ function Products() {
 									<td>{item.productName}</td>
 									<td>{item.productPrice}</td>
 									<td>
-										<button type="submit" onClick={<UpdateProduct />}>
+										<button onClick={() => handleEditProduct(item)}>
 											<MdEdit className="text-blue-500" />
 										</button>
 									</td>
@@ -58,6 +64,11 @@ function Products() {
 					</table>
 				</div>
 			</div>
+			{editProduct.isOpen && (
+				<div className="fixed inset-0 bg-lightBlue bg-opacity-75 flex justify-center items-center">
+					<UpdateProduct product={editProduct.data} />
+				</div>
+			)}
 		</div>
 	);
 }
