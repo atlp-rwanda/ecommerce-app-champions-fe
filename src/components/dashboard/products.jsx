@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdEdit, MdOutlineDeleteOutline } from 'react-icons/md';
 import Button from '../Button/Button';
-import { fetchProducts } from '../../redux/reducers/product/productsSlice';
+import { fetchProducts } from '../../redux/reducers/product/productSlice';
+import { UpdateProduct } from '../../pages/UpdateProduct';
 
 function Products() {
 	const dispatch = useDispatch();
@@ -44,7 +45,9 @@ function Products() {
 									<td>{item.productName}</td>
 									<td>{item.productPrice}</td>
 									<td>
-										<MdEdit className="text-blue-500" />
+										<button type="submit" onClick={<UpdateProduct />}>
+											<MdEdit className="text-blue-500" />
+										</button>
 									</td>
 									<td>
 										<MdOutlineDeleteOutline className="text-red-500" />

@@ -50,7 +50,7 @@ export default {
 				red: '#ff0000',
 				rosy_brown: '#A0616A',
 				blue: '#1fb6ff',
-				lightBlue: '#4E5BD7',
+				lightBlue: '#E5EAF9',
 			},
 		},
 	},
