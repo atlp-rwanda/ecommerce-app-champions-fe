@@ -21,6 +21,7 @@
 		"@hookform/resolvers": "^3.1.0",
 		"@jest/globals": "^29.5.0",
 		"@reduxjs/toolkit": "^1.9.5",
+		"@rollup/plugin-node-resolve": "^15.0.2",
 		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/react": "^14.0.0",
 		"@testing-library/user-event": "^14.4.3",
