@@ -17,9 +17,12 @@ import CreateProduct from './pages/Createproduct';
 import SingleProductPage from './pages/SingleProductPage';
 import { ProductPage } from './pages/ProductPage';
 import SellerProductPage from './pages/SellerProductPage';
+<<<<<<< HEAD
 import Topnav from './components/Landingpage/topnav';
 import Footer from './components/Landingpage/Footer';
 import PaymentSuccesspage from './components/payment/payment';
+=======
+>>>>>>> dc4766e (ft-seller-view-product)
 
 function App() {
 	return (
@@ -66,6 +69,7 @@ function App() {
 					path="SellerProductPage/:productId"
 					element={<SellerProductPage />}
 				/>
+				<Route path="*" element={<PageNotFound />} />
 			</Routes>
 		</BrowserRouter>
 	);
