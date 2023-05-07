@@ -1,26 +1,33 @@
+/* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdEdit, MdOutlineDeleteOutline } from 'react-icons/md';
+import LoadingSpinner from '../LoadingSpinner';
+
 import {
+	fetchProducts,
 	deleteProduct,
-	// fetchProducts,
-	getVendorProducts,
-} from '../../redux/reducers/product/productSlice';
+} from '../../redux/actions/product.action';
 import Button from '../Button/Button';
 
 function Products() {
 	const dispatch = useDispatch();
-	const { loading, error, products } = useSelector((state) => state.products);
+	const { loading, error, items } = useSelector(
+		(state) => state.products.products
+	);
 	const [selectedProduct, setSelectedProduct] = useState(null);
+
 	const token = Cookies.get('token');
 	useEffect(() => {
-		// dispatch(fetchProducts());
-		dispatch(getVendorProducts(token));
+		dispatch(fetchProducts(token));
 	}, [dispatch, token]);
 
 	const handleDelete = (productId) => {
-		dispatch(deleteProduct(productId, token));
+		dispatch(deleteProduct(productId, token))
+			.then(() => dispatch(fetchProducts(token)))
+			.catch((error) => console.log(error));
+		setSelectedProduct(null);
 	};
 
 	const handleCancelDelete = () => {
@@ -54,7 +61,7 @@ function Products() {
 									<td>Edit</td>
 									<td>Delete</td>
 								</tr>
-								{products?.map((item) => (
+								{items?.map((item) => (
 									<tr key={item.productId} className="h-20">
 										<td>{item.productName}</td>
 										<td>{item.productPrice}</td>
@@ -81,20 +88,17 @@ function Products() {
 							Are you sure you want to delete {selectedProduct.productName}?
 						</p>
 						<div className="flex justify-end mx-5 mb-5">
-							<button
-								type="submit"
+							<Button
+								label={loading ? <LoadingSpinner /> : 'Yes'}
 								className="px-4 py-2 mr-2 font-bold text-white rounded-2xl bg-rosy_brown w-28"
 								onClick={() => handleDelete(selectedProduct.productId)}
-							>
-								Yes
-							</button>
-							<button
-								type="submit"
+							/>
+
+							<Button
+								label={loading ? <LoadingSpinner /> : 'No'}
 								className="px-4 py-2 mr-4 font-bold text-white rounded-2xl bg-primaryGreen w-28"
 								onClick={handleCancelDelete}
-							>
-								No
-							</button>
+							/>
 						</div>
 					</div>
 				</div>
