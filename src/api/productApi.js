@@ -10,9 +10,7 @@ export const createproduct = (productData) => {
 	return new Promise((resolve, reject) => {
 		axios
 			.post(`${url}/api/product/create`, productData, {
-				headers: {
-					token: `Bearer ${token}`,
-				},
+				headers: { Token: `Bearer ${token}` },
 			})
 			.then((response) => resolve(response.data))
 			.catch((error) => {

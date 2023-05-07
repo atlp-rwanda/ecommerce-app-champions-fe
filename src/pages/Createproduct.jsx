@@ -1,21 +1,25 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-return-assign */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import { RiCloseLine } from 'react-icons/ri';
 import { createProductField } from '../constants/formFields';
 import InputProduct from '../components/Auth/InputProduct';
-import Button, { DangerButton } from '../components/Button/Button';
+import Button from '../components/Button/Button';
 
 import { createnewProduct } from '../redux/actions/createproduct.actions';
 
 const fieldState = {};
 createProductField.forEach((field) => (fieldState[field.id] = ''));
 
-const CreateProduct = () => {
+const CreateProduct = ({ setIsOpen }) => {
 	const dispatch = useDispatch();
-	const { loading } = useSelector((state) => state.createproduct);
+	const { product, loading } = useSelector((state) => state.createproduct);
 	const [createState, setCreateState] = useState(fieldState);
 	const [imageFiles, setImageFiles] = useState([]);
+	const [selectedImages, setSelectedImages] = useState([]);
 
 	const handleChange = (e) => {
 		if (e.target.type === 'file') {
@@ -40,14 +44,47 @@ const CreateProduct = () => {
 	const handleCancel = () => {
 		setCreateState(fieldState);
 		setImageFiles([]);
+		setSelectedImages([]);
+		setIsOpen(false);
 	};
+
+	useEffect(() => {
+		if (product) {
+			setTimeout(() => {
+				setIsOpen(false);
+				window.location.reload();
+			}, 7000);
+		}
+
+		const filesArray = Array.from(imageFiles);
+		const selectedImageUrls = filesArray.map((file) =>
+			URL.createObjectURL(file)
+		);
+		setSelectedImages(selectedImageUrls);
+
+		return () => {
+			// Clean up the object URLs
+			selectedImageUrls.forEach((url) => URL.revokeObjectURL(url));
+		};
+	}, [product, imageFiles, setIsOpen]);
+
 	return (
-		<div className=" bg-brightGray flex flex-col justify-center items-center pl-20 pr-20 ">
+		<div className=" relative w-full sm:w-3/4  bg-brightGray  flex flex-col overflow-auto   items-center p-10 my-20">
+			<button
+				className="absolute top-0 right-0 p-2  text-red font-bold"
+				onClick={() => setIsOpen(false)}
+			>
+				<RiCloseLine />
+			</button>
+
 			<h3 className="text-left font-extrabold text-2xl font-bold text-yellow my-2">
 				Create a new product
 			</h3>
-			<form className="w-80% bg-E5EAF9 my-5" onSubmit={handleCreate}>
-				<div className="grid grid-cols-3  gap-4 content-center ">
+			<form
+				className=" w-full sm:w-80%  bg-E5EAF9 my-5"
+				onSubmit={handleCreate}
+			>
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 content-center ">
 					{createProductField.map((field) => (
 						<InputProduct
 							key={field.id}
@@ -81,13 +118,25 @@ const CreateProduct = () => {
 						/>
 					</div>
 				</div>
+				<div className="flex flex-wrap gap-4">
+					{selectedImages.map((imageUrl, imageindex) => (
+						<img
+							key={imageindex}
+							src={imageUrl}
+							alt=""
+							className="h-16 w-16 object-cover rounded"
+						/>
+					))}
+				</div>
 				<div className="flex  space-x-4 my-5  justify-center items-center">
 					<Button
+						type="submit"
 						loading={loading}
 						label="Add product"
 						className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-2 w-28"
 					/>
-					<DangerButton
+					<Button
+						type="button"
 						label="Cancel"
 						className="flex items-center justify-center p-1 rounded-2xl bg-lightRed text-white font-bold my-2 w-28"
 						onClick={handleCancel}

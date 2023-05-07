@@ -1,20 +1,13 @@
+/* eslint-disable react/button-has-type */
 import LoadingSpinner from '../LoadingSpinner';
 
-const Button = ({ label, className, loading }) => {
-	return (
-		<button type="submit" className={className} disabled={loading && loading}>
-			{loading ? <LoadingSpinner /> : label}
-		</button>
-	);
-};
-
-export const DangerButton = ({ label, className, loading, onClick }) => {
+const Button = ({ label, className, loading, buttontype, onClick }) => {
 	return (
 		<button
-			type="button"
-			onClick={onClick}
+			type={buttontype}
 			className={className}
 			disabled={loading && loading}
+			onClick={onClick}
 		>
 			{loading ? <LoadingSpinner /> : label}
 		</button>
