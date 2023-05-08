@@ -53,7 +53,13 @@ const ForgotPassword = () => {
 						onChange={(event) => setEmail(event.target.value)}
 					/>
 					<Button
-						label={isLoading ? <LoadingSpinner /> : 'Submit'}
+						label={
+							isLoading ? (
+								<LoadingSpinner className="w-6 h-6 mr-2 text-gray-200 animate-spin fill-white" />
+							) : (
+								'Submit'
+							)
+						}
 						className="bg-primaryGreen text-white font-bold w-28 p-1 my-2 flex justify-center items-center"
 						disabled={isLoading}
 					/>

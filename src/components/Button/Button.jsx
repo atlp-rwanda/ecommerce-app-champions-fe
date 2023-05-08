@@ -18,7 +18,7 @@ const Button = (props) => {
 			{...otherProps}
 		>
 			{loading ? (
-				<LoadingSpinner className="w-6 h-6 mr-2 text-gray-200 animate-spin fill-white" />
+				<LoadingSpinner className="w-6 h-6 mx-auto text-gray-200 animate-spin fill-white" />
 			) : (
 				label
 			)}

@@ -1,4 +1,11 @@
-import { expect, afterEach, beforeAll, afterAll } from 'vitest';
+import {
+	expect,
+	afterEach,
+	beforeAll,
+	afterAll,
+	beforeEach,
+	vitest,
+} from 'vitest';
 import { cleanup, render as rtlRender } from '@testing-library/react';
 import matchers from '@testing-library/jest-dom/matchers';
 import { BrowserRouter } from 'react-router-dom';
@@ -32,9 +39,20 @@ function render(
 	};
 }
 
+let store = {};
+
 beforeAll(async () => {
+	global.Storage.prototype.setItem = vitest.fn((key, value) => {
+		store[key] = value;
+	});
 	await server.listen();
 });
+
+beforeEach(() => {
+	store = {};
+});
+
+afterEach(() => server.resetHandlers());
 
 expect.extend(matchers);
 

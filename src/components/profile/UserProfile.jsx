@@ -15,19 +15,20 @@ import LoadingSpinner from '../LoadingSpinner';
 import { handleToken } from '../../redux/actions/token.action';
 
 const UserProfile = () => {
-	const [profileInfo, setProfileInfo] = useState({});
-	const [fullDetails, setFullDetails] = useState({});
+	const [profileInfo, setProfileInfo] = useState('');
+	const [fullDetails, setFullDetails] = useState('');
 	const dispatch = useDispatch();
-	const { decodedToken } = useSelector((state) => state.token);
-	const { profile, loading } = useSelector((state) => state.userProfile);
+	const { decodedToken } = useSelector((state) => state.token || {});
+	const { profile, loading } = useSelector((state) => state.userProfile || {});
+	const updateProfile = useSelector((state) => state.profile);
 	useEffect(() => {
 		dispatch(handleToken());
 	}, [dispatch]);
 	useEffect(() => {
 		if (decodedToken) {
-			if (decodedToken.role.roleName === 'buyer') {
+			if (decodedToken?.role.roleName === 'buyer') {
 				dispatch(getBuyerProfile(decodedToken.id));
-			} else if (decodedToken.role.roleName === 'vendor') {
+			} else if (decodedToken?.role.roleName === 'vendor') {
 				dispatch(getVendorProfile(decodedToken.id));
 			}
 		}
@@ -37,7 +38,7 @@ const UserProfile = () => {
 			setProfileInfo(profile.data.others);
 			setFullDetails(profile.data.profile);
 		}
-	}, [profile]);
+	}, [profile, updateProfile]);
 	if (!profile || loading === true) {
 		return (
 			<div>
@@ -46,7 +47,6 @@ const UserProfile = () => {
 					<AiOutlineLogout
 						size={25}
 						className="text-primaryGreen cursor-pointer"
-						onClick={() => Cookies.remove('token')}
 					/>
 				</div>
 				<div className="w-full h-full flex items-center justify-center mx-auto my-4">
@@ -62,6 +62,10 @@ const UserProfile = () => {
 				<AiOutlineLogout
 					size={25}
 					className="text-primaryGreen cursor-pointer"
+					onClick={Cookies.remove('token', {
+						path: '/',
+						domain: 'https://ecommerce-app-champions-fe.vercel.app',
+					})}
 				/>
 			</div>
 			<div className="flex flex-col space-y-4 md:space-y-0 w-full">

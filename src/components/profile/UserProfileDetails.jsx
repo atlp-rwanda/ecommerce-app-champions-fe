@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-return-assign */
 import React, { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { buyerSignUpFields } from '../../constants/formFields';
 import Input from '../Auth/Input';
 import Button from '../Button/Button';
@@ -43,6 +44,7 @@ const UserProfileDetails = ({ profile }) => {
 						className="bg-primaryGreen text-white rounded-2xl p-1 w-40"
 					/>
 				</form>
+				<ToastContainer />
 			</div>
 		);
 	}
