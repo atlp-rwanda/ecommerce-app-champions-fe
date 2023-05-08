@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 import { AiOutlineLogout, AiFillEdit } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import Logo from '../../assets/Logo.svg';
@@ -45,6 +46,7 @@ const UserProfile = () => {
 					<AiOutlineLogout
 						size={25}
 						className="text-primaryGreen cursor-pointer"
+						onClick={() => Cookies.remove('token')}
 					/>
 				</div>
 				<div className="w-full h-full flex items-center justify-center mx-auto my-4">
