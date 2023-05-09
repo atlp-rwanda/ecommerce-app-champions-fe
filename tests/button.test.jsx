@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect, describe, it } from 'vitest';
 import { render, screen } from './setup';
-import Button, { DangerButton } from '../src/components/Button/Button';
+import Button from '../src/components/Button/Button';
 import GoogleButton from '../src/components/Button/GoogleButton';
 
 describe('Button component', () => {

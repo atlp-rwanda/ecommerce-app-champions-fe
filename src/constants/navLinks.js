@@ -23,4 +23,12 @@ export const navLinks = [
 		name: 'Reset Password',
 		path: '/ResetPassword',
 	},
+	{
+		name: 'Auth',
+		path: '/auth',
+	},
+	{
+		name: 'Profile',
+		path: '/Profile',
+	},
 ];

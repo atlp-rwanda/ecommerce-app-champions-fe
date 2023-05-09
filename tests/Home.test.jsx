@@ -1,14 +1,13 @@
 import { test, describe, expect } from 'vitest';
 import { render, screen } from './setup';
-import BuyerSignupPage from '../src/pages/BuyerSignupPage';
+import HomePage from '../src/pages/HomePage';
 
 describe('Home', () => {
 	test('hompepage test', () => {
-		render(<BuyerSignupPage />);
-		expect(screen.getByRole('link', { name: /login/i })).toBeInTheDocument();
-		expect(screen.getByRole('heading', { level: 3 })).toBeInTheDocument();
-		expect(
-			screen.getByRole('button', { name: 'Register' })
-		).toBeInTheDocument();
+		render(<HomePage />);
+		expect(screen.getByRole('link', { name: /Login/i })).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: /Vendor/i })).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: /Buyer/i })).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: /Home/i })).toBeInTheDocument();
 	});
 });

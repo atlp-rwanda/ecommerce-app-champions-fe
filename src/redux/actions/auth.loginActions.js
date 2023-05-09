@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable */
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';

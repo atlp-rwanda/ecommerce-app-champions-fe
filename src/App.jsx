@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import BuyerSignupPage from './pages/BuyerSignupPage';
@@ -6,8 +7,10 @@ import LoginPage from './pages/LoginPage';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import TwoFactorAuth from './pages/Two-factor-auth';
+import ProfilePage from './pages/ProfilePage';
 import AdminDashboard from './pages/adminDashboard';
 import VendorDashboard from './pages/vendorDashboard';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
 	return (
@@ -20,8 +23,10 @@ function App() {
 				<Route path="/ForgotPassword" element={<ForgotPassword />} />
 				<Route path="/ResetPassword" element={<ResetPassword />} />
 				<Route path="/auth" element={<TwoFactorAuth />} />
+				<Route path="/profile" element={<ProfilePage />} />
 				<Route path="/admin" element={<AdminDashboard />} />
 				<Route path="/vendors" element={<VendorDashboard />} />
+				<Route path="*" element={<PageNotFound />} />
 			</Routes>
 		</BrowserRouter>
 	);

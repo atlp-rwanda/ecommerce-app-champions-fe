@@ -1,6 +1,4 @@
-/* eslint-disable no-return-assign */
-/* eslint-disable consistent-return */
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable */
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -16,10 +14,10 @@ import 'react-toastify/dist/ReactToastify.css';
 const fieldState = {};
 userloginFields.forEach((field) => (fieldState[field.id] = ''));
 
-const Login = () => {
+const LoginPage = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const { user, loading } = useSelector((state) => state.login);
+	const { user, loading } = useSelector((state) => state.login || {});
 	const [loginState, setLoginState] = useState(fieldState);
 
 	const handleChange = (e) =>
@@ -37,7 +35,7 @@ const Login = () => {
 			if (user?.data?.others?.RoleId === 3) return navigate('/');
 
 			if (user?.hashedOTP) return navigate('/auth');
-		}, 9000);
+		}, 8000);
 	}, [user]);
 
 	return (
@@ -78,12 +76,9 @@ const Login = () => {
 						label="Sign in with Google"
 						className="font-bold text-white bg-wheat "
 					/>
-					<div className="flex flex-row py-2 my-2 space-x-3">
-						<Link to="/Buyer" className="underline text-lightBlue">
-							Buyer Signup
-						</Link>
-						<Link to="/Vendor" className="underline text-lightBlue">
-							Vendor Signup
+					<div className="flex flex-row space-x-3 py-2 my-2">
+						<Link to="/Buyer" className="text-lightBlue underline">
+							Signup
 						</Link>
 						<Link to="/ForgotPassword" className="underline text-lightBlue">
 							Forgot password
@@ -94,4 +89,5 @@ const Login = () => {
 		</div>
 	);
 };
-export default Login;
+
+export default LoginPage;

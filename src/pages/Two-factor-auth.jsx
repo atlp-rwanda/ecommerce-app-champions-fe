@@ -1,5 +1,4 @@
-/* eslint-disable no-shadow */
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,7 +16,9 @@ const TwoFactorAuth = () => {
 	const [OTP, setOTP] = useState('');
 	const [otpErrors, setotpErrors] = useState(null);
 	const dispatch = useDispatch();
-	const { loading, error, token, user } = useSelector((state) => state.auth);
+	const { loading, error, token, user } = useSelector(
+		(state) => state.auth || {}
+	);
 	const [seconds, setSeconds] = useState(300);
 	const navigate = useNavigate();
 	const handleSubmit = async (e) => {
@@ -76,7 +77,7 @@ const TwoFactorAuth = () => {
 					<div>
 						<OTPInput
 							numInputs={6}
-							shouldAutoFocus={true}
+							shouldAutoFocus
 							renderSeparator={<span>-</span>}
 							value={OTP}
 							onChange={setOTP}

@@ -44,3 +44,63 @@ export const Userlogin = (userData) => {
 			});
 	});
 };
+
+export const updateBuyer = (buyerData, token, userId) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.put(`${url}/api/buyer/profile/${userId}`, buyerData, {
+				headers: { token: `Bearer ${token}` },
+			})
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
+export const updateVendor = (vendorData, token, userId) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.put(`${url}/api/vendor/profile/${userId}`, vendorData, {
+				headers: { token: `Bearer ${token}` },
+			})
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
+export const singleBuyerProfile = (buyerId) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/buyer/oneProfile/${buyerId}`)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
+export const singleVendorProfile = (vendorId) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/vendor/oneProfile/${vendorId}`)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
