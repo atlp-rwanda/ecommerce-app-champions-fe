@@ -4,62 +4,67 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 import varKeys from '../../../constants/keys';
 
 const url = varKeys.APP_URL;
+const token = Cookies.get('token');
 
-export const processReset = createAsyncThunk(
-	'resetPassword/processReset',
-	async ({ token, password, confirmPassword }, { rejectWithValue }) => {
+export const updateProduct = createAsyncThunk(
+	'product/updateProduct',
+	async ({ id, data }, { rejectWithValue }) => {
 		try {
-			const response = await axios.post(
-				`${url}/api/user/resetpassword/${token}`,
-				{ password, confirmPassword }
+			const response = await axios.patch(
+				`${url}/api/product/update/${id}`,
+				data,
+				{
+					headers: {
+						Token: `Bearer ${token}`,
+					},
+				}
 			);
 
-			toast.success(response.data.message);
+			toast.success('product updated successfully');
 
 			return response.data;
 		} catch (error) {
-			// console.log( "gdbrtgbsdtrgsdtr",error)
 			if (error.response && error.response.data) {
 				toast.error(error.response.data.error);
 				return rejectWithValue(error.response.data);
 			} else {
-				toast.error('Something went wrong');
+				toast.error('Something went wrong!!!!!!!!!!!!');
 				return rejectWithValue({ error: 'Something went wrong' });
 			}
 		}
 	}
 );
 
-export const resetPasswordSlice = createSlice({
-	name: 'resetPassword',
+export const updateProductSlice = createSlice({
+	name: 'update',
 	initialState: {
-		loading: false,
+		isLoading: false,
 		error: null,
 		success: null,
 	},
 	reducers: {},
 	extraReducers: (builder) => {
 		builder
-			.addCase(processReset.pending, (state) => {
-				state.loading = true;
+			.addCase(updateProduct.pending, (state) => {
+				state.isLoading = true;
 				state.error = null;
 				state.success = null;
 			})
-			.addCase(processReset.fulfilled, (state, action) => {
-				state.loading = false;
+			.addCase(updateProduct.fulfilled, (state, action) => {
+				state.isLoading = false;
 				state.error = null;
-				state.success = action.payload.message;
+				state.success = action.payload.productUpdate;
 			})
-			.addCase(processReset.rejected, (state, action) => {
-				state.loading = false;
+			.addCase(updateProduct.rejected, (state, action) => {
+				state.isLoading = false;
 				state.error = action.payload.error;
 				state.success = null;
 			});
 	},
 });
 
-export default resetPasswordSlice.reducer;
+export default updateProductSlice.reducer;

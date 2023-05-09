@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdEdit, MdOutlineDeleteOutline } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
 
 import {
@@ -19,7 +20,7 @@ function Products() {
 	const [selectedProduct, setSelectedProduct] = useState(null);
 	const navigate = useNavigate();
 	// const { loading, error, items } = useSelector((state) => state.products);
-	const [editProduct, setEditProduct] = useState({ isOpen: false, data: {} });
+	// const [editProduct, setEditProduct] = useState({ isOpen: false, data: {} });
 
 	const token = Cookies.get('token');
 	useEffect(() => {
@@ -40,9 +41,9 @@ function Products() {
 		return <p>{error}</p>;
 	}
 
-	const handleEditProduct = (product) => {
-		setEditProduct({ isOpen: true, data: product });
-	};
+	// const handleEditProduct = (product) => {
+	// 	setEditProduct({ isOpen: true, data: product });
+	// };
 
 	return (
 		<div className="container mx-auto mt-10">

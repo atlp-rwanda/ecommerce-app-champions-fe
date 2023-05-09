@@ -308,17 +308,6 @@ export const createProductField = [
 		autoComplete: 'true',
 	},
 	{
-		labelFor: 'Product Images',
-		labelText: 'Product Images',
-		placeholder: 'Add image',
-		id: 'productImage',
-		name: 'image',
-		type: 'file',
-		isRequired: true,
-		autoComplete: 'true',
-		multiple: true,
-	},
-	{
 		labelFor: 'Product Description',
 		labelText: 'Product Description',
 		placeholder: 'Description',

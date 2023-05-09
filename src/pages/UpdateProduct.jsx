@@ -4,12 +4,13 @@
 /* eslint-disable no-return-assign */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import Cookies from 'js-cookie';
 import ProductInput from '../components/product/ProductInput';
 import Button from '../components/Button/Button';
 import { updateProductField } from '../constants/formFields';
-import { fetchProducts } from '../redux/reducers/product/productSlice';
+import { fetchProducts } from '../redux/actions/product.action';
 import { updateProduct } from '../redux/reducers/product/updateProductSlice';
 
 const fieldState = {};
@@ -21,48 +22,40 @@ const initialState = {
 	productPrice: '',
 	quantity: '',
 	expiredDate: '',
-	// productImage: '',
 	productDescription: '',
-	// Category: '',
 	bonus: '',
 };
 
 export const UpdateProduct = () => {
-	const productId = useParams();
-	const { loading, error, items } = useSelector((state) => state.products);
+	const navigate = useNavigate();
+	const { id } = useParams();
 	const dispatch = useDispatch();
+	const { loading, error, items } = useSelector(
+		(state) => state.products.products
+	);
 	const [formData, setFormData] = useState(initialState);
 	const [imageFiles, setImageFiles] = useState([]);
 	const [selectedImages, setSelectedImages] = useState([]);
-	// const [updatedData, setUpdatedData] = useState({});
-	// const { osLoading } = useSelector(
-	// 	(state) => state.updateProduct
-	// );
-	const singleProduct = items
-		? items.find((product) => product.productId == productId.id)
-		: null;
-	// console.log('bonussss', singleProduct.Category.name);
+	const { isLoading, success } = useSelector((state) => state.update);
+	const token = Cookies.get('token');
 	useEffect(() => {
-		dispatch(fetchProducts());
-	}, [dispatch]);
-
+		dispatch(fetchProducts(token));
+	}, [dispatch, token]);
+	const singleProduct = items
+		? items.find((product) => product.productId == id)
+		: null;
 	useEffect(() => {
 		if (singleProduct) {
-			// eslint-disable-next-line no-shadow
-			// const { productId, ...others } = singleProduct;
 			const updatedData = {
 				productName: singleProduct.productName,
 				productOwner: singleProduct.productOwner,
-				// Category: singleProduct.Category,
 				productPrice: singleProduct.productPrice,
 				quantity: singleProduct.quantity,
 				expiredDate: singleProduct.expiredDate,
 				productDescription: singleProduct.productDescription,
 				bonus: singleProduct.bonus,
-				// productImage: singleProduct.productImage,
 			};
 			setFormData(updatedData);
-			// console.log('product nameeeeeee', formData);
 		}
 	}, [singleProduct]);
 	function formatDate(dateString) {
@@ -75,17 +68,13 @@ export const UpdateProduct = () => {
 		const day = `${date.getDate()}`.padStart(2, '0');
 		return `${year}-${month}-${day}`;
 	}
-	const updateProductId = productId.id;
+	const updateProductId = id;
 
 	const handleUpdateProduct = (event) => {
 		event.preventDefault();
 		const formDat = new FormData();
 		Object.keys(formData).forEach((key) => formDat.append(key, formData[key]));
 		imageFiles.forEach((file) => formDat.append('productImage', file));
-		// console.log( "form dataaaaaaaaaaaaa",formDat);
-		// console.log('updatedData', updatedData);
-		// setUpdatedData(formData);
-		// console.log("dataaaaaaaaa", formData.productCategory);
 		dispatch(updateProduct({ id: updateProductId, data: formDat }));
 	};
 
@@ -105,15 +94,20 @@ export const UpdateProduct = () => {
 		setSelectedImages(selectedImageUrls);
 
 		return () => {
-			// Clean up the object URLs
 			selectedImageUrls.forEach((url) => URL.revokeObjectURL(url));
 		};
 	}, [imageFiles]);
-
-	// console.log(formData);
+	useEffect(() => {
+		let timer;
+		if (success) {
+			setFormData(initialState);
+			timer = setTimeout(() => navigate('/vendors'), 500);
+		}
+		return () => clearTimeout(timer);
+	}, [success, navigate]);
 
 	return (
-		<div className="flex flex-col  bg-lightBlue items-center justify-center h-screen">
+		<div className="flex flex-col  bg-brightGray items-center justify-center md:h-screen">
 			<h3 className="text-center text-4xl font-extrabold font-bold text-yellow mb-8">
 				Update Product
 			</h3>
@@ -131,7 +125,6 @@ export const UpdateProduct = () => {
 						autoComplete="true"
 						value={formData?.productOwner}
 						handleChange={handleChange}
-						// value={createState[field.id]}
 					/>
 					<ProductInput
 						placeholder="Product Name"
@@ -145,7 +138,6 @@ export const UpdateProduct = () => {
 						autoComplete="true"
 						value={formData?.productName}
 						handleChange={handleChange}
-						// value={createState[field.id]}
 					/>
 					<ProductInput
 						placeholder="Product Price"
@@ -159,7 +151,6 @@ export const UpdateProduct = () => {
 						autoComplete="true"
 						value={formData?.productPrice}
 						handleChange={handleChange}
-						// value={createState[field.id]}
 					/>
 					<ProductInput
 						placeholder="quantity"
@@ -173,7 +164,6 @@ export const UpdateProduct = () => {
 						autoComplete="true"
 						value={formData?.quantity}
 						handleChange={handleChange}
-						// value={createState[field.id]}
 					/>
 
 					<ProductInput
@@ -188,13 +178,9 @@ export const UpdateProduct = () => {
 						autoComplete="true"
 						value={formatDate(formData?.expiredDate)}
 						handleChange={handleChange}
-						// value={createState[field.id]}
 					/>
 
 					<div>
-						{/* <span className="text-black">
-							<img src={formData?.productImage[0]} alt="productImage" />
-						</span> */}
 						<div className="flex flex-col">
 							<label
 								htmlFor="productImage"
@@ -236,20 +222,6 @@ export const UpdateProduct = () => {
 						handleChange={handleChange}
 						// value={createState[field.id]}
 					/>
-					{/* <ProductInput
-						placeholder="Product Category"
-						type="text"
-						id="productCategory"
-						name="productCategory"
-						isRequired={true}
-						labelText="Product Category"
-						labelFor="Product Category"
-						multiple={true}
-						autoComplete="true"
-						value={formData?.productCategory ?? formData?.Category?.name}
-						handleChange={handleChange}
-					/> */}
-
 					<ProductInput
 						placeholder="Bonus"
 						type="number"
@@ -267,15 +239,17 @@ export const UpdateProduct = () => {
 
 					<ToastContainer />
 				</div>
-				<div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8 my-5">
+				<div className="flex space-x-4 my-5  justify-center items-center">
 					<Button
 						label="Cancel"
-						className="flex items-center justify-center p-2 rounded-2xl bg-red text-white font-bold w-full md:w-28"
+						onClick={() => navigate(`/vendors/`)}
+						className="flex items-center justify-center p-1 rounded-2xl bg-lightRed text-white font-bold my-2 w-28"
 					/>
 					<Button
 						label="Update"
+						loading={isLoading}
 						onClick={handleUpdateProduct}
-						className="flex items-center justify-center p-2 rounded-2xl bg-primaryGreen text-white font-bold w-full md:w-28"
+						className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-2 w-28"
 					/>
 				</div>
 			</form>
