@@ -39,13 +39,13 @@ const LoginPage = () => {
 	}, [user]);
 
 	return (
-		<div className="w-screen h-screen flex flex-row space-x-0 md:space-x-0 items-center">
-			<div className="hidden w-2/5 md:3/5 md:flex items-center justify-center">
+		<div className="flex flex-row items-center w-screen h-screen space-x-0 md:space-x-0">
+			<div className="items-center justify-center hidden w-2/5 md:3/5 md:flex">
 				<img src={Loginphoto} alt="secureloginphoto" className="w-9/12" />
 			</div>
-			<div className="w-full md:w-3/5 flex flex-col h-full bg-brightGray p-9">
-				<div className="w-full md:w-4/5 h-4/5 px-3 flex flex-col justify-center">
-					<h3 className="text-left font-extrabold text-2xl font-bold text-yellow my-2">
+			<div className="flex flex-col w-full h-full md:w-3/5 bg-brightGray p-9">
+				<div className="flex flex-col justify-center w-full px-3 md:w-4/5 h-4/5">
+					<h3 className="my-2 text-2xl font-bold font-extrabold text-left text-yellow">
 						Sign Into Your Account
 					</h3>
 					<form onSubmit={handleLogin} id="loginForm">
@@ -62,25 +62,25 @@ const LoginPage = () => {
 								labelFor={field.labelFor}
 								autoComplete={field.autoComplete}
 								handleChange={handleChange}
-								className="appearance-none py-2 px-2 my-2 rounded-md w-11/12"
+								className="w-11/12 px-2 py-2 my-2 rounded-md appearance-none"
 							/>
 						))}
 						<Button
 							loading={loading}
 							label="Login"
-							className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-2 w-28"
+							className="flex items-center justify-center p-1 my-2 font-bold text-white rounded-2xl bg-primaryGreen w-28"
 						/>
 					</form>
 					<ToastContainer />
 					<GoogleButton
 						label="Sign in with Google"
-						className="bg-wheat text-white font-bold "
+						className="font-bold text-white bg-wheat "
 					/>
 					<div className="flex flex-row space-x-3 py-2 my-2">
 						<Link to="/Buyer" className="text-lightBlue underline">
 							Signup
 						</Link>
-						<Link to="/ForgotPassword" className="text-lightBlue underline">
+						<Link to="/ForgotPassword" className="underline text-lightBlue">
 							Forgot password
 						</Link>
 					</div>

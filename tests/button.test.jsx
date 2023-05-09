@@ -29,4 +29,12 @@ describe('Button component', () => {
 		expect(await screen.findByText(/Sign in with Google/i)).toBeInTheDocument();
 		expect(screen.getByRole('button')).toBeInTheDocument();
 	});
+
+	it('should render Add product  ', async () => {
+		render(<Button label="Add product" />);
+		expect(screen.getByText(/Add product/i)).toBeVisible();
+		expect(screen.getByText(/Add product/i)).toContainHTML('button');
+		expect(await screen.findByText(/Add product/i)).toBeInTheDocument();
+		expect(screen.getByRole('button')).toBeInTheDocument();
+	});
 });

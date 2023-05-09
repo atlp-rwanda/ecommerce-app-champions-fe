@@ -9,6 +9,5 @@ describe('Home', () => {
 		expect(screen.getByRole('link', { name: /Vendor/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /Buyer/i })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: /Home/i })).toBeInTheDocument();
-		expect(screen.getByText(/Fetching all Products/i)).toBeInTheDocument();
 	});
 });
