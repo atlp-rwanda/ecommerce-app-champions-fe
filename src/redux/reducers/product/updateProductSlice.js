@@ -9,7 +9,6 @@ import varKeys from '../../../constants/keys';
 
 const url = varKeys.APP_URL;
 const token = Cookies.get('token');
-
 export const updateProduct = createAsyncThunk(
 	'product/updateProduct',
 	async ({ id, data }, { rejectWithValue }) => {
@@ -66,5 +65,4 @@ export const updateProductSlice = createSlice({
 			});
 	},
 });
-
 export default updateProductSlice.reducer;
