@@ -30,7 +30,7 @@ function App() {
 				<Route path="/vendors" element={<VendorDashboard />} />
 				<Route path="*" element={<PageNotFound />} />
 				<Route path="/AddProduct" element={<CreateProduct />} />
-				<Route path="/vendors/update/:id" element={<UpdateProduct />} />
+				<Route path="/vendors/:id" element={<UpdateProduct />} />
 			</Routes>
 		</BrowserRouter>
 	);

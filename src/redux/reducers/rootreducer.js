@@ -10,7 +10,7 @@ import fetchTokenSlice from './fetchTokenSlice';
 import singleProfileSlice from './auth/userProfileSlice';
 import productsSlice from './product/productSlice';
 import createProductSlice from './product/createProductSlice';
-import update from './product/updateProductSlice';
+import updateProductSlice from './product/updateProductSlice';
 
 const rootReducer = combineReducers({
 	cart: cartSlice,
@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
 	resetPassword,
 	products: productsSlice,
 	createproduct: createProductSlice,
-	update,
+	updateProduct: updateProductSlice,
 });
 
 export default rootReducer;

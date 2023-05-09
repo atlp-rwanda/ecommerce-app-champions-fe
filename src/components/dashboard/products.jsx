@@ -12,15 +12,13 @@ import {
 } from '../../redux/actions/product.action';
 import Button from '../Button/Button';
 
-function Products() {
+function Products({ setIsOpen }) {
 	const dispatch = useDispatch();
 	const { loading, error, items } = useSelector(
 		(state) => state.products.products
 	);
 	const [selectedProduct, setSelectedProduct] = useState(null);
 	const navigate = useNavigate();
-	// const { loading, error, items } = useSelector((state) => state.products);
-	// const [editProduct, setEditProduct] = useState({ isOpen: false, data: {} });
 
 	const token = Cookies.get('token');
 	useEffect(() => {
@@ -41,10 +39,6 @@ function Products() {
 		return <p>{error}</p>;
 	}
 
-	// const handleEditProduct = (product) => {
-	// 	setEditProduct({ isOpen: true, data: product });
-	// };
-
 	return (
 		<div className="container mx-auto mt-10">
 			{loading ? (
@@ -56,8 +50,9 @@ function Products() {
 							All Products
 						</h1>
 						<Button
-							buttontype="submit"
+							buttontype="button"
 							label="Add Products"
+							onClick={() => setIsOpen(true)}
 							className="w-full p-1 my-2 font-bold text-white rounded-full md:w-auto products-center bg-primaryGreen"
 						/>
 					</div>
@@ -76,10 +71,8 @@ function Products() {
 										<td>{item.productPrice}</td>
 										<td>
 											<MdEdit
-												className="text-blue-500"
-												onClick={() =>
-													navigate(`/vendors/update/${item.productId}`)
-												}
+												className="text-blue-500 cursor-pointer"
+												onClick={() => navigate(`/vendors/${item.productId}`)}
 											/>
 										</td>
 										<td>
