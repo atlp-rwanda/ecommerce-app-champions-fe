@@ -48,6 +48,7 @@ function Products() {
 							All Products
 						</h1>
 						<Button
+							buttontype="submit"
 							label="Add Products"
 							className="w-full p-1 my-2 font-bold text-white rounded-full md:w-auto products-center bg-primaryGreen"
 						/>
@@ -89,12 +90,14 @@ function Products() {
 						</p>
 						<div className="flex justify-end mx-5 mb-5">
 							<Button
+								buttontype="submit"
 								label={loading ? <LoadingSpinner /> : 'Yes'}
 								className="px-4 py-2 mr-2 font-bold text-white rounded-2xl bg-rosy_brown w-28"
 								onClick={() => handleDelete(selectedProduct.productId)}
 							/>
 
 							<Button
+								buttontype="submit"
 								label={loading ? <LoadingSpinner /> : 'No'}
 								className="px-4 py-2 mr-4 font-bold text-white rounded-2xl bg-primaryGreen w-28"
 								onClick={handleCancelDelete}

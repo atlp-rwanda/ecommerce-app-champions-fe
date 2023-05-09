@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect, describe, it } from 'vitest';
 import { render, screen } from './setup';
-import Button from '../src/components/Button/Button';
+import Button, { DangerButton } from '../src/components/Button/Button';
 import GoogleButton from '../src/components/Button/GoogleButton';
 
 describe('Button component', () => {
@@ -27,6 +27,14 @@ describe('Button component', () => {
 		expect(screen.getByText(/Sign in with Google/i)).toBeVisible();
 		expect(screen.getByText(/Sign in with Google/i)).toContainHTML('button');
 		expect(await screen.findByText(/Sign in with Google/i)).toBeInTheDocument();
+		expect(screen.getByRole('button')).toBeInTheDocument();
+	});
+
+	it('should render Add product  ', async () => {
+		render(<Button label="Add product" />);
+		expect(screen.getByText(/Add product/i)).toBeVisible();
+		expect(screen.getByText(/Add product/i)).toContainHTML('button');
+		expect(await screen.findByText(/Add product/i)).toBeInTheDocument();
 		expect(screen.getByRole('button')).toBeInTheDocument();
 	});
 });
