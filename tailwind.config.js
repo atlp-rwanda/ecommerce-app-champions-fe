@@ -6,11 +6,6 @@ export default {
 			font: ['Inter', 'sans-serif'],
 		},
 		fontWeight: { bold: '700', medium: '500', normal: '400' },
-		fontSize: {
-			iphoneSE: ['12px', '14px'],
-			middle: '15px',
-			samsung: ['12px', '14px'],
-		},
 		screens: {
 			sm: '480px',
 			samsung: '359px',

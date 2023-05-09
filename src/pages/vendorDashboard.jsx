@@ -3,20 +3,22 @@
 import { useState } from 'react';
 
 import Button from '../components/Button/Button';
+import Products from '../components/dashboard/products';
 
 import CreateProduct from './Createproduct';
 
-const vendorDashboard = () => {
+const VendorDashboard = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	return (
-		<div className=" h-screen flex justify-end pr-4">
+		<div className="flex justify-end h-screen pr-4 ">
+			<Products />
 			{isOpen ? (
 				<CreateProduct setIsOpen={setIsOpen} />
 			) : (
 				<div className="mt-40">
 					<Button
 						label="create new product"
-						className=" flex items-center justify-center px-10 py-2 rounded-2xl bg-primaryGreen text-white font-bold my-2 w-50"
+						className="flex items-center justify-center px-10 py-2 my-2 font-bold text-white rounded-2xl bg-primaryGreen w-50"
 						onClick={() => setIsOpen(true)}
 					/>
 				</div>
@@ -24,5 +26,4 @@ const vendorDashboard = () => {
 		</div>
 	);
 };
-
-export default vendorDashboard;
+export default VendorDashboard;
