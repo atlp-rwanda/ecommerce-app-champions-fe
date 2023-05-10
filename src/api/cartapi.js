@@ -16,6 +16,28 @@ export const userCart = (token) => {
 			});
 	});
 };
+export const addToCart = (id, token) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(
+				`${url}/api/cart/add/${id}`,
+				{},
+				{
+					headers: { token: `Bearer ${token}` },
+				}
+			)
+			.then((response) => {
+				resolve(response.data);
+			})
+			.catch((error) => {
+				if (error.response && error.response.data !== undefined) {
+					reject(error.response.data);
+				} else {
+					reject(error);
+				}
+			});
+	});
+};
 
 export const clearUseCart = (token) => {
 	return new Promise((resolve, reject) => {

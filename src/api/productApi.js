@@ -40,6 +40,24 @@ const api = {
 				});
 		});
 	},
+
+	getAvailableProducts: (token) => {
+		return new Promise((resolve, reject) => {
+			axios
+				.get(`${url}/api/product/getAvailable`, {
+					headers: {
+						token: `Bearer ${token}`,
+					},
+				})
+				.then((response) => resolve(response.data))
+				.catch((error) => {
+					if (error.response !== undefined) {
+						reject(error.response.data);
+					}
+					reject(error);
+				});
+		});
+	},
 };
 
 export const updateProduct = (id, data, token) => {

@@ -4,13 +4,21 @@ import {
 	getCartPending,
 	getCartSuccess,
 	getCartFail,
+	addToCartPending,
+	addToCartSuccess,
+	addToCartFail,
 	clearCartPending,
 	clearCartSuccess,
 	clearCartFail,
 	deleteProductPending,
 	deleteProductSuccess,
 } from '../reducers/cart/cartSlice';
-import { userCart, clearUseCart, deleteCartItem } from '../../api/cartapi';
+import {
+	userCart,
+	clearUseCart,
+	deleteCartItem,
+	addToCart,
+} from '../../api/cartapi';
 
 export const getCart = (token) => async (dispatch) => {
 	try {
@@ -22,6 +30,23 @@ export const getCart = (token) => async (dispatch) => {
 			return dispatch(getCartFail(error.message));
 		}
 		return dispatch(getCartFail(error.Error));
+	}
+};
+export const addItemToCart = (id, token) => async (dispatch) => {
+	try {
+		dispatch(addToCartPending());
+		const res = await addToCart(id, token);
+		dispatch(addToCartSuccess(res));
+		toast.success(`${res.message}`, {
+			position: toast.POSITION.TOP_RIGHT,
+		});
+	} catch (error) {
+		if (error) {
+			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+			return dispatch(addToCartFail(error.message));
+		}
+		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+		return dispatch(addToCartFail(error.Error));
 	}
 };
 
