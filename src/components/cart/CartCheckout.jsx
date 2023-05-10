@@ -5,7 +5,7 @@ import Input from '../Auth/Input';
 
 const CartCheckout = ({ handleClearCart }) => {
 	return (
-		<div className="flex flex-col w-full mx-auto md:w-2/5 space-y-4 bg-white shadow rounded-md h-80 p-5">
+		<div className="flex flex-col w-full mx-auto  space-y-4 bg-white shadow rounded-md h-80 p-5">
 			<div className="flex justify-between">
 				<span>Subtotal</span>
 				<span>$129.99</span>
@@ -19,15 +19,15 @@ const CartCheckout = ({ handleClearCart }) => {
 				<span>Total</span>
 				<span className="font-bold">$134.98 USD</span>
 			</div>
-			<div className="flex space-x-5 items-center">
+			<div className="flex space-x-3 items-center w-full">
 				<Input
 					placeholder="Coupon code"
 					label="Coupn"
-					className="outline-none border border-gray p-1 rounded-md"
+					className="outline-none border border-gray p-1 rounded-md w-full"
 				/>
 				<Button
 					label="Apply"
-					className="bg-primaryGreen text-white p-1 flex items-center justify-center  rounded-lg font-bold my-2 w-11/12"
+					className="bg-primaryGreen text-white p-1 flex items-center justify-center  rounded-lg font-bold my-2 w-2/6"
 					handleClick={handleClearCart}
 				/>
 			</div>
