@@ -57,5 +57,6 @@ export default {
 			},
 		},
 	},
+	// eslint-disable-next-line import/no-unresolved
 	plugins: [require('flowbite/plugin')],
 };

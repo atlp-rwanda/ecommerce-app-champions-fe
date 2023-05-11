@@ -20,7 +20,7 @@ export const userCart = (token) => {
 export const clearUseCart = (token) => {
 	return new Promise((resolve, reject) => {
 		axios
-			.delete(`${url}/api/cart/clear-cart/1`, {
+			.delete(`${url}/api/cart/clear-cart`, {
 				headers: { token: `Bearer ${token}` },
 			})
 			.then((response) => resolve(response.data))

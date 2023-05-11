@@ -12,6 +12,8 @@ import AdminDashboard from './pages/adminDashboard';
 import VendorDashboard from './pages/vendorDashboard';
 import CartPage from './pages/CartPage';
 import PageNotFound from './components/PageNotFound';
+import { UpdateProduct } from './pages/UpdateProduct';
+import CreateProduct from './pages/Createproduct';
 
 function App() {
 	return (
@@ -29,6 +31,8 @@ function App() {
 				<Route path="/vendors" element={<VendorDashboard />} />
 				<Route path="/cart" element={<CartPage />} />
 				<Route path="*" element={<PageNotFound />} />
+				<Route path="/AddProduct" element={<CreateProduct />} />
+				<Route path="/vendors/:id" element={<UpdateProduct />} />
 			</Routes>
 		</BrowserRouter>
 	);

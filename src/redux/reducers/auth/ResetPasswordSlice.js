@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import Cookies from 'js-cookie';
 import varKeys from '../../../constants/keys';
 
 const url = varKeys.APP_URL;
@@ -21,6 +22,7 @@ export const processReset = createAsyncThunk(
 
 			return response.data;
 		} catch (error) {
+			// console.log( "gdbrtgbsdtrgsdtr",error)
 			if (error.response && error.response.data) {
 				toast.error(error.response.data.error);
 				return rejectWithValue(error.response.data);
