@@ -9,6 +9,7 @@ import {
 	fetchProducts,
 	deleteProduct,
 } from '../../redux/actions/product.action';
+
 import Button from '../Button/Button';
 
 function Products() {

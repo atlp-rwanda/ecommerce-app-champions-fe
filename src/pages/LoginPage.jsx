@@ -36,6 +36,7 @@ const LoginPage = () => {
 
 			if (user?.hashedOTP) return navigate('/auth');
 		}, 8000);
+		localStorage.setItem('user', JSON.stringify(user));
 	}, [user]);
 
 	return (
@@ -76,8 +77,8 @@ const LoginPage = () => {
 						label="Sign in with Google"
 						className="font-bold text-white bg-wheat "
 					/>
-					<div className="flex flex-row space-x-3 py-2 my-2">
-						<Link to="/Buyer" className="text-lightBlue underline">
+					<div className="flex flex-row py-2 my-2 space-x-3">
+						<Link to="/Buyer" className="underline text-lightBlue">
 							Signup
 						</Link>
 						<Link to="/ForgotPassword" className="underline text-lightBlue">
