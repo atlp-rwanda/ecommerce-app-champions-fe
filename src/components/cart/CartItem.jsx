@@ -14,7 +14,6 @@ const CartItem = ({ product }) => {
 			dispatch(getCart(token));
 		});
 	};
-
 	return (
 		<div className="bg-white flex items-center justify-between space-x-1 md:space-x-2  p-2 rounded-md shadow-md">
 			<div className="flex flex-row w-full space-x-3">

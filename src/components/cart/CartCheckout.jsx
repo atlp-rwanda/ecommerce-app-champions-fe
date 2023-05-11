@@ -6,14 +6,12 @@ import Input from '../Auth/Input';
 const CartCheckout = ({ handleClearCart, loading, cart }) => {
 	return (
 		<div className="flex flex-col w-full mx-auto  space-y-4 bg-white shadow rounded-md h-80 p-5">
-			{/* <div className="flex justify-between">
-				<span>Subtotal</span>
-				<span>$129.99</span>
-			</div> */}
-			<div className="flex justify-between">
-				<span>Shipping</span>
-				<span>$5.00</span>
-			</div>
+			{cart.data.total > 0 && (
+				<div className="flex justify-between">
+					<span>Shipping</span>
+					<span>$5.00</span>
+				</div>
+			)}
 			<span className="border border-gray opacity-60">{}</span>
 			<div className="flex justify-between">
 				<span>Total</span>
