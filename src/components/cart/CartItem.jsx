@@ -1,8 +1,20 @@
 import React from 'react';
 import { AiOutlineClose, AiOutlinePlus, AiOutlineLine } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
 import Input from '../Auth/Input';
 
+import { getCart, removeItem } from '../../redux/actions/cart.action';
+
 const CartItem = ({ product }) => {
+	const dispatch = useDispatch();
+	const { token } = useSelector((state) => state.token);
+
+	const handleRemoveItem = (productId) => {
+		dispatch(removeItem(productId, token)).then(() => {
+			dispatch(getCart(token));
+		});
+	};
+
 	return (
 		<div className="bg-white flex items-center justify-between space-x-1 md:space-x-2  p-2 rounded-md shadow-md">
 			<div className="flex flex-row w-full space-x-3">
@@ -43,6 +55,7 @@ const CartItem = ({ product }) => {
 			<AiOutlineClose
 				size={20}
 				className=" hover:text-lightRed cursor-pointer"
+				onClick={() => handleRemoveItem(product.productId)}
 			/>
 		</div>
 	);

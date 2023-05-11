@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import CartItem from '../components/cart/CartItem';
 import CartCheckout from '../components/cart/CartCheckout';
 import { handleToken } from '../redux/actions/token.action';
@@ -7,11 +8,16 @@ import { getCart, clearCart } from '../redux/actions/cart.action';
 
 const CartPage = () => {
 	const { token } = useSelector((state) => state.token);
-	const { cartItems } = useSelector((state) => state.cart);
+	const { cartItems, loading } = useSelector((state) => state.cart);
 	const dispatch = useDispatch();
 	const handleClearCart = () => {
-		dispatch(clearCart(token));
+		dispatch(clearCart(token)).then(() =>
+			setTimeout(() => {
+				dispatch(getCart(token));
+			}, 7000)
+		);
 	};
+
 	useEffect(() => {
 		dispatch(handleToken());
 	}, [dispatch]);
@@ -43,11 +49,15 @@ const CartPage = () => {
 						<CartItem key={product.productId} product={product} />
 					))}
 				</div>
-
 				<div className="flex flex-col w-full md:w-1/4">
-					<CartCheckout handleClearCart={handleClearCart} />
+					<CartCheckout
+						handleClearCart={handleClearCart}
+						loading={loading}
+						cart={cartItems}
+					/>
 				</div>
 			</div>
+			<ToastContainer />
 		</div>
 	);
 };

@@ -38,6 +38,18 @@ const cartSlice = createSlice({
 			state.loading = false;
 			state.error = action.payload;
 		},
+		deleteProductPending: (state) => {
+			state.loading = true;
+			state.error = null;
+		},
+		deleteProductSuccess: (state) => {
+			state.loading = false;
+			state.error = null;
+		},
+		deleteProductFail: (state, action) => {
+			state.loading = false;
+			state.error = action.payload;
+		},
 	},
 });
 
@@ -48,6 +60,9 @@ export const {
 	clearCartPending,
 	clearCartSuccess,
 	clearCartFail,
+	deleteProductPending,
+	deleteProductSuccess,
+	deleteProductFail,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
