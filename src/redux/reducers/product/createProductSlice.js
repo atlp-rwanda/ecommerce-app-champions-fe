@@ -24,10 +24,15 @@ const createProductSlice = createSlice({
 			state.product = null;
 			state.error = action.payload;
 		},
+		resetProduct: (state) => {
+			state.loading = false;
+			state.product = null;
+			state.error = null;
+		},
 	},
 });
 
-export const { createPending, createSuccess, createFail } =
+export const { createPending, createSuccess, createFail, resetProduct } =
 	createProductSlice.actions;
 
 export default createProductSlice.reducer;

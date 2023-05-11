@@ -1,7 +1,7 @@
 import React from 'react';
-import InputError from './InputError';
+import InputError from '../Auth/InputError';
 
-const InputProduct = ({
+const ProductInput = ({
 	placeholder,
 	type,
 	error,
@@ -9,6 +9,7 @@ const InputProduct = ({
 	id,
 	isRequired,
 	handleChange,
+	className,
 	labelFor,
 	labelText,
 	autoComplete,
@@ -39,4 +40,4 @@ const InputProduct = ({
 	);
 };
 
-export default InputProduct;
+export default ProductInput;

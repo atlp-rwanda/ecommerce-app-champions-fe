@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdEdit, MdOutlineDeleteOutline } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
 
 import {
@@ -11,12 +12,13 @@ import {
 } from '../../redux/actions/product.action';
 import Button from '../Button/Button';
 
-function Products() {
+function Products({ setIsOpen }) {
 	const dispatch = useDispatch();
 	const { loading, error, items } = useSelector(
 		(state) => state.products.products
 	);
 	const [selectedProduct, setSelectedProduct] = useState(null);
+	const navigate = useNavigate();
 
 	const token = Cookies.get('token');
 	useEffect(() => {
@@ -48,8 +50,9 @@ function Products() {
 							All Products
 						</h1>
 						<Button
-							buttontype="submit"
+							buttontype="button"
 							label="Add Products"
+							onClick={() => setIsOpen(true)}
 							className="w-full p-1 my-2 font-bold text-white rounded-full md:w-auto products-center bg-primaryGreen"
 						/>
 					</div>
@@ -67,7 +70,10 @@ function Products() {
 										<td>{item.productName}</td>
 										<td>{item.productPrice}</td>
 										<td>
-											<MdEdit className="text-blue-500" />
+											<MdEdit
+												className="text-blue-500 cursor-pointer"
+												onClick={() => navigate(`/vendors/${item.productId}`)}
+											/>
 										</td>
 										<td>
 											<MdOutlineDeleteOutline
