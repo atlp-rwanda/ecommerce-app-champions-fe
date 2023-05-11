@@ -44,6 +44,7 @@ export default {
 				white: '#fff',
 				wheat: '#D9CC9F',
 				gray: '#D9D9D9',
+				lightGray: '#F6F4F4',
 				grayishBlue: '#2F2E41',
 				oxford_blue: '#263238',
 				cyan_lime_green: '#92E3A9',

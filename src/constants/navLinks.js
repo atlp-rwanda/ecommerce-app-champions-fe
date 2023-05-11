@@ -31,4 +31,8 @@ export const navLinks = [
 		name: 'Profile',
 		path: '/Profile',
 	},
+	{
+		name: 'Cart',
+		path: '/cart',
+	},
 ];

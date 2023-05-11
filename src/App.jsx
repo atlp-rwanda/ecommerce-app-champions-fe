@@ -10,6 +10,7 @@ import TwoFactorAuth from './pages/Two-factor-auth';
 import ProfilePage from './pages/ProfilePage';
 import AdminDashboard from './pages/adminDashboard';
 import VendorDashboard from './pages/vendorDashboard';
+import CartPage from './pages/CartPage';
 import PageNotFound from './components/PageNotFound';
 import { UpdateProduct } from './pages/UpdateProduct';
 import CreateProduct from './pages/Createproduct';
@@ -28,6 +29,7 @@ function App() {
 				<Route path="/profile" element={<ProfilePage />} />
 				<Route path="/admin" element={<AdminDashboard />} />
 				<Route path="/vendors" element={<VendorDashboard />} />
+				<Route path="/cart" element={<CartPage />} />
 				<Route path="*" element={<PageNotFound />} />
 				<Route path="/AddProduct" element={<CreateProduct />} />
 				<Route path="/vendors/:id" element={<UpdateProduct />} />
