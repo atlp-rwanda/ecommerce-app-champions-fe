@@ -1,4 +1,5 @@
 /* eslint-disable consistent-return */
+import { toast } from 'react-toastify';
 import {
 	getCartPending,
 	getCartSuccess,
@@ -6,8 +7,10 @@ import {
 	clearCartPending,
 	clearCartSuccess,
 	clearCartFail,
+	deleteProductPending,
+	deleteProductSuccess,
 } from '../reducers/cart/cartSlice';
-import { userCart, clearUseCart } from '../../api/cartapi';
+import { userCart, clearUseCart, deleteCartItem } from '../../api/cartapi';
 
 export const getCart = (token) => async (dispatch) => {
 	try {
@@ -25,12 +28,37 @@ export const getCart = (token) => async (dispatch) => {
 export const clearCart = (token) => async (dispatch) => {
 	try {
 		dispatch(clearCartPending());
-		await clearUseCart(token);
-		dispatch(clearCartSuccess());
+		const res = await clearUseCart(token);
+		dispatch(clearCartSuccess(res));
+		toast.success(`${res.message}`, {
+			position: toast.POSITION.TOP_RIGHT,
+		});
 	} catch (error) {
 		if (error) {
+			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
 			return dispatch(clearCartFail(error.message));
 		}
+		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+		return dispatch(clearCartFail(error.Error));
+	}
+};
+
+export const removeItem = (id, token) => async (dispatch) => {
+	try {
+		dispatch(deleteProductPending());
+
+		const res = await deleteCartItem(id, token);
+
+		dispatch(deleteProductSuccess(res));
+		toast.success(`${res.message}`, {
+			position: toast.POSITION.TOP_RIGHT,
+		});
+	} catch (error) {
+		if (error) {
+			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+			return dispatch(clearCartFail(error.message));
+		}
+		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
 		return dispatch(clearCartFail(error.Error));
 	}
 };

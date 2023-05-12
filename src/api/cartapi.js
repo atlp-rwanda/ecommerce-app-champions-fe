@@ -32,3 +32,19 @@ export const clearUseCart = (token) => {
 			});
 	});
 };
+
+export const deleteCartItem = (productId, token) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.delete(`${url}/api/cart/clear-cart-item/${productId}`, {
+				headers: { token: `Bearer ${token}` },
+			})
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
