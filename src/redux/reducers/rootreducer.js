@@ -13,6 +13,7 @@ import createProductSlice from './product/createProductSlice';
 import updateProductSlice from './product/updateProductSlice';
 import notifications from './auth/notificationSlice';
 import vendorProducts from './auth/vendorProductSlice';
+import searchProductSlice from './product/searchProductSlice';
 
 const rootReducer = combineReducers({
 	cart: cartSlice,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
 	updateProduct: updateProductSlice,
 	notifications,
 	vendorProducts,
+	searchProduct: searchProductSlice,
 });
 
 export default rootReducer;

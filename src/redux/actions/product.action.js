@@ -37,3 +37,15 @@ export const deleteProduct = (productId, token) => async (dispatch) => {
 		dispatch(deleteProductFail(error.message));
 	}
 };
+
+export const fetchSearchProducts = (searchParam) => async (dispatch) => {
+	try {
+		dispatch(getProductsPending());
+
+		const products = await productApi.getVendorProducts(searchParam);
+
+		dispatch(getProductsSuccess(products));
+	} catch (error) {
+		dispatch(getProductsFail(error.message));
+	}
+};
