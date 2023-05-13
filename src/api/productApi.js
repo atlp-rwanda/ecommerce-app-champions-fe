@@ -57,6 +57,19 @@ export const updateProduct = (id, data, token) => {
 			});
 	});
 };
+export const searchProduct = (searchParam) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/product/searcch?searchParam=${searchParam}`)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
 const token = Cookies.get('token');
 
 export const createproduct = (productData) => {

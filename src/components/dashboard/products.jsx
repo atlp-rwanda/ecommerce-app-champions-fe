@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
@@ -5,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { MdEdit, MdOutlineDeleteOutline } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
+import SearchComponent from '../product/SearchProduct';
 
 import {
 	fetchProducts,
@@ -57,6 +59,7 @@ function Products({ setIsOpen }) {
 						/>
 					</div>
 					<div className="overflow-x-auto">
+						<SearchComponent />
 						<table className="w-full border-1">
 							<tbody>
 								<tr className="p-4 text-xl font-bold md:text-2xl h-14">
