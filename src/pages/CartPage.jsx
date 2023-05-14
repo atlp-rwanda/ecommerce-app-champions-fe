@@ -7,7 +7,6 @@ import CartCheckout from '../components/cart/CartCheckout';
 import { handleToken } from '../redux/actions/token.action';
 import { getCart, clearCart, updateCart } from '../redux/actions/cart.action';
 import LoadingSpinner from '../components/LoadingSpinner';
-import SearchComponent from '../components/product/SearchProduct';
 
 import { paymentaction } from '../redux/actions/payment.action';
 
@@ -55,7 +54,6 @@ const CartPage = () => {
 	if (!cartItems) {
 		return (
 			<div className="w-screen overflow-x-hidden bg-lightGray h-screen">
-				<SearchComponent />
 				<h1 className="text-black text-center font-bold text-2xl py-4">
 					Cart Items
 				</h1>
