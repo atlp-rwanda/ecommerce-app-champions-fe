@@ -12,9 +12,6 @@ export const searchProducts = (id, data, token) => async (dispatch) => {
 		dispatch(searchPending());
 		const res = await searchProduct(id, data, token);
 		dispatch(searchSuccess(res));
-		// toast.success('Product updated sucessfully! ', {
-		// 	position: toast.POSITION.TOP_RIGHT,
-		// });
 		return res;
 	} catch (error) {
 		if (error) {

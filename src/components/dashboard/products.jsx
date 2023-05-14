@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
@@ -19,6 +20,7 @@ function Products({ setIsOpen }) {
 	const { loading, error, items } = useSelector(
 		(state) => state.products.products
 	);
+	const [searchResults, setSearchResults] = useState(null);
 	const [selectedProduct, setSelectedProduct] = useState(null);
 	const navigate = useNavigate();
 
@@ -41,12 +43,16 @@ function Products({ setIsOpen }) {
 		return <p>{error}</p>;
 	}
 
+	const handleEmptySearch = () => {
+		setSearchResults(null);
+	};
+
 	return (
 		<div className="container mx-auto mt-10">
 			{loading ? (
 				<div>Loading ..</div>
 			) : (
-				<div className="px-5 py-4 border-0 bg-brightGray rounded-xl">
+				<div className="p-10 m-10 border-0 bg-brightGray rounded-xl">
 					<div className="flex flex-col items-center justify-between md:flex-row">
 						<h1 className="py-4 text-3xl font-bold md:text-4xl">
 							All Products
@@ -55,11 +61,18 @@ function Products({ setIsOpen }) {
 							buttontype="button"
 							label="Add Products"
 							onClick={() => setIsOpen(true)}
-							className="w-full p-1 my-2 font-bold text-white rounded-full md:w-auto products-center bg-primaryGreen"
+							className="w-full px-5 py-2 my-2 font-bold text-white rounded-full md:w-auto products-center bg-primaryGreen"
 						/>
 					</div>
 					<div className="overflow-x-auto">
-						<SearchComponent />
+						{items && (
+							<SearchComponent
+								searchedItems={(items) => {
+									setSearchResults(items);
+								}}
+								onEmptySearch={handleEmptySearch}
+							/>
+						)}
 						<table className="w-full border-1">
 							<tbody>
 								<tr className="p-4 text-xl font-bold md:text-2xl h-14">
@@ -68,24 +81,49 @@ function Products({ setIsOpen }) {
 									<td>Edit</td>
 									<td>Delete</td>
 								</tr>
-								{items?.map((item) => (
-									<tr key={item.productId} className="h-20">
-										<td>{item.productName}</td>
-										<td>{item.productPrice}</td>
-										<td>
-											<MdEdit
-												className="text-blue-500 cursor-pointer"
-												onClick={() => navigate(`/vendors/${item.productId}`)}
-											/>
-										</td>
-										<td>
-											<MdOutlineDeleteOutline
-												className="text-red-500 cursor-pointer"
-												onClick={() => setSelectedProduct(item)}
-											/>
-										</td>
-									</tr>
-								))}
+								{searchResults && searchResults?.length ? (
+									searchResults?.map((item) => (
+										<tr key={item.productId} className="h-20">
+											<td>{item.productName}</td>
+											<td>{item.productPrice}</td>
+											<td>
+												<MdEdit
+													className="text-blue-500 cursor-pointer"
+													onClick={() => navigate(`/vendors/${item.productId}`)}
+												/>
+											</td>
+											<td>
+												<MdOutlineDeleteOutline
+													className="text-red-500 cursor-pointer"
+													onClick={() => setSelectedProduct(item)}
+												/>
+											</td>
+										</tr>
+									))
+								) : searchResults && !searchResults?.length ? (
+									<div className="font-bold text-lg py-5 text-red">
+										No products found!
+									</div>
+								) : (
+									items?.map((item) => (
+										<tr key={item.productId} className="h-20">
+											<td>{item.productName}</td>
+											<td>{item.productPrice}</td>
+											<td>
+												<MdEdit
+													className="text-blue-500 cursor-pointer"
+													onClick={() => navigate(`/vendors/${item.productId}`)}
+												/>
+											</td>
+											<td>
+												<MdOutlineDeleteOutline
+													className="text-red-500 cursor-pointer"
+													onClick={() => setSelectedProduct(item)}
+												/>
+											</td>
+										</tr>
+									))
+								)}
 							</tbody>
 						</table>
 					</div>
