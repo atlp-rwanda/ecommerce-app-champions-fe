@@ -1,12 +1,22 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import varKeys from '../../constants/keys';
+
+const url = varKeys.APP_URL;
+const token = Cookies.get('token');
 
 export const getNotifications = createAsyncThunk(
 	'getNotifications',
 	async () => {
 		try {
 			const response = await axios.get(
-				'http://localhost:5050/api/notification/getNotifications'
+				`${url}/api/notification/getNotifications`,
+				{
+					headers: {
+						token: `Bearer ${token}`,
+					},
+				}
 			);
 			return response.data;
 		} catch (error) {
@@ -23,7 +33,12 @@ export const deleteNotification = createAsyncThunk(
 	async (id) => {
 		try {
 			const response = await axios.delete(
-				`http://localhost:5050/api/notification/deleteNotifications/${id}`
+				`${url}/api/notification/deleteNotifications/${id}`,
+				{
+					headers: {
+						token: `Bearer ${token}`,
+					},
+				}
 			);
 			return response.data;
 		} catch (error) {

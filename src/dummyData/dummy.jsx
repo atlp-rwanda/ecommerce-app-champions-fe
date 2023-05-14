@@ -105,12 +105,11 @@ export const customersGrid = [
 		textAlign: 'Center',
 	},
 	{
-		field: 'Location',
-		headerText: 'Category',
+		field: 'quantity',
+		headerText: 'Quantity',
 		width: '150',
 		textAlign: 'Center',
 	},
-
 	{
 		field: 'CustomerID',
 		headerText: 'Bonus',

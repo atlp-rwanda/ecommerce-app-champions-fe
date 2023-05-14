@@ -1,17 +1,47 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/no-array-index-key */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { MdOutlineCancel } from 'react-icons/md';
-import { chatData } from '../../dummyData/dummy';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import { deleteNotification } from '../../redux/actions/notifications';
+import { setNotificationId } from '../../redux/reducers/auth/notificationSlice';
+
 import Button from './Button';
+import NotButton from './notButton';
 
 const Notification = () => {
-	const [showAllNotifications, setShowAllNotifications] = useState(false);
+	const [chatData, setChatData] = useState(null);
+	const { notifications } = useSelector((state) => state.notifications);
+	const [hoveredIndex, setHoveredIndex] = useState(null);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		if (notifications) {
+			const chatData = notifications.map((item) => {
+				return {
+					id: item.id,
+					message: item.subject,
+					desc: item.message,
+				};
+			});
+			setChatData(chatData);
+		}
+	}, [notifications]);
 
-	const handleSeeAllNotificationsClick = () => {
-		setShowAllNotifications(!showAllNotifications);
+	const handleMouseEnter = (index) => {
+		setHoveredIndex(index);
 	};
+
+	const handleMouseLeave = () => {
+		setHoveredIndex(null);
+	};
+	const handleDeleteNotification = (id) => {
+		dispatch(setNotificationId({ id }));
+		dispatch(deleteNotification(id));
+	};
+
 	return (
-		<div className="dashboard side nav-item absolute right-5 md:right-40 top-16 bg-white p-8 rounded-lg w-96">
+		<div className="side nav-item absolute right-5 md:right-40 top-16 bg-white p-8 rounded-lg w-96">
 			<div className="flex justify-between items-center">
 				<div className="flex gap-3">
 					<p className="notif font-semibold text-lg">Notifications</p>
@@ -24,17 +54,14 @@ const Notification = () => {
 					borderRadius="50%"
 				/>
 			</div>
-			<div className="mt-5 overflow-y-scroll overflow-x-hidden h-60">
+			<div className="mt-5 overflow-y-scroll overflow-x-hidden h-60 cursor-pointer">
 				{chatData?.map((item, index) => (
 					<div
 						key={index}
 						className="flex items-center leading-8 gap-5 border-b-1 border-color p-3"
+						onMouseEnter={() => handleMouseEnter(index)}
+						onMouseLeave={handleMouseLeave}
 					>
-						<img
-							className="rounded-full h-10 w-10"
-							src={item.image}
-							alt={item.message}
-						/>
 						<div>
 							<p className="notif font-semibold dark:text-gray-200">
 								{item.message}
@@ -43,22 +70,18 @@ const Notification = () => {
 								{item.desc}
 							</p>
 						</div>
+						{hoveredIndex === index && (
+							<NotButton
+								icon={<RiDeleteBin6Line />}
+								color="red"
+								bgHoverColor="light-gray"
+								size="2xl"
+								borderRadius="50%"
+								onClick={() => handleDeleteNotification(item.id)}
+							/>
+						)}
 					</div>
 				))}
-			</div>
-			<div className="mt-5">
-				<Button
-					color="white"
-					bgColor="#225F33"
-					text={
-						showAllNotifications
-							? 'See less notifications'
-							: 'See all notifications'
-					}
-					borderRadius="10px"
-					width="full"
-					onClick={handleSeeAllNotificationsClick}
-				/>
 			</div>
 		</div>
 	);

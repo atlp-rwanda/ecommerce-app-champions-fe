@@ -88,10 +88,6 @@ const Sidebar = ({ setShowEcommerce, setShowSales, setShowProducts }) => {
 								<AiOutlineShoppingCart className="relative top-[4px]" />
 								<span className="capitalize">Sales</span>
 							</div>
-							<div className="gap-5 rounded-lg hover:bg-white text-md pl-4 pt-3 pb-2.5 flex flex-row relative left-[32px] top-[10px] cursor-pointer">
-								<IoMdContacts className="relative top-[4px]" />
-								<span className="capitalize">Employees</span>
-							</div>
 							<div
 								className="gap-5 rounded-lg hover:bg-white text-md pl-4 pt-3 pb-2.5 flex flex-row relative left-[32px] top-[10px] cursor-pointer"
 								onClick={() => handleLinkClick('products')}

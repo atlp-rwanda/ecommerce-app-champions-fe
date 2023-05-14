@@ -174,7 +174,8 @@ body {
 }
 .add {
 	position: relative;
-	right: 160px;
+	top: 530px;
+	right: 230px;
 }
 .align {
 	display: flex;
@@ -212,6 +213,8 @@ body {
 .table .e-headercell {
 	border-bottom: 1px solid #ccc;
 	padding: 8px;
+	background-color: #92e3a9;
+	color: #225f33;
 }
 .table .e-rowcell {
 	padding: 8px; /* Add padding to table cells */

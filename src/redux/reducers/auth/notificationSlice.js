@@ -1,27 +1,26 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { getNotifications } from '../../actions/notifications';
+import {
+	getNotifications,
+	deleteNotification,
+} from '../../actions/notifications';
 
 const initialState = {
 	notificationId: null,
 	loading: false,
 	notifications: [],
 	error: null,
-	message: {},
 };
 
 const notificationSlice = createSlice({
 	name: 'notifications',
 	initialState,
 	reducers: {
-		setTotalNotification: (state, action) => {
-			const newNotification = action.payload;
-			const exist = state.notifications.some(
-				(notification) => notification.id === newNotification.id
-			);
-			if (!exist) {
-				state.notifications = [action.payload, ...state.notifications];
-			}
+		setNotifications: (state, { payload }) => {
+			state.notifications.unshift(payload);
+		},
+		setNotificationId: (state, { payload }) => {
+			state.notificationId = payload.id;
 		},
 	},
 	extraReducers: (builder) => {
@@ -29,28 +28,34 @@ const notificationSlice = createSlice({
 			.addCase(getNotifications.pending, (state) => {
 				state.loading = true;
 			})
-			.addCase(getNotifications.rejected, (state) => {
+			.addCase(getNotifications.rejected, (state, { payload }) => {
 				state.loading = false;
-				state.error.status = true;
+				state.error = payload.message;
 			})
 			.addCase(getNotifications.fulfilled, (state, { payload }) => {
-				if (payload.status === 200) {
+				if (payload.status === 'success') {
 					state.loading = false;
-					state.notifications = payload.notifications.filter(
-						(notification) => !notification.read
-					);
-				} else if (payload.status) {
-					state.loading = false;
-					state.error = { status: true, payload: payload.status };
+					state.notifications = payload.message.reverse();
 				} else {
 					state.loading = false;
-					state.error = { payload, status: true };
+					state.error = payload.message;
 				}
 			});
+		builder.addCase(deleteNotification.fulfilled, (state, { payload }) => {
+			if (payload.status === 'success') {
+				state.notifications = state.notifications.filter(
+					(notification) => notification.id !== state.notificationId
+				);
+				state.notificationId = null;
+			} else {
+				state.error = payload.message;
+			}
+		});
 	},
 });
 
-export const { setTotalNotification } = notificationSlice.actions;
+export const { setTotalNotification, setNotifications, setNotificationId } =
+	notificationSlice.actions;
 
 export const getNotificationStates = (state) => state.notification;
 export default notificationSlice.reducer;
