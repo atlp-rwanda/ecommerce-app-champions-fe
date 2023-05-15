@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 import varKeys from '../../constants/keys';
 
 const url = varKeys.APP_URL;
@@ -18,6 +19,7 @@ export const getNotifications = createAsyncThunk(
 					},
 				}
 			);
+
 			return response.data;
 		} catch (error) {
 			if (error.response) {
@@ -40,6 +42,9 @@ export const deleteNotification = createAsyncThunk(
 					},
 				}
 			);
+			toast.success('Notification Deleted ', {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return response.data;
 		} catch (error) {
 			if (error.response.data) {

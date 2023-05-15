@@ -23,6 +23,7 @@ import CreateProduct from '../../pages/Createproduct';
 import { UpdateProduct } from '../../pages/UpdateProduct';
 import { deleteProduct } from '../../redux/actions/product.action';
 import { getVendorProducts } from '../../redux/actions/vendor.product';
+import { GrAddCircle } from 'react-icons/gr';
 
 const Products = () => {
 	const token = Cookies.get('token');
@@ -58,14 +59,6 @@ const Products = () => {
 	return (
 		<div className="product m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl ">
 			<Header category="Page" title="All Products" />
-			<div className="add flex justify-end mb-4">
-				<button
-					className="rounded-[50px] px-[1.5em] py-[0.5em] bg-primaryGreen w-[200px] text-[#92E3A9] font-bold p-[20px],inset_0px_2px_1px_0px_rgba(255,255,255,0.75)] hover:bg-emerald-500"
-					onClick={() => setAddProductVisible(true)}
-				>
-					Add Product
-				</button>
-			</div>
 			<div className="flex justify-center items-center table-container">
 				<GridComponent
 					dataSource={customersData}
@@ -86,6 +79,10 @@ const Products = () => {
 							textAlign="Center"
 							template={({ rowData }) => (
 								<div className="align">
+									<GrAddCircle
+										className="addi hover:text-whitetext-blue-600 mr-2 cursor-pointer size={24}"
+										onClick={() => setAddProductVisible(true)}
+									/>
 									<BiEdit
 										className="edit text-blue-600 mr-2 cursor-pointer size={24}"
 										onClick={() => setUpdateProductVisible(true)}

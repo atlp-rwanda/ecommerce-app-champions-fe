@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdOutlineCancel } from 'react-icons/md';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import { ToastContainer } from 'react-toastify';
 import { deleteNotification } from '../../redux/actions/notifications';
 import { setNotificationId } from '../../redux/reducers/auth/notificationSlice';
 
@@ -83,6 +84,7 @@ const Notification = () => {
 					</div>
 				))}
 			</div>
+			<ToastContainer />
 		</div>
 	);
 };
