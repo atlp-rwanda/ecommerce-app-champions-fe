@@ -11,6 +11,8 @@ import singleProfileSlice from './auth/userProfileSlice';
 import productsSlice from './product/productSlice';
 import createProductSlice from './product/createProductSlice';
 import updateProductSlice from './product/updateProductSlice';
+import notifications from './auth/notificationSlice';
+import vendorProducts from './auth/vendorProductSlice';
 
 const rootReducer = combineReducers({
 	cart: cartSlice,
@@ -25,6 +27,8 @@ const rootReducer = combineReducers({
 	products: productsSlice,
 	createproduct: createProductSlice,
 	updateProduct: updateProductSlice,
+	notifications,
+	vendorProducts,
 });
 
 export default rootReducer;

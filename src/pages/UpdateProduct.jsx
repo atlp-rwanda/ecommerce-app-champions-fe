@@ -25,7 +25,7 @@ const initialState = {
 	bonus: '',
 };
 
-export const UpdateProduct = () => {
+export const UpdateProduct = ({ setShowUpdateProduct }) => {
 	const navigate = useNavigate();
 
 	const { id } = useParams();
@@ -36,6 +36,10 @@ export const UpdateProduct = () => {
 	const [selectedImages, setSelectedImages] = useState([]);
 	const { isLoading, success } = useSelector((state) => state.updateProduct);
 	const token = Cookies.get('token');
+
+	const handleUpdateProductClose = () => {
+		setShowUpdateProduct(false);
+	};
 	useEffect(() => {
 		dispatch(fetchProducts(token));
 	}, [dispatch, token]);
@@ -118,16 +122,19 @@ export const UpdateProduct = () => {
 	}, [navigate, success]);
 
 	return (
-		<div className=" relative flex flex-col m-5 md:m-20  p-10  bg-brightGray items-center justify-center">
+		<div className="dashboard relative flex flex-col m-5 md:m-20  p-10  bg-brightGray items-center justify-center">
 			<button
 				className="absolute top-0 right-0 p-2 text-red"
-				onClick={() => navigate(`/vendors/`)}
+				onClick={handleUpdateProductClose}
 			>
 				<RiCloseLine />
 			</button>
-			<h3 className="text-centerm-  text-1xl md:text-4xl font-extrabold font-bold text-yellow mb-8">
-				Update Product
-			</h3>
+			<div className="absolute left-[45px] top-[10px]">
+				<h3 className="text-centerm-  text-1xl md:text-4xl font-extrabold font-bold text-yellow mb-8">
+					Update Product
+				</h3>
+			</div>
+
 			<form onSubmit={handleUpdateProduct}>
 				<div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:ml-20">
 					<ProductInput
@@ -271,7 +278,7 @@ export const UpdateProduct = () => {
 					/>
 					<Button
 						label="Cancel"
-						onClick={() => navigate(`/vendors/`)}
+						onClick={handleUpdateProductClose}
 						className="flex items-center justify-center p-1 rounded-2xl bg-lightRed text-white font-bold my-2 w-28"
 					/>
 				</div>

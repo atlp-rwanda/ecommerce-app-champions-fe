@@ -31,8 +31,6 @@ function App() {
 				<Route path="/vendors" element={<VendorDashboard />} />
 				<Route path="/cart" element={<CartPage />} />
 				<Route path="*" element={<PageNotFound />} />
-				<Route path="/AddProduct" element={<CreateProduct />} />
-				<Route path="/vendors/:id" element={<UpdateProduct />} />
 			</Routes>
 		</BrowserRouter>
 	);

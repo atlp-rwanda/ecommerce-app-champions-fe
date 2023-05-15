@@ -10,10 +10,13 @@ import InputProduct from '../components/Auth/InputProduct';
 import Button from '../components/Button/Button';
 import { createnewProduct } from '../redux/actions/createproduct.actions';
 import { resetProduct } from '../redux/reducers/product/createProductSlice';
+import { getVendorProducts } from '../redux/actions/vendor.product';
+import Cookies from 'js-cookie';
 
 const fieldState = {};
 createProductField.forEach((field) => (fieldState[field.id] = ''));
-const CreateProduct = ({ setIsOpen }) => {
+const CreateProduct = ({ setIsOpen, setShowAddProduct }) => {
+	const token = Cookies.get('token');
 	const dispatch = useDispatch();
 	const { product, loading } = useSelector((state) => state.createproduct);
 	const [createState, setCreateState] = useState(fieldState);
@@ -26,6 +29,10 @@ const CreateProduct = ({ setIsOpen }) => {
 			setCreateState({ ...createState, [e.target.id]: e.target.value });
 		}
 	};
+	const handleCreateProductClose = () => {
+		setShowAddProduct(false);
+	};
+
 	const handleCreate = (e) => {
 		e.preventDefault();
 		const formData = new FormData();
@@ -33,7 +40,9 @@ const CreateProduct = ({ setIsOpen }) => {
 			formData.append(key, createState[key])
 		);
 		imageFiles.forEach((file) => formData.append('productImage', file));
-		dispatch(createnewProduct(formData));
+		dispatch(createnewProduct(formData, token)).then(() => {
+			dispatch(getVendorProducts(token));
+		});
 	};
 	const handleCancel = () => {
 		setCreateState(fieldState);
@@ -72,16 +81,19 @@ const CreateProduct = ({ setIsOpen }) => {
 		};
 	}, [product, imageFiles, setIsOpen, dispatch]);
 	return (
-		<div className=" relative w-full sm:w-3/4  bg-brightGray  flex flex-col overflow-auto   items-center p-10 my-20">
+		<div className="dashboard relative w-full sm:w-3/4  bg-white  flex flex-col overflow-auto   items-center p-10 my-20 ">
 			<button
 				className="absolute top-0 right-0 p-2  text-red font-bold"
-				onClick={() => setIsOpen(false)}
+				onClick={handleCreateProductClose}
 			>
 				<RiCloseLine />
 			</button>
-			<h3 className="text-left font-extrabold text-2xl font-bold text-yellow my-2">
-				Create a new product
-			</h3>
+			<div className="absolute left-[45px] top-[10px]">
+				<h3 className="text-left font-extrabold text-2xl font-bold text-yellow my-2">
+					Create a new product
+				</h3>
+			</div>
+
 			<form
 				className=" w-full sm:w-80%  bg-E5EAF9 my-5"
 				onSubmit={handleCreate}
@@ -149,7 +161,7 @@ const CreateProduct = ({ setIsOpen }) => {
 						type="button"
 						label="Cancel"
 						className="flex items-center justify-center p-1 rounded-2xl bg-lightRed text-white font-bold my-2 w-28"
-						onClick={handleCancel}
+						onClick={handleCreateProductClose}
 					/>
 				</div>
 				<ToastContainer />
