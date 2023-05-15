@@ -173,9 +173,9 @@ body {
 	color: red !important;
 }
 .add {
-	position: relative;
-	top: 530px;
-	right: 230px;
+	position: absolute;
+	bottom: 20px;
+	right: 550px;
 }
 .align {
 	display: flex;

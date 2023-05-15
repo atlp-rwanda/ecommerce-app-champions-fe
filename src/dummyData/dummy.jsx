@@ -117,18 +117,18 @@ export const customersGrid = [
 		textAlign: 'Center',
 		isPrimaryKey: true,
 	},
-	{
-		field: 'CustomerID',
-		headerText: 'Actions',
-		width: '120',
-		textAlign: 'Center',
-		template: () => (
-			<div className="align">
-				<BiEdit className="edit text-blue-600 mr-2 cursor-pointer size={24}" />
-				<AiFillDelete className="delete text-red-600 cursor-pointer" />
-			</div>
-		),
-	},
+	// {
+	// 	field: 'CustomerID',
+	// 	headerText: 'Actions',
+	// 	width: '120',
+	// 	textAlign: 'Center',
+	// 	template: () => (
+	// 		<div className="align">
+	// 			<BiEdit className="edit text-blue-600 mr-2 cursor-pointer size={24}" />
+	// 			<AiFillDelete className="delete text-red-600 cursor-pointer" />
+	// 		</div>
+	// 	),
+	// },
 ];
 
 export const employeesGrid = [
