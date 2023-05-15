@@ -9,10 +9,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { AiFillStar } from 'react-icons/ai';
+import { FiHeart } from 'react-icons/fi';
 import { addItemToCart } from '../redux/actions/cart.action';
 import { handleToken } from '../redux/actions/token.action';
 import { fetchAvailableProducts } from '../redux/actions/product.action';
 import LoadingSpinner from '../components/LoadingSpinner';
+import shoe from '../assets/shoe.png';
+import Button from '../components/Button/Button';
 
 export const ProductPage = () => {
 	const [products, setProducts] = useState([]);
@@ -40,16 +43,7 @@ export const ProductPage = () => {
 	}, [items]);
 
 	useEffect(() => {
-		if (cartItems) {
-			const timer = setTimeout(() => {
-				navigate('/cart');
-			}, 5000);
-
-			return () => {
-				clearTimeout(timer);
-			};
-		}
-		if (error) {
+		if (cartItems || error) {
 			setIsLoading(false);
 		}
 	}, [cartItems, error, navigate]);
@@ -63,14 +57,62 @@ export const ProductPage = () => {
 
 	return (
 		<div>
-			<div className="h-[2715px] w-[1430px] grid grid-cols-3 gap-3 my-10 mx-10 justify-center item-center">
+			<div className=" flex  bg-[#D9CC9F] w-[1440px] h-[500px] mt-[0px]">
+				<div className="h-[99px] w-[517px] pl-[89px] pt-[210px] text-white font-inter font-bold text-5xl leading-12">
+					<p>
+						Upgrade your footwear collection with our
+						<br />
+						amazing deals on men's shoes
+					</p>
+					<Button
+						label="More"
+						className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-4 w-28"
+					/>
+				</div>
+				<div className="">
+					<img
+						src={shoe}
+						alt="back ground"
+						className="w-[700px] h-[500px] pl-[250px] "
+					/>
+				</div>
+			</div>
+			<h3 className="ml-[70px] mt-10 font-bold">Todays Best Deals for You!</h3>
+			<div className="flex w-[1440px] gap-5 justify-around">
+				<Button
+					label="All"
+					className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-4 w-28"
+				/>
+				<Button
+					label="Clothes"
+					className="flex items-center justify-center p-1 rounded-2xl bg-gray text-black font-bold my-4 w-28"
+				/>
+				<Button
+					label="Electronics"
+					className="flex items-center justify-center p-1 rounded-2xl bg-gray text-black font-bold my-4 w-28"
+				/>
+				<Button
+					label="Food"
+					className="flex items-center justify-center p-1 rounded-2xl bg-gray text-black font-bold my-4 w-28"
+				/>
+				<Button
+					label="Fashion"
+					className="flex items-center justify-center p-1 rounded-2xl bg-gray text-black font-bold my-4 w-28"
+				/>
+			</div>
+			<div className="grid grid-cols-3 gap-20 my-10 mx-10 justify-center item-center">
 				{products.map((product) => (
 					<div key={product.productId} className="card w-[365px] h-[552px]">
-						<img
-							className="h-[338px] w-[350px] bg-gray"
-							src={product.productImage[0]}
-							alt={product.productName}
-						/>
+						<div className="bg-gray relative">
+							<div className="absolute top-2 right-2 flex items-center justify-center w-8 h-8 rounded-full bg-white">
+								<FiHeart className="text-red" />
+							</div>
+							<img
+								className="h-[330px] w-full bg-gray"
+								src={product.productImage[0]}
+								alt={product.productName}
+							/>
+						</div>
 						<div>
 							<h1>{product.productName}</h1>
 							<p className="font-bold">Price: ${product.productPrice}</p>
