@@ -30,9 +30,8 @@ function App() {
 				<Route path="/admin" element={<AdminDashboard />} />
 				<Route path="/vendors" element={<VendorDashboard />} />
 				<Route path="/cart" element={<CartPage />} />
-				<Route path="*" element={<PageNotFound />} />
-				<Route path="/AddProduct" element={<CreateProduct />} />
 				<Route path="/vendors/:id" element={<UpdateProduct />} />
+				<Route path="*" element={<PageNotFound />} />
 			</Routes>
 		</BrowserRouter>
 	);

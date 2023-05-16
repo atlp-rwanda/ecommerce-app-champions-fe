@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable prefer-promise-reject-errors */
 import axios from 'axios';
 import varkeys from '../constants/keys';

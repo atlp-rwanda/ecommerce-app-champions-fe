@@ -11,6 +11,8 @@ import singleProfileSlice from './auth/userProfileSlice';
 import productsSlice from './product/productSlice';
 import createProductSlice from './product/createProductSlice';
 import updateProductSlice from './product/updateProductSlice';
+import notifications from './auth/notificationSlice';
+import vendorProducts from './auth/vendorProductSlice';
 import searchProductSlice from './product/searchProductSlice';
 
 const rootReducer = combineReducers({
@@ -26,6 +28,8 @@ const rootReducer = combineReducers({
 	products: productsSlice,
 	createproduct: createProductSlice,
 	updateProduct: updateProductSlice,
+	notifications,
+	vendorProducts,
 	searchProduct: searchProductSlice,
 });
 
