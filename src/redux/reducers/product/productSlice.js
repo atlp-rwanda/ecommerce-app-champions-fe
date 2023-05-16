@@ -5,6 +5,7 @@ const initialState = {
 	loading: false,
 	error: null,
 	products: [],
+	product: null,
 };
 
 const productsSlice = createSlice({
@@ -35,6 +36,34 @@ const productsSlice = createSlice({
 			state.loading = false;
 			state.error = action.payload;
 		},
+		getAvailableProductsPending: (state) => {
+			state.loading = true;
+		},
+		getAvailableProductsSuccess: (state, action) => {
+			state.loading = false;
+			state.products = action.payload;
+			state.error = null;
+		},
+		getAvailableProductsFail: (state, action) => {
+			state.loading = false;
+			state.products = [];
+			state.error = action.payload;
+		},
+		getSingleProductPending: (state) => {
+			state.loading = true;
+			state.product = null;
+			state.error = null;
+		},
+		getSingleProductSuccess: (state, action) => {
+			state.loading = false;
+			state.product = action.payload;
+			state.error = null;
+		},
+		getSingleProductFail: (state, action) => {
+			state.loading = false;
+			state.product = null;
+			state.error = action.payload;
+		},
 	},
 });
 
@@ -45,6 +74,12 @@ export const {
 	deleteProductPending,
 	deleteProductSuccess,
 	deleteProductFail,
+	getAvailableProductsPending,
+	getAvailableProductsSuccess,
+	getAvailableProductsFail,
+	getSingleProductPending,
+	getSingleProductSuccess,
+	getSingleProductFail,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

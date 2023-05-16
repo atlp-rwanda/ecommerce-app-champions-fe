@@ -4,6 +4,48 @@ import varKeys from '../constants/keys';
 
 const url = varKeys.APP_URL;
 
+export const singleProduct = (productId) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/product/getOne/${productId}`)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
+export const productRating = (productId) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/review/getProductRate/${productId}`)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
+export const searchProd = (product) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/product/searcch?searchParam=${product}`)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
 const api = {
 	getVendorProducts: (token) => {
 		return new Promise((resolve, reject) => {
@@ -27,6 +69,24 @@ const api = {
 		return new Promise((resolve, reject) => {
 			axios
 				.delete(`${url}/api/product/delete/${productId}`, {
+					headers: {
+						token: `Bearer ${token}`,
+					},
+				})
+				.then((response) => resolve(response.data))
+				.catch((error) => {
+					if (error.response !== undefined) {
+						reject(error.response.data);
+					}
+					reject(error);
+				});
+		});
+	},
+
+	getAvailableProducts: (token) => {
+		return new Promise((resolve, reject) => {
+			axios
+				.get(`${url}/api/product/getAvailable`, {
 					headers: {
 						token: `Bearer ${token}`,
 					},

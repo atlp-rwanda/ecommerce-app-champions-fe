@@ -14,6 +14,8 @@ import CartPage from './pages/CartPage';
 import PageNotFound from './components/PageNotFound';
 import { UpdateProduct } from './pages/UpdateProduct';
 import CreateProduct from './pages/Createproduct';
+import SingleProductPage from './pages/SingleProductPage';
+import { ProductPage } from './pages/ProductPage';
 
 function App() {
 	return (
@@ -30,6 +32,10 @@ function App() {
 				<Route path="/admin" element={<AdminDashboard />} />
 				<Route path="/vendors" element={<VendorDashboard />} />
 				<Route path="/cart" element={<CartPage />} />
+				<Route path="/product" element={<ProductPage />} />
+				<Route path="/product/:productId" element={<SingleProductPage />} />
+				<Route path="*" element={<PageNotFound />} />
+				<Route path="/AddProduct" element={<CreateProduct />} />
 				<Route path="/vendors/:id" element={<UpdateProduct />} />
 				<Route path="*" element={<PageNotFound />} />
 			</Routes>
