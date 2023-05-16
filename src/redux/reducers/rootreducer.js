@@ -14,6 +14,11 @@ import updateProductSlice from './product/updateProductSlice';
 import notifications from './auth/notificationSlice';
 import vendorProducts from './auth/vendorProductSlice';
 import searchProductSlice from './product/searchProductSlice';
+import singleProductSlice from './product/singleProductSlice';
+import roleSlice from './role/roleSlice';
+import permissionSlice from './permission/permissionSlice';
+import buyerSlice from './buyer/buyerSlice';
+import vendorSlice from './vendor/vendorSlice';
 
 const rootReducer = combineReducers({
 	cart: cartSlice,
@@ -31,6 +36,11 @@ const rootReducer = combineReducers({
 	notifications,
 	vendorProducts,
 	searchProduct: searchProductSlice,
+	singleProduct: singleProductSlice,
+	role: roleSlice,
+	permission: permissionSlice,
+	buyer: buyerSlice,
+	vendor: vendorSlice,
 });
 
 export default rootReducer;

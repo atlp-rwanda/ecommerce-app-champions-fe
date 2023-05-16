@@ -15,6 +15,7 @@ import PageNotFound from './components/PageNotFound';
 import { UpdateProduct } from './pages/UpdateProduct';
 import CreateProduct from './pages/Createproduct';
 import { ProductPage } from './pages/ProductPage';
+import SellerProductPage from './pages/SellerProductPage';
 
 function App() {
 	return (
@@ -36,6 +37,10 @@ function App() {
 				<Route path="/AddProduct" element={<CreateProduct />} />
 				<Route path="/vendors/:id" element={<UpdateProduct />} />
 				<Route path="*" element={<PageNotFound />} />
+				<Route
+					path="SellerProductPage/:productId"
+					element={<SellerProductPage />}
+				/>
 			</Routes>
 		</BrowserRouter>
 	);
