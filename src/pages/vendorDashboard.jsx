@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import Navbar from '../components/vendorDashboard/Navbar';
 import Sidebar from '../components/vendorDashboard/Sidebar';
-import Products from '../components/vendorDashboard/Products';
+import Products from '../components/dashboard/products';
 import Ecommerce from '../components/vendorDashboard/Ecommerce';
 import Sales from '../components/vendorDashboard/Sales';
 import { useStateContext } from '../contexts/ContextProvider';

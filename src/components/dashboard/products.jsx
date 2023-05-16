@@ -1,11 +1,29 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdEdit, MdOutlineDeleteOutline } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import {
+	GridComponent,
+	Resize,
+	Sort,
+	ContextMenu,
+	Filter,
+	Page,
+	ExcelExport,
+	PdfExport,
+	Edit,
+	Inject,
+} from '@syncfusion/ej2-react-grids';
+import { GrAddCircle } from 'react-icons/gr';
+import { BiEdit } from 'react-icons/bi';
+import { AiFillDelete } from 'react-icons/ai';
 import LoadingSpinner from '../LoadingSpinner';
-
+import SearchComponent from '../product/SearchProduct';
+import Header from '../vendorDashboard/Header';
 import {
 	fetchProducts,
 	deleteProduct,
@@ -17,6 +35,7 @@ function Products({ setIsOpen }) {
 	const { loading, error, items } = useSelector(
 		(state) => state.products.products
 	);
+	const [searchResults, setSearchResults] = useState(null);
 	const [selectedProduct, setSelectedProduct] = useState(null);
 	const navigate = useNavigate();
 
@@ -39,52 +58,120 @@ function Products({ setIsOpen }) {
 		return <p>{error}</p>;
 	}
 
+	const handleEmptySearch = () => {
+		setSearchResults(null);
+	};
+
 	return (
-		<div className="container mx-auto mt-10">
+		<div className="sales dahsboard m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
 			{loading ? (
 				<div>Loading ..</div>
 			) : (
-				<div className="px-5 py-4 border-0 bg-brightGray rounded-xl">
-					<div className="flex flex-col items-center justify-between md:flex-row">
-						<h1 className="py-4 text-3xl font-bold md:text-4xl">
-							All Products
-						</h1>
-						<Button
-							buttontype="button"
-							label="Add Products"
-							onClick={() => setIsOpen(true)}
-							className="w-full p-1 my-2 font-bold text-white rounded-full md:w-auto products-center bg-primaryGreen"
-						/>
-					</div>
+				<div className="sales dahsboard m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+					<Header title="All Products" />
 					<div className="overflow-x-auto">
-						<table className="w-full border-1">
-							<tbody>
-								<tr className="p-4 text-xl font-bold md:text-2xl h-14">
-									<td className="text-xl md:text-2xl">Product</td>
-									<td>Price</td>
-									<td>Edit</td>
-									<td>Delete</td>
-								</tr>
-								{items?.map((item) => (
-									<tr key={item.productId} className="h-20">
-										<td>{item.productName}</td>
-										<td>{item.productPrice}</td>
-										<td>
-											<MdEdit
-												className="text-blue-500 cursor-pointer"
-												onClick={() => navigate(`/vendors/${item.productId}`)}
-											/>
-										</td>
-										<td>
-											<MdOutlineDeleteOutline
-												className="text-red-500 cursor-pointer"
-												onClick={() => setSelectedProduct(item)}
-											/>
-										</td>
+						{items && (
+							<SearchComponent
+								searchedItems={(items) => {
+									setSearchResults(items);
+								}}
+								onEmptySearch={handleEmptySearch}
+							/>
+						)}
+						<GridComponent allowPaging allowSorting id="gridcomp">
+							<table className="w-full">
+								<tbody>
+									<tr className="p-4 text-xl font-bold md:text-2xl h-14">
+										<td className="text-xl md:text-2xl">Product Name</td>
+										<td>Product Id</td>
+										<td>Quantity</td>
+										<td>Price</td>
+										<td>Add</td>
+										<td>Edit</td>
+										<td>Delete</td>
 									</tr>
-								))}
-							</tbody>
-						</table>
+									{searchResults && searchResults?.length ? (
+										searchResults?.map((item) => (
+											<tr key={item.productId} className="h-20">
+												<td>{item.productName}</td>
+												<td>{item.productId}</td>
+												<td>{item.quantity}</td>
+												<td>{item.productPrice}</td>
+												<td>
+													<GrAddCircle
+														className="addi hover:text-whitetext-blue-600 mr-2 cursor-pointer size={24}"
+														onClick={() =>
+															navigate(`/vendors/${item.productId}`)
+														}
+													/>
+												</td>
+												<td>
+													<MdEdit
+														className="text-blue-500 cursor-pointer"
+														onClick={() =>
+															navigate(`/vendors/${item.productId}`)
+														}
+													/>
+												</td>
+												<td>
+													<MdOutlineDeleteOutline
+														className="text-red-500 cursor-pointer"
+														onClick={() => setSelectedProduct(item)}
+													/>
+												</td>
+											</tr>
+										))
+									) : searchResults && !searchResults?.length ? (
+										<div className="font-bold text-lg py-5 text-red">
+											No products found!
+										</div>
+									) : (
+										items?.map((item) => (
+											<tr key={item.productId} className="h-20">
+												<td>{item.productName}</td>
+												<td>{item.productId}</td>
+												<td>{item.quantity}</td>
+												<td>{item.productPrice}</td>
+												<td>
+													<GrAddCircle
+														className="addi hover:text-whitetext-blue-600 mr-2 cursor-pointer size={24}"
+														onClick={() =>
+															navigate(`/vendors/${item.productId}`)
+														}
+													/>
+												</td>
+												<td>
+													<BiEdit
+														className="edit text-blue-600 mr-2 cursor-pointer size={24}"
+														onClick={() =>
+															navigate(`/vendors/${item.productId}`)
+														}
+													/>
+												</td>
+												<td>
+													<AiFillDelete
+														className="delete text-red-600 cursor-pointer"
+														onClick={() => setSelectedProduct(item)}
+													/>
+												</td>
+											</tr>
+										))
+									)}
+								</tbody>
+							</table>
+							<Inject
+								services={[
+									Resize,
+									Sort,
+									ContextMenu,
+									Filter,
+									Page,
+									ExcelExport,
+									Edit,
+									PdfExport,
+								]}
+							/>
+						</GridComponent>
 					</div>
 				</div>
 			)}

@@ -25,7 +25,7 @@ const initialState = {
 	bonus: '',
 };
 
-export const UpdateProduct = ({ setShowUpdateProduct }) => {
+export const UpdateProduct = () => {
 	const navigate = useNavigate();
 
 	const { id } = useParams();
@@ -37,9 +37,6 @@ export const UpdateProduct = ({ setShowUpdateProduct }) => {
 	const { isLoading, success } = useSelector((state) => state.updateProduct);
 	const token = Cookies.get('token');
 
-	const handleUpdateProductClose = () => {
-		setShowUpdateProduct(false);
-	};
 	useEffect(() => {
 		dispatch(fetchProducts(token));
 	}, [dispatch, token]);
@@ -125,7 +122,7 @@ export const UpdateProduct = ({ setShowUpdateProduct }) => {
 		<div className="dashboard relative flex flex-col m-5 md:m-20  p-10  bg-brightGray items-center justify-center">
 			<button
 				className="absolute top-0 right-0 p-2 text-red"
-				onClick={handleUpdateProductClose}
+				onClick={() => navigate(`/vendors`)}
 			>
 				<RiCloseLine />
 			</button>
@@ -278,7 +275,7 @@ export const UpdateProduct = ({ setShowUpdateProduct }) => {
 					/>
 					<Button
 						label="Cancel"
-						onClick={handleUpdateProductClose}
+						onClick={() => navigate(`/vendors`)}
 						className="flex items-center justify-center p-1 rounded-2xl bg-lightRed text-white font-bold my-2 w-28"
 					/>
 				</div>
