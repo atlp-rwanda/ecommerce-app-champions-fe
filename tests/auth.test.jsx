@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { expect, describe, it } from 'vitest';
 import { act } from 'react-dom/test-utils';

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable prefer-promise-reject-errors */
 import axios from 'axios';
 import varkeys from '../constants/keys';
@@ -10,7 +11,7 @@ export const buyerSignup = (buyerData) => {
 			.post(`${url}/api/buyer/signup`, buyerData)
 			.then((response) => resolve(response.data))
 			.catch((error) => {
-				if (error.response.data !== undefined) {
+				if (error.response.data !== 'undefined') {
 					reject(error.response.data);
 				}
 				reject(error);

@@ -9,8 +9,16 @@ export default {
 	theme: {
 		fontFamily: {
 			font: ['Inter', 'sans-serif'],
+			display: ['Open Sans', 'sans-serif'],
+			body: ['Open Sans', 'sans-serif'],
 		},
 		fontWeight: { bold: '700', medium: '500', normal: '400' },
+		fontSize: {
+			iphoneSE: ['12px', '14px'],
+			middle: '15px',
+			samsung: ['12px', '14px'],
+		},
+
 		screens: {
 			sm: '640px',
 			samsung: '359px',
@@ -44,6 +52,7 @@ export default {
 				white: '#fff',
 				wheat: '#D9CC9F',
 				gray: '#D9D9D9',
+				lightGray: '#F6F4F4',
 				grayishBlue: '#2F2E41',
 				oxford_blue: '#263238',
 				cyan_lime_green: '#92E3A9',
@@ -54,7 +63,39 @@ export default {
 				lightBlue: '#4E5BD7',
 				miniBlue: '#E5EAF9',
 			},
+			fontSize: {
+				14: '14px',
+			},
+			backgroundColor: {
+				'main-bg': '#FAFBFB',
+				'main-dark-bg': '#20232A',
+				'secondary-dark-bg': '#33373E',
+				'light-gray': '#F7F7F7',
+				'half-transparent': 'rgba(0, 0, 0, 0.5)',
+			},
+			borderWidth: {
+				1: '1px',
+			},
+			borderColor: {
+				color: 'rgba(0, 0, 0, 0.1)',
+			},
+			width: {
+				400: '400px',
+				760: '760px',
+				780: '780px',
+				800: '800px',
+				1000: '1000px',
+				1200: '1200px',
+				1400: '1400px',
+			},
+			height: {
+				80: '80px',
+			},
+			minHeight: {
+				590: '590px',
+			},
 		},
 	},
+	// eslint-disable-next-line import/no-unresolved
 	plugins: [require('flowbite/plugin')],
 };
