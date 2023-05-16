@@ -7,6 +7,9 @@ import {
 	getProductsPending,
 	getProductsSuccess,
 	getProductsFail,
+	getAvailableProductsPending,
+	getAvailableProductsSuccess,
+	getAvailableProductsFail,
 } from '../reducers/product/productSlice';
 
 import productApi from '../../api/productApi';
@@ -37,15 +40,14 @@ export const deleteProduct = (productId, token) => async (dispatch) => {
 		dispatch(deleteProductFail(error.message));
 	}
 };
-
-export const fetchSearchProducts = (searchParam) => async (dispatch) => {
+export const fetchAvailableProducts = (token) => async (dispatch) => {
 	try {
-		dispatch(getProductsPending());
+		dispatch(getAvailableProductsPending());
 
-		const products = await productApi.getVendorProducts(searchParam);
+		const products = await productApi.getAvailableProducts(token);
 
-		dispatch(getProductsSuccess(products));
+		dispatch(getAvailableProductsSuccess(products));
 	} catch (error) {
-		dispatch(getProductsFail(error.message));
+		dispatch(getAvailableProductsFail(error.message));
 	}
 };
