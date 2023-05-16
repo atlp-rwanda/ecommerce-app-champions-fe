@@ -401,3 +401,13 @@ export const updateProductField = [
 		autoComplete: 'true',
 	},
 ];
+export const searchField = {
+	labelFor: 'search',
+	labelText: 'search',
+	placeholder: 'Search product.... ',
+	id: 'search',
+	name: 'search',
+	type: 'text',
+	isRequired: true,
+	autoComplete: 'true',
+};
