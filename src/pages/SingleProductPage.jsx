@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,11 +8,12 @@ import { addItemToCart } from '../redux/actions/cart.action';
 import Button from '../components/Button/Button';
 import Truck from '../assets/truck.svg';
 import Return from '../assets/return.svg';
+import RecommendedProducts from '../components/product/RecommendedProducts';
 
 const SingleProductPage = () => {
 	const { productId } = useParams();
 	const { product } = useSelector((state) => state.products);
-	const { loading } = useSelector((state) => state.cart);
+	const [image, setImage] = useState(null);
 	const { token } = useSelector((state) => state.token);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -32,20 +33,22 @@ const SingleProductPage = () => {
 	};
 	return (
 		<div className="w-screen h-screen mx-auto my-5 flex flex-col space-y-5">
-			<div className="flex flex-col md:flex-row space-x-0 md:space-x-8 space-y-6 w-11/12 mx-auto">
+			<div className="flex flex-col md:flex-row space-x-0 md:space-x-8 space-y-8 w-11/12 mx-auto">
 				<div className="w-full md:w-2/5 h-72  md:h-96 flex flex-col space-y-2 md:space-y-3">
 					<img
-						src={product?.item?.productImage[0]}
+						src={image != null ? image : product?.item?.productImage[0]}
 						alt=""
 						className="object-cover h-full w-full rounded-md"
 					/>
 					<div className="hidden md:flex w-full justify-between items-center">
-						{product?.item?.productImage.map((img, index) => (
+						{product?.item?.productImage.slice(0, 5).map((img, index) => (
+							// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
 							<img
 								src={img}
 								alt=""
 								key={index}
-								className=" h-20 w-24 rounded-sm object-cover "
+								className=" h-16 w-20 rounded-sm object-cover "
+								onClick={() => setImage(img)}
 							/>
 						))}
 					</div>
@@ -82,7 +85,6 @@ const SingleProductPage = () => {
 						</Link>
 						<Button
 							handleClick={() => handleClick(product?.item?.productId)}
-							loading={loading}
 							label="Add to cart"
 							className="border border-primaryGreen text-center rounded-full hover:bg-primaryGreen hover:text-white w-36 px-2 py-1"
 						/>
@@ -106,8 +108,9 @@ const SingleProductPage = () => {
 					</div>
 				</div>
 			</div>
-			<div className="w-11/12 mx-auto">
+			<div className="w-11/12 mx-auto my-4">
 				<h2 className="font-bold text-2xl">Similar Products</h2>
+				<RecommendedProducts product={product?.item?.productName} />
 			</div>
 			<ToastContainer />
 		</div>

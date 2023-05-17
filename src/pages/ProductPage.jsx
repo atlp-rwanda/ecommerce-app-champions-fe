@@ -101,7 +101,7 @@ export const ProductPage = () => {
 			</Carousel>
 			<div className="w-11/12 mx-auto h-2/6">
 				<h3 className="font-bold text-2xl">Todays Best Deals for You!</h3>
-				<div className="flex w-full space-x-4">
+				<div className="flex w-full space-x-2 md:space-x-4">
 					<Button
 						label="All"
 						className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-4 w-28"
@@ -124,7 +124,7 @@ export const ProductPage = () => {
 					/>
 				</div>
 				<div className="w-full my-5 mx-auto">
-					<div className="grid grid-cols-4 gap-5">
+					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
 						{products?.map((product) => (
 							<div key={product.productId} className="card">
 								<div className="bg-gray relative">

@@ -18,6 +18,20 @@ export const singleProduct = (productId) => {
 	});
 };
 
+export const recommendedProducts = (productName) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/product/recommended?searchParam=${productName}`)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
 export const productRating = (productId) => {
 	return new Promise((resolve, reject) => {
 		axios
