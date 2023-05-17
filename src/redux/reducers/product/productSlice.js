@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	loading: false,
+	loadRecommended: false,
 	error: null,
 	products: [],
 	product: null,
@@ -64,6 +65,21 @@ const productsSlice = createSlice({
 			state.product = null;
 			state.error = action.payload;
 		},
+		getrRecommenedProductsPending: (state) => {
+			state.loadRecommended = true;
+			state.products = null;
+			state.error = null;
+		},
+		getrRecommenedProductsSuccess: (state, action) => {
+			state.loadRecommended = false;
+			state.products = action.payload;
+			state.error = null;
+		},
+		getrRecommenedProductsFail: (state, action) => {
+			state.loadRecommended = false;
+			state.products = null;
+			state.error = action.payload;
+		},
 	},
 });
 
@@ -80,6 +96,9 @@ export const {
 	getSingleProductPending,
 	getSingleProductSuccess,
 	getSingleProductFail,
+	getrRecommenedProductsPending,
+	getrRecommenedProductsSuccess,
+	getrRecommenedProductsFail,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

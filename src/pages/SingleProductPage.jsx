@@ -8,11 +8,11 @@ import { addItemToCart } from '../redux/actions/cart.action';
 import Button from '../components/Button/Button';
 import Truck from '../assets/truck.svg';
 import Return from '../assets/return.svg';
+import RecommendedProducts from '../components/product/RecommendedProducts';
 
 const SingleProductPage = () => {
 	const { productId } = useParams();
 	const { product } = useSelector((state) => state.products);
-	const { loading } = useSelector((state) => state.cart);
 	const { token } = useSelector((state) => state.token);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -32,7 +32,7 @@ const SingleProductPage = () => {
 	};
 	return (
 		<div className="w-screen h-screen mx-auto my-5 flex flex-col space-y-5">
-			<div className="flex flex-col md:flex-row space-x-0 md:space-x-8 space-y-6 w-11/12 mx-auto">
+			<div className="flex flex-col md:flex-row space-x-0 md:space-x-8 space-y-8 w-11/12 mx-auto">
 				<div className="w-full md:w-2/5 h-72  md:h-96 flex flex-col space-y-2 md:space-y-3">
 					<img
 						src={product?.item?.productImage[0]}
@@ -82,7 +82,6 @@ const SingleProductPage = () => {
 						</Link>
 						<Button
 							handleClick={() => handleClick(product?.item?.productId)}
-							loading={loading}
 							label="Add to cart"
 							className="border border-primaryGreen text-center rounded-full hover:bg-primaryGreen hover:text-white w-36 px-2 py-1"
 						/>
@@ -106,8 +105,9 @@ const SingleProductPage = () => {
 					</div>
 				</div>
 			</div>
-			<div className="w-11/12 mx-auto">
+			<div className="w-11/12 mx-auto my-4">
 				<h2 className="font-bold text-2xl">Similar Products</h2>
+				<RecommendedProducts product={product?.item?.productName} />
 			</div>
 			<ToastContainer />
 		</div>

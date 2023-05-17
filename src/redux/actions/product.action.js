@@ -13,9 +13,15 @@ import {
 	getSingleProductPending,
 	getSingleProductSuccess,
 	getSingleProductFail,
+	getrRecommenedProductsPending,
+	getrRecommenedProductsSuccess,
+	getrRecommenedProductsFail,
 } from '../reducers/product/productSlice';
 
-import productApi, { singleProduct } from '../../api/productApi';
+import productApi, {
+	singleProduct,
+	recommendedProducts,
+} from '../../api/productApi';
 
 export const fetchProducts = (token) => async (dispatch) => {
 	try {
@@ -66,5 +72,19 @@ export const getSingleProduct = (productId) => async (dispatch) => {
 			return dispatch(getSingleProductFail(error.message));
 		}
 		return dispatch(getSingleProductFail(error.Error));
+	}
+};
+
+export const getRecommendedProducts = (productName) => async (dispatch) => {
+	try {
+		dispatch(getrRecommenedProductsPending());
+		const res = await recommendedProducts(productName);
+		dispatch(getrRecommenedProductsSuccess(res));
+		return res;
+	} catch (error) {
+		if (error) {
+			return dispatch(getrRecommenedProductsFail(error.message));
+		}
+		return dispatch(getrRecommenedProductsFail(error.Error));
 	}
 };
