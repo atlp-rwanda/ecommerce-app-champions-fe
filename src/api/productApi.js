@@ -50,7 +50,25 @@ const api = {
 	getVendorProducts: (token) => {
 		return new Promise((resolve, reject) => {
 			axios
-				.get(`${url}/api/product/getAll`, {
+				.get(`${url}/api/product/getAvailable`, {
+					headers: {
+						token: `Bearer ${token}`,
+					},
+				})
+				.then((response) => resolve(response.data))
+				.catch((error) => {
+					if (error.response !== undefined) {
+						reject(error.response.data);
+					}
+					reject(error);
+				});
+		});
+	},
+
+	getAvailableProducts: (token) => {
+		return new Promise((resolve, reject) => {
+			axios
+				.get(`${url}/api/product/getAvailable`, {
 					headers: {
 						token: `Bearer ${token}`,
 					},
@@ -82,11 +100,10 @@ const api = {
 				});
 		});
 	},
-
-	getAvailableProducts: (token) => {
+	getProductById: (productId, token) => {
 		return new Promise((resolve, reject) => {
 			axios
-				.get(`${url}/api/product/getAvailable`, {
+				.get(`${url}/api/product/getOne/${productId}`, {
 					headers: {
 						token: `Bearer ${token}`,
 					},

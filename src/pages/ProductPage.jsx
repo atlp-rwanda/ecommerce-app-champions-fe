@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { Carousel } from 'flowbite-react';
 import { AiFillStar } from 'react-icons/ai';
 import { FiHeart } from 'react-icons/fi';
@@ -49,6 +49,14 @@ export const ProductPage = () => {
 		event.preventDefault();
 		setIsLoading(true);
 		setClickedProductId(productId);
+		if (!token) {
+			toast.warn('you must login to add item to cart.', {
+				position: toast.POSITION.TOP_RIGHT,
+			});
+			setTimeout(() => {
+				navigate('/login');
+			}, 2000);
+		}
 		dispatch(addItemToCart(productId, token));
 	};
 

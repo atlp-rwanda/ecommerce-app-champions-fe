@@ -1,8 +1,10 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import { getSingleProduct } from '../redux/actions/product.action';
+import { addItemToCart } from '../redux/actions/cart.action';
 import Button from '../components/Button/Button';
 import Truck from '../assets/truck.svg';
 import Return from '../assets/return.svg';
@@ -10,10 +12,24 @@ import Return from '../assets/return.svg';
 const SingleProductPage = () => {
 	const { productId } = useParams();
 	const { product } = useSelector((state) => state.products);
+	const { loading } = useSelector((state) => state.cart);
+	const { token } = useSelector((state) => state.token);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	useEffect(() => {
 		dispatch(getSingleProduct(productId));
 	}, [dispatch, productId]);
+	const handleClick = (prodId) => {
+		if (!token) {
+			toast.warn('you must login to add item to cart.', {
+				position: toast.POSITION.TOP_RIGHT,
+			});
+			setTimeout(() => {
+				navigate('/login');
+			}, 2000);
+		}
+		dispatch(addItemToCart(prodId, token));
+	};
 	return (
 		<div className="w-screen h-screen mx-auto my-5 flex flex-col space-y-5">
 			<div className="flex flex-col md:flex-row space-x-0 md:space-x-8 space-y-6 w-11/12 mx-auto">
@@ -58,11 +74,15 @@ const SingleProductPage = () => {
 						</div>
 					</div>
 					<div className="flex space-x-5 items-center">
-						<Button
-							label="Buy Now"
+						<Link
+							to="/checkout"
 							className="bg-primaryGreen text-center text-white px-2 py-1 rounded-full w-36"
-						/>
+						>
+							Buy Now
+						</Link>
 						<Button
+							handleClick={() => handleClick(product?.item?.productId)}
+							loading={loading}
 							label="Add to cart"
 							className="border border-primaryGreen text-center rounded-full hover:bg-primaryGreen hover:text-white w-36 px-2 py-1"
 						/>
@@ -89,6 +109,7 @@ const SingleProductPage = () => {
 			<div className="w-11/12 mx-auto">
 				<h2 className="font-bold text-2xl">Similar Products</h2>
 			</div>
+			<ToastContainer />
 		</div>
 	);
 };
