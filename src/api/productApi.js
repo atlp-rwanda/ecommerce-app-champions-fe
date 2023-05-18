@@ -105,4 +105,22 @@ export const createproduct = (productData) => {
 	});
 };
 
+export const getOrder = () => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/orders/getOrders`, {
+				headers: {
+					token: `Bearer ${token}`,
+				},
+			})
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
 export default api;

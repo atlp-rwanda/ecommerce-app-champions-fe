@@ -16,6 +16,7 @@ import { UpdateProduct } from './pages/UpdateProduct';
 import CreateProduct from './pages/Createproduct';
 import { ProductPage } from './pages/ProductPage';
 import SellerProductPage from './pages/SellerProductPage';
+import TrackOrder from './components/product/TrackOrder';
 
 function App() {
 	return (
@@ -32,6 +33,7 @@ function App() {
 				<Route path="/admin" element={<AdminDashboard />} />
 				<Route path="/vendors" element={<VendorDashboard />} />
 				<Route path="/cart" element={<CartPage />} />
+				<Route path="/order" element={<TrackOrder />} />
 				<Route path="/product" element={<ProductPage />} />
 				<Route path="*" element={<PageNotFound />} />
 				<Route path="/AddProduct" element={<CreateProduct />} />
