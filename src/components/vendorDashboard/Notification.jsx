@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -32,18 +33,6 @@ const Notification = () => {
 	const [markAllClicked, setMarkAllClicked] = useState(false); // New state variable
 	const { isLoading } = useSelector((state) => state.notifications);
 	const dispatch = useDispatch();
-	const socket = io(url);
-
-	useEffect(() => {
-		socket.on('notification', (data) => {
-			toast.warn('New notification!', { position: 'top-right' });
-			console.log('Received notification:', data);
-		});
-
-		return () => {
-			socket.off('notification');
-		};
-	}, [socket]);
 
 	useEffect(() => {
 		if (notifications && Array.isArray(notifications)) {
@@ -107,7 +96,7 @@ const Notification = () => {
 					>
 						<span
 							className={`rounded-full border ${
-								markAllClicked ? 'bg-green' : 'text-primaryGreen'
+								markAllClicked ? 'bg-green' : 'text-blue'
 							}`}
 						>
 							<BiCheckDouble className="rounded-full w-6 h-6 " />
@@ -132,7 +121,7 @@ const Notification = () => {
 					>
 						<div>
 							{item.isRead ? (
-								<span className=" text-primaryGreen border rounded-full mr-2 w-6 h-6 cursor-pointer">
+								<span className=" text-blue border rounded-full mr-2 w-6 h-6 cursor-pointer">
 									<BiCheckDouble className="rounded-full w-6 h-6" />
 								</span>
 							) : (

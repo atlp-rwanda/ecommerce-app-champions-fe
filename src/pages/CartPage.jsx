@@ -13,12 +13,12 @@ import { paymentaction } from '../redux/actions/payment.action';
 
 const CartPage = () => {
 	const { cartItems, loading } = useSelector((state) => state.cart);
-	// eslint-disable-next-line no-unused-vars
-	const [cartQuantity, setCartQuantity] = useState();
 
 	const { checkout, isloading } = useSelector((state) => state.checkout);
 
 	const token = Cookies.get('token');
+	// eslint-disable-next-line no-unused-vars
+	const [cartQuantity, setCartQuantity] = useState();
 	const dispatch = useDispatch();
 	const handleClearCart = () => {
 		dispatch(clearCart(token)).then(() =>

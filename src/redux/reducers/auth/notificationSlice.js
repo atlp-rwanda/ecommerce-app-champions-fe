@@ -81,8 +81,15 @@ const notificationSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(markAllNotifications.fulfilled, (state, { payload }) => {
-				state.loading = false;
-				state.notifications = payload.message;
+				if (payload.status === 'success') {
+					state.loading = false;
+					state.notifications.forEach((notification) => {
+						notification.isRead = true;
+					});
+				} else {
+					state.loading = false;
+					state.error = payload.message;
+				}
 			})
 
 			.addCase(markAllNotifications.rejected, (state, { payload }) => {
