@@ -32,7 +32,7 @@ const Homeproduct = () => {
 		}
 	}, [products, products.items]);
 
-	const product = availableProducts ? availableProducts.slice(0, 6) : [];
+	const product = availableProducts ? availableProducts.slice(0, 8) : [];
 
 	const handleClick = async (event, productId) => {
 		event.preventDefault();

@@ -19,6 +19,7 @@ import { ProductPage } from './pages/ProductPage';
 import SellerProductPage from './pages/SellerProductPage';
 import Topnav from './components/Landingpage/topnav';
 import Footer from './components/Landingpage/Footer';
+import PaymentSuccesspage from './components/payment/payment';
 
 function App() {
 	return (
@@ -85,6 +86,16 @@ function App() {
 						<>
 							<Topnav displaySearchBar />
 							<CartPage />
+							<Footer />
+						</>
+					}
+				/>
+				<Route
+					path="/paymentsuccess"
+					element={
+						<>
+							<Topnav />
+							<PaymentSuccesspage />
 							<Footer />
 						</>
 					}
