@@ -12,12 +12,16 @@ import {
 	clearCartFail,
 	deleteProductPending,
 	deleteProductSuccess,
+	updateCartPending,
+	updateCartSuccess,
+	updateCartFail,
 } from '../reducers/cart/cartSlice';
 import {
 	userCart,
 	clearUseCart,
 	deleteCartItem,
 	addToCart,
+	updateCartItems,
 } from '../../api/cartapi';
 
 export const getCart = (token) => async (dispatch) => {
@@ -47,6 +51,19 @@ export const addItemToCart = (id, token) => async (dispatch) => {
 		}
 		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
 		return dispatch(addToCartFail(error.Error));
+	}
+};
+
+export const updateCart = (productId, quantity, token) => async (dispatch) => {
+	try {
+		dispatch(updateCartPending());
+		const res = await updateCartItems(productId, quantity, token);
+		dispatch(updateCartSuccess(res));
+	} catch (error) {
+		if (error) {
+			return dispatch(updateCartFail(error.message));
+		}
+		return dispatch(updateCartFail(error.Error));
 	}
 };
 
