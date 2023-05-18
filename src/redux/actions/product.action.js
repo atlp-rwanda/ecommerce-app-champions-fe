@@ -21,6 +21,7 @@ import {
 import productApi, {
 	singleProduct,
 	recommendedProducts,
+	getAvailableProduct,
 } from '../../api/productApi';
 
 export const fetchProducts = (token) => async (dispatch) => {
@@ -49,11 +50,12 @@ export const deleteProduct = (productId, token) => async (dispatch) => {
 		dispatch(deleteProductFail(error.message));
 	}
 };
-export const fetchAvailableProducts = (token) => async (dispatch) => {
+
+export const fetchAvailableProducts = () => async (dispatch) => {
 	try {
 		dispatch(getAvailableProductsPending());
 
-		const products = await productApi.getAvailableProducts(token);
+		const products = await getAvailableProduct();
 
 		dispatch(getAvailableProductsSuccess(products));
 	} catch (error) {

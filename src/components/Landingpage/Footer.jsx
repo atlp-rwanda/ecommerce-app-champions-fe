@@ -8,8 +8,8 @@ import Logo from '../../assets/Logo.svg';
 
 const Footer = () => {
 	return (
-		<div>
-			<div className="w-screen h-100 md:w-full bg-lightYellow px-7 py-5  flex justify-between  items-center">
+		<div className="">
+			<div className="w-screen h-100 md:w-full bg-lightYellow px-7 py-5 grid grid-cols-2 middle:grid-cols-3 md:grid-cols-4  justify-between  items-center ">
 				<div>
 					<h1 className="font-bold">Company</h1>
 					<p>About Us</p>

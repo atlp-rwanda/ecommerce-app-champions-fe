@@ -61,7 +61,7 @@ const CartPage = () => {
 
 	return (
 		cartItems?.data?.products?.length > 0 && (
-			<div className="w-screen overflow-x-hidden bg-lightGray h-screen">
+			<div className="w-screen overflow-x-hidden bg-lightGray h-screen pb-10">
 				<h1 className="text-black text-center font-bold text-2xl py-4">
 					Cart Items
 				</h1>
