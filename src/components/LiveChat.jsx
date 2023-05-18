@@ -93,41 +93,38 @@ const LiveChat = () => {
 	return (
 		others &&
 		showModel && (
-			<div className="fixed flex p-2 pr-6 mt-12 rounded-2xl h-3/4 right-2 bg-gray">
-				<div className="flex-col hidden w-full md:flex sm:w-1/3">
-					<div className="flex items-center justify-center h-20 text-2xl font-bold">
-						<i className="mr-2 fas fa-comments" />
-						Champions
-					</div>
-					<div className="px-4 mt-4 mb-2 text-sm font-semibold">Status:</div>
-					<div className="px-4 mb-4">{status}</div>
-					<div className="px-4 mt-4 mb-2 text-sm font-semibold">
-						Active Users:
-					</div>
-					<ul id="users" className="px-4 mb-4">
+			<div className="fixed flex p-2 pr-3 bottom-20 rounded-2xl h-3/4 right-2 md:right-1 bg-gray z-40 w-3/4 md:w-1/3">
+				<div className="hidden md:flex flex-col space-y-3 w-1/3">
+					<div className="text-lg font-bold">Champions</div>
+					<div className=" text-sm font-semibold">Status:</div>
+					<div className="">{status}</div>
+					<div className="text-sm font-semibold">Active Users:</div>
+					<ul id="users" className="">
 						{onlineUsers.map((onlineUser) => (
-							<li key={onlineUser.id} className="flex mb-2">
-								<div className="w-4 h-4 mr-2 bg-green-500 rounded-full" />{' '}
-								{onlineUser.username} {onlineUser.status}
+							<li key={onlineUser.id} className="flex items-center space-x-2">
+								<div className="w-2 h-2 bg-green-500 rounded-full" />{' '}
+								<p>
+									{onlineUser.username} {onlineUser.status}
+								</p>
 							</li>
 						))}
 					</ul>
 				</div>
-				<div className="flex flex-col flex-1 h-full">
+				<div className="flex flex-col  h-full w-full md:w-4/5">
 					<Button
-						className="absolute top-0 right-0 font-bold"
+						className="absolute top-2 right-2 font-bold"
 						handleClick={() => setShowModel(false)}
-						label={<RxCross2 size={36} />}
+						label={<RxCross2 size={28} className="text-primaryGreen" />}
 					/>
-					<div className="flex items-center justify-between h-20 pt-2 pl-2 pr-4 mr-3 text-2xl font-bold bg-lightYellow">
+					<div className="text-lg font-bold bg-lightYellow px-3 py-1">
 						<div className="flex items-center">Chat</div>
 					</div>
 
-					<div className="flex-1 px-4 overflow-y-scroll bg-white rounded-bl-xl">
+					<div className="flex-1 px-3 overflow-y-scroll bg-white rounded-bl-xl">
 						{messages.map((message, index) => (
-							<div key={index} id="messages" className="mb-4">
-								<div className="flex justify-between mb-1">
-									<span className="text-sm font-semibold">
+							<div key={index} id="messages" className="mb-3">
+								<div className="flex justify-between">
+									<span className="text-sm font-semibold text-yellow">
 										{message.username}
 									</span>
 									<span className="text-xs">{message.time}</span>
@@ -137,14 +134,14 @@ const LiveChat = () => {
 						))}
 					</div>
 
-					<div className="p-4 mt-4">
+					<div className="my-3">
 						<form onSubmit={handleSubmit} className="flex">
 							<input
 								type="text"
 								ref={messageInput}
 								autoComplete="off"
 								placeholder="Type your message here..."
-								className="flex-1 px-4 py-2 mr-2 border border-gray-400 rounded"
+								className="flex-1 px-3 py-1 mr-2 border border-gray rounded-md"
 							/>
 							<Button
 								buttontype="submit"
