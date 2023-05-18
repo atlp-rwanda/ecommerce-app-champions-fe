@@ -2,7 +2,7 @@ import { FiSearch } from 'react-icons/fi';
 
 const SearchBar = () => {
 	return (
-		<form className="w-full h-1/3">
+		<form className="w-full h-2/3">
 			<div className="flex items-center space-x-1 w-full md:w-3/4 bg-white h-full rounded-full px-2 ">
 				<input
 					placeholder="Search for product.... "

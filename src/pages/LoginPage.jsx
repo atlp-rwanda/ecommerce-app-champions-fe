@@ -10,7 +10,6 @@ import Loginphoto from '../assets/login-illustration.svg';
 import GoogleButton from '../components/Button/GoogleButton';
 import { login } from '../redux/actions/auth.loginActions';
 import 'react-toastify/dist/ReactToastify.css';
-import Footer from '../components/Landingpage/Footer';
 
 const fieldState = {};
 userloginFields.forEach((field) => (fieldState[field.id] = ''));
@@ -90,8 +89,6 @@ const LoginPage = () => {
 					</div>
 				</div>
 			</div>
-
-			<Footer />
 			<ToastContainer />
 		</div>
 	);

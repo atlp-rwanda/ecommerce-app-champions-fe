@@ -66,7 +66,7 @@ const HomePage = () => {
 			<Button
 				handleClick={toggleChat}
 				label={<BsChatText size={22} />}
-				className="bg-primaryGreen fixed flex items-center justify-center w-14 h-14 font-bold text-white rounded-full bottom-4 right-4"
+				className="bg-primaryGreen fixed flex items-center justify-center w-14 h-14 font-bold text-white rounded-full bottom-4 right-4 z-50"
 			/>
 			<ToastContainer />
 		</div>

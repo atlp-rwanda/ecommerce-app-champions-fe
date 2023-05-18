@@ -21,7 +21,7 @@ import {
 } from '../../redux/actions/auth.profile.action';
 import SearchBar from './SearchBar';
 
-const Topnav = ({ displaySearchBar }) => {
+const Topnav = ({ displaySearchBar, className }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [loggedinuser, setLoggedinuser] = useState('');
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -54,8 +54,10 @@ const Topnav = ({ displaySearchBar }) => {
 			setLoggedinuser(profile.data.others.firstName);
 		}
 	}, [profile]);
+	const fixedClassNames =
+		'w-full bg-lightYellow px-8 py-2  flex  items-center justify-between';
 	return (
-		<div className="w-full bg-lightYellow px-8 py-2  flex  items-center justify-between">
+		<div className={className || fixedClassNames}>
 			<div className="flex items-center space-x-5 w-1/3 ">
 				<Link to="/">
 					<img src={Logo} className="w-52 md:w-40 cursor-pointer" alt="Logo" />
@@ -75,8 +77,8 @@ const Topnav = ({ displaySearchBar }) => {
 				{displaySearchBar && <SearchBar />}
 				<div className="w-1/4 flex flex-col lg:flex-row justify-between items-center  ">
 					{decodedToken ? (
-						<div className="relative flex items-center cursor-pointer text-primaryGreen">
-							<BsFillPersonFill size={40} />
+						<div className="flex items-center cursor-pointer text-primaryGreen">
+							<BsFillPersonFill size={28} />
 							<h1 className="font-bold">{loggedinuser}</h1>
 							<BiChevronDown size={30} onClick={handleDropdown} />
 							{isDropdownOpen && (

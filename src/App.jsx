@@ -27,48 +27,12 @@ function App() {
 			<Routes>
 				<Route exact path="/" element={<HomePage />} />
 				<Route path="/buyer" element={<BuyerSignupPage />} />
-				<Route
-					path="/vendor"
-					element={
-						<>
-							<Topnav displaySearchBar />
-							<VendorSignupPage />
-							<Footer />
-						</>
-					}
-				/>
+				<Route path="/vendor" element={<VendorSignupPage />} />
 				<Route path="/Login" element={<LoginPage />} />
-				<Route
-					path="/ForgotPassword"
-					element={
-						<>
-							<Topnav displaySearchBar />
-							<ForgotPassword />
-							<Footer />
-						</>
-					}
-				/>
-				<Route
-					path="/ResetPassword"
-					element={
-						<>
-							<Topnav displaySearchBar />
-							<ResetPassword />
-							<Footer />
-						</>
-					}
-				/>
+				<Route path="/ForgotPassword" element={<ForgotPassword />} />
+				<Route path="/ResetPassword" element={<ResetPassword />} />
 				<Route path="/auth" element={<TwoFactorAuth />} />
-				<Route
-					path="/profile"
-					element={
-						<>
-							<Topnav />
-							<ProfilePage />
-							<Footer />
-						</>
-					}
-				/>
+				<Route path="/profile" element={<ProfilePage />} />
 				<Route path="/admin" element={<AdminDashboard />} />
 				<Route path="/vendors" element={<VendorDashboard />} />
 				<Route
@@ -91,27 +55,9 @@ function App() {
 						</>
 					}
 				/>
-				<Route
-					path="/product"
-					element={
-						<>
-							<Topnav displaySearchBar />
-							<ProductPage />
-							<Footer />
-						</>
-					}
-				/>
+				<Route path="/product" element={<ProductPage />} />
 
-				<Route
-					path="/product/:productId"
-					element={
-						<>
-							<Topnav displaySearchBar />
-							<SingleProductPage />
-							<Footer />
-						</>
-					}
-				/>
+				<Route path="/product/:productId" element={<SingleProductPage />} />
 
 				<Route path="*" element={<PageNotFound />} />
 				<Route path="/AddProduct" element={<CreateProduct />} />
