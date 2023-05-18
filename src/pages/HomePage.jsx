@@ -14,6 +14,7 @@ import Footer from '../components/Landingpage/Footer';
 import Homeproduct from '../components/Landingpage/Availableproduct';
 import Banner from '../components/Landingpage/Banner';
 import { fetchAvailableProducts } from '../redux/actions/product.action';
+import { getBuyerNotifications } from '../redux/actions/notifications';
 
 const HomePage = () => {
 	const [showChat, setShowChat] = useState(false);
@@ -29,6 +30,10 @@ const HomePage = () => {
 
 		setShowChat(!showChat);
 	};
+
+	useEffect(() => {
+		dispatch(getBuyerNotifications());
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(handleToken());

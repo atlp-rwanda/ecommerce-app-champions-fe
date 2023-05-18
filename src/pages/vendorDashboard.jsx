@@ -4,6 +4,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import io from 'socket.io-client';
 import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import Navbar from '../components/vendorDashboard/Navbar';
@@ -15,6 +16,9 @@ import { getVendorProducts } from '../redux/actions/vendor.product';
 import { getNotifications } from '../redux/actions/notifications';
 import Loader from '../components/vendorDashboard/Loader';
 import Sales from '../components/vendorDashboard/Sales';
+
+// const url = varKeys.APP_URL;
+// const socket = io(url);
 
 const vendorDashboard = () => {
 	const token = Cookies.get('token');
@@ -32,7 +36,6 @@ const vendorDashboard = () => {
 		dispatch(getVendorProducts(token));
 		dispatch(getNotifications());
 	}, [dispatch, token]);
-
 	useEffect(() => {
 		if (error) {
 			toast.error(error);
