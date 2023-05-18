@@ -322,3 +322,33 @@ body {
 		background-color: #03a9f4;
 	}
 }
+.toolbar {
+	/* Use the mixins.toolbar value from Material-UI theme */
+	min-height: 56px;
+	/* Add any additional styles as needed */
+}
+
+.title {
+	margin-top: 5%;
+}
+
+.emptyButton {
+	min-width: 150px;
+	margin-bottom: 5px; /* For xs breakpoint */
+	margin-right: 20px; /* For xs breakpoint */
+}
+
+.checkoutButton {
+	min-width: 150px;
+}
+
+.link {
+	text-decoration: none;
+}
+
+.cardDetails {
+	display: flex;
+	margin-top: 10%;
+	width: 100%;
+	justify-content: space-between;
+}

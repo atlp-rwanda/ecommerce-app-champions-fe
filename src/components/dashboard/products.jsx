@@ -26,6 +26,12 @@ import { useNavigate, Link } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
 import SearchComponent from '../product/SearchProduct';
 import Header from '../vendorDashboard/Header';
+import { ToastContainer } from 'react-toastify';
+import { handleToken } from '../../redux/actions/token.action';
+import {
+	addItemToWishList,
+	getAllWishlist,
+} from '../../redux/actions/wishList.action';
 import {
 	fetchProducts,
 	deleteProduct,
@@ -38,14 +44,19 @@ function Products({ setIsOpen }) {
 	const { loading, error, items } = useSelector(
 		(state) => state.products.products
 	);
+	const { token } = useSelector((state) => state.token);
+	const { wishlistItem } = useSelector((state) => state.wishlist);
 	const [searchResults, setSearchResults] = useState(null);
 	const [selectedProduct, setSelectedProduct] = useState(null);
 	const navigate = useNavigate();
 
-	const token = Cookies.get('token');
+	// const token = Cookies.get('token');
 	useEffect(() => {
 		dispatch(fetchProducts(token));
 	}, [dispatch, token]);
+	useEffect(() => {
+		dispatch(handleToken());
+	}, [dispatch]);
 
 	const handleDelete = (productId) => {
 		dispatch(deleteProduct(productId, token))
@@ -65,9 +76,16 @@ function Products({ setIsOpen }) {
 	const handleEmptySearch = () => {
 		setSearchResults(null);
 	};
+	const handleWish = (id) => {
+		dispatch(addItemToWishList(id, token)).then(() => {
+			dispatch(getAllWishlist(token));
+		});
+	};
 
 	return (
 		<div className="sales dahsboard m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+		<div className="container mx-auto mt-10">
+			<ToastContainer />
 			{loading ? (
 				<div>Loading ..</div>
 			) : (
@@ -93,6 +111,7 @@ function Products({ setIsOpen }) {
 										<td>Add</td>
 										<td>Edit</td>
 										<td>Delete</td>
+										<td>List</td>
 									</tr>
 									{searchResults && searchResults?.length ? (
 										searchResults?.map((item) => (
@@ -147,9 +166,7 @@ function Products({ setIsOpen }) {
 												<td>
 													<GrAddCircle
 														className="addi hover:text-whitetext-blue-600 mr-2 cursor-pointer size={24}"
-														onClick={() =>
-															navigate(`/vendors/${item.productId}`)
-														}
+														onClick={() => handleWish(item.productId)}
 													/>
 												</td>
 												<td>
@@ -164,6 +181,12 @@ function Products({ setIsOpen }) {
 													<AiFillDelete
 														className="delete text-red-600 cursor-pointer"
 														onClick={() => setSelectedProduct(item)}
+													/>
+												</td>
+												<td>
+													<AiFillDelete
+														className=" text-red-600 cursor-pointer"
+														onClick={() => handleWish(item.productId)}
 													/>
 												</td>
 											</tr>

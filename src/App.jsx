@@ -17,12 +17,11 @@ import CreateProduct from './pages/Createproduct';
 import SingleProductPage from './pages/SingleProductPage';
 import { ProductPage } from './pages/ProductPage';
 import SellerProductPage from './pages/SellerProductPage';
-<<<<<<< HEAD
 import Topnav from './components/Landingpage/topnav';
 import Footer from './components/Landingpage/Footer';
 import PaymentSuccesspage from './components/payment/payment';
-=======
->>>>>>> dc4766e (ft-seller-view-product)
+import Products from './components/dashboard/products';
+import Wishlist from './components/wishlist/Wishlist';
 
 function App() {
 	return (
@@ -65,6 +64,8 @@ function App() {
 				<Route path="*" element={<PageNotFound />} />
 				<Route path="/AddProduct" element={<CreateProduct />} />
 				<Route path="/vendors/:id" element={<UpdateProduct />} />
+				<Route path="/products" element={<Products />} />
+				<Route path="/wishlist" element={<Wishlist />} />
 				<Route
 					path="SellerProductPage/:productId"
 					element={<SellerProductPage />}
