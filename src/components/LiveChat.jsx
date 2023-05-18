@@ -1,27 +1,24 @@
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import { FiSend } from 'react-icons/fi';
 import io from 'socket.io-client';
-
 import { useDispatch, useSelector } from 'react-redux';
 import Button from './Button/Button';
 import { getChatUsers, getChatMessages } from '../redux/actions/chat.action';
 import { handleToken } from '../redux/actions/token.action';
+import envKeys from '../constants/keys';
 
 let socket;
 const user = localStorage.getItem('user');
-// eslint-disable-next-line no-unsafe-optional-chaining
 const others = JSON.parse(user)?.data.others;
 
 const LiveChat = () => {
+	const url = envKeys.APP_URL;
 	const messageInput = useRef();
 	const [status, setStatus] = useState('Disconnected');
 	const { token, decodedToken } = useSelector((state) => state.token);
-	// const chats = useSelector((state) => state?.chats?.chat?.data?.chats);
-
 	const [messages, setMessages] = useState([]);
 	const [onlineUsers, setOnlineUsers] = useState([]);
 	const navigate = useNavigate();
@@ -35,25 +32,25 @@ const LiveChat = () => {
 
 	useEffect(() => {
 		dispatch(handleToken());
-	}, []);
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (token) {
 			dispatch(getChatUsers(decodedToken.id));
 		}
-	}, [dispatch, decodedToken]);
+	}, [dispatch, decodedToken, token]);
 
 	useEffect(() => {
-		socket = io('https://ecommerce-champions.onrender.com', {
+		socket = io(`${url}`, {
 			query: others,
 		});
-	}, []);
+	}, [url]);
 
 	useEffect(() => {
 		if (token) {
 			dispatch(getChatMessages(token));
 		}
-	}, []);
+	}, [dispatch, token]);
 
 	useEffect(() => {
 		socket.emit('joinChat', others?.firstName, () => {
@@ -96,7 +93,7 @@ const LiveChat = () => {
 	return (
 		others &&
 		showModel && (
-			<div className="fixed flex p-4 pr-8 mt-4 rounded-2xl h-3/4 right-2 bg-brightGray h-4/5">
+			<div className="fixed flex p-2 pr-6 mt-12 rounded-2xl h-3/4 right-2 bg-gray">
 				<div className="flex-col hidden w-full md:flex sm:w-1/3">
 					<div className="flex items-center justify-center h-20 text-2xl font-bold">
 						<i className="mr-2 fas fa-comments" />

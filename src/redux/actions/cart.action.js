@@ -27,8 +27,11 @@ export const getCart = (token) => async (dispatch) => {
 		dispatch(getCartSuccess(res));
 	} catch (error) {
 		if (error) {
+			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
 			return dispatch(getCartFail(error.message));
 		}
+		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+
 		return dispatch(getCartFail(error.Error));
 	}
 };

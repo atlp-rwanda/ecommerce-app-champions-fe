@@ -1,14 +1,87 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import varKeys from '../constants/keys';
 
 const url = varKeys.APP_URL;
+
+export const singleProduct = (productId) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/product/getOne/${productId}`)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
+export const recommendedProducts = (productName) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/product/recommended?searchParam=${productName}`)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
+export const productRating = (productId) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/review/getProductRate/${productId}`)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
+export const searchProd = (product) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/product/searcch?searchParam=${product}`)
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
 
 const api = {
 	getVendorProducts: (token) => {
 		return new Promise((resolve, reject) => {
 			axios
-				.get(`${url}/api/product/getAll`, {
+				.get(`${url}/api/product/getAvailable`, {
+					headers: {
+						token: `Bearer ${token}`,
+					},
+				})
+				.then((response) => resolve(response.data))
+				.catch((error) => {
+					if (error.response !== undefined) {
+						reject(error.response.data);
+					}
+					reject(error);
+				});
+		});
+	},
+
+	getAvailableProducts: (token) => {
+		return new Promise((resolve, reject) => {
+			axios
+				.get(`${url}/api/product/getAvailable`, {
 					headers: {
 						token: `Bearer ${token}`,
 					},
@@ -40,11 +113,10 @@ const api = {
 				});
 		});
 	},
-
-	getAvailableProducts: (token) => {
+	getProductById: (productId, token) => {
 		return new Promise((resolve, reject) => {
 			axios
-				.get(`${url}/api/product/getAvailable`, {
+				.get(`${url}/api/product/getOne/${productId}`, {
 					headers: {
 						token: `Bearer ${token}`,
 					},
@@ -88,14 +160,26 @@ export const searchProduct = (searchParam) => {
 			});
 	});
 };
-const token = Cookies.get('token');
 
-export const createproduct = (productData) => {
+export const createproduct = (productData, token) => {
 	return new Promise((resolve, reject) => {
 		axios
 			.post(`${url}/api/product/create`, productData, {
 				headers: { token: `Bearer ${token}` },
 			})
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+export const getAvailableProduct = () => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/product/getAvailable`, {})
 			.then((response) => resolve(response.data))
 			.catch((error) => {
 				if (error.response.data !== undefined) {

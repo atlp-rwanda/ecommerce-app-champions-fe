@@ -14,7 +14,12 @@ import CartPage from './pages/CartPage';
 import PageNotFound from './components/PageNotFound';
 import { UpdateProduct } from './pages/UpdateProduct';
 import CreateProduct from './pages/Createproduct';
+import SingleProductPage from './pages/SingleProductPage';
 import { ProductPage } from './pages/ProductPage';
+import SellerProductPage from './pages/SellerProductPage';
+import Topnav from './components/Landingpage/topnav';
+import Footer from './components/Landingpage/Footer';
+import PaymentSuccesspage from './components/payment/payment';
 
 function App() {
 	return (
@@ -22,20 +27,99 @@ function App() {
 			<Routes>
 				<Route exact path="/" element={<HomePage />} />
 				<Route path="/buyer" element={<BuyerSignupPage />} />
-				<Route path="/vendor" element={<VendorSignupPage />} />
+				<Route
+					path="/vendor"
+					element={
+						<>
+							<Topnav displaySearchBar />
+							<VendorSignupPage />
+							<Footer />
+						</>
+					}
+				/>
 				<Route path="/Login" element={<LoginPage />} />
-				<Route path="/ForgotPassword" element={<ForgotPassword />} />
-				<Route path="/ResetPassword" element={<ResetPassword />} />
+				<Route
+					path="/ForgotPassword"
+					element={
+						<>
+							<Topnav displaySearchBar />
+							<ForgotPassword />
+							<Footer />
+						</>
+					}
+				/>
+				<Route
+					path="/ResetPassword"
+					element={
+						<>
+							<Topnav displaySearchBar />
+							<ResetPassword />
+							<Footer />
+						</>
+					}
+				/>
 				<Route path="/auth" element={<TwoFactorAuth />} />
-				<Route path="/profile" element={<ProfilePage />} />
+				<Route
+					path="/profile"
+					element={
+						<>
+							<Topnav />
+							<ProfilePage />
+							<Footer />
+						</>
+					}
+				/>
 				<Route path="/admin" element={<AdminDashboard />} />
 				<Route path="/vendors" element={<VendorDashboard />} />
-				<Route path="/cart" element={<CartPage />} />
-				<Route path="/product" element={<ProductPage />} />
+				<Route
+					path="/cart"
+					element={
+						<>
+							<Topnav displaySearchBar />
+							<CartPage />
+							<Footer />
+						</>
+					}
+				/>
+				<Route
+					path="/paymentsuccess"
+					element={
+						<>
+							<Topnav />
+							<PaymentSuccesspage />
+							<Footer />
+						</>
+					}
+				/>
+				<Route
+					path="/product"
+					element={
+						<>
+							<Topnav displaySearchBar />
+							<ProductPage />
+							<Footer />
+						</>
+					}
+				/>
+
+				<Route
+					path="/product/:productId"
+					element={
+						<>
+							<Topnav displaySearchBar />
+							<SingleProductPage />
+							<Footer />
+						</>
+					}
+				/>
+
 				<Route path="*" element={<PageNotFound />} />
 				<Route path="/AddProduct" element={<CreateProduct />} />
 				<Route path="/vendors/:id" element={<UpdateProduct />} />
-				<Route path="*" element={<PageNotFound />} />
+				<Route
+					path="SellerProductPage/:productId"
+					element={<SellerProductPage />}
+				/>
 			</Routes>
 		</BrowserRouter>
 	);

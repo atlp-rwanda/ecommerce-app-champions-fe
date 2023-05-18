@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
@@ -5,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdEdit, MdOutlineDeleteOutline } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
 import {
 	GridComponent,
 	Resize,
@@ -21,6 +21,8 @@ import {
 import { GrAddCircle } from 'react-icons/gr';
 import { BiEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
+import { FaEye } from 'react-icons/fa';
+import { useNavigate, Link } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
 import SearchComponent from '../product/SearchProduct';
 import Header from '../vendorDashboard/Header';
@@ -55,6 +57,7 @@ function Products({ setIsOpen }) {
 	const handleCancelDelete = () => {
 		setSelectedProduct(null);
 	};
+
 	if (error) {
 		return <p>{error}</p>;
 	}
@@ -119,6 +122,14 @@ function Products({ setIsOpen }) {
 														className="text-red-500 cursor-pointer"
 														onClick={() => setSelectedProduct(item)}
 													/>
+												</td>
+												<td>
+													<Link to={`/productPage/${item.productId}`}>
+														<FaEye
+															className="text-red-500 cursor-pointer rosy_brown rounded  h-5"
+															style={{ color: 'rosybrown' }}
+														/>
+													</Link>
 												</td>
 											</tr>
 										))
