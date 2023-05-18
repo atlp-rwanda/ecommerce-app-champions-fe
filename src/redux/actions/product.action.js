@@ -10,9 +10,19 @@ import {
 	getAvailableProductsPending,
 	getAvailableProductsSuccess,
 	getAvailableProductsFail,
+	getSingleProductPending,
+	getSingleProductSuccess,
+	getSingleProductFail,
+	getrRecommenedProductsPending,
+	getrRecommenedProductsSuccess,
+	getrRecommenedProductsFail,
 } from '../reducers/product/productSlice';
 
-import productApi from '../../api/productApi';
+import productApi, {
+	singleProduct,
+	recommendedProducts,
+	getAvailableProduct,
+} from '../../api/productApi';
 
 export const fetchProducts = (token) => async (dispatch) => {
 	try {
@@ -40,14 +50,43 @@ export const deleteProduct = (productId, token) => async (dispatch) => {
 		dispatch(deleteProductFail(error.message));
 	}
 };
-export const fetchAvailableProducts = (token) => async (dispatch) => {
+
+export const fetchAvailableProducts = () => async (dispatch) => {
 	try {
 		dispatch(getAvailableProductsPending());
 
-		const products = await productApi.getAvailableProducts(token);
+		const products = await getAvailableProduct();
 
 		dispatch(getAvailableProductsSuccess(products));
 	} catch (error) {
 		dispatch(getAvailableProductsFail(error.message));
+	}
+};
+
+export const getSingleProduct = (productId) => async (dispatch) => {
+	try {
+		dispatch(getSingleProductPending());
+		const res = await singleProduct(productId);
+		dispatch(getSingleProductSuccess(res));
+		return res;
+	} catch (error) {
+		if (error) {
+			return dispatch(getSingleProductFail(error.message));
+		}
+		return dispatch(getSingleProductFail(error.Error));
+	}
+};
+
+export const getRecommendedProducts = (productName) => async (dispatch) => {
+	try {
+		dispatch(getrRecommenedProductsPending());
+		const res = await recommendedProducts(productName);
+		dispatch(getrRecommenedProductsSuccess(res));
+		return res;
+	} catch (error) {
+		if (error) {
+			return dispatch(getrRecommenedProductsFail(error.message));
+		}
+		return dispatch(getrRecommenedProductsFail(error.Error));
 	}
 };
