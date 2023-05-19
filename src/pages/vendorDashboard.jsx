@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import Navbar from '../components/vendorDashboard/Navbar';
-import Sidebar from '../components/vendorDashboard/Sidebar';
+import VendorSidebar from '../components/vendorDashboard/vendorSidebar';
 import Products from '../components/dashboard/products';
 import Ecommerce from '../components/vendorDashboard/Ecommerce';
 import Sales from '../components/vendorDashboard/Sales';
@@ -53,7 +53,7 @@ const vendorDashboard = () => {
 					<div className="flex relative ">
 						{activeMenu ? (
 							<div className="w-72 fixed sidebar bg-white ">
-								<Sidebar
+								<VendorSidebar
 									showEcommerce={showEcommerce}
 									setShowEcommerce={setShowEcommerce}
 									showSales={showSales}
@@ -63,7 +63,7 @@ const vendorDashboard = () => {
 							</div>
 						) : (
 							<div className="w-0 ">
-								<Sidebar
+								<VendorSidebar
 									showEcommerce={showEcommerce}
 									setShowEcommerce={setShowEcommerce}
 									showSales={showSales}
