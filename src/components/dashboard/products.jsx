@@ -23,11 +23,9 @@ import { BiEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
 import { FaEye } from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import LoadingSpinner from '../LoadingSpinner';
 import SearchComponent from '../product/SearchProduct';
 import Header from '../vendorDashboard/Header';
-import { handleToken } from '../../redux/actions/token.action';
 import {
 	fetchProducts,
 	deleteProduct,
@@ -40,19 +38,14 @@ function Products({ setIsOpen }) {
 	const { loading, error, items } = useSelector(
 		(state) => state.products.products
 	);
-	const { token } = useSelector((state) => state.token);
 	const [searchResults, setSearchResults] = useState(null);
 	const [selectedProduct, setSelectedProduct] = useState(null);
 	const navigate = useNavigate();
 
-	// const token = Cookies.get('token');
+	const token = Cookies.get('token');
 	useEffect(() => {
 		dispatch(fetchProducts(token));
 	}, [dispatch, token]);
-
-	useEffect(() => {
-		dispatch(handleToken());
-	}, [dispatch]);
 
 	const handleDelete = (productId) => {
 		dispatch(deleteProduct(productId, token))
@@ -75,150 +68,149 @@ function Products({ setIsOpen }) {
 
 	return (
 		<div className="sales dahsboard m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-			<div className="container mx-auto mt-10">
-				<ToastContainer />
-				{loading ? (
-					<div>Loading ..</div>
-				) : (
-					<div className="sales dahsboard m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-						<Header title="All Products" />
-						<div className="overflow-x-auto">
-							{items && (
-								<SearchComponent
-									searchedItems={(items) => {
-										setSearchResults(items);
-									}}
-									onEmptySearch={handleEmptySearch}
-								/>
-							)}
-							<GridComponent allowPaging allowSorting id="gridcomp">
-								<table className="w-full">
-									<tbody>
-										<tr className="p-4 text-xl font-bold md:text-2xl h-14">
-											<td className="text-xl md:text-2xl">Product Name</td>
-											<td>Product Id</td>
-											<td>Quantity</td>
-											<td>Price</td>
-											<td>Add</td>
-											<td>Edit</td>
-											<td>Delete</td>
-										</tr>
-										{searchResults && searchResults?.length ? (
-											searchResults?.map((item) => (
-												<tr key={item.productId} className="h-20">
-													<td>{item.productName}</td>
-													<td>{item.productId}</td>
-													<td>{item.quantity}</td>
-													<td>{item.productPrice}</td>
-													<td>
-														<GrAddCircle
-															className="addi hover:text-whitetext-blue-600 mr-2 cursor-pointer size={24}"
-															onClick={() =>
-																navigate(`/vendors/${item.productId}`)
-															}
+			{loading ? (
+				<div>Loading ..</div>
+			) : (
+				<div className="sales dahsboard m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+					<Header title="All Products" />
+					<div className="overflow-x-auto">
+						{items && (
+							<SearchComponent
+								searchedItems={(items) => {
+									setSearchResults(items);
+								}}
+								onEmptySearch={handleEmptySearch}
+							/>
+						)}
+						<GridComponent allowPaging allowSorting id="gridcomp">
+							<table className="w-full">
+								<tbody>
+									<tr className="p-4 text-xl font-bold md:text-2xl h-14">
+										<td className="text-xl md:text-2xl">Product Name</td>
+										<td>Product Id</td>
+										<td>Quantity</td>
+										<td>Price</td>
+										<td>Add</td>
+										<td>Edit</td>
+										<td>Delete</td>
+									</tr>
+									{searchResults && searchResults?.length ? (
+										searchResults?.map((item) => (
+											<tr key={item.productId} className="h-20">
+												<td>{item.productName}</td>
+												<td>{item.productId}</td>
+												<td>{item.quantity}</td>
+												<td>{item.productPrice}</td>
+												<td>
+													<GrAddCircle
+														className="addi hover:text-whitetext-blue-600 mr-2 cursor-pointer size={24}"
+														onClick={() =>
+															navigate(`/vendors/${item.productId}`)
+														}
+													/>
+												</td>
+												<td>
+													<MdEdit
+														className="text-blue-500 cursor-pointer"
+														onClick={() =>
+															navigate(`/vendors/${item.productId}`)
+														}
+													/>
+												</td>
+												<td>
+													<MdOutlineDeleteOutline
+														className="text-red-500 cursor-pointer"
+														onClick={() => setSelectedProduct(item)}
+													/>
+												</td>
+												<td>
+													<Link to={`/productPage/${item.productId}`}>
+														<FaEye
+															className="text-red-500 cursor-pointer rosy_brown rounded  h-5"
+															style={{ color: 'rosybrown' }}
 														/>
-													</td>
-													<td>
-														<MdEdit
-															className="text-blue-500 cursor-pointer"
-															onClick={() =>
-																navigate(`/vendors/${item.productId}`)
-															}
-														/>
-													</td>
-													<td>
-														<MdOutlineDeleteOutline
-															className="text-red-500 cursor-pointer"
-															onClick={() => setSelectedProduct(item)}
-														/>
-													</td>
-													<td>
-														<Link to={`/productPage/${item.productId}`}>
-															<FaEye
-																className="text-red-500 cursor-pointer rosy_brown rounded  h-5"
-																style={{ color: 'rosybrown' }}
-															/>
-														</Link>
-													</td>
-												</tr>
-											))
-										) : searchResults && !searchResults?.length ? (
-											<div className="font-bold text-lg py-5 text-red">
-												No products found!
-											</div>
-										) : (
-											items?.map((item) => (
-												<tr key={item.productId} className="h-20">
-													<td>{item.productName}</td>
-													<td>{item.productId}</td>
-													<td>{item.quantity}</td>
-													<td>{item.productPrice}</td>
-													<td>
-														<GrAddCircle
-															className="addi hover:text-whitetext-blue-600 mr-2 cursor-pointer size={24}"
-															onClick={() => handleWish(item.productId)}
-														/>
-													</td>
-													<td>
-														<BiEdit
-															className="edit text-blue-600 mr-2 cursor-pointer size={24}"
-															onClick={() =>
-																navigate(`/vendors/${item.productId}`)
-															}
-														/>
-													</td>
-													<td>
-														<AiFillDelete
-															className="delete text-red-600 cursor-pointer"
-															onClick={() => setSelectedProduct(item)}
-														/>
-													</td>
-												</tr>
-											))
-										)}
-									</tbody>
-								</table>
-								<Inject
-									services={[
-										Resize,
-										Sort,
-										ContextMenu,
-										Filter,
-										Page,
-										ExcelExport,
-										Edit,
-										PdfExport,
-									]}
-								/>
-							</GridComponent>
-						</div>
+													</Link>
+												</td>
+											</tr>
+										))
+									) : searchResults && !searchResults?.length ? (
+										<div className="font-bold text-lg py-5 text-red">
+											No products found!
+										</div>
+									) : (
+										items?.map((item) => (
+											<tr key={item.productId} className="h-20">
+												<td>{item.productName}</td>
+												<td>{item.productId}</td>
+												<td>{item.quantity}</td>
+												<td>{item.productPrice}</td>
+												<td>
+													<GrAddCircle
+														className="addi hover:text-whitetext-blue-600 mr-2 cursor-pointer size={24}"
+														onClick={() =>
+															navigate(`/vendors/${item.productId}`)
+														}
+													/>
+												</td>
+												<td>
+													<BiEdit
+														className="edit text-blue-600 mr-2 cursor-pointer size={24}"
+														onClick={() =>
+															navigate(`/vendors/${item.productId}`)
+														}
+													/>
+												</td>
+												<td>
+													<AiFillDelete
+														className="delete text-red-600 cursor-pointer"
+														onClick={() => setSelectedProduct(item)}
+													/>
+												</td>
+											</tr>
+										))
+									)}
+								</tbody>
+							</table>
+							<Inject
+								services={[
+									Resize,
+									Sort,
+									ContextMenu,
+									Filter,
+									Page,
+									ExcelExport,
+									Edit,
+									PdfExport,
+								]}
+							/>
+						</GridComponent>
 					</div>
-				)}
-				{selectedProduct && (
-					<div className="fixed inset-0 z-10 flex items-center justify-center bg-gray-300 bg-opacity-70">
-						<div className="w-full bg-white rounded-lg shadow-xl md:w-1/2 lg:w-1/3">
-							<p className="mx-5 mt-5 mb-5">
-								Are you sure you want to delete {selectedProduct.productName}?
-							</p>
-							<div className="flex justify-end mx-5 mb-5">
-								<Button
-									buttontype="submit"
-									label={loading ? <LoadingSpinner /> : 'Yes'}
-									className="px-4 py-2 mr-2 font-bold text-white rounded-2xl bg-rosy_brown w-28"
-									onClick={() => handleDelete(selectedProduct.productId)}
-								/>
+				</div>
+			)}
+			{selectedProduct && (
+				<div className="fixed inset-0 z-10 flex items-center justify-center bg-gray-300 bg-opacity-70">
+					<div className="w-full bg-white rounded-lg shadow-xl md:w-1/2 lg:w-1/3">
+						<p className="mx-5 mt-5 mb-5">
+							Are you sure you want to delete {selectedProduct.productName}?
+						</p>
+						<div className="flex justify-end mx-5 mb-5">
+							<Button
+								buttontype="submit"
+								label={loading ? <LoadingSpinner /> : 'Yes'}
+								className="px-4 py-2 mr-2 font-bold text-white rounded-2xl bg-rosy_brown w-28"
+								onClick={() => handleDelete(selectedProduct.productId)}
+							/>
 
-								<Button
-									buttontype="submit"
-									label={loading ? <LoadingSpinner /> : 'No'}
-									className="px-4 py-2 mr-4 font-bold text-white rounded-2xl bg-primaryGreen w-28"
-									onClick={handleCancelDelete}
-								/>
-							</div>
+							<Button
+								buttontype="submit"
+								label={loading ? <LoadingSpinner /> : 'No'}
+								className="px-4 py-2 mr-4 font-bold text-white rounded-2xl bg-primaryGreen w-28"
+								onClick={handleCancelDelete}
+							/>
 						</div>
 					</div>
-				)}
-			</div>
+				</div>
+			)}
 		</div>
 	);
 }
