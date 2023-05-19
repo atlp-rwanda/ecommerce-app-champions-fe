@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import Cookies from 'js-cookie';
 import {
 	Typography,
 	Button,
@@ -19,6 +20,7 @@ import { handleToken } from '../../../redux/actions/token.action';
 import useStyles from './styles';
 
 const WishlistItem = ({ item, onRemoveFromWishlist }) => {
+	const tokenn = Cookies.get('token');
 	const classes = useStyles();
 	const { token } = useSelector((state) => state.token);
 	const dispatch = useDispatch();
@@ -29,7 +31,7 @@ const WishlistItem = ({ item, onRemoveFromWishlist }) => {
 	}, [dispatch]);
 
 	const handleClick = async (productId) => {
-		dispatch(addItemToCart(productId, token));
+		dispatch(addItemToCart(productId, tokenn));
 	};
 
 	return (

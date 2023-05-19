@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Typography, Button, Grid } from '@material-ui/core';
 import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 import { getAllWishlist } from '../../redux/actions/wishList.action';
 import { handleToken } from '../../redux/actions/token.action';
 import WishlistItem from './wishlist/WishlistItems';
@@ -15,6 +17,7 @@ const Wishlist = ({ onRemoveFromWishlist }) => {
 	const classes = useStyles();
 	const { token } = useSelector((state) => state.token);
 	const { wishlistItems, loading } = useSelector((state) => state.wishlist);
+	const tokenn = Cookies.get('token');
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(handleToken());
@@ -29,6 +32,12 @@ const Wishlist = ({ onRemoveFromWishlist }) => {
 			dispatch(getAllWishlist(token));
 		}
 	}, [dispatch, token]);
+	useEffect(() => {
+		if (!tokenn) {
+			toast('Login First');
+			navigate('/');
+		}
+	}, [tokenn, navigate]);
 
 	const renderEmptyWishlist = () => (
 		<Typography variant="subtitle1">
@@ -48,6 +57,7 @@ const Wishlist = ({ onRemoveFromWishlist }) => {
 				<Loader />
 			) : (
 				<div>
+					<ToastContainer />
 					<Grid container spacing={3}>
 						{wishlistItems.wishlist.map((items) => (
 							<Grid item xs={12} sm={4} key={items.productId}>

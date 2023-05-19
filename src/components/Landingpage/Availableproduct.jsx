@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AiFillStar, AiFillHeart } from 'react-icons/ai';
+import Cookies from 'js-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import {
+	addItemToWishList,
+	getAllWishlist,
+} from '../../redux/actions/wishList.action';
 import { fetchAvailableProducts } from '../../redux/actions/product.action';
 import Button from '../Button/Button';
 import LoadingSpinner from '../LoadingSpinner';
@@ -10,6 +18,11 @@ const Homeproduct = () => {
 	const [availableProducts, setAvailableProducts] = useState([]);
 	const { products } = useSelector((state) => state.products || {});
 	const { loading } = useSelector((state) => state.products || {});
+	const token = Cookies.get('token');
+	const [showHeart, setShowHeart] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [clickedProductId, setClickedProductId] = useState(null);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -23,6 +36,33 @@ const Homeproduct = () => {
 	}, [products, products.items]);
 
 	const product = availableProducts ? availableProducts.slice(0, 8) : [];
+
+	const handleClick = async (event, productId) => {
+		event.preventDefault();
+		setIsLoading(true);
+		setClickedProductId(productId);
+		if (!token) {
+			toast.warn('you must login to add item to cart.', {
+				position: toast.POSITION.TOP_RIGHT,
+			});
+			setTimeout(() => {
+				navigate('/login');
+			}, 2000);
+		}
+		dispatch(addItemToCart(productId, token));
+	};
+	useEffect(() => {
+		const tokenFromCookies = Cookies.get('token');
+		if (tokenFromCookies) {
+			setShowHeart(true);
+		}
+	}, []);
+	const handleWish = (id) => {
+		dispatch(addItemToWishList(id, token)).then(() => {
+			dispatch(getAllWishlist(token));
+		});
+	};
+
 	return (
 		<div className="w-full mx-auto px-8 py-4 ">
 			<h3 className="w-full font-bold text-3xl">Todays Best Deals for You!</h3>
@@ -62,6 +102,49 @@ const Homeproduct = () => {
 					) : (
 						product?.map((item) => (
 							<ProductCard key={item.productId} product={item} />
+							<div key={item.productId} className="card border">
+								<div className="bg-gray relative">
+									<div className="heartContainer absolute top-2 right-2 flex items-center justify-center w-8 h-8 ">
+										{showHeart && (
+											<AiFillHeart
+												className="heart"
+												size={24}
+												onClick={() => handleWish(item.productId)}
+											/>
+										)}
+									</div>
+									<Link to={`/product/${item.productId}`}>
+										<img
+											className="h-56 w-full object-cover"
+											src={item.productImage[0]}
+											alt={item.productName}
+										/>
+									</Link>
+								</div>
+								<div>
+									<h1>{item.productName}</h1>
+									<p className="font-bold">Price: ${item.productPrice}</p>
+									<p>{item.productDescription.slice(0, 50)}...</p>
+									<div className="flex gap-1">
+										<AiFillStar className="text-[#225F33]" />
+										<AiFillStar className="text-[#225F33]" />
+										<AiFillStar className="text-[#225F33]" />
+										<AiFillStar className="text-[#225F33]" />
+										<AiFillStar className="text-[#000000]" />
+									</div>
+									<button
+										type="submit"
+										className="flex items-center justify-center p-1 rounded-2xl bg-gray text-black font-bold my-2 w-28"
+										onClick={(event) => handleClick(event, item.productId)}
+									>
+										{isLoading && clickedProductId === item.productId ? (
+											<LoadingSpinner className="w-6 h-6 mr-2 text-green" />
+										) : (
+											'Add to Cart'
+										)}
+									</button>
+								</div>
+							</div>
 						))
 					)}
 				</div>

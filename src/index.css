@@ -2,13 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+.heart {
+	color: black !important;
+}
+.heart:hover {
+	color: red !important;
+}
+.heartContainer:hover {
+	border-radius: 50%;
+	background-color: white;
+}
+.text-red {
+	color: red;
+}
 
-body {
-	margin: 0;
-	padding: 0;
-	font-family: 'Open Sans', sans-serif;
-} */
+.text-black {
+	color: black;
+}
 
 .otpInput {
 	width: 50px !important;

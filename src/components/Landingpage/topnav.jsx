@@ -86,6 +86,9 @@ const Topnav = ({ displaySearchBar, className }) => {
 									<h1 className="block px-4 py-2 text-gray-800 hover:bg-gray-200 font-bold">
 										<Link to="/Profile">Profile</Link>
 									</h1>
+									<h1 className="block px-4 py-2 text-gray-800 hover:bg-gray-200 font-bold">
+										<Link to="/wishlist">Wishlist</Link>
+									</h1>
 									<h1 className="flex px-4 py-2 text-gray-800 hover:bg-gray-200 font-bold">
 										<AiOutlineLogout
 											size={25}

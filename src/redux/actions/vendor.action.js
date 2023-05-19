@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
 	getVendorsPending,
 	getVendorsSuccess,
@@ -16,11 +17,15 @@ export const getAllVendors = (token) => async (dispatch) => {
 		dispatch(getVendorsPending());
 		const res = await allVendors(token);
 		dispatch(getVendorsSuccess(res));
+		toast.success(`${res.message}`, {
+			position: toast.POSITION.TOP_RIGHT,
+		});
 		return res;
 	} catch (error) {
 		if (error) {
 			return dispatch(getVendorsFail(error.message));
 		}
+		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
 		return dispatch(getVendorsFail(error.Error));
 	}
 };
@@ -30,11 +35,15 @@ export const enableVendorAccount = (token, id) => async (dispatch) => {
 		dispatch(enableVendorPending());
 		const res = await enable(token, id);
 		dispatch(enableVendorSuccess(res));
+		toast.success(`${res.message}`, {
+			position: toast.POSITION.TOP_RIGHT,
+		});
 		return res;
 	} catch (error) {
 		if (error) {
 			return dispatch(enableVendorFail(error.message));
 		}
+		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
 		return dispatch(enableVendorFail(error.Error));
 	}
 };
