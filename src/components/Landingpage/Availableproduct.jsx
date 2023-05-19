@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiFillStar, AiFillHeart } from 'react-icons/ai';
 import Cookies from 'js-cookie';
