@@ -99,7 +99,7 @@ export const ProductPage = () => {
 					/>
 				</div>
 			</Carousel>
-			<div className="w-11/12 mx-auto h-2/6">
+			<div className="w-11/12 mx-auto h-2/6 ">
 				<h3 className="font-bold text-2xl">Todays Best Deals for You!</h3>
 				<div className="flex w-full space-x-2 md:space-x-4">
 					<Button

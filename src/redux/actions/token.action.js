@@ -16,3 +16,13 @@ export const handleToken = () => (dispatch) => {
 		dispatch(fetchFail());
 	}
 };
+
+export const handleUserToken = (usertoken) => (dispatch) => {
+	if (usertoken) {
+		const decodedToken = jwtDecode(usertoken);
+		dispatch(fetchToken(usertoken));
+		dispatch(decodeToken(decodedToken));
+	} else {
+		dispatch(fetchFail());
+	}
+};
