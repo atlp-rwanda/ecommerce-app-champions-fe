@@ -26,7 +26,7 @@ const reviewSlice = createSlice({
 			state.error = action.payload;
 			state.results = null;
 		},
-		getreviewPending: (state) => {
+		getReviewPending: (state) => {
 			state.loading = true;
 			state.error = null;
 			state.results = null;
@@ -40,18 +40,6 @@ const reviewSlice = createSlice({
 			state.loading = false;
 			state.error = action.payload;
 			state.results = null;
-		},
-		getRatePending: (state) => {
-			state.loading = true;
-			state.error = null;
-		},
-		getRateSuccess: (state) => {
-			state.loading = false;
-			state.error = null;
-		},
-		getRateFail: (state, action) => {
-			state.loading = false;
-			state.error = action.payload;
 		},
 		updateReviewPending: (state) => {
 			state.loading = true;
@@ -90,9 +78,6 @@ export const {
 	getReviewPending,
 	getReviewSuccess,
 	getReviewFail,
-	getRatePending,
-	getRateSuccess,
-	getRateFail,
 	updateReviewPending,
 	updateReviewSuccess,
 	updateReviewFail,

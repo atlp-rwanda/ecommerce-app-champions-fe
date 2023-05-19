@@ -7,9 +7,6 @@ import {
 	getReviewPending,
 	getReviewSuccess,
 	getReviewFail,
-	getRatePending,
-	getRateSuccess,
-	getRateFail,
 	updateReviewPending,
 	updateReviewSuccess,
 	updateReviewFail,
@@ -20,7 +17,6 @@ import {
 import {
 	productReview,
 	getReview,
-	getRate,
 	updateReview,
 	deleteReview,
 } from '../../api/reviewsApi';
@@ -53,19 +49,6 @@ export const getProductReview = (productId) => async (dispatch) => {
 			return dispatch(getReviewFail(error.message));
 		}
 		return dispatch(getReviewFail(error.Error));
-	}
-};
-
-export const getProductRate = (productId) => async (dispatch) => {
-	try {
-		dispatch(getRatePending());
-		const res = await getRate(productId);
-		dispatch(getRateSuccess(res));
-	} catch (error) {
-		if (error) {
-			return dispatch(getRateFail(error.message));
-		}
-		return dispatch(getRateFail(error.Error));
 	}
 };
 

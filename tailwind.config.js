@@ -13,12 +13,6 @@ export default {
 			body: ['Open Sans', 'sans-serif'],
 		},
 		fontWeight: { bold: '700', medium: '500', normal: '400' },
-		fontSize: {
-			iphoneSE: ['12px', '14px'],
-			middle: '15px',
-			samsung: ['12px', '14px'],
-		},
-
 		screens: {
 			sm: '640px',
 			samsung: '359px',

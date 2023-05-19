@@ -22,21 +22,7 @@ export const productReview = (token, productId, data) => {
 export const getReview = (productId) => {
 	return new Promise((resolve, reject) => {
 		axios
-			.get(`${url}/api/review/getProductReview/${productId}`)
-			.then((response) => resolve(response.data))
-			.catch((error) => {
-				if (error.response.data !== undefined) {
-					reject(error.response.data);
-				}
-				reject(error);
-			});
-	});
-};
-
-export const getRate = (productId) => {
-	return new Promise((resolve, reject) => {
-		axios
-			.get(`${url}/api/review/getProductRate/${productId}`)
+			.get(`${url}/api/review/getProductReviews/${productId}`)
 			.then((response) => resolve(response.data))
 			.catch((error) => {
 				if (error.response.data !== undefined) {
