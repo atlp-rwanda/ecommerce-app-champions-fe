@@ -12,6 +12,7 @@ import Truck from '../assets/truck.svg';
 import Return from '../assets/return.svg';
 import RecommendedProducts from '../components/product/RecommendedProducts';
 import Topnav from '../components/Landingpage/topnav';
+// import Footer from '../components/Landingpage/Footer';
 
 const SingleProductPage = () => {
 	const { productId } = useParams();
@@ -117,6 +118,7 @@ const SingleProductPage = () => {
 					<RecommendedProducts product={product?.item?.productName} />
 				</div>
 			</div>
+			{/* <Footer /> */}
 			<ToastContainer />
 		</div>
 	);
