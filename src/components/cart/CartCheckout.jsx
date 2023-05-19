@@ -10,7 +10,7 @@ const CartCheckout = ({
 	handlePayment,
 }) => {
 	return (
-		<div className="flex flex-col w-full mx-auto  space-y-4 bg-white shadow rounded-md h-80 p-5">
+		<div className="flex flex-col w-full mx-auto  space-y-4 bg-white shadow rounded-md h-72 p-5">
 			{cart.data.total > 0 && (
 				<div className="flex justify-between">
 					<span>Shipping</span>
