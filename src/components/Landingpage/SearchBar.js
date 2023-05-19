@@ -2,18 +2,18 @@ import { FiSearch } from 'react-icons/fi';
 
 const SearchBar = () => {
 	return (
-		<form className="w-full flex relative  p-0">
-			<input
-				placeholder="Search for product.... "
-				id="search"
-				name="search"
-				type="text"
-				autoComplete="true"
-				className="w-full md:w-3/4 px-2 py-2 my-2 rounded-full border  bg-gray-200  appearance-none mr-0"
-			/>
-			<button type="submit" className="absolute top-4 left-3/4 font-bold ">
-				<FiSearch size={24} />
-			</button>
+		<form className="w-full h-2/3">
+			<div className="flex items-center space-x-1 w-full md:w-3/4 bg-white h-full rounded-full px-2 ">
+				<input
+					placeholder="Search for product.... "
+					id="search"
+					name="search"
+					type="text"
+					autoComplete="true"
+					className="w-11/12 h-full border-none  rounded-full  appearance-none outline-none"
+				/>
+				<FiSearch size={24} className="cursor-pointer w-1/12 text-black" />
+			</div>
 		</form>
 	);
 };

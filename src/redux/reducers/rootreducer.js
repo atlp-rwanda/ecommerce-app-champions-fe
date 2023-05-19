@@ -10,6 +10,7 @@ import fetchTokenSlice from './fetchTokenSlice';
 import singleProfileSlice from './auth/userProfileSlice';
 import productsSlice from './product/productSlice';
 import createProductSlice from './product/createProductSlice';
+import chatSlice from './chat/chatSlice';
 import updateProductSlice from './product/updateProductSlice';
 import notifications from './auth/notificationSlice';
 import vendorProducts from './auth/vendorProductSlice';
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
 	resetPassword,
 	products: productsSlice,
 	createproduct: createProductSlice,
+	chats: chatSlice,
 	updateProduct: updateProductSlice,
 	notifications,
 	vendorProducts,
