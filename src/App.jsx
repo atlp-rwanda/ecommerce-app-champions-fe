@@ -32,16 +32,7 @@ function App() {
 				<Route path="/ForgotPassword" element={<ForgotPassword />} />
 				<Route path="/ResetPassword" element={<ResetPassword />} />
 				<Route path="/auth" element={<TwoFactorAuth />} />
-				<Route
-					path="/profile"
-					element={
-						<>
-							<Topnav />
-							<ProfilePage />
-							<Footer />
-						</>
-					}
-				/>
+				<Route path="/profile" element={<ProfilePage />} />
 				<Route path="/admin" element={<AdminDashboard />} />
 				<Route path="/vendors" element={<VendorDashboard />} />
 				<Route

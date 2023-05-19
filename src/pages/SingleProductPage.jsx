@@ -17,8 +17,8 @@ import Topnav from '../components/Landingpage/topnav';
 const SingleProductPage = () => {
 	const { productId } = useParams();
 	const { product } = useSelector((state) => state.products);
-	const [image, setImage] = useState(product?.item?.productImage[0]);
 	const { token } = useSelector((state) => state.token);
+	const [image, setImage] = useState(product?.item?.productImage[0]);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	useEffect(() => {
@@ -36,7 +36,7 @@ const SingleProductPage = () => {
 		dispatch(addItemToCart(prodId, token));
 	};
 	return (
-		<div className="flex flex-col space-y-5">
+		<div className="flex flex-col space-y-5 w-screen h-screen">
 			<Topnav />
 			<div className="w-screen h-screen mx-auto  flex flex-col space-y-5">
 				<div className="flex flex-col md:flex-row space-x-0 md:space-x-8 space-y-8 w-11/12 mx-auto">
