@@ -11,7 +11,7 @@ export const buyerSignup = (buyerData) => {
 			.post(`${url}/api/buyer/signup`, buyerData)
 			.then((response) => resolve(response.data))
 			.catch((error) => {
-				if (error.response.data !== undefined) {
+				if (error.response.data !== 'undefined') {
 					reject(error.response.data);
 				}
 				reject(error);

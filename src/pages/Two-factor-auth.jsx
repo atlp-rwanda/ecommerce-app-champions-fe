@@ -44,6 +44,8 @@ const TwoFactorAuth = () => {
 	}, [seconds, dispatch, navigate]);
 	// eslint-disable-next-line consistent-return
 	useEffect(() => {
+		localStorage.setItem('user', JSON.stringify(user));
+		console.log('i am a user', user);
 		if (user?.RoleId === 2) return navigate('/vendors');
 		if (user?.RoleId === 1) return navigate('/admin');
 	}, [user, navigate]);
@@ -51,7 +53,7 @@ const TwoFactorAuth = () => {
 	return (
 		<form data-testid="twofactorpage" onSubmit={handleSubmit}>
 			<div className=" shadow-[inset_0px_1px_0px_0px_rgba(0,0,0,0.05),inset_0px_2px_3px_0px_rgba(0,0,0,0.1)] text-center px-0 py-[8em]">
-				<div className="hidden w-2/5 md:flex items-center justify-center">
+				<div className="items-center justify-center hidden w-2/5 md:flex">
 					<img src={LoginIllustation} alt="" className="w-9/12 " />
 				</div>
 				<div className="absolute top-[40px] left-[50px] middle:hidden">
@@ -99,7 +101,7 @@ const TwoFactorAuth = () => {
 					<div className="relative top-[40px]">
 						<p>
 							<b>Didn't receive the Code?</b>{' '}
-							<b className="text-red cursor-pointer hover:text-white">
+							<b className="cursor-pointer text-red hover:text-white">
 								<Link to="/Login">try again</Link>
 							</b>
 						</p>

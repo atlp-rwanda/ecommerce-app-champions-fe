@@ -10,12 +10,19 @@ import fetchTokenSlice from './fetchTokenSlice';
 import singleProfileSlice from './auth/userProfileSlice';
 import productsSlice from './product/productSlice';
 import createProductSlice from './product/createProductSlice';
+import chatSlice from './chat/chatSlice';
 import updateProductSlice from './product/updateProductSlice';
 import notifications from './auth/notificationSlice';
 import vendorProducts from './auth/vendorProductSlice';
 import searchProductSlice from './product/searchProductSlice';
 import singleProductSlice from './product/singleProductSlice';
 import trackOrderSlice from './product/trackOrderSlice';
+import roleSlice from './role/roleSlice';
+import permissionSlice from './permission/permissionSlice';
+import buyerSlice from './buyer/buyerSlice';
+import vendorSlice from './vendor/vendorSlice';
+import paymentSlice from './pay/paymentSlice';
+import checkoutSlice from './pay/checkoutSlice';
 
 const rootReducer = combineReducers({
 	cart: cartSlice,
@@ -29,11 +36,18 @@ const rootReducer = combineReducers({
 	resetPassword,
 	products: productsSlice,
 	createproduct: createProductSlice,
+	chats: chatSlice,
 	updateProduct: updateProductSlice,
 	notifications,
 	vendorProducts,
 	searchProduct: searchProductSlice,
 	singleProduct: singleProductSlice,
+	role: roleSlice,
+	permission: permissionSlice,
+	buyer: buyerSlice,
+	vendor: vendorSlice,
+	payment: paymentSlice,
+	checkout: checkoutSlice,
 	orders: trackOrderSlice,
 });
 

@@ -6,11 +6,11 @@ import {
 
 import { getOrder } from '../../api/productApi';
 
-export const trackOrderState = () => async (dispatch) => {
+export const trackOrderState = (token) => async (dispatch) => {
 	try {
 		dispatch(getOrderPending());
 
-		const orders = await getOrder();
+		const orders = await getOrder(token);
 
 		dispatch(getOrderSuccess(orders));
 	} catch (error) {

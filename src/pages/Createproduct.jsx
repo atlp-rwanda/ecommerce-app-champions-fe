@@ -5,13 +5,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { RiCloseLine } from 'react-icons/ri';
+import Cookies from 'js-cookie';
 import { createProductField } from '../constants/formFields';
 import InputProduct from '../components/Auth/InputProduct';
 import Button from '../components/Button/Button';
 import { createnewProduct } from '../redux/actions/createproduct.actions';
 import { resetProduct } from '../redux/reducers/product/createProductSlice';
 import { getVendorProducts } from '../redux/actions/vendor.product';
-import Cookies from 'js-cookie';
 
 const fieldState = {};
 createProductField.forEach((field) => (fieldState[field.id] = ''));

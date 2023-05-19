@@ -2,7 +2,7 @@ import UserProfile from '../components/profile/UserProfile';
 
 const ProfilePage = () => {
 	return (
-		<div className="min-h-screen w-screen">
+		<div className="w-screen min-h-screen">
 			<UserProfile />
 		</div>
 	);

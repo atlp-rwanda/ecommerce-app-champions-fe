@@ -14,9 +14,13 @@ import CartPage from './pages/CartPage';
 import PageNotFound from './components/PageNotFound';
 import { UpdateProduct } from './pages/UpdateProduct';
 import CreateProduct from './pages/Createproduct';
+import SingleProductPage from './pages/SingleProductPage';
 import { ProductPage } from './pages/ProductPage';
 import SellerProductPage from './pages/SellerProductPage';
 import TrackOrder from './components/product/TrackOrder';
+import Topnav from './components/Landingpage/topnav';
+import Footer from './components/Landingpage/Footer';
+import PaymentSuccesspage from './components/payment/payment';
 
 function App() {
 	return (
@@ -32,13 +36,34 @@ function App() {
 				<Route path="/profile" element={<ProfilePage />} />
 				<Route path="/admin" element={<AdminDashboard />} />
 				<Route path="/vendors" element={<VendorDashboard />} />
-				<Route path="/cart" element={<CartPage />} />
 				<Route path="/order" element={<TrackOrder />} />
+				<Route
+					path="/cart"
+					element={
+						<>
+							<Topnav displaySearchBar />
+							<CartPage />
+							<Footer />
+						</>
+					}
+				/>
+				<Route
+					path="/paymentsuccess"
+					element={
+						<>
+							<Topnav />
+							<PaymentSuccesspage />
+							<Footer />
+						</>
+					}
+				/>
 				<Route path="/product" element={<ProductPage />} />
+
+				<Route path="/product/:productId" element={<SingleProductPage />} />
+
 				<Route path="*" element={<PageNotFound />} />
 				<Route path="/AddProduct" element={<CreateProduct />} />
 				<Route path="/vendors/:id" element={<UpdateProduct />} />
-				<Route path="*" element={<PageNotFound />} />
 				<Route
 					path="SellerProductPage/:productId"
 					element={<SellerProductPage />}

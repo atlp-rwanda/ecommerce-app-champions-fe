@@ -42,42 +42,42 @@ const UserProfile = () => {
 	if (!profile || loading === true) {
 		return (
 			<div>
-				<div className="w-screen md:w-full bg-lightYellow px-7 py-4 flex justify-between items-center">
-					<img src={Logo} className="w-32 md:w-40 cursor-pointer" alt="Logo" />
+				<div className="flex items-center justify-between w-screen py-4 md:w-full bg-lightYellow px-7">
+					<img src={Logo} className="w-32 cursor-pointer md:w-40" alt="Logo" />
 					<AiOutlineLogout
 						size={25}
-						className="text-primaryGreen cursor-pointer"
+						className="cursor-pointer text-primaryGreen"
 					/>
 				</div>
-				<div className="w-full h-full flex items-center justify-center mx-auto my-4">
-					<LoadingSpinner className="w-9 h-9 mr-2 text-gray-200 animate-spin fill-primaryGreen" />
+				<div className="flex items-center justify-center w-full h-full mx-auto my-4">
+					<LoadingSpinner className="mr-2 text-gray-200 w-9 h-9 animate-spin fill-primaryGreen" />
 				</div>
 			</div>
 		);
 	}
 	return (
-		<div className="w-screen flex flex-col">
-			<div className="w-screen md:w-full bg-lightYellow px-7 py-4 flex justify-between items-center">
-				<img src={Logo} className="w-32 md:w-40 cursor-pointer" alt="Logo" />
+		<div className="flex flex-col w-screen">
+			<div className="flex items-center justify-between w-screen py-4 md:w-full bg-lightYellow px-7">
+				<img src={Logo} className="w-32 cursor-pointer md:w-40" alt="Logo" />
 				<AiOutlineLogout
 					size={25}
-					className="text-primaryGreen cursor-pointer"
+					className="cursor-pointer text-primaryGreen"
 					onClick={Cookies.remove('token', {
 						path: '/',
 						domain: 'https://ecommerce-app-champions-fe.vercel.app',
 					})}
 				/>
 			</div>
-			<div className="flex flex-col space-y-4 md:space-y-0 w-full">
-				<div className="flex flex-col md:flex-row space-x-0  md:space-x-10 my-4 px-6 md:px-10 w-full">
-					<div className="w-full md:w-1/5 flex mx-auto md:mx-0  items-center justify-center">
+			<div className="flex flex-col w-full space-y-4 md:space-y-0">
+				<div className="flex flex-col w-full px-6 my-4 space-x-0 md:flex-row md:space-x-10 md:px-10">
+					<div className="flex items-center justify-center w-full mx-auto md:w-1/5 md:mx-0">
 						<div className="relative">
 							<img
 								src={profilePic}
 								alt=""
-								className="w-32 h-32 rounded-full object-cover border-4 border-lightYellow"
+								className="object-cover w-32 h-32 border-4 rounded-full border-lightYellow"
 							/>
-							<div className="w-9 bg-primaryGreen h-9 rounded-full absolute right-0 bottom-4 flex items-center justify-center cursor-pointer z-10">
+							<div className="absolute right-0 z-10 flex items-center justify-center rounded-full cursor-pointer w-9 bg-primaryGreen h-9 bottom-4">
 								<AiFillEdit className="text-white" size={18} />
 							</div>
 						</div>

@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	token: null,
+	name: null,
 	decodedToken: null,
 };
 
@@ -12,6 +13,9 @@ const fetchTokenSlice = createSlice({
 	reducers: {
 		fetchToken: (state, action) => {
 			state.token = action.payload;
+		},
+		fetchName: (state, action) => {
+			state.name = action.payload;
 		},
 		decodeToken: (state, action) => {
 			state.decodedToken = action.payload;
@@ -23,6 +27,7 @@ const fetchTokenSlice = createSlice({
 	},
 });
 
-export const { fetchToken, decodeToken, fetchFail } = fetchTokenSlice.actions;
+export const { fetchToken, decodeToken, fetchFail, fetchName } =
+	fetchTokenSlice.actions;
 
 export default fetchTokenSlice.reducer;

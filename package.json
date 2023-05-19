@@ -18,6 +18,7 @@
 	},
 	"dependencies": {
 		"@emotion/react": "^11.10.6",
+		"@esbuild/linux-x64": "^0.17.19",
 		"@hookform/resolvers": "^3.1.0",
 		"@jest/globals": "^29.5.0",
 		"@reduxjs/toolkit": "^1.9.5",

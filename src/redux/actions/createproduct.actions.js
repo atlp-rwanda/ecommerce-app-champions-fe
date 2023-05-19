@@ -8,10 +8,10 @@ import {
 
 import { createproduct } from '../../api/productApi';
 
-export const createnewProduct = (Data) => async (dispatch) => {
+export const createnewProduct = (Data, token) => async (dispatch) => {
 	try {
 		dispatch(createPending());
-		const res = await createproduct(Data);
+		const res = await createproduct(Data, token);
 		dispatch(createSuccess(res));
 		toast.success('Product created! check to make it available ', {
 			position: toast.POSITION.TOP_RIGHT,
