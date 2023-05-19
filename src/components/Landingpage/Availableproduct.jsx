@@ -101,50 +101,52 @@ const Homeproduct = () => {
 						</div>
 					) : (
 						product?.map((item) => (
-							<ProductCard key={item.productId} product={item} />
-							<div key={item.productId} className="card border">
-								<div className="bg-gray relative">
-									<div className="heartContainer absolute top-2 right-2 flex items-center justify-center w-8 h-8 ">
-										{showHeart && (
-											<AiFillHeart
-												className="heart"
-												size={24}
-												onClick={() => handleWish(item.productId)}
+							<>
+								<ProductCard key={item.productId} product={item} />
+								<div key={item.productId} className="card border">
+									<div className="bg-gray relative">
+										<div className="heartContainer absolute top-2 right-2 flex items-center justify-center w-8 h-8 ">
+											{showHeart && (
+												<AiFillHeart
+													className="heart"
+													size={24}
+													onClick={() => handleWish(item.productId)}
+												/>
+											)}
+										</div>
+										<Link to={`/product/${item.productId}`}>
+											<img
+												className="h-56 w-full object-cover"
+												src={item.productImage[0]}
+												alt={item.productName}
 											/>
-										)}
+										</Link>
 									</div>
-									<Link to={`/product/${item.productId}`}>
-										<img
-											className="h-56 w-full object-cover"
-											src={item.productImage[0]}
-											alt={item.productName}
-										/>
-									</Link>
-								</div>
-								<div>
-									<h1>{item.productName}</h1>
-									<p className="font-bold">Price: ${item.productPrice}</p>
-									<p>{item.productDescription.slice(0, 50)}...</p>
-									<div className="flex gap-1">
-										<AiFillStar className="text-[#225F33]" />
-										<AiFillStar className="text-[#225F33]" />
-										<AiFillStar className="text-[#225F33]" />
-										<AiFillStar className="text-[#225F33]" />
-										<AiFillStar className="text-[#000000]" />
+									<div>
+										<h1>{item.productName}</h1>
+										<p className="font-bold">Price: ${item.productPrice}</p>
+										<p>{item.productDescription.slice(0, 50)}...</p>
+										<div className="flex gap-1">
+											<AiFillStar className="text-[#225F33]" />
+											<AiFillStar className="text-[#225F33]" />
+											<AiFillStar className="text-[#225F33]" />
+											<AiFillStar className="text-[#225F33]" />
+											<AiFillStar className="text-[#000000]" />
+										</div>
+										<button
+											type="submit"
+											className="flex items-center justify-center p-1 rounded-2xl bg-gray text-black font-bold my-2 w-28"
+											onClick={(event) => handleClick(event, item.productId)}
+										>
+											{isLoading && clickedProductId === item.productId ? (
+												<LoadingSpinner className="w-6 h-6 mr-2 text-green" />
+											) : (
+												'Add to Cart'
+											)}
+										</button>
 									</div>
-									<button
-										type="submit"
-										className="flex items-center justify-center p-1 rounded-2xl bg-gray text-black font-bold my-2 w-28"
-										onClick={(event) => handleClick(event, item.productId)}
-									>
-										{isLoading && clickedProductId === item.productId ? (
-											<LoadingSpinner className="w-6 h-6 mr-2 text-green" />
-										) : (
-											'Add to Cart'
-										)}
-									</button>
 								</div>
-							</div>
+							</>
 						))
 					)}
 				</div>
