@@ -10,7 +10,6 @@ import Loginphoto from '../assets/login-illustration.svg';
 import GoogleButton from '../components/Button/GoogleButton';
 import { login } from '../redux/actions/auth.loginActions';
 import 'react-toastify/dist/ReactToastify.css';
-import Topnav from '../components/Landingpage/topnav';
 import Footer from '../components/Landingpage/Footer';
 
 const fieldState = {};
@@ -38,12 +37,11 @@ const LoginPage = () => {
 
 			if (user?.hashedOTP) return navigate('/auth');
 		}, 8000);
+		localStorage.setItem('user', JSON.stringify(user));
 	}, [user]);
 
 	return (
 		<div>
-			<Topnav displaySearchBar />
-
 			<div className="flex flex-row items-center w-screen h-screen space-x-0 md:space-x-0">
 				<div className="items-center justify-center hidden w-2/5 md:3/5 md:flex">
 					<img src={Loginphoto} alt="secureloginphoto" className="w-9/12" />
@@ -94,6 +92,7 @@ const LoginPage = () => {
 			</div>
 
 			<Footer />
+			<ToastContainer />
 		</div>
 	);
 };
