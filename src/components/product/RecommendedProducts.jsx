@@ -17,6 +17,9 @@ const RecommendedProducts = ({ product }) => {
 	}
 	return (
 		<div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 sm:gap-4 md:gap-3 my-4">
+			{products == null && (
+				<div className="font-medium text-lg">0 products</div>
+			)}
 			{products?.recommendedProducts?.map((prod) => (
 				<ProductCard key={prod.productId} product={prod} />
 			))}
