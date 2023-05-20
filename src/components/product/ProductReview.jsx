@@ -71,7 +71,7 @@ const ProductReview = ({ product }) => {
 						{review.content}
 						<div className="flex space-x-2">
 							<AiFillDelete
-								className="cursor-pointer text-red"
+								className="cursor-pointer text-lightRed"
 								onClick={(event) =>
 									handleDeleteReview(event, review.id, review.productId)
 								}

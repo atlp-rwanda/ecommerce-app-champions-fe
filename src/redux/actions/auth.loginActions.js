@@ -16,8 +16,10 @@ export const login = (userData) => async (dispatch) => {
 		const res = await Userlogin(userData);
 		if (res.token && !res.encodedOTP) {
 			Cookies.set('token', res.token, { expires: 7 });
+			Cookies.set('name', res.data.others.firstName, { expires: 7 });
 			dispatch(loginSuccess(res));
 		} else if (res.loginOTP) {
+			console.log(res);
 			Cookies.set('loginOTP', res.loginOTP);
 			dispatch(loginSuccess(res));
 		} else if (res.passwordExpired) {

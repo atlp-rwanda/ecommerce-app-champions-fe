@@ -12,12 +12,16 @@ import {
 	clearCartFail,
 	deleteProductPending,
 	deleteProductSuccess,
+	updateCartPending,
+	updateCartSuccess,
+	updateCartFail,
 } from '../reducers/cart/cartSlice';
 import {
 	userCart,
 	clearUseCart,
 	deleteCartItem,
 	addToCart,
+	updateCartItems,
 } from '../../api/cartapi';
 
 export const getCart = (token) => async (dispatch) => {
@@ -27,8 +31,11 @@ export const getCart = (token) => async (dispatch) => {
 		dispatch(getCartSuccess(res));
 	} catch (error) {
 		if (error) {
+			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
 			return dispatch(getCartFail(error.message));
 		}
+		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+
 		return dispatch(getCartFail(error.Error));
 	}
 };
@@ -47,6 +54,19 @@ export const addItemToCart = (id, token) => async (dispatch) => {
 		}
 		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
 		return dispatch(addToCartFail(error.Error));
+	}
+};
+
+export const updateCart = (productId, quantity, token) => async (dispatch) => {
+	try {
+		dispatch(updateCartPending());
+		const res = await updateCartItems(productId, quantity, token);
+		dispatch(updateCartSuccess(res));
+	} catch (error) {
+		if (error) {
+			return dispatch(updateCartFail(error.message));
+		}
+		return dispatch(updateCartFail(error.Error));
 	}
 };
 
