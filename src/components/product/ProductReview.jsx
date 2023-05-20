@@ -1,8 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ImQuotesLeft, ImPencil, ImCross } from 'react-icons/im';
+import { AiFillDelete } from 'react-icons/ai';
 import Cookies from 'js-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
+import { getProductRate } from '../../redux/actions/ratings.action';
+
 import {
 	deleteProductReview,
 	getProductReview,
@@ -10,10 +15,11 @@ import {
 import LoadingSpinner from '../LoadingSpinner';
 
 const ProductReview = ({ product }) => {
+	const [clickedReviewId, setClickedReviewId] = useState(null);
 	const { loading, results } = useSelector((state) => state.review);
 	const dispatch = useDispatch();
-	// const { token } = useSelector((state) => state.token);
 	const token = Cookies.get('token');
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(getProductReview(product));
@@ -25,39 +31,55 @@ const ProductReview = ({ product }) => {
 		);
 	}
 
-	const handleDeleteReview = (productId) => {
-		dispatch(deleteProductReview(productId, token));
-		// Implement your delete review logic here
+	const handleDeleteReview = async (event, reviewId, productId) => {
+		event.preventDefault();
+		setClickedReviewId(reviewId);
+		if (!token) {
+			toast.warn('you must login to add item to cart.', {
+				position: toast.POSITION.TOP_RIGHT,
+			});
+			setTimeout(() => {
+				navigate('/login');
+			}, 2000);
+		}
+		dispatch(deleteProductReview(reviewId, token))
+			.then(() => {
+				dispatch(getProductReview(product));
+				dispatch(getProductRate(productId));
+			})
+			.catch((error) => {
+				toast.error('Failed to delete review.', {
+					position: toast.POSITION.TOP_RIGHT,
+				});
+			});
 	};
 
-	const handleUpdateReview = (reviewId) => {
-		// Implement your update review logic here
-	};
+	const handleUpdateReview = (reviewId) => {};
 
 	return (
-		<div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 sm:gap-4 md:gap-3 my-4">
+		<div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 sm:gap-4 md:gap-3 my-4 ">
 			{results?.data?.map((review) => (
 				<div
-					className="flex flex-col space-y-1 md:space-y-2 h-42 border-1 justify-center items-center"
+					className=" flex flex-col space-y-1 md:space-y-2 h-42  justify-center items-center text-italic border border-lightYellow "
 					key={review.id}
 				>
 					<div className="flex text-xl font-bold justify-between items-center">
 						<ImQuotesLeft />
 					</div>
-					<p>
-						{review.content}{' '}
-						{/* <div className="flex space-x-2">
-							<ImPencil
-								className="cursor-pointer"
-								onClick={() => handleUpdateReview(review.id)}
-							/>
-							<ImCross
+					<p className="font-bold">{review.title}</p>
+					<p className="italic">
+						{review.content}
+						<div className="flex space-x-2">
+							<AiFillDelete
 								className="cursor-pointer text-red"
-								onClick={() => handleDeleteReview(review.id)}
+								onClick={(event) =>
+									handleDeleteReview(event, review.id, review.productId)
+								}
 							/>
-						</div> */}
+						</div>
 					</p>
-					<p className="text-lg font-medium"> {review.User.firstName}</p>
+					<p className="text-lg font-bold"> {review.User.firstName}</p>
+					<ToastContainer />
 				</div>
 			))}
 		</div>

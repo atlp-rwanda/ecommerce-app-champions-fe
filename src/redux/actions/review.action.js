@@ -26,7 +26,7 @@ export const addReview = (token, productId, data) => async (dispatch) => {
 		dispatch(addReviewPending());
 		const res = await productReview(token, productId, data);
 		dispatch(addReviewSuccess(res));
-		toast.success(`${res.message}`, {
+		toast.success(`Review added successfully!!!`, {
 			position: toast.POSITION.TOP_RIGHT,
 		});
 	} catch (error) {
@@ -53,10 +53,10 @@ export const getProductReview = (productId) => async (dispatch) => {
 };
 
 export const updateProductReview =
-	(token, productId, data) => async (dispatch) => {
+	(token, reviewId, data) => async (dispatch) => {
 		try {
 			dispatch(updateReviewPending());
-			const res = await updateReview(token, productId, data);
+			const res = await updateReview(token, reviewId, data);
 			dispatch(updateReviewSuccess(res));
 			toast.success(`${res.message}`, {
 				position: toast.POSITION.TOP_RIGHT,
@@ -71,14 +71,14 @@ export const updateProductReview =
 		}
 	};
 
-export const deleteProductReview = (productId, token) => async (dispatch) => {
+export const deleteProductReview = (reviewId, token) => async (dispatch) => {
 	try {
 		dispatch(deleteReviewPending());
 
-		const res = await deleteReview(productId, token);
+		const res = await deleteReview(reviewId, token);
 
 		dispatch(deleteReviewSuccess(res));
-		toast.success(`${res.message}`, {
+		toast.success(`Review deleted successfully!!!!`, {
 			position: toast.POSITION.TOP_RIGHT,
 		});
 	} catch (error) {

@@ -33,10 +33,10 @@ export const getReview = (productId) => {
 	});
 };
 
-export const updateReview = (token, productId, data) => {
+export const updateReview = (token, reviewId, data) => {
 	return new Promise((resolve, reject) => {
 		axios
-			.patch(`${url}/api/review/updateReview/${productId}`, data, {
+			.patch(`${url}/api/review/updateReview/${reviewId}`, data, {
 				headers: { token: `Bearer ${token}` },
 			})
 			.then((response) => resolve(response.data))
@@ -49,10 +49,10 @@ export const updateReview = (token, productId, data) => {
 	});
 };
 
-export const deleteReview = (token, productId) => {
+export const deleteReview = (reviewId, token) => {
 	return new Promise((resolve, reject) => {
 		axios
-			.delete(`${url}/api/review/deleteReview/${productId}`, {
+			.delete(`${url}/api/review/deleteReview/${reviewId}`, {
 				headers: { token: `Bearer ${token}` },
 			})
 			.then((response) => resolve(response.data))

@@ -23,7 +23,6 @@ const SingleProductPage = () => {
 
 	const { productId } = useParams();
 	const { product } = useSelector((state) => state.products);
-	// const { results } = useSelector((state) => state.review);
 	const { token } = useSelector((state) => state.token);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -46,8 +45,7 @@ const SingleProductPage = () => {
 	const handleReviewAdded = () => {
 		setShowAddReviewForm(false);
 		dispatch(getProductReview(productId));
-
-		// Additional logic or UI updates after review added
+		dispatch(getProductRate(productId));
 	};
 	const handleClick = (prodId) => {
 		if (!token) {
@@ -92,6 +90,9 @@ const SingleProductPage = () => {
 						Price: {product?.item?.productPrice} RWF
 						<span className="px-2 font-normal"> each</span>
 					</p>
+					<h1 className="text-md font-bold flex items-center text-yellow">
+						Ratings
+					</h1>
 					<div className="flex gap-1">
 						{[...Array(5)].map((_, index) => (
 							<span key={index}>
@@ -102,6 +103,9 @@ const SingleProductPage = () => {
 								)}
 							</span>
 						))}
+						<span className="text-black font-bold">
+							({rating?.reviews.length})
+						</span>
 					</div>
 					<div className="border border-gray w-full opacity-60" />
 					<div className="flex items-center justify-between w-full space-x-6">
@@ -148,27 +152,26 @@ const SingleProductPage = () => {
 				</div>
 			</div>
 			<div className="w-11/12 mx-auto my-4">
-				<h2 className="font-bold text-2xl">Similar Products</h2>
-				<RecommendedProducts product={product?.item?.productName} />
-			</div>
-			<div className="w-11/12 mx-auto my-4">
-				<h2 className="font-bold text-2xl">Reviews</h2>
+				<h2 className="font-bold text-2xl text-yellow ">Reviews</h2>
 				<ProductReview product={product?.item?.productId} />
 			</div>
 			{!showAddReviewForm && (
 				<Button
 					label="Add Review"
 					onClick={handleToggleAddReviewForm}
-					className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-2 w-28"
+					className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-2 mx-10 w-28"
 				/>
 			)}
-
 			{showAddReviewForm && !success && (
 				<AddReviewForm
 					productId={productId}
 					onReviewAdded={handleReviewAdded}
 				/>
 			)}
+			<div className="w-11/12 mx-auto my-4">
+				<h2 className="font-bold text-2xl">Similar Products</h2>
+				<RecommendedProducts product={product?.item?.productName} />
+			</div>
 
 			<ToastContainer />
 		</div>
