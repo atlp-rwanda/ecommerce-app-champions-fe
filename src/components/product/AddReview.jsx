@@ -82,6 +82,8 @@ const AddReviewForm = ({ productId, onReviewAdded }) => {
 						name="rating"
 						value={reviewData.rating}
 						onChange={handleChange}
+						min={0}
+						max={5}
 						className="w-[500px] border-gray-300 rounded-md shadow-sm focus:ring-primaryGreen focus:border-primaryGreen sm:text-sm"
 					/>
 				</div>

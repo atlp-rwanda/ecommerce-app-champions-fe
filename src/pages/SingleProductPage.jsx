@@ -21,7 +21,7 @@ import AddReviewForm from '../components/product/AddReview';
 
 const SingleProductPage = () => {
 	const [showAddReviewForm, setShowAddReviewForm] = useState(false);
-	const { success } = useSelector((state) => state.review);
+	const { success, error } = useSelector((state) => state.review);
 	const { rating } = useSelector((state) => state.rating);
 
 	const { productId } = useParams();
@@ -46,8 +46,17 @@ const SingleProductPage = () => {
 	const handleToggleAddReviewForm = () => {
 		setShowAddReviewForm(!showAddReviewForm);
 	};
+	if (error) {
+		dispatch(getProductReview(productId));
+	}
+
 	const handleReviewAdded = () => {
 		setShowAddReviewForm(false);
+		if (!token) {
+			setTimeout(() => {
+				navigate('/login');
+			}, 2000);
+		}
 		dispatch(getProductReview(productId));
 		dispatch(getProductRate(productId));
 	};

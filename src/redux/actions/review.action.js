@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 /* eslint-disable consistent-return */
 import { toast } from 'react-toastify';
 import {
@@ -30,6 +31,12 @@ export const addReview = (token, productId, data) => async (dispatch) => {
 			position: toast.POSITION.TOP_RIGHT,
 		});
 	} catch (error) {
+		if (error && !token) {
+			toast.warn(`Login first to add a review to a product`, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
+			return dispatch(addReviewFail(error));
+		}
 		if (error) {
 			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
 			return dispatch(addReviewFail(error.message));
@@ -82,11 +89,19 @@ export const deleteProductReview = (reviewId, token) => async (dispatch) => {
 			position: toast.POSITION.TOP_RIGHT,
 		});
 	} catch (error) {
+		if (error && !token) {
+			toast.warn(`Login first to delete A review`, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
+			return dispatch(deleteReviewFail(error));
+		}
 		if (error) {
-			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+			toast.error(`This Review is not yours!!!`, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(deleteReviewFail(error.message));
 		}
 		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
-		return dispatch(deleteReviewFail(error.Error));
+		return dispatch(addReviewFail(error.Error));
 	}
 };

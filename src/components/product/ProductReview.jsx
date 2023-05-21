@@ -5,7 +5,7 @@ import { ImQuotesLeft, ImPencil, ImCross } from 'react-icons/im';
 import { AiFillDelete } from 'react-icons/ai';
 import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getProductRate } from '../../redux/actions/ratings.action';
 
 import {
@@ -35,9 +35,6 @@ const ProductReview = ({ product }) => {
 		event.preventDefault();
 		setClickedReviewId(reviewId);
 		if (!token) {
-			toast.warn('you must login to add item to cart.', {
-				position: toast.POSITION.TOP_RIGHT,
-			});
 			setTimeout(() => {
 				navigate('/login');
 			}, 2000);
