@@ -53,6 +53,18 @@ const cartSlice = createSlice({
 			state.loading = false;
 			state.error = action.payload;
 		},
+		updateCartPending: (state) => {
+			state.loading = true;
+			state.error = null;
+		},
+		updateCartSuccess: (state) => {
+			state.loading = false;
+			state.error = null;
+		},
+		updateCartFail: (state, action) => {
+			state.loading = false;
+			state.error = action.payload;
+		},
 		deleteProductPending: (state) => {
 			state.loading = true;
 			state.error = null;
@@ -81,6 +93,9 @@ export const {
 	addToCartPending,
 	addToCartSuccess,
 	addToCartFail,
+	updateCartPending,
+	updateCartSuccess,
+	updateCartFail,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

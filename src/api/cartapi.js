@@ -55,6 +55,22 @@ export const clearUseCart = (token) => {
 	});
 };
 
+export const updateCartItems = (productId, quantity, token) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.put(`${url}/api/cart/updateCart/${productId}`, quantity, {
+				headers: { token: `Bearer ${token}` },
+			})
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+
 export const deleteCartItem = (productId, token) => {
 	return new Promise((resolve, reject) => {
 		axios

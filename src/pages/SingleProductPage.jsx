@@ -12,6 +12,7 @@ import Truck from '../assets/truck.svg';
 import Return from '../assets/return.svg';
 import RecommendedProducts from '../components/product/RecommendedProducts';
 import Topnav from '../components/Landingpage/topnav';
+// import Footer from '../components/Landingpage/Footer';
 
 const SingleProductPage = () => {
 	const { productId } = useParams();
@@ -41,7 +42,7 @@ const SingleProductPage = () => {
 				<div className="flex flex-col md:flex-row space-x-0 md:space-x-8 space-y-8 w-11/12 mx-auto">
 					<div className="w-full md:w-2/5 h-72  md:h-96 flex flex-col space-y-2 md:space-y-3">
 						<img
-							src={image}
+							src={image || product?.item?.productImage[0]}
 							alt=""
 							className="object-cover h-full w-full rounded-md"
 						/>
@@ -117,6 +118,7 @@ const SingleProductPage = () => {
 					<RecommendedProducts product={product?.item?.productName} />
 				</div>
 			</div>
+			{/* <Footer /> */}
 			<ToastContainer />
 		</div>
 	);

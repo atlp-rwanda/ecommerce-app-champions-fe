@@ -16,12 +16,12 @@ const trackOrderSlice = createSlice({
 		},
 		getOrderSuccess: (state, action) => {
 			state.loading = false;
-			state.products = action.payload;
+			state.orders = action.payload;
 			state.error = null;
 		},
 		getOrderFail: (state, action) => {
 			state.loading = false;
-			state.products = null;
+			state.orders = null;
 			state.error = action.payload;
 		},
 	},

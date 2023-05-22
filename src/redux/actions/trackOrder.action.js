@@ -10,9 +10,9 @@ export const trackOrderState = (token) => async (dispatch) => {
 	try {
 		dispatch(getOrderPending());
 
-		const orders = await getOrder(token);
+		const response = await getOrder(token);
 
-		dispatch(getOrderSuccess(orders));
+		dispatch(getOrderSuccess(response));
 	} catch (error) {
 		dispatch(getOrderFail(error.message));
 	}
