@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 import React, { useState, useEffect } from 'react';
