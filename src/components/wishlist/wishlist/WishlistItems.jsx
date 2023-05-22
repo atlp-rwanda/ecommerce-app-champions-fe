@@ -50,7 +50,7 @@ const WishlistItem = ({ item, onRemoveFromWishlist }) => {
 				<Button
 					variant="contained"
 					type="button"
-					color="secondary"
+					className={classes.removeButton}
 					onClick={() => handleRemoveFromCart(item.productId)}
 				>
 					Remove

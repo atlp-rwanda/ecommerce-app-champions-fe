@@ -71,7 +71,7 @@ function Products({ setIsOpen }) {
 			{loading ? (
 				<div>Loading ..</div>
 			) : (
-				<div className="sales dahsboard m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+				<div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
 					<Header title="All Products" />
 					<div className="overflow-x-auto">
 						{items && (
@@ -82,6 +82,9 @@ function Products({ setIsOpen }) {
 								onEmptySearch={handleEmptySearch}
 							/>
 						)}
+						<button className="add rounded-[50px] px-[1.5em] py-[0.5em] bg-primaryGreen w-[200px] text-[#92E3A9] font-bold p-[20px],inset_0px_2px_1px_0px_rgba(255,255,255,0.75)] hover:bg-emerald-500  samsung:relative samsung:left-[-15px]">
+							Add Product
+						</button>
 						<GridComponent allowPaging allowSorting id="gridcomp">
 							<table className="w-full">
 								<tbody>
@@ -90,7 +93,6 @@ function Products({ setIsOpen }) {
 										<td>Product Id</td>
 										<td>Quantity</td>
 										<td>Price</td>
-										<td>Add</td>
 										<td>Edit</td>
 										<td>Delete</td>
 									</tr>
@@ -101,14 +103,6 @@ function Products({ setIsOpen }) {
 												<td>{item.productId}</td>
 												<td>{item.quantity}</td>
 												<td>{item.productPrice}</td>
-												<td>
-													<GrAddCircle
-														className="addi hover:text-whitetext-blue-600 mr-2 cursor-pointer size={24}"
-														onClick={() =>
-															navigate(`/vendors/${item.productId}`)
-														}
-													/>
-												</td>
 												<td>
 													<MdEdit
 														className="text-blue-500 cursor-pointer"
@@ -144,14 +138,6 @@ function Products({ setIsOpen }) {
 												<td>{item.productId}</td>
 												<td>{item.quantity}</td>
 												<td>{item.productPrice}</td>
-												<td>
-													<GrAddCircle
-														className="addi hover:text-whitetext-blue-600 mr-2 cursor-pointer size={24}"
-														onClick={() =>
-															navigate(`/vendors/${item.productId}`)
-														}
-													/>
-												</td>
 												<td>
 													<BiEdit
 														className="edit text-blue-600 mr-2 cursor-pointer size={24}"

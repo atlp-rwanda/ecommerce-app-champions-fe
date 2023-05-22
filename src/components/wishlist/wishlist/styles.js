@@ -15,4 +15,12 @@ export default makeStyles(() => ({
 		display: 'flex',
 		alignItems: 'center',
 	},
+	removeButton: {
+		backgroundColor: '#225F33',
+		color: 'white',
+		'&:hover': {
+			backgroundColor: 'black', // Set the background color on hover
+			color: 'white', // Set the text color on hover
+		},
+	},
 }));

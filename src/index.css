@@ -193,8 +193,8 @@
 }
 .add {
 	position: absolute;
-	bottom: 80px;
-	right: 550px;
+	top: 340px;
+	right: 350px;
 }
 .align {
 	display: flex;

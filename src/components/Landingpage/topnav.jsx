@@ -11,7 +11,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { BiChevronDown } from 'react-icons/bi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Logo from '../../assets/Logo.svg';
 import { handleUserToken } from '../../redux/actions/token.action';
@@ -25,6 +25,7 @@ const Topnav = ({ displaySearchBar, className }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [loggedinuser, setLoggedinuser] = useState('');
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const navigate = useNavigate();
 
 	const handleDropdown = () => {
 		setIsDropdownOpen(!isDropdownOpen);
@@ -37,6 +38,13 @@ const Topnav = ({ displaySearchBar, className }) => {
 	const dispatch = useDispatch();
 	const { decodedToken } = useSelector((state) => state.token || {});
 	const { profile } = useSelector((state) => state.userProfile || {});
+
+	const handeLogOut = () => {
+		Cookies.remove('token');
+		navigate('/', { replace: true });
+		window.location.reload();
+	};
+
 	useEffect(() => {
 		dispatch(handleUserToken(token));
 	}, [dispatch, token]);
@@ -141,9 +149,7 @@ const Topnav = ({ displaySearchBar, className }) => {
 											<AiOutlineLogout
 												size={25}
 												className="text-primaryGreen cursor-pointer"
-												onClick={() => {
-													Cookies.remove('token', { path: '/' });
-												}}
+												onClick={handeLogOut}
 											/>
 											Logout
 										</h1>

@@ -49,7 +49,7 @@ const Wishlist = ({ onRemoveFromWishlist }) => {
 		</Typography>
 	);
 
-	if (!wishlistItems) return 'Loading';
+	if (!wishlistItems) return <Loader />;
 
 	const renderWishlist = () => (
 		<>
@@ -103,7 +103,7 @@ const Wishlist = ({ onRemoveFromWishlist }) => {
 		<Container>
 			<div className={classes.toolbar} />
 			<Typography className={classes.title} variant="h3" gutterBottom>
-				Your Wishlist
+				My Wishlist
 			</Typography>
 			{!wishlistItems.wishlist.length
 				? renderEmptyWishlist()

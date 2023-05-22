@@ -7,10 +7,14 @@ import { AiFillStar } from 'react-icons/ai';
 import LoadingSpinner from '../LoadingSpinner';
 import { handleToken } from '../../redux/actions/token.action';
 import { addItemToCart } from '../../redux/actions/cart.action';
-
+import {
+	addItemToWishList,
+	getAllWishlist,
+} from '../../redux/actions/wishList.action';
 const ProductCard = ({ product }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [clickedProductId, setClickedProductId] = useState(null);
+	const [showHeart, setShowHeart] = useState(false);
 	const { token } = useSelector((state) => state.token);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -31,11 +35,25 @@ const ProductCard = ({ product }) => {
 		}
 		dispatch(addItemToCart(productId, token));
 	};
-
+	useEffect(() => {
+		if (token) {
+			setShowHeart(true);
+		}
+	}, [token]);
+	const handleWish = (id) => {
+		dispatch(addItemToWishList(id, token)).then(() => {
+			dispatch(getAllWishlist(token));
+		});
+	};
 	return (
 		<div className="card border-2 border-lightYellow rounded-md relative">
 			<div className="absolute top-1 right-1 flex items-center justify-center w-8 h-8 rounded-full bg-white">
-				<FiHeart className="text-lightRed" />
+				{showHeart && (
+					<FiHeart
+						className="text-lightRed"
+						onClick={() => handleWish(product.productId)}
+					/>
+				)}
 			</div>
 			<Link to={`/product/${product.productId}`}>
 				<img
@@ -73,5 +91,4 @@ const ProductCard = ({ product }) => {
 		</div>
 	);
 };
-
 export default ProductCard;

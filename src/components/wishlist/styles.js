@@ -10,6 +10,7 @@ export default makeStyles((theme) => ({
 		justifyContent: 'center',
 		fontWeight: '50%',
 		marginBottom: '5%',
+		color: '#225F33',
 	},
 	emptyButton: {
 		minWidth: '150px',
@@ -20,10 +21,21 @@ export default makeStyles((theme) => ({
 			marginRight: '20px',
 		},
 		marginBottom: '5%',
+		backgroundColor: 'white',
+		color: 'black',
+		'&:hover': {
+			backgroundColor: 'black', // Set the background color on hover
+			color: 'white', // Set the text color on hover
+		},
 	},
 	checkoutButton: {
 		minWidth: '150px',
 		marginBottom: '5%',
+		backgroundColor: '#225F33',
+		'&:hover': {
+			backgroundColor: 'black', // Set the background color on hover
+			color: 'white', // Set the text color on hover
+		},
 	},
 	link: {
 		textDecoration: 'none',
