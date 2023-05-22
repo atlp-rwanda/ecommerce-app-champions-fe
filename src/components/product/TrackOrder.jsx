@@ -46,6 +46,7 @@ const TrackOrder = () => {
 							{orders?.data?.getOrders?.map((order, index) => (
 								<li
 									className="flex justify-between w-2/3 mt-10 ml-5"
+									// eslint-disable-next-line react/no-array-index-key
 									key={index}
 								>
 									<div className="w-16 ml-2">{order.orderTotal}</div>
