@@ -103,7 +103,6 @@ const Wishlist = ({ onRemoveFromWishlist }) => {
 	return (
 		<div>
 			<Topnav />
-
 			<Container>
 				<div className={classes.toolbar} />
 				<Typography className={classes.title} variant="h3" gutterBottom>
