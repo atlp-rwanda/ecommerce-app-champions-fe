@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { getAllWishlist } from '../../redux/actions/wishList.action';
+import Topnav from '../Landingpage/topnav';
 import { handleToken } from '../../redux/actions/token.action';
 import WishlistItem from './wishlist/WishlistItems';
 import Loader from '../vendorDashboard/Loader';
@@ -100,15 +101,19 @@ const Wishlist = ({ onRemoveFromWishlist }) => {
 	);
 
 	return (
-		<Container>
-			<div className={classes.toolbar} />
-			<Typography className={classes.title} variant="h3" gutterBottom>
-				My Wishlist
-			</Typography>
-			{!wishlistItems.wishlist.length
-				? renderEmptyWishlist()
-				: renderWishlist()}
-		</Container>
+		<div>
+			<Topnav />
+
+			<Container>
+				<div className={classes.toolbar} />
+				<Typography className={classes.title} variant="h3" gutterBottom>
+					My Wishlist
+				</Typography>
+				{!wishlistItems.wishlist.length
+					? renderEmptyWishlist()
+					: renderWishlist()}
+			</Container>
+		</div>
 	);
 };
 
