@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { getSingleProduct } from '../redux/actions/product.action';
 import { addItemToCart } from '../redux/actions/cart.action';
 import Button from '../components/Button/Button';
@@ -12,21 +13,56 @@ import Truck from '../assets/truck.svg';
 import Return from '../assets/return.svg';
 import RecommendedProducts from '../components/product/RecommendedProducts';
 import Topnav from '../components/Landingpage/topnav';
+import { getProductReview } from '../redux/actions/review.action';
+import { getProductRate } from '../redux/actions/ratings.action';
+import ProductReview from '../components/product/ProductReview';
+import AddReviewForm from '../components/product/AddReview';
 // import Footer from '../components/Landingpage/Footer';
 
 const SingleProductPage = () => {
+	const [showAddReviewForm, setShowAddReviewForm] = useState(false);
+	const { success, error } = useSelector((state) => state.review);
+	const { rating } = useSelector((state) => state.rating);
+
 	const { productId } = useParams();
 	const { product } = useSelector((state) => state.products);
 	const { token } = useSelector((state) => state.token);
 	const [image, setImage] = useState(product?.item?.productImage[0]);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
 	useEffect(() => {
 		dispatch(getSingleProduct(productId));
 	}, [dispatch, productId]);
+
+	useEffect(() => {
+		dispatch(getProductReview(productId));
+	}, [dispatch, productId]);
+
+	useEffect(() => {
+		dispatch(getProductRate(productId));
+	}, [dispatch, productId]);
+
+	const handleToggleAddReviewForm = () => {
+		setShowAddReviewForm(!showAddReviewForm);
+	};
+	if (error) {
+		dispatch(getProductReview(productId));
+	}
+
+	const handleReviewAdded = () => {
+		setShowAddReviewForm(false);
+		if (!token) {
+			setTimeout(() => {
+				navigate('/login');
+			}, 2000);
+		}
+		dispatch(getProductReview(productId));
+		dispatch(getProductRate(productId));
+	};
 	const handleClick = (prodId) => {
 		if (!token) {
-			toast.warn('you must login to add item to cart.', {
+			toast.warn('You must login to add items to the cart.', {
 				position: toast.POSITION.TOP_RIGHT,
 			});
 			setTimeout(() => {
@@ -35,6 +71,7 @@ const SingleProductPage = () => {
 		}
 		dispatch(addItemToCart(prodId, token));
 	};
+
 	return (
 		<div className="flex flex-col space-y-5 w-screen h-screen">
 			<Topnav />
@@ -69,6 +106,24 @@ const SingleProductPage = () => {
 							Price: {product?.item?.productPrice} RWF
 							<span className="px-2 font-normal"> each</span>
 						</p>
+						<h1 className="text-md font-bold flex items-center text-yellow">
+							Ratings
+						</h1>
+						<div className="flex gap-1">
+							{[...Array(5)].map((_, index) => (
+								<span key={index}>
+									{index < rating?.averageRating ? (
+										<AiFillStar className="text-[#225F33]" />
+									) : (
+										<AiOutlineStar className="text-[#000000]" />
+									)}
+								</span>
+							))}
+							<span className="text-black font-bold">
+								({rating?.reviews.length})
+							</span>
+						</div>
+
 						<div className="border border-gray w-full opacity-60" />
 						<div className="flex items-center justify-between w-full space-x-6">
 							<div className="text-black font-normal">
@@ -113,6 +168,23 @@ const SingleProductPage = () => {
 						</div>
 					</div>
 				</div>
+				<div className="w-11/12 mx-auto my-4">
+					<h2 className="font-bold text-2xl text-yellow ">Reviews</h2>
+					<ProductReview product={product?.item?.productId} />
+				</div>
+				{!showAddReviewForm && (
+					<Button
+						label="Add Review"
+						onClick={handleToggleAddReviewForm}
+						className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-2 mx-10 w-28"
+					/>
+				)}
+				{showAddReviewForm && !success && (
+					<AddReviewForm
+						productId={productId}
+						onReviewAdded={handleReviewAdded}
+					/>
+				)}
 				<div className="w-11/12 mx-auto">
 					<h2 className="font-bold text-2xl">Similar Products</h2>
 					<RecommendedProducts product={product?.item?.productName} />

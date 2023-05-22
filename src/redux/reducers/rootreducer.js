@@ -16,6 +16,8 @@ import notifications from './auth/notificationSlice';
 import vendorProducts from './auth/vendorProductSlice';
 import searchProductSlice from './product/searchProductSlice';
 import singleProductSlice from './product/singleProductSlice';
+import reviewSlice from './review/reviewSlice';
+import ratingsSlice from './review/ratingsSlice';
 import roleSlice from './role/roleSlice';
 import permissionSlice from './permission/permissionSlice';
 import buyerSlice from './buyer/buyerSlice';
@@ -41,6 +43,8 @@ const rootReducer = combineReducers({
 	vendorProducts,
 	searchProduct: searchProductSlice,
 	singleProduct: singleProductSlice,
+	review: reviewSlice,
+	rating: ratingsSlice,
 	role: roleSlice,
 	permission: permissionSlice,
 	buyer: buyerSlice,
