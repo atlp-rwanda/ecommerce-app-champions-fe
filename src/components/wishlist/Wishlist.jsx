@@ -13,7 +13,7 @@ import WishlistItem from './wishlist/WishlistItems';
 import Loader from '../vendorDashboard/Loader';
 import useStyles from './styles';
 
-const Wishlist = ({ onRemoveFromWishlist }) => {
+const Wishlist = () => {
 	const navigate = useNavigate();
 	const classes = useStyles();
 	const { token } = useSelector((state) => state.token);
@@ -62,10 +62,7 @@ const Wishlist = ({ onRemoveFromWishlist }) => {
 					<Grid container spacing={3}>
 						{wishlistItems.wishlist.map((items) => (
 							<Grid item xs={12} sm={4} key={items.productId}>
-								<WishlistItem
-									item={items}
-									ononRemoveFromWishlist={onRemoveFromWishlist}
-								/>
+								<WishlistItem item={items} />
 							</Grid>
 						))}
 					</Grid>

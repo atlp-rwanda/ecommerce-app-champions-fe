@@ -24,8 +24,8 @@ export default makeStyles((theme) => ({
 		backgroundColor: 'white',
 		color: 'black',
 		'&:hover': {
-			backgroundColor: 'black', // Set the background color on hover
-			color: 'white', // Set the text color on hover
+			backgroundColor: 'black',
+			color: 'white',
 		},
 	},
 	checkoutButton: {
@@ -33,12 +33,14 @@ export default makeStyles((theme) => ({
 		marginBottom: '5%',
 		backgroundColor: '#225F33',
 		'&:hover': {
-			backgroundColor: 'black', // Set the background color on hover
-			color: 'white', // Set the text color on hover
+			backgroundColor: 'black',
+			color: 'white',
 		},
 	},
 	link: {
 		textDecoration: 'none',
+		color: '#5AFF15',
+		fontWeight: '100%',
 	},
 	cardDetails: {
 		display: 'flex',

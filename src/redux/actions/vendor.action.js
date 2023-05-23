@@ -17,7 +17,7 @@ export const getAllVendors = (token) => async (dispatch) => {
 		dispatch(getVendorsPending());
 		const res = await allVendors(token);
 		dispatch(getVendorsSuccess(res));
-		toast.success(`${res.message}`, {
+		toast.success('All Available Accounts Retrieved', {
 			position: toast.POSITION.TOP_RIGHT,
 		});
 		return res;
@@ -35,7 +35,7 @@ export const enableVendorAccount = (token, id) => async (dispatch) => {
 		dispatch(enableVendorPending());
 		const res = await enable(token, id);
 		dispatch(enableVendorSuccess(res));
-		toast.success(`${res.message}`, {
+		toast.success('Account Enabled', {
 			position: toast.POSITION.TOP_RIGHT,
 		});
 		return res;
@@ -53,6 +53,9 @@ export const disableVendorAccount = (token, id) => async (dispatch) => {
 		dispatch(disableVendorPending());
 		const res = await disable(token, id);
 		dispatch(disableVendorSuccess(res));
+		toast.success('Account Disabled', {
+			position: toast.POSITION.TOP_RIGHT,
+		});
 		return res;
 	} catch (error) {
 		if (error) {

@@ -1,6 +1,10 @@
 /* eslint-disable consistent-return */
 import { toast } from 'react-toastify';
-import { addToWishList, getWishLIst } from '../../api/wishlistApi';
+import {
+	addToWishList,
+	getWishLIst,
+	removeFromWishList,
+} from '../../api/wishlistApi';
 import {
 	addToWishListFail,
 	addToWishListPending,
@@ -8,6 +12,9 @@ import {
 	getWishListFail,
 	getWishListSuccess,
 	getWishLIstPending,
+	deleteWishlistPending,
+	deleteWishlistSuccess,
+	deleteWishlistFail,
 } from '../reducers/WishList/wishlistSlice';
 
 export const addItemToWishList = (id, token) => async (dispatch) => {
@@ -25,6 +32,24 @@ export const addItemToWishList = (id, token) => async (dispatch) => {
 		}
 		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
 		return dispatch(addToWishListFail(error.Error));
+	}
+};
+
+export const removeItemFromWishlist = (id, token) => async (dispatch) => {
+	try {
+		dispatch(deleteWishlistPending());
+		const res = await removeFromWishList(id, token);
+		dispatch(deleteWishlistSuccess(res));
+		toast.success('Product removed from wishlist', {
+			position: toast.POSITION.TOP_RIGHT,
+		});
+	} catch (error) {
+		if (error) {
+			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+			return dispatch(deleteWishlistFail(error.message));
+		}
+		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+		return dispatch(deleteWishlistFail(error.Error));
 	}
 };
 

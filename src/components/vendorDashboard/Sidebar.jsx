@@ -13,7 +13,6 @@ import {
 	AiOutlineUsergroupDelete,
 } from 'react-icons/ai';
 import { IoMdContacts } from 'react-icons/io';
-import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { useStateContext } from '../../contexts/ContextProvider';
 
 const Sidebar = ({
@@ -70,17 +69,13 @@ const Sidebar = ({
 							<SiShopware />
 							<span>Shopmart</span>
 						</Link>
-						<TooltipComponent content="Menu" position="BottomCenter">
-							<button
-								type="button"
-								onClick={() =>
-									setActiveMenu((prevActiveMenu) => !prevActiveMenu)
-								}
-								className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block z-index-10000"
-							>
-								<MdOutlineCancel />
-							</button>
-						</TooltipComponent>
+						<button
+							type="button"
+							onClick={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)}
+							className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block z-index-10000"
+						>
+							<MdOutlineCancel />
+						</button>
 					</div>
 					<div>
 						<p className="text-gray-400 m-2 mt-3 uppercase font-bold">
@@ -103,10 +98,6 @@ const Sidebar = ({
 							>
 								<AiOutlineShoppingCart />
 								<span className="capitalize">Sales</span>
-							</div>
-							<div className="hover:rounded-lg hover:bg-white text-md p-2 flex flex-row items-center space-x-4 cursor-pointer">
-								<IoMdContacts />
-								<span className="capitalize">Employees</span>
 							</div>
 							<div
 								className="hover:bg-white hover:rounded-lg text-md p-2 flex flex-row items-center space-x-4 cursor-pointer"

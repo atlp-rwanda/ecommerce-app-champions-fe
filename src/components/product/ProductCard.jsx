@@ -50,7 +50,7 @@ const ProductCard = ({ product }) => {
 			<div className="absolute top-1 right-1 flex items-center justify-center w-8 h-8 rounded-full bg-white">
 				{showHeart && (
 					<FiHeart
-						className="text-lightRed"
+						className="text-lightRed cursor-pointer"
 						onClick={() => handleWish(product.productId)}
 					/>
 				)}

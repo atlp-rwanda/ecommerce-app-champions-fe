@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { RiCloseLine } from 'react-icons/ri';
+import { MdOutlineCancel } from 'react-icons/md';
 import Cookies from 'js-cookie';
 import { createProductField } from '../constants/formFields';
 import InputProduct from '../components/Auth/InputProduct';
@@ -12,6 +13,7 @@ import Button from '../components/Button/Button';
 import { createnewProduct } from '../redux/actions/createproduct.actions';
 import { resetProduct } from '../redux/reducers/product/createProductSlice';
 import { getVendorProducts } from '../redux/actions/vendor.product';
+import NotButton from '../components/vendorDashboard/notButton';
 
 const fieldState = {};
 createProductField.forEach((field) => (fieldState[field.id] = ''));
@@ -81,15 +83,20 @@ const CreateProduct = ({ setIsOpen, setShowAddProduct }) => {
 		};
 	}, [product, imageFiles, setIsOpen, dispatch]);
 	return (
-		<div className="dashboard relative w-full sm:w-3/4  bg-white  flex flex-col overflow-auto   items-center p-10 my-20 ">
-			<button
-				className="absolute top-0 right-0 p-2  text-red font-bold"
-				onClick={handleCreateProductClose}
-			>
-				<RiCloseLine />
-			</button>
+		<div className="bg-[#EEF0F2] relative createProduct w-[1100px] sm:w-3/4  bg-white  flex flex-col overflow-auto   items-center p-10 my-20 ">
+			<div className="absolute right-[80px] top-[10px] ">
+				<NotButton
+					icon={<MdOutlineCancel />}
+					color="green"
+					bgHoverColor="green"
+					size="2xl"
+					borderRadius="50%"
+					className="cancel"
+					onClick={handleCreateProductClose}
+				/>
+			</div>
 			<div className="absolute left-[45px] top-[10px]">
-				<h3 className="text-left font-extrabold text-2xl font-bold text-yellow my-2">
+				<h3 className="text-left font-extrabold text-2xl font-bold text-[#4B7F52] my-2">
 					Create a new product
 				</h3>
 			</div>
@@ -98,7 +105,7 @@ const CreateProduct = ({ setIsOpen, setShowAddProduct }) => {
 				className=" w-full sm:w-80%  bg-E5EAF9 my-5"
 				onSubmit={handleCreate}
 			>
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 content-center ">
+				<div className="grid grid-cols-1 input sm:grid-cols-2 md:grid-cols-3  gap-4 content-center ">
 					{createProductField.map((field) => (
 						<InputProduct
 							key={field.id}
@@ -113,7 +120,7 @@ const CreateProduct = ({ setIsOpen, setShowAddProduct }) => {
 							autoComplete={field.autoComplete}
 							handleChange={handleChange}
 							value={createState[field.id]}
-							className="appearance-none py-2 px-2 my-2 rounded-md w-12/12"
+							className="appearance-none input py-2 px-2 my-2 rounded-md w-12/12"
 						/>
 					))}
 					<div className="flex flex-col">
@@ -155,12 +162,12 @@ const CreateProduct = ({ setIsOpen, setShowAddProduct }) => {
 						type="submit"
 						loading={loading}
 						label="Add product"
-						className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-2 w-28"
+						className="flex items-center justify-center p-1 rounded-[50px] bg-primaryGreen font-bold my-2 w-28 px-[1.5em] py-[0.5em] w-[150px] text-[#92E3A9] font-bold p-[20px],inset_0px_2px_1px_0px_rgba(255,255,255,0.75)] hover:bg-emerald-500"
 					/>
 					<Button
 						type="button"
 						label="Cancel"
-						className="flex items-center justify-center p-1 rounded-2xl bg-lightRed text-white font-bold my-2 w-28"
+						className="flex items-center justify-center p-1 rounded-[50px] bg-[#c14953] font-bold my-2 w-28 px-[1.5em] py-[0.5em] w-[150px] text-[#D6CBC1] font-bold p-[20px],inset_0px_2px_1px_0px_rgba(255,255,255,0.75)] hover:bg-[#E3170A]"
 						onClick={handleCreateProductClose}
 					/>
 				</div>

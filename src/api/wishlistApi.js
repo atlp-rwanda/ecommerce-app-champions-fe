@@ -25,6 +25,21 @@ export const addToWishList = (id, token) => {
 			});
 	});
 };
+export const removeFromWishList = (id, token) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.delete(`${url}/api/product/remove-from-wishlist/${id}`, {
+				headers: { token: `Bearer ${token}` },
+			})
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
 
 export const getWishLIst = (token) => {
 	return new Promise((resolve, reject) => {

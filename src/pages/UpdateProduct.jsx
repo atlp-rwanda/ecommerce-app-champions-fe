@@ -5,14 +5,16 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { MdOutlineCancel } from 'react-icons/md';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { RiCloseLine } from 'react-icons/ri';
 import ProductInput from '../components/product/ProductInput';
 import Button from '../components/Button/Button';
-import { fetchProducts } from '../redux/actions/product.action';
+import { getVendorProducts } from '../redux/actions/vendor.product';
 import { updateExistingProduct } from '../redux/actions/updateProduct.action';
+import NotButton from '../components/vendorDashboard/notButton';
 
 const initialState = {
 	productOwner: '',
@@ -30,7 +32,8 @@ export const UpdateProduct = () => {
 
 	const { id } = useParams();
 	const dispatch = useDispatch();
-	const { items } = useSelector((state) => state.products.products);
+	// const { items } = useSelector((state) => state.products.products);
+	const { vendorProducts } = useSelector((state) => state.vendorProducts);
 	const [formData, setFormData] = useState(initialState);
 	const [imageFiles, setImageFiles] = useState([]);
 	const [selectedImages, setSelectedImages] = useState([]);
@@ -38,10 +41,10 @@ export const UpdateProduct = () => {
 	const token = Cookies.get('token');
 
 	useEffect(() => {
-		dispatch(fetchProducts(token));
+		dispatch(getVendorProducts(token));
 	}, [dispatch, token]);
-	const singleProduct = items
-		? items.find((product) => product.productId == id)
+	const singleProduct = vendorProducts
+		? vendorProducts.find((product) => product.productId == id)
 		: null;
 	useEffect(() => {
 		if (singleProduct) {
@@ -119,21 +122,26 @@ export const UpdateProduct = () => {
 	}, [navigate, success]);
 
 	return (
-		<div className="dashboard relative flex flex-col m-5 md:m-20  p-10  bg-brightGray items-center justify-center">
-			<button
-				className="absolute top-0 right-0 p-2 text-red"
-				onClick={() => navigate(`/vendors`)}
-			>
-				<RiCloseLine />
-			</button>
+		<div className="bg-[#EEF0F2] relative createProduct flex flex-col m-5 md:m-20  p-10  bg-brightGray items-center justify-center">
+			<div className="absolute right-[80px] top-[10px] ">
+				<NotButton
+					icon={<MdOutlineCancel />}
+					color="green"
+					bgHoverColor="green"
+					size="2xl"
+					borderRadius="50%"
+					className="cancel"
+					onClick={() => navigate(`/vendors`)}
+				/>
+			</div>
 			<div className="absolute left-[45px] top-[10px]">
-				<h3 className="text-centerm-  text-1xl md:text-4xl font-extrabold font-bold text-yellow mb-8">
+				<h3 className="text-centerm-  text-[#4B7F52] text-1xl md:text-4xl font-extrabold font-bold mb-8">
 					Update Product
 				</h3>
 			</div>
 
 			<form onSubmit={handleUpdateProduct}>
-				<div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:ml-20">
+				<div className="padding grid grid-cols-1 gap-4 md:grid-cols-3 md:ml-20">
 					<ProductInput
 						placeholder="Product Owner"
 						type="Text"
@@ -271,12 +279,12 @@ export const UpdateProduct = () => {
 						label="Update"
 						loading={isLoading}
 						onClick={handleUpdateProduct}
-						className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-2 w-28"
+						className="flex items-center justify-center p-1 rounded-[50px] bg-primaryGreen font-bold my-2 w-28 px-[1.5em] py-[0.5em] w-[150px] text-[#92E3A9] font-bold p-[20px],inset_0px_2px_1px_0px_rgba(255,255,255,0.75)] hover:bg-emerald-500"
 					/>
 					<Button
 						label="Cancel"
 						onClick={() => navigate(`/vendors`)}
-						className="flex items-center justify-center p-1 rounded-2xl bg-lightRed text-white font-bold my-2 w-28"
+						className="flex items-center justify-center p-1 rounded-[50px] bg-[#c14953] font-bold my-2 w-28 px-[1.5em] py-[0.5em] w-[150px] text-[#D6CBC1] font-bold p-[20px],inset_0px_2px_1px_0px_rgba(255,255,255,0.75)] hover:bg-[#E3170A]"
 					/>
 				</div>
 			</form>

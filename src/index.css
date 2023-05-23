@@ -45,7 +45,9 @@
 	align-items: center;
 	margin: auto;
 }
-
+.capitalizi {
+	padding-right: 10px;
+}
 .nav {
 	transition: background-color 0.2s ease-in-out;
 	position: relative;
@@ -127,7 +129,39 @@
 	letter-spacing: -0.025em;
 	color: #1f2937;
 }
-
+@media (max-width: 820px) {
+	.productAdd {
+		position: relative;
+		bottom: 280px;
+		left: 340px;
+		font-size: 15px;
+	}
+}
+@media (max-width: 912px) {
+	.productAdd {
+		position: relative;
+		bottom: 280px;
+		left: 340px;
+		font-size: 15px;
+	}
+}
+@media (max-width: 1024px) {
+	.productAdd {
+		position: relative;
+		bottom: 280px;
+		left: 340px;
+		font-size: 15px;
+	}
+	.createProduct {
+		width: 900px;
+	}
+}
+.createProduct {
+	border-radius: 1%;
+}
+.input {
+	font-size: large !important;
+}
 #gridcomp {
 	cursor: pointer;
 }
@@ -165,7 +199,7 @@
 }
 
 .edit {
-	color: rgb(87, 141, 221) !important;
+	color: #087e8b !important;
 	font-size: 20px !important;
 	text-align: center;
 	margin-right: 10px;
@@ -176,8 +210,11 @@
 	text-align: center;
 	margin-right: 10px;
 }
+.padding {
+	padding-top: 40px;
+}
 .delete {
-	color: rgb(172, 40, 40) !important;
+	color: #ff5a5f !important;
 	font-size: 20px !important;
 	text-align: center;
 	margin-right: 10px;
@@ -214,6 +251,14 @@
 }
 .ecommerce {
 	margin-bottom: 30px !important;
+}
+.sideEcommerce {
+	position: relative;
+	left: 12px;
+	margin-bottom: 15px !important;
+}
+.eye {
+	background-color: #8c271e !important;
 }
 .side {
 	z-index: 1000 !important;

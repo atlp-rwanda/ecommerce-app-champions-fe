@@ -14,17 +14,25 @@ import {
 	IconButton,
 } from '@material-ui/core';
 import { AddShoppingCart } from '@material-ui/icons';
+import {
+	removeItemFromWishlist,
+	getAllWishlist,
+} from '../../../redux/actions/wishList.action';
 import { addItemToCart } from '../../../redux/actions/cart.action';
 import { handleToken } from '../../../redux/actions/token.action';
 
 import useStyles from './styles';
 
-const WishlistItem = ({ item, onRemoveFromWishlist }) => {
+const WishlistItem = ({ item }) => {
 	const tokenn = Cookies.get('token');
 	const classes = useStyles();
 	const { token } = useSelector((state) => state.token);
 	const dispatch = useDispatch();
-	const handleRemoveFromCart = (item) => onRemoveFromWishlist(item.productId);
+	const handleRemoveFromWishlist = (id) => {
+		dispatch(removeItemFromWishlist(id, token)).then(() => {
+			dispatch(getAllWishlist(token));
+		});
+	};
 
 	useEffect(() => {
 		dispatch(handleToken());
@@ -51,7 +59,7 @@ const WishlistItem = ({ item, onRemoveFromWishlist }) => {
 					variant="contained"
 					type="button"
 					className={classes.removeButton}
-					onClick={() => handleRemoveFromCart(item.productId)}
+					onClick={() => handleRemoveFromWishlist(item.productId)}
 				>
 					Remove
 				</Button>

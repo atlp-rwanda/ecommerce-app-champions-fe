@@ -10,7 +10,6 @@ import Navbar from '../components/vendorDashboard/Navbar';
 import VendorSidebar from '../components/vendorDashboard/vendorSidebar';
 import Products from '../components/dashboard/products';
 import Ecommerce from '../components/vendorDashboard/Ecommerce';
-import Sales from '../components/vendorDashboard/Sales';
 import { useStateContext } from '../contexts/ContextProvider';
 import { getVendorProducts } from '../redux/actions/vendor.product';
 import { getNotifications } from '../redux/actions/notifications';
@@ -50,7 +49,7 @@ const vendorDashboard = () => {
 				<Loader />
 			) : (
 				<div>
-					<div className="flex relative ">
+					<div className="flex relative bg-[#DBE4EE]">
 						{activeMenu ? (
 							<div className="w-72 fixed sidebar bg-white ">
 								<VendorSidebar
@@ -83,7 +82,6 @@ const vendorDashboard = () => {
 
 							<div>
 								{showEcommerce && <Ecommerce />}
-								{showSales && <Sales />}
 								{showProducts && <Products />}
 							</div>
 						</div>
