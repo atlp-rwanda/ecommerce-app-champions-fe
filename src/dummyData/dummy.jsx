@@ -1,9 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
-import { useEffect } from 'react';
-import Cookies from 'js-cookie';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../redux/actions/product.action';
+import React from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { FiBarChart } from 'react-icons/fi';
 import { BiEdit } from 'react-icons/bi';
@@ -105,11 +102,20 @@ export const customersGrid = [
 		textAlign: 'Center',
 	},
 	{
-		field: 'quantity',
+		field: 'Budget',
 		headerText: 'Quantity',
+		width: '100',
+		format: 'yMd',
+		textAlign: 'Center',
+	},
+
+	{
+		field: 'Location',
+		headerText: 'Category',
 		width: '150',
 		textAlign: 'Center',
 	},
+
 	{
 		field: 'CustomerID',
 		headerText: 'Bonus',
@@ -117,18 +123,18 @@ export const customersGrid = [
 		textAlign: 'Center',
 		isPrimaryKey: true,
 	},
-	// {
-	// 	field: 'CustomerID',
-	// 	headerText: 'Actions',
-	// 	width: '120',
-	// 	textAlign: 'Center',
-	// 	template: () => (
-	// 		<div className="align">
-	// 			<BiEdit className="edit text-blue-600 mr-2 cursor-pointer size={24}" />
-	// 			<AiFillDelete className="delete text-red-600 cursor-pointer" />
-	// 		</div>
-	// 	),
-	// },
+	{
+		field: 'CustomerID',
+		headerText: 'Actions',
+		width: '120',
+		textAlign: 'Center',
+		template: () => (
+			<div className="align">
+				<BiEdit className="edit text-blue-600 mr-2 cursor-pointer size={24}" />
+				<AiFillDelete className="delete text-red-600 cursor-pointer" />
+			</div>
+		),
+	},
 ];
 
 export const employeesGrid = [
@@ -307,6 +313,204 @@ export const ordersGrid = [
 		textAlign: 'Center',
 	},
 ];
+
+export const customersData = [
+	{
+		CustomerID: 1,
+		CustomerName: 'iphone 12 Pro Max',
+		CustomerEmail: 'vendor@gmail.com',
+		CustomerImage: passport_photo,
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Active',
+		StatusBg: '#8BE78B',
+		Weeks: '$400',
+		Budget: '150',
+		Location: 'phones',
+	},
+	{
+		CustomerID: 1,
+		CustomerName: 'iphone 12 Pro Max',
+		CustomerEmail: 'vendor@gmail.com',
+		CustomerImage: passport_photo,
+		ProjectName: 'iphone 12 Pro',
+		Status: 'Active',
+		StatusBg: '#8BE78B',
+		Weeks: '$400',
+		Budget: '150',
+		Location: 'phones',
+		icon: <MdOutlineProductionQuantityLimits />,
+	},
+	{
+		CustomerID: 2,
+
+		CustomerName: 'iphone 12 Pro Max',
+		CustomerEmail: 'sunil@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Active',
+
+		StatusBg: '#8BE78B',
+		Weeks: '$110',
+		Budget: '35',
+		Location: 'phones',
+	},
+	{
+		CustomerID: 3,
+
+		CustomerName: 'iphone 12 Pro Max',
+		CustomerEmail: 'andrew@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Expired',
+		StatusBg: '#FEC90F',
+		Weeks: '$219',
+		Budget: '$24.5k',
+		Location: 'USA',
+	},
+	{
+		CustomerID: 2,
+
+		CustomerName: 'Christopher Jamil',
+		CustomerEmail: 'jamil@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Active',
+		StatusBg: '#8BE78B',
+		Weeks: '$340',
+		Budget: '16.5k',
+		Location: 'phones',
+	},
+	{
+		CustomerID: 1,
+
+		CustomerName: 'Michael',
+		CustomerEmail: 'michael@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Inactive',
+		StatusBg: 'red',
+		Weeks: '$340',
+		Budget: '16.5k',
+		Location: 'phones',
+	},
+	{
+		CustomerID: 1,
+		CustomerName: 'iphone 12 Pro Max',
+		CustomerEmail: 'nirav@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Active',
+		StatusBg: '#8BE78B',
+		Weeks: '$409',
+		Budget: '2.4k',
+		Location: 'phones',
+	},
+	{
+		CustomerID: 1,
+
+		CustomerName: 'Sunil Joshi',
+		CustomerEmail: 'sunil@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Active',
+
+		StatusBg: '#8BE78B',
+		Weeks: '$112',
+		Budget: '3.9k',
+		Location: 'computer',
+	},
+	{
+		CustomerID: 8,
+
+		CustomerName: 'Andrew McDownland',
+		CustomerEmail: 'andrew@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Expired',
+		StatusBg: '#FEC90F',
+		Weeks: '$190',
+		Budget: '24.5k',
+		Location: 'phones',
+	},
+	{
+		CustomerID: 9,
+
+		CustomerName: 'Christopher Jamil',
+		CustomerEmail: 'jamil@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Active',
+		StatusBg: '#8BE78B',
+		Weeks: '$340',
+		Budget: '16.5k',
+		Location: 'phones',
+	},
+	{
+		CustomerID: 10,
+
+		CustomerName: 'Michael',
+		CustomerEmail: 'michael@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Inactive',
+		StatusBg: 'red',
+		Weeks: '$340',
+		Budget: '16.5k',
+		Location: 'phones',
+	},
+	{
+		CustomerID: 11,
+		CustomerName: 'Nirav Joshi',
+		CustomerEmail: 'nirav@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Active',
+		StatusBg: '#8BE78B',
+		Weeks: '$400',
+		Budget: '2.4k',
+		Location: 'computer',
+	},
+	{
+		CustomerID: 12,
+
+		CustomerName: 'Sunil Joshi',
+		CustomerEmail: 'sunil@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Active',
+
+		StatusBg: '#8BE78B',
+		Weeks: '$311',
+		Budget: '3.9k',
+		Location: 'phones',
+	},
+	{
+		CustomerID: 13,
+
+		CustomerName: 'Andrew McDownland',
+		CustomerEmail: 'andrew@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Expired',
+		StatusBg: '#FEC90F',
+		Weeks: '$197',
+		Budget: '24.5k',
+		Location: 'phones',
+	},
+	{
+		CustomerID: 14,
+
+		CustomerName: 'Christopher Jamil',
+		CustomerEmail: 'jamil@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Active',
+		StatusBg: '#8BE78B',
+		Weeks: '$345',
+		Budget: '16.5k',
+		Location: 'computer',
+	},
+	{
+		CustomerID: 15,
+
+		CustomerName: 'Michael',
+		CustomerEmail: 'michael@gmail.com',
+		ProjectName: 'iphone 12 Pro Max',
+		Status: 'Inactive',
+		StatusBg: 'red',
+		Weeks: '$344',
+		Budget: '16.5k',
+		Location: 'computer',
+	},
+];
+
 export const ordersData = [
 	{
 		OrderID: 10248,

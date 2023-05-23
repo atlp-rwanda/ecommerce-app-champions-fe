@@ -11,7 +11,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { BiChevronDown } from 'react-icons/bi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Logo from '../../assets/Logo.svg';
 import { handleUserToken } from '../../redux/actions/token.action';
@@ -25,6 +25,7 @@ const Topnav = ({ displaySearchBar, className }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [loggedinuser, setLoggedinuser] = useState('');
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const navigate = useNavigate();
 
 	const handleDropdown = () => {
 		setIsDropdownOpen(!isDropdownOpen);
@@ -37,6 +38,13 @@ const Topnav = ({ displaySearchBar, className }) => {
 	const dispatch = useDispatch();
 	const { decodedToken } = useSelector((state) => state.token || {});
 	const { profile } = useSelector((state) => state.userProfile || {});
+
+	const handeLogOut = () => {
+		Cookies.remove('token');
+		navigate('/', { replace: true });
+		window.location.reload();
+	};
+
 	useEffect(() => {
 		dispatch(handleUserToken(token));
 	}, [dispatch, token]);
@@ -85,6 +93,9 @@ const Topnav = ({ displaySearchBar, className }) => {
 								<div className="absolute bg-white rounded border shadow-lg mt-2 top-7 right-0">
 									<h1 className="block px-4 py-2 text-gray-800 hover:bg-gray-200 font-bold">
 										<Link to="/Profile">Profile</Link>
+									</h1>
+									<h1 className="block px-4 py-2 text-gray-800 hover:bg-gray-200 font-bold">
+										<Link to="/wishlist">Wishlist</Link>
 									</h1>
 									<h1 className="flex px-4 py-2 text-gray-800 hover:bg-gray-200 font-bold">
 										<AiOutlineLogout
@@ -138,9 +149,7 @@ const Topnav = ({ displaySearchBar, className }) => {
 											<AiOutlineLogout
 												size={25}
 												className="text-primaryGreen cursor-pointer"
-												onClick={() => {
-													Cookies.remove('token', { path: '/' });
-												}}
+												onClick={handeLogOut}
 											/>
 											Logout
 										</h1>

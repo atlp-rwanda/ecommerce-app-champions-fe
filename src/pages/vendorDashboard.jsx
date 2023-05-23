@@ -7,10 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import Navbar from '../components/vendorDashboard/Navbar';
-import Sidebar from '../components/vendorDashboard/Sidebar';
+import VendorSidebar from '../components/vendorDashboard/vendorSidebar';
 import Products from '../components/dashboard/products';
 import Ecommerce from '../components/vendorDashboard/Ecommerce';
-import Sales from '../components/vendorDashboard/Sales';
 import { useStateContext } from '../contexts/ContextProvider';
 import { getVendorProducts } from '../redux/actions/vendor.product';
 import { getNotifications } from '../redux/actions/notifications';
@@ -50,10 +49,10 @@ const vendorDashboard = () => {
 				<Loader />
 			) : (
 				<div>
-					<div className="flex relative ">
+					<div className="flex relative bg-[#DBE4EE]">
 						{activeMenu ? (
 							<div className="w-72 fixed sidebar bg-white ">
-								<Sidebar
+								<VendorSidebar
 									showEcommerce={showEcommerce}
 									setShowEcommerce={setShowEcommerce}
 									showSales={showSales}
@@ -63,7 +62,7 @@ const vendorDashboard = () => {
 							</div>
 						) : (
 							<div className="w-0 ">
-								<Sidebar
+								<VendorSidebar
 									showEcommerce={showEcommerce}
 									setShowEcommerce={setShowEcommerce}
 									showSales={showSales}
@@ -83,7 +82,6 @@ const vendorDashboard = () => {
 
 							<div>
 								{showEcommerce && <Ecommerce />}
-								{showSales && <Sales />}
 								{showProducts && <Products />}
 							</div>
 						</div>

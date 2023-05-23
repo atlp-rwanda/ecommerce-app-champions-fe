@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-key */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { Table, Modal } from 'flowbite-react';
+import Cookies from 'js-cookie';
 import Button from '../Button/Button';
 import Select from '../Auth/Select';
+import { handleToken } from '../../redux/actions/token.action';
 import { assignRoleToUser } from '../../redux/actions/role.action';
 import {
 	enableVendorAccount,
@@ -27,6 +30,7 @@ const AllVendors = ({ vendor }) => {
 	const { token } = useSelector((state) => state.token);
 	const { loading } = useSelector((state) => state.role);
 	const dispatch = useDispatch();
+	const tokenn = Cookies.get('token');
 
 	const onClick = () => {
 		setVisible(true);
@@ -35,6 +39,10 @@ const AllVendors = ({ vendor }) => {
 	const onClose = () => {
 		setVisible(false);
 	};
+
+	useEffect(() => {
+		dispatch(handleToken());
+	}, [dispatch]);
 
 	const handleRoleChange = (e) => {
 		setRole(e.target.value);
@@ -77,6 +85,7 @@ const AllVendors = ({ vendor }) => {
 				</Table.Head>
 				{vendor?.map((item) => (
 					<Table.Body className="divide-y" key={item.id}>
+						<ToastContainer />
 						<Table.Row className="bg-white">
 							<Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
 								{item?.User?.firstName}
@@ -114,8 +123,8 @@ const AllVendors = ({ vendor }) => {
 									}`}
 									onClick={() =>
 										item?.User?.active === true
-											? handleDisableVendor(item.UserId)
-											: handleEnableVendor(item.UserId)
+											? handleDisableVendor(item.id)
+											: handleEnableVendor(item.id)
 									}
 								>
 									{item?.User?.active === true ? 'deactivate' : 'activate'}

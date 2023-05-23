@@ -5,23 +5,19 @@ import { fetchAvailableProducts } from '../../redux/actions/product.action';
 import Button from '../Button/Button';
 import LoadingSpinner from '../LoadingSpinner';
 import ProductCard from '../product/ProductCard';
-
 const Homeproduct = () => {
 	const [availableProducts, setAvailableProducts] = useState([]);
 	const { products } = useSelector((state) => state.products || {});
 	const { loading } = useSelector((state) => state.products || {});
 	const dispatch = useDispatch();
-
 	useEffect(() => {
 		dispatch(fetchAvailableProducts());
 	}, [dispatch]);
-
 	useEffect(() => {
 		if (products) {
 			setAvailableProducts(products.items);
 		}
 	}, [products, products.items]);
-
 	const product = availableProducts ? availableProducts.slice(0, 8) : [];
 	return (
 		<div className="w-full mx-auto px-8 py-4 ">
@@ -43,7 +39,6 @@ const Homeproduct = () => {
 					label="food"
 					className="flex items-center justify-center p-1 rounded-2xl  bg-brightGray text-black my-4  w-28"
 				/>
-
 				<Link
 					to="/product"
 					className="text-yellow font-bold underline flex items-center justify-center"
@@ -69,5 +64,4 @@ const Homeproduct = () => {
 		</div>
 	);
 };
-
 export default Homeproduct;

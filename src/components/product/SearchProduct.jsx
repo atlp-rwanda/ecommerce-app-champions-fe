@@ -39,7 +39,7 @@ const SearchComponent = ({ searchedItems, onEmptySearch }) => {
 				<Button
 					label="Search"
 					loading={loading}
-					className="flex items-center justify-center p-2 py-[9.5px] rounded-r-2xl bg-primaryGreen text-white font-bold w-28"
+					className="flex items-center justify-center p-2 py-[9.5px] rounded-r-2xl bg-primaryGreen text-[#92E3A9] font-bold w-28"
 				/>
 			</form>
 		</div>

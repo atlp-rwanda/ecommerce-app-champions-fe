@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable prettier/prettier */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-vars */
@@ -6,184 +8,146 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdEdit, MdOutlineDeleteOutline } from 'react-icons/md';
-import {
-	GridComponent,
-	Resize,
-	Sort,
-	ContextMenu,
-	Filter,
-	Page,
-	ExcelExport,
-	PdfExport,
-	Edit,
-	Inject,
-} from '@syncfusion/ej2-react-grids';
-import { GrAddCircle } from 'react-icons/gr';
 import { BiEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
 import { FaEye } from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
+import CreateProduct from '../../pages/Createproduct';
+import SellerProductPage from '../../pages/SellerProductPage';
 import LoadingSpinner from '../LoadingSpinner';
 import SearchComponent from '../product/SearchProduct';
 import Header from '../vendorDashboard/Header';
-import {
-	fetchProducts,
-	deleteProduct,
-} from '../../redux/actions/product.action';
-
+import { deleteProduct } from '../../redux/actions/product.action';
+import { getVendorProducts } from '../../redux/actions/vendor.product';
+import Loader from '../vendorDashboard/Loader';
 import Button from '../Button/Button';
 
-function Products({ setIsOpen }) {
+function Products() {
 	const dispatch = useDispatch();
-	const { loading, error, items } = useSelector(
-		(state) => state.products.products
+	const { vendorProducts, loading, error } = useSelector(
+		(state) => state.vendorProducts
 	);
 	const [searchResults, setSearchResults] = useState(null);
 	const [selectedProduct, setSelectedProduct] = useState(null);
 	const navigate = useNavigate();
 
 	const token = Cookies.get('token');
-	useEffect(() => {
-		dispatch(fetchProducts(token));
-	}, [dispatch, token]);
 
 	const handleDelete = (productId) => {
 		dispatch(deleteProduct(productId, token))
-			.then(() => dispatch(fetchProducts(token)))
-			.catch((error) => console.log(error));
+			.then(() => dispatch(getVendorProducts(token)))
+			.catch((error) => error.message);
 		setSelectedProduct(null);
 	};
 
 	const handleCancelDelete = () => {
 		setSelectedProduct(null);
 	};
-
-	if (error) {
-		return <p>{error}</p>;
-	}
+	const [isAddProductVisible, setAddProductVisible] = useState(false);
 
 	const handleEmptySearch = () => {
 		setSearchResults(null);
 	};
 
 	return (
-		<div className="sales dahsboard m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+		<div className="dashboard m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
 			{loading ? (
-				<div>Loading ..</div>
+				<Loader />
 			) : (
-				<div className="sales dahsboard m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+				<div className="m-2 md:m-10 mt-24 p-2 md:p-10 rounded-3xl">
+					<div className="productAdd">
+						<button
+							className="add rounded-[50px] px-[1.5em] py-[0.5em] bg-primaryGreen w-[200px] text-[#92E3A9] font-bold p-[20px],inset_0px_2px_1px_0px_rgba(255,255,255,0.75)] hover:bg-emerald-500  samsung:relative samsung:left-[-15px]"
+							onClick={() => setAddProductVisible(true)}
+						>
+							Add Product
+						</button>
+					</div>
 					<Header title="All Products" />
-					<div className="overflow-x-auto">
-						{items && (
+					<div className="overflow-x-auto text-[#1C1F33]">
+						{vendorProducts && (
 							<SearchComponent
-								searchedItems={(items) => {
-									setSearchResults(items);
+								searchedItems={(vendorProducts) => {
+									setSearchResults(vendorProducts);
 								}}
 								onEmptySearch={handleEmptySearch}
 							/>
 						)}
-						<GridComponent allowPaging allowSorting id="gridcomp">
-							<table className="w-full">
-								<tbody>
-									<tr className="p-4 text-xl font-bold md:text-2xl h-14">
-										<td className="text-xl md:text-2xl">Product Name</td>
-										<td>Product Id</td>
-										<td>Quantity</td>
-										<td>Price</td>
-										<td>Add</td>
-										<td>Edit</td>
-										<td>Delete</td>
-									</tr>
-									{searchResults && searchResults?.length ? (
-										searchResults?.map((item) => (
-											<tr key={item.productId} className="h-20">
-												<td>{item.productName}</td>
-												<td>{item.productId}</td>
-												<td>{item.quantity}</td>
-												<td>{item.productPrice}</td>
-												<td>
-													<GrAddCircle
-														className="addi hover:text-whitetext-blue-600 mr-2 cursor-pointer size={24}"
-														onClick={() =>
-															navigate(`/vendors/${item.productId}`)
-														}
+						<table className="w-full">
+							<tbody>
+								<tr className="p-4 text-xl text-[#1C1F33] md:text-2xl h-14">
+									<td className="text-xl md:text-2xl">Product Name</td>
+									<td>Product Id</td>
+									<td>Quantity</td>
+									<td>Price</td>
+								</tr>
+								{searchResults && searchResults.length ? (
+									searchResults.map((item) => (
+										<tr key={item.productId} className="h-20">
+											<td>{item.productName}</td>
+											<td>{item.productId}</td>
+											<td>{item.quantity}</td>
+											<td>$ {item.productPrice}</td>
+											<td>
+												<MdEdit
+													className="text-[#FF5A5F] cursor-pointer"
+													onClick={() => navigate(`/vendors/${item.productId}`)}
+												/>
+											</td>
+											<td>
+												<MdOutlineDeleteOutline
+													className="text-red-500 cursor-pointer"
+													onClick={() => setSelectedProduct(item)}
+												/>
+											</td>
+											<td>
+												<Link to={`/productPage/${item.productId}`}>
+													<FaEye
+														className="text-[#8C271E] eye cursor-pointer rosy_brown rounded  h-5"
+														style={{ color: 'rosybrown' }}
+														onClick={() => setAddProductVisible(true)}
 													/>
-												</td>
-												<td>
-													<MdEdit
-														className="text-blue-500 cursor-pointer"
-														onClick={() =>
-															navigate(`/vendors/${item.productId}`)
-														}
+												</Link>
+											</td>
+										</tr>
+									))
+								) : searchResults && !searchResults.length ? (
+									<div className="font-bold text-lg py-5 text-red">
+										No products found!
+									</div>
+								) : (
+									vendorProducts.map((item) => (
+										<tr key={item.productId} className="h-20">
+											<td>{item.productName}</td>
+											<td>{item.productId}</td>
+											<td>{item.quantity}</td>
+											<td>$ {item.productPrice}</td>
+											<td>
+												<BiEdit
+													className="edit text-[#FF5A5F] mr-2 cursor-pointer size={24}"
+													onClick={() => navigate(`/vendors/${item.productId}`)}
+												/>
+											</td>
+											<td>
+												<AiFillDelete
+													className="delete text-red-600 cursor-pointer"
+													onClick={() => setSelectedProduct(item)}
+												/>
+											</td>
+											<td>
+												<Link to={`/productPage/${item.productId}`}>
+													<FaEye
+														className="text-[#8C271E] cursor-pointer rosy_brown rounded  h-5"
+														style={{ color: 'rosybrown' }}
+														onClick={() => setAddProductVisible(true)}
 													/>
-												</td>
-												<td>
-													<MdOutlineDeleteOutline
-														className="text-red-500 cursor-pointer"
-														onClick={() => setSelectedProduct(item)}
-													/>
-												</td>
-												<td>
-													<Link to={`/productPage/${item.productId}`}>
-														<FaEye
-															className="text-red-500 cursor-pointer rosy_brown rounded  h-5"
-															style={{ color: 'rosybrown' }}
-														/>
-													</Link>
-												</td>
-											</tr>
-										))
-									) : searchResults && !searchResults?.length ? (
-										<div className="font-bold text-lg py-5 text-red">
-											No products found!
-										</div>
-									) : (
-										items?.map((item) => (
-											<tr key={item.productId} className="h-20">
-												<td>{item.productName}</td>
-												<td>{item.productId}</td>
-												<td>{item.quantity}</td>
-												<td>{item.productPrice}</td>
-												<td>
-													<GrAddCircle
-														className="addi hover:text-whitetext-blue-600 mr-2 cursor-pointer size={24}"
-														onClick={() =>
-															navigate(`/vendors/${item.productId}`)
-														}
-													/>
-												</td>
-												<td>
-													<BiEdit
-														className="edit text-blue-600 mr-2 cursor-pointer size={24}"
-														onClick={() =>
-															navigate(`/vendors/${item.productId}`)
-														}
-													/>
-												</td>
-												<td>
-													<AiFillDelete
-														className="delete text-red-600 cursor-pointer"
-														onClick={() => setSelectedProduct(item)}
-													/>
-												</td>
-											</tr>
-										))
-									)}
-								</tbody>
-							</table>
-							<Inject
-								services={[
-									Resize,
-									Sort,
-									ContextMenu,
-									Filter,
-									Page,
-									ExcelExport,
-									Edit,
-									PdfExport,
-								]}
-							/>
-						</GridComponent>
+												</Link>
+											</td>
+										</tr>
+									))
+								)}
+							</tbody>
+						</table>
 					</div>
 				</div>
 			)}
@@ -211,6 +175,13 @@ function Products({ setIsOpen }) {
 					</div>
 				</div>
 			)}
+			<div>
+				{isAddProductVisible && (
+					<div className="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-75 z-50 flex justify-center items-center">
+						<CreateProduct setShowAddProduct={setAddProductVisible} />
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }
