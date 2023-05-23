@@ -61,7 +61,6 @@ const LiveChat = () => {
 		socket.on('message', (msg) => {
 			if (msg.text === 'welcome to Our public chat') {
 				// eslint-disable-next-line no-new, new-cap
-				// new toast(`${msg.text}`);
 			}
 
 			setMessages((prevMessages) => [...prevMessages, msg]);
