@@ -1,12 +1,54 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineCancel } from 'react-icons/md';
-
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+import { handleUserToken } from '../../redux/actions/token.action';
+import {
+	getBuyerProfile,
+	getVendorProfile,
+} from '../../redux/actions/auth.profile.action';
 import Button from './Button';
+import NotButton from './notButton';
 import { userProfileData } from '../../dummyData/dummy';
 import avatar from '../../dummyData/passport_photo.jpg';
 
 const UserProfile = () => {
+	const token = Cookies.get('token');
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const [loggedinuser, setLoggedinuser] = useState('');
+	const { decodedToken } = useSelector((state) => state.token || {});
+	const { profile } = useSelector((state) => state.userProfile || {});
+	useEffect(() => {
+		dispatch(handleUserToken(token));
+	}, [dispatch, token]);
+	useEffect(() => {
+		if (decodedToken) {
+			if (decodedToken?.role.roleName === 'buyer') {
+				dispatch(getBuyerProfile(decodedToken.id));
+			} else if (decodedToken?.role.roleName === 'vendor') {
+				dispatch(getVendorProfile(decodedToken.id));
+			}
+		}
+	}, [decodedToken, dispatch]);
+	useEffect(() => {
+		if (profile) {
+			setLoggedinuser(profile.data.others.firstName);
+		}
+	}, [profile]);
+
+	const handleLogout = () => {
+		Cookies.remove('token');
+		navigate('/');
+	};
+	useEffect(() => {
+		if (!token) {
+			navigate('/');
+		}
+	});
+
 	return (
 		<div className="dashboard side nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
 			<div className="flex justify-between items-center">
@@ -28,7 +70,7 @@ const UserProfile = () => {
 				<div>
 					<p className="font-semibold text-xl dark:text-gray-200">
 						{' '}
-						Mudakikwa Aimable{' '}
+						{loggedinuser}{' '}
 					</p>
 					<p className="text-gray-500 text-sm dark:text-gray-400"> Vendor </p>
 					<p className="text-gray-500 text-sm font-semibold dark:text-gray-400">
@@ -62,12 +104,13 @@ const UserProfile = () => {
 				))}
 			</div>
 			<div className="mt-5">
-				<Button
+				<NotButton
 					color="white"
 					bgColor="#225F33"
 					text="Logout"
 					borderRadius="10px"
 					width="full"
+					onClick={handleLogout}
 				/>
 			</div>
 		</div>

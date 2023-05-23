@@ -3,24 +3,32 @@ import varkeys from '../constants/keys';
 
 const url = varkeys.APP_URL;
 
-export const allVendors = (token) => {
+export const addToWishList = (id, token) => {
 	return new Promise((resolve, reject) => {
 		axios
-			.get(`${url}/api/vendor/all`, { headers: { token: `Bearer ${token}` } })
-			.then((response) => resolve(response.data))
-			.catch((error) => {
-				if (error.response.data !== undefined) {
-					reject(error.response.data);
+			.post(
+				`${url}/api/product/addToWishlist/${id}`,
+				{},
+				{
+					headers: { token: `Bearer ${token}` },
 				}
-				reject(error);
+			)
+			.then((response) => {
+				resolve(response.data);
+			})
+			.catch((error) => {
+				if (error.response && error.response.data !== undefined) {
+					reject(error.response.data);
+				} else {
+					reject(error);
+				}
 			});
 	});
 };
-
-export const enable = (token, id) => {
+export const removeFromWishList = (id, token) => {
 	return new Promise((resolve, reject) => {
 		axios
-			.put(`${url}/api/vendor/enable/${id}`, {
+			.delete(`${url}/api/product/remove-from-wishlist/${id}`, {
 				headers: { token: `Bearer ${token}` },
 			})
 			.then((response) => resolve(response.data))
@@ -33,18 +41,21 @@ export const enable = (token, id) => {
 	});
 };
 
-export const disable = (token, id) => {
+export const getWishLIst = (token) => {
 	return new Promise((resolve, reject) => {
 		axios
-			.post(`${url}/api/vendor/disable/${id}`, {
+			.get(`${url}/api/product/retrieveWishlistItems`, {
 				headers: { token: `Bearer ${token}` },
 			})
-			.then((response) => resolve(response.data))
+			.then((response) => {
+				resolve(response.data);
+			})
 			.catch((error) => {
-				if (error.response.data !== undefined) {
+				if (error.message && error.response.data !== undefined) {
 					reject(error.response.data);
+				} else {
+					reject(error);
 				}
-				reject(error);
 			});
 	});
 };

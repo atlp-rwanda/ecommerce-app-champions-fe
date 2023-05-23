@@ -21,6 +21,8 @@ import TrackOrder from './components/product/TrackOrder';
 import Topnav from './components/Landingpage/topnav';
 import Footer from './components/Landingpage/Footer';
 import PaymentSuccesspage from './components/payment/payment';
+import Products from './components/dashboard/products';
+import Wishlist from './components/wishlist/Wishlist';
 
 function App() {
 	return (
@@ -64,10 +66,13 @@ function App() {
 				<Route path="*" element={<PageNotFound />} />
 				<Route path="/AddProduct" element={<CreateProduct />} />
 				<Route path="/vendors/:id" element={<UpdateProduct />} />
+				<Route path="/products" element={<Products />} />
+				<Route path="/wishlist" element={<Wishlist />} />
 				<Route
 					path="SellerProductPage/:productId"
 					element={<SellerProductPage />}
 				/>
+				<Route path="*" element={<PageNotFound />} />
 			</Routes>
 		</BrowserRouter>
 	);

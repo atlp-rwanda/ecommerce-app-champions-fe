@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -5,16 +6,16 @@ import { AiOutlineLogout } from 'react-icons/ai';
 import Logo from '../assets/Logo.svg';
 import { getProductById } from '../redux/actions/singleProduct.action';
 import { handleToken } from '../redux/actions/token.action';
-import ProductImages from '../components/product/productImages';
-import ProductDetails from '../components/product/productDetails';
-import LoadingSpinner from '../components/LoadingSpinner';
+import Button from '../components/Button/Button';
 
 const SellerProductPage = () => {
 	const { productId } = useParams();
 	const dispatch = useDispatch();
-	const { products, loading } = useSelector((state) => state.singleProduct);
+	const { products } = useSelector((state) => state.singleProduct);
 	const { token } = useSelector((state) => state.token);
-
+	const formattedDate = new Date(
+		products?.item?.expiredDate
+	).toLocaleDateString();
 	useEffect(() => {
 		dispatch(handleToken());
 	}, [dispatch]);
@@ -26,7 +27,7 @@ const SellerProductPage = () => {
 	}, [dispatch, productId, token]);
 
 	return (
-		<div>
+		<>
 			<div className="w-screen md:w-full bg-lightYellow px-7 py-4 flex justify-between items-center">
 				<img src={Logo} className="w-32 md:w-40 cursor-pointer" alt="Logo" />
 				<AiOutlineLogout
@@ -34,25 +35,70 @@ const SellerProductPage = () => {
 					className="text-primaryGreen cursor-pointer"
 				/>
 			</div>
-			<div className="flex container w-4/5 mx-auto  flex-col justify-center lg:flex-row">
-				{loading ? (
-					<div className="w-full h-full flex items-center justify-center mx-auto my-4">
-						<LoadingSpinner className="w-9 h-9 mr-2 text-gray-200 animate-spin fill-primaryGreen" />
-					</div>
-				) : (
-					products && (
-						<div className="flex justify-center mx-auto mt-9 flex-col md:flex-row md:justify-center  w-full ">
-							<div className=" justify-start md:w-1/2 top-0 border-0  rounded-xl  ">
-								<ProductImages images={products.item.productImage} />
-							</div>
-							<div className="w-full md:w-1/2 px-5 border-0 rounded-xl">
-								<ProductDetails product={products.item} />
-							</div>
+			<div className="w-screen h-screen mx-auto my-5 flex flex-col space-y-5">
+				<div className="flex flex-col md:flex-row space-x-0 md:space-x-8 space-y-6 w-11/12 mx-auto">
+					<div className="w-full md:w-2/5 h-72  md:h-96 flex flex-col space-y-2 md:space-y-3">
+						<img
+							src={products?.item?.productImage[0]}
+							alt=""
+							className="object-cover h-full w-full rounded-md"
+						/>
+						<div className="hidden md:flex w-full justify-between items-center">
+							{products?.item?.productImage.map((img, index) => (
+								<img
+									src={img}
+									alt=""
+									key={index}
+									className=" h-20 w-24 rounded-sm object-cover "
+								/>
+							))}
 						</div>
-					)
-				)}
+					</div>
+					<div className="flex flex-col w-full md:w-3/5 space-y-5">
+						<h2 className="text-3xl capitalize font-bold">
+							{products?.item?.productName}
+						</h2>
+						<p className="text-md capitalize font-normal justify-self-auto">
+							{products?.item?.productDescription}
+						</p>
+						<p className="text-md font-bold flex items-center">
+							Price: {products?.item?.productPrice} RWF
+						</p>
+						<p className="text-md font-bold flex items-center">
+							Quantity:{products?.item?.quantity}
+						</p>
+						{products?.item?.available ? (
+							<p className="text-2xl text-green-500 border-b border-lightRed">
+								Available
+							</p>
+						) : (
+							<p className="text-lg text-red-500">Out of stock</p>
+						)}
+						<p className="text-md font-bold flex items-center">
+							Expiry date: {formattedDate}
+						</p>
+						<p className="text-lg">{products?.item?.bonus}</p>
+
+						{/* <div>
+						<h2 className="text-2xl font-bold mb-2">Reviews</h2>
+
+						<p>No reviews yet</p>
+					</div> */}
+						<div className="flex gap-2 ">
+							<Button
+								label="Enable"
+								className="bg-primaryGreen text-center text-white px-2 py-1 rounded-full"
+							/>
+							<Button
+								label="Disable"
+								className=" bg-rosy_brown text-center text-white px-2 py-1  rounded-full"
+							/>
+						</div>
+						<div className="border border-gray w-full opacity-60 mt-8" />
+					</div>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

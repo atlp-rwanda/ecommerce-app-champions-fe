@@ -25,6 +25,7 @@ import buyerSlice from './buyer/buyerSlice';
 import vendorSlice from './vendor/vendorSlice';
 import paymentSlice from './pay/paymentSlice';
 import checkoutSlice from './pay/checkoutSlice';
+import wishlistSlice from './WishList/wishlistSlice';
 
 const rootReducer = combineReducers({
 	cart: cartSlice,
@@ -53,6 +54,7 @@ const rootReducer = combineReducers({
 	payment: paymentSlice,
 	checkout: checkoutSlice,
 	orders: trackOrderSlice,
+	wishlist: wishlistSlice,
 });
 
 export default rootReducer;

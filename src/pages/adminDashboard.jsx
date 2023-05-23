@@ -2,9 +2,7 @@
 import { useState } from 'react';
 import Navbar from '../components/vendorDashboard/Navbar';
 import Sidebar from '../components/vendorDashboard/Sidebar';
-import Products from '../components/vendorDashboard/Products';
 import Ecommerce from '../components/vendorDashboard/Ecommerce';
-import Sales from '../components/vendorDashboard/Sales';
 import { useStateContext } from '../contexts/ContextProvider';
 import UserManagement from '../components/dashboard/UserManagement';
 
@@ -52,8 +50,6 @@ const adminDashboard = () => {
 
 				<div>
 					{showEcommerce && <Ecommerce />}
-					{showSales && <Sales />}
-					{showProducts && <Products />}
 					{showDashboard && <UserManagement />}
 				</div>
 			</div>
