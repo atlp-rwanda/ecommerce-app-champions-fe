@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 import { AiOutlineLogout, AiFillEdit } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../assets/Logo.svg';
 import profilePic from '../../assets/profilePic.jpg';
 import UserProfileDetails from './UserProfileDetails';
@@ -12,12 +12,13 @@ import {
 	getVendorProfile,
 } from '../../redux/actions/auth.profile.action';
 import LoadingSpinner from '../LoadingSpinner';
-import { handleToken } from '../../redux/actions/token.action';
+import { handleToken, handleLogout } from '../../redux/actions/token.action';
 
 const UserProfile = () => {
 	const [profileInfo, setProfileInfo] = useState('');
 	const [fullDetails, setFullDetails] = useState('');
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { decodedToken } = useSelector((state) => state.token || {});
 	const { profile, loading } = useSelector((state) => state.userProfile || {});
 	const updateProfile = useSelector((state) => state.profile);
@@ -39,6 +40,10 @@ const UserProfile = () => {
 			setFullDetails(profile.data.profile);
 		}
 	}, [profile, updateProfile]);
+	const logout = () => {
+		dispatch(handleLogout());
+		navigate('/');
+	};
 	if (!profile || loading === true) {
 		return (
 			<div>
@@ -62,10 +67,7 @@ const UserProfile = () => {
 				<AiOutlineLogout
 					size={25}
 					className="cursor-pointer text-primaryGreen"
-					onClick={Cookies.remove('token', {
-						path: '/',
-						domain: 'https://ecommerce-app-champions-fe.vercel.app',
-					})}
+					onClick={() => logout()}
 				/>
 			</div>
 			<div className="flex flex-col w-full space-y-4 md:space-y-0">

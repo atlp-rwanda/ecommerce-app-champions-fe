@@ -4,7 +4,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Cookies from 'js-cookie';
+import { BsChatText } from 'react-icons/bs';
 import { ToastContainer, toast } from 'react-toastify';
 import Navbar from '../components/vendorDashboard/Navbar';
 import VendorSidebar from '../components/vendorDashboard/vendorSidebar';
@@ -14,11 +14,11 @@ import { useStateContext } from '../contexts/ContextProvider';
 import { getVendorProducts } from '../redux/actions/vendor.product';
 import { getNotifications } from '../redux/actions/notifications';
 import Loader from '../components/vendorDashboard/Loader';
-import varKeys from '../constants/keys';
+import LiveChat from '../components/LiveChat';
+import { handleToken } from '../redux/actions/token.action';
+import Button from '../components/Button/Button';
 
 const vendorDashboard = () => {
-	const token = Cookies.get('token');
-	const dispatch = useDispatch();
 	const { activeMenu } = useStateContext();
 	const [showEcommerce, setShowEcommerce] = useState(true);
 	const [showSales, setShowSales] = useState(false);
@@ -27,6 +27,21 @@ const vendorDashboard = () => {
 	const { loading: notLoading, error: notError } = useSelector(
 		(state) => state.notifications
 	);
+	const { token } = useSelector((state) => state.token);
+	const [showChat, setShowChat] = useState(false);
+
+	const dispatch = useDispatch();
+	const toggleChat = () => {
+		if (!token) {
+			toast.warn('login first!', { position: 'top-right' });
+		}
+
+		setShowChat(!showChat);
+	};
+
+	useEffect(() => {
+		dispatch(handleToken());
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getVendorProducts(token));
@@ -44,11 +59,11 @@ const vendorDashboard = () => {
 	}, [error, notError]);
 	return (
 		<>
-			<ToastContainer />
 			{loading || notLoading ? (
 				<Loader />
 			) : (
 				<div>
+					{showChat && LiveChat ? <LiveChat /> : ''}
 					<div className="flex relative bg-[#DBE4EE]">
 						{activeMenu ? (
 							<div className="fixed bg-white w-72 sidebar ">
@@ -86,6 +101,12 @@ const vendorDashboard = () => {
 							</div>
 						</div>
 					</div>
+					<Button
+						handleClick={toggleChat}
+						label={<BsChatText size={22} />}
+						className="fixed z-50 flex items-center justify-center font-bold text-white rounded-full bg-primaryGreen w-14 h-14 bottom-4 right-4"
+					/>
+					<ToastContainer />
 				</div>
 			)}
 		</>

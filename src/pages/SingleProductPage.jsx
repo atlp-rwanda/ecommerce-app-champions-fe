@@ -3,7 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { getSingleProduct } from '../redux/actions/product.action';
@@ -71,6 +71,17 @@ const SingleProductPage = () => {
 		}
 		dispatch(addItemToCart(prodId, token));
 	};
+	const handleCehckout = (prodId) => {
+		if (!token) {
+			toast.warn('You must login to add items to the cart.', {
+				position: toast.POSITION.TOP_RIGHT,
+			});
+			setTimeout(() => {
+				navigate('/login');
+			}, 2000);
+		}
+		dispatch(addItemToCart(prodId, token)).then(() => navigate('/cart'));
+	};
 
 	return (
 		<div className="flex flex-col space-y-5 w-screen h-screen">
@@ -137,12 +148,17 @@ const SingleProductPage = () => {
 							</div>
 						</div>
 						<div className="flex space-x-5 items-center">
-							<Link
+							<Button
+								handleClick={() => handleCehckout(product?.item?.productId)}
+								label="Buy Now"
+								className="bg-primaryGreen text-center text-white px-2 py-1 rounded-full w-36"
+							/>
+							{/* <Link
 								to="/checkout"
 								className="bg-primaryGreen text-center text-white px-2 py-1 rounded-full w-36"
 							>
 								Buy Now
-							</Link>
+							</Link> */}
 							<Button
 								handleClick={() => handleClick(product?.item?.productId)}
 								label="Add to cart"

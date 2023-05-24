@@ -3,14 +3,16 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
 import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import avatar from '../../dummyData/passport_photo.jpg';
 import Notification from './Notification';
 import UserProfile from './userProfile';
 import { useStateContext } from '../../contexts/ContextProvider';
+import { handleToken } from '../../redux/actions/token.action';
 
-const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
+const NavButton = ({ customFunc, icon, color, dotColor }) => (
 	<button
 		type="button"
 		onClick={() => customFunc()}
@@ -35,6 +37,12 @@ const Navbar = () => {
 		screenSize,
 	} = useStateContext();
 
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(handleToken());
+	}, []);
+
 	useEffect(() => {
 		const handleResize = () => setScreenSize(window.innerWidth);
 		window.addEventListener('resize', handleResize);
@@ -51,9 +59,10 @@ const Navbar = () => {
 	}, [screenSize]);
 
 	const handleActiveMenu = () => setActiveMenu(!activeMenu);
+	const { name } = useSelector((state) => state.token);
 
 	return (
-		<div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
+		<div className="flex justify-between p-2 md:ml-6 md:mr-6 relative z-40">
 			<NavButton
 				title="Menu"
 				customFunc={handleActiveMenu}
@@ -78,10 +87,8 @@ const Navbar = () => {
 						alt="user-profile"
 					/>
 					<p>
-						<span className="text-gray-400 text-14">Hi,</span>{' '}
-						<span className="text-gray-400 font-bold ml-1 text-14">
-							Aimable
-						</span>
+						<span className="text-gray-400 text-14">Hi,</span>
+						<span className="text-gray-400 font-bold ml-1 text-14">{name}</span>
 					</p>
 					<MdKeyboardArrowDown className="text-gray-400 text-14" />
 				</div>
