@@ -1,6 +1,4 @@
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/button-has-type */
 import { useState, useEffect } from 'react';
@@ -12,18 +10,12 @@ import { BiChevronDown } from 'react-icons/bi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import Logo from '../../assets/Logo.svg';
-import { handleUserToken } from '../../redux/actions/token.action';
-import {
-	getBuyerProfile,
-	getVendorProfile,
-} from '../../redux/actions/auth.profile.action';
+import { handleToken, handleLogout } from '../../redux/actions/token.action';
 import SearchBar from './SearchBar';
 
 const Topnav = ({ displaySearchBar, className }) => {
 	const [showMenu, setShowMenu] = useState(false);
-	const [loggedinuser, setLoggedinuser] = useState('');
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const navigate = useNavigate();
 
@@ -34,34 +26,19 @@ const Topnav = ({ displaySearchBar, className }) => {
 	const toggleMenu = () => {
 		setShowMenu(!showMenu);
 	};
-	const token = Cookies.get('token');
 	const dispatch = useDispatch();
-	const { decodedToken } = useSelector((state) => state.token || {});
-	const { profile } = useSelector((state) => state.userProfile || {});
+	const { decodedToken, token, name } = useSelector(
+		(state) => state.token || {}
+	);
 
-	const handeLogOut = () => {
-		Cookies.remove('token');
-		navigate('/', { replace: true });
-		window.location.reload();
+	const logout = () => {
+		dispatch(handleLogout());
+		dispatch(handleToken()).then(() => navigate('/'));
 	};
 
 	useEffect(() => {
-		dispatch(handleUserToken(token));
-	}, [dispatch, token]);
-	useEffect(() => {
-		if (decodedToken) {
-			if (decodedToken?.role.roleName === 'buyer') {
-				dispatch(getBuyerProfile(decodedToken.id));
-			} else if (decodedToken?.role.roleName === 'vendor') {
-				dispatch(getVendorProfile(decodedToken.id));
-			}
-		}
-	}, [decodedToken, dispatch]);
-	useEffect(() => {
-		if (profile) {
-			setLoggedinuser(profile.data.others.firstName);
-		}
-	}, [profile]);
+		dispatch(handleToken());
+	}, [dispatch]);
 	const fixedClassNames =
 		'w-full bg-lightYellow px-8 py-2  flex  items-center justify-between';
 	return (
@@ -84,14 +61,14 @@ const Topnav = ({ displaySearchBar, className }) => {
 			<div className="flex-col items-center justify-end hidden w-11/12 h-full mx-auto lg:flex lg:flex-row">
 				{displaySearchBar && <SearchBar />}
 				<div className="flex flex-col items-center justify-between w-1/4 lg:flex-row ">
-					{decodedToken ? (
+					{token && (
 						<div className="flex items-center cursor-pointer text-primaryGreen">
 							<BsFillPersonFill size={28} />
-							<h1 className="font-bold">{loggedinuser}</h1>
+							<h1 className="font-bold">{name}</h1>
 							<BiChevronDown size={30} onClick={handleDropdown} />
 							{isDropdownOpen && (
-								<div className="absolute right-0 mt-2 bg-white border rounded shadow-lg top-7">
-									<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
+								<div className="absolute right-8 mt-11 bg-gray border rounded shadow-lg top-7">
+									<h1 className="block px-6 py-2 font-bold text-gray-800 hover:bg-gray-200">
 										<Link to="/Profile">Profile</Link>
 									</h1>
 									<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
@@ -100,24 +77,29 @@ const Topnav = ({ displaySearchBar, className }) => {
 									<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
 										<Link to="/wishlist">Wishlist</Link>
 									</h1>
-									<h1 className="flex px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
+									<h1
+										className="flex px-4 py-2 font-bold text-gray-800 hover:bg-gray-200"
+										onClick={() => logout()}
+									>
 										<AiOutlineLogout
 											size={25}
 											className="cursor-pointer text-primaryGreen"
-											onClick={() => {
-												Cookies.remove('token', { path: '/' });
-											}}
 										/>
 										Logout
 									</h1>
 								</div>
 							)}
 						</div>
-					) : (
+					)}
+
+					{!token && (
 						<div>
-							<h1 className="flex items-center justify-center p-1 my-4 font-bold border rounded-2xl bg-brightGray text-primaryGreen w-28">
+							<Link
+								to="/login"
+								className="flex items-center justify-center p-1 my-4 font-bold border rounded-2xl bg-brightGray text-primaryGreen w-28"
+							>
 								<Link to="/login">Login</Link>
-							</h1>
+							</Link>
 						</div>
 					)}
 
@@ -141,18 +123,20 @@ const Topnav = ({ displaySearchBar, className }) => {
 						{decodedToken ? (
 							<div className="relative flex items-center cursor-pointer text-primaryGreen">
 								<BsFillPersonFill size={40} />
-								<h1 className="font-bold">{loggedinuser}</h1>
+								<h1 className="font-bold">{name}</h1>
 								<BiChevronDown size={30} onClick={handleDropdown} />
 								{isDropdownOpen && (
 									<div className="absolute right-0 mt-2 bg-white border rounded shadow-lg top-7">
 										<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
 											<Link to="/Profile">Profile</Link>
 										</h1>
-										<h1 className="flex px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
+										<h1
+											className="flex px-4 py-2 font-bold text-gray-800 hover:bg-gray-200"
+											onClick={() => logout()}
+										>
 											<AiOutlineLogout
 												size={25}
 												className="cursor-pointer text-primaryGreen"
-												onClick={handeLogOut}
 											/>
 											Logout
 										</h1>

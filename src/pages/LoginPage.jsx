@@ -25,21 +25,18 @@ const LoginPage = () => {
 
 	const handleLogin = (e) => {
 		e.preventDefault();
-		dispatch(login(loginState));
+		dispatch(login(loginState)).then(() => {
+			setTimeout(() => {
+				if (user?.data?.others?.RoleId === 1) return navigate('/admin');
+
+				if (user?.data?.others?.RoleId === 3) return navigate('/');
+
+				if (user?.hashedOTP) return navigate('/auth');
+			}, 7000);
+			localStorage.setItem('user', JSON.stringify(user));
+		});
 	};
-
-	useEffect(() => {
-		setTimeout(() => {
-			if (user?.data?.others?.RoleId === 1) return navigate('/admin');
-
-			if (user?.data?.others?.RoleId === 3) return navigate('/');
-
-			if (user?.hashedOTP) return navigate('/auth');
-		}, 8000);
-
-		localStorage.setItem('user', JSON.stringify(user));
-	}, [user]);
-
+	
 	return (
 		<div>
 			<div className="flex flex-row items-center w-screen h-screen space-x-0 md:space-x-0">

@@ -7,9 +7,9 @@ import {
 	fetchName,
 } from '../reducers/fetchTokenSlice';
 
-const token = Cookies.get('token');
-const name = Cookies.get('name');
 export const handleToken = () => (dispatch) => {
+	const token = Cookies.get('token');
+	const name = Cookies.get('name');
 	if (token) {
 		const decodedToken = jwtDecode(token);
 		dispatch(fetchToken(token));
@@ -20,12 +20,11 @@ export const handleToken = () => (dispatch) => {
 	}
 };
 
-export const handleUserToken = (usertoken) => (dispatch) => {
-	if (usertoken) {
-		const decodedToken = jwtDecode(usertoken);
-		dispatch(fetchToken(usertoken));
-		dispatch(decodeToken(decodedToken));
-	} else {
-		dispatch(fetchFail());
-	}
+export const handleLogout = () => (dispatch) => {
+	const token = Cookies.get('token');
+	dispatch(fetchToken(token));
+	localStorage.removeItem('user');
+	Cookies.remove('token', { path: '/' });
+	Cookies.remove('name', { path: '/' });
+	return null;
 };
