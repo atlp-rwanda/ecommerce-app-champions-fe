@@ -22,6 +22,7 @@ const HomePage = () => {
 		if (!token) {
 			toast.warn('login first!', { position: 'top-right' });
 		}
+
 		setShowChat(!showChat);
 	};
 
@@ -36,23 +37,23 @@ const HomePage = () => {
 			<Banner />
 			<div className="w-screen h-screen bg-lightYellow">
 				<Topnav displaySearchBar />
-				<div className="w-full px-8 h-full  flex flex-col-reverse md:flex-row justify-between items-center">
+				<div className="flex flex-col-reverse items-center justify-between w-full h-full px-8 md:flex-row">
 					<div className="flex flex-col space-y-4 md:space-y-7 h-1/2">
-						<h1 className="text-4xl md:text-6xl text-primaryGreen font-bold">
+						<h1 className="text-4xl font-bold md:text-6xl text-primaryGreen">
 							Shopping and Shipping Made Easier
 						</h1>
 						<p className="text-xl md:text-2xl">
 							You can buy and sell any product on our platform easily and the
 							shipping is made directly
 						</p>
-						<button className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-5 w-28">
+						<button className="flex items-center justify-center p-1 my-5 font-bold text-white rounded-2xl bg-primaryGreen w-28">
 							<Link to="/product">more</Link>
 						</button>
 					</div>
-					<div className="w-full h-1/2   md:w-2/4 md:h-3/4">
+					<div className="w-full h-1/2 md:w-2/4 md:h-3/4">
 						<img
 							src={Homeimage}
-							className=" w-full h-full  object-cover cursor-pointer"
+							className="object-cover w-full h-full cursor-pointer "
 							alt="Homeimage"
 						/>
 					</div>
@@ -66,7 +67,7 @@ const HomePage = () => {
 			<Button
 				handleClick={toggleChat}
 				label={<BsChatText size={22} />}
-				className="bg-primaryGreen fixed flex items-center justify-center w-14 h-14 font-bold text-white rounded-full bottom-4 right-4 z-50"
+				className="fixed z-50 flex items-center justify-center font-bold text-white rounded-full bg-primaryGreen w-14 h-14 bottom-4 right-4"
 			/>
 			<ToastContainer />
 		</div>

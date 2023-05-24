@@ -16,6 +16,7 @@ import notifications from './auth/notificationSlice';
 import vendorProducts from './auth/vendorProductSlice';
 import searchProductSlice from './product/searchProductSlice';
 import singleProductSlice from './product/singleProductSlice';
+import trackOrderSlice from './product/trackOrderSlice';
 import reviewSlice from './review/reviewSlice';
 import ratingsSlice from './review/ratingsSlice';
 import roleSlice from './role/roleSlice';
@@ -52,6 +53,7 @@ const rootReducer = combineReducers({
 	vendor: vendorSlice,
 	payment: paymentSlice,
 	checkout: checkoutSlice,
+	orders: trackOrderSlice,
 	wishlist: wishlistSlice,
 });
 

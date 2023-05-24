@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
 	AiFillFacebook,
 	AiFillTwitterSquare,
@@ -9,13 +10,16 @@ import Logo from '../../assets/Logo.svg';
 const Footer = () => {
 	return (
 		<div className="flex flex-col w-screen">
-			<div className="w-fulll bg-lightYellow px-8 py-5 grid grid-cols-2 middle:grid-cols-3 md:grid-cols-4  justify-between  items-center ">
+			<div className="grid items-center justify-between grid-cols-2 px-8 py-5 w-fulll bg-lightYellow middle:grid-cols-3 md:grid-cols-4 ">
 				<div>
 					<h1 className="font-bold">Company</h1>
 					<p>About Us</p>
 					<p>Why Choose us</p>
 					<p>Pricing</p>
 					<p>Testimonial</p>
+					<p>
+						<Link to="/vendor">Become vendor</Link>
+					</p>
 				</div>
 
 				<div>
@@ -36,10 +40,10 @@ const Footer = () => {
 				</div>
 
 				<div>
-					<img src={Logo} className="w-32 md:w-40 cursor-pointer" alt="Logo" />
+					<img src={Logo} className="w-32 cursor-pointer md:w-40" alt="Logo" />
 				</div>
 			</div>
-			<div className="w-screen h-100 md:w-full bg-lightYellow px-7 py-5  flex justify-between  items-center">
+			<div className="flex items-center justify-between w-screen py-5 h-100 md:w-full bg-lightYellow px-7">
 				<hr className="w-1/4 font-bold" />
 				<h1>Copyright &copy; 2023</h1>
 				<span className="flex">

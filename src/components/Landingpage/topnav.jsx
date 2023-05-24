@@ -66,11 +66,11 @@ const Topnav = ({ displaySearchBar, className }) => {
 		'w-full bg-lightYellow px-8 py-2  flex  items-center justify-between';
 	return (
 		<div className={className || fixedClassNames}>
-			<div className="flex items-center space-x-5 w-1/3 ">
+			<div className="flex items-center w-1/3 space-x-5 ">
 				<Link to="/">
-					<img src={Logo} className="w-52 md:w-40 cursor-pointer" alt="Logo" />
+					<img src={Logo} className="cursor-pointer w-52 md:w-40" alt="Logo" />
 				</Link>
-				<h1 className="hidden md:block  font-bold text-primaryGreen">
+				<h1 className="hidden font-bold md:block text-primaryGreen">
 					<Link to="/product">Products</Link>
 				</h1>
 			</div>
@@ -81,26 +81,29 @@ const Topnav = ({ displaySearchBar, className }) => {
 			>
 				<GiHamburgerMenu size={36} />
 			</button>
-			<div className="hidden  lg:flex flex-col lg:flex-row justify-end w-11/12 mx-auto items-center h-full">
+			<div className="flex-col items-center justify-end hidden w-11/12 h-full mx-auto lg:flex lg:flex-row">
 				{displaySearchBar && <SearchBar />}
-				<div className="w-1/4 flex flex-col lg:flex-row justify-between items-center  ">
+				<div className="flex flex-col items-center justify-between w-1/4 lg:flex-row ">
 					{decodedToken ? (
 						<div className="flex items-center cursor-pointer text-primaryGreen">
 							<BsFillPersonFill size={28} />
 							<h1 className="font-bold">{loggedinuser}</h1>
 							<BiChevronDown size={30} onClick={handleDropdown} />
 							{isDropdownOpen && (
-								<div className="absolute bg-white rounded border shadow-lg mt-2 top-7 right-0">
-									<h1 className="block px-4 py-2 text-gray-800 hover:bg-gray-200 font-bold">
+								<div className="absolute right-0 mt-2 bg-white border rounded shadow-lg top-7">
+									<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
 										<Link to="/Profile">Profile</Link>
 									</h1>
-									<h1 className="block px-4 py-2 text-gray-800 hover:bg-gray-200 font-bold">
+									<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
+										<Link to="/order">Orders</Link>
+									</h1>
+									<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
 										<Link to="/wishlist">Wishlist</Link>
 									</h1>
-									<h1 className="flex px-4 py-2 text-gray-800 hover:bg-gray-200 font-bold">
+									<h1 className="flex px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
 										<AiOutlineLogout
 											size={25}
-											className="text-primaryGreen cursor-pointer"
+											className="cursor-pointer text-primaryGreen"
 											onClick={() => {
 												Cookies.remove('token', { path: '/' });
 											}}
@@ -112,7 +115,7 @@ const Topnav = ({ displaySearchBar, className }) => {
 						</div>
 					) : (
 						<div>
-							<h1 className="flex items-center justify-center p-1 rounded-2xl border  bg-brightGray text-primaryGreen font-bold my-4  w-28">
+							<h1 className="flex items-center justify-center p-1 my-4 font-bold border rounded-2xl bg-brightGray text-primaryGreen w-28">
 								<Link to="/login">Login</Link>
 							</h1>
 						</div>
@@ -127,28 +130,28 @@ const Topnav = ({ displaySearchBar, className }) => {
 			</div>
 
 			{showMenu && (
-				<div className="flex h-screen lg:hidden pt-10 flex-col items-center mt-50  w-3/4 md:w-3/4  bg-gray absolute top-7 right-7 rounded border shadow-lg z-10 ">
-					<div className="w-3/4  ">{displaySearchBar && <SearchBar />}</div>
-					<div className="flex items-center justify-center my-5 w-3/4">
-						<h1 className=" middle:hidden  font-bold  text-primaryGreen">
+				<div className="absolute z-10 flex flex-col items-center w-3/4 h-screen pt-10 border rounded shadow-lg lg:hidden mt-50 md:w-3/4 bg-gray top-7 right-7 ">
+					<div className="w-3/4 ">{displaySearchBar && <SearchBar />}</div>
+					<div className="flex items-center justify-center w-3/4 my-5">
+						<h1 className="font-bold middle:hidden text-primaryGreen">
 							<Link to="/product">Products</Link>
 						</h1>
 					</div>
-					<div className="w-1/4  flex flex-col justify-between items-center  mb-10 ">
+					<div className="flex flex-col items-center justify-between w-1/4 mb-10 ">
 						{decodedToken ? (
 							<div className="relative flex items-center cursor-pointer text-primaryGreen">
 								<BsFillPersonFill size={40} />
 								<h1 className="font-bold">{loggedinuser}</h1>
 								<BiChevronDown size={30} onClick={handleDropdown} />
 								{isDropdownOpen && (
-									<div className="absolute bg-white rounded border shadow-lg mt-2 top-7 right-0">
-										<h1 className="block px-4 py-2 text-gray-800 hover:bg-gray-200 font-bold">
+									<div className="absolute right-0 mt-2 bg-white border rounded shadow-lg top-7">
+										<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
 											<Link to="/Profile">Profile</Link>
 										</h1>
-										<h1 className="flex px-4 py-2 text-gray-800 hover:bg-gray-200 font-bold">
+										<h1 className="flex px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
 											<AiOutlineLogout
 												size={25}
-												className="text-primaryGreen cursor-pointer"
+												className="cursor-pointer text-primaryGreen"
 												onClick={handeLogOut}
 											/>
 											Logout
@@ -158,12 +161,12 @@ const Topnav = ({ displaySearchBar, className }) => {
 							</div>
 						) : (
 							<div>
-								<h1 className="flex items-center justify-center p-1 rounded-2xl border  bg-brightGray text-primaryGreen font-bold my-4  w-28">
+								<h1 className="flex items-center justify-center p-1 my-4 font-bold border rounded-2xl bg-brightGray text-primaryGreen w-28">
 									<Link to="/login">Login</Link>
 								</h1>
 							</div>
 						)}
-						<button className="text-primaryGreen mt-5">
+						<button className="mt-5 text-primaryGreen">
 							<Link to="/cart">
 								<MdAddShoppingCart size={40} />
 							</Link>

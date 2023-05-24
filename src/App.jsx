@@ -17,6 +17,7 @@ import CreateProduct from './pages/Createproduct';
 import SingleProductPage from './pages/SingleProductPage';
 import { ProductPage } from './pages/ProductPage';
 import SellerProductPage from './pages/SellerProductPage';
+import TrackOrder from './components/product/TrackOrder';
 import Topnav from './components/Landingpage/topnav';
 import Footer from './components/Landingpage/Footer';
 import PaymentSuccesspage from './components/payment/payment';
@@ -37,6 +38,7 @@ function App() {
 				<Route path="/profile" element={<ProfilePage />} />
 				<Route path="/admin" element={<AdminDashboard />} />
 				<Route path="/vendors" element={<VendorDashboard />} />
+				<Route path="/order" element={<TrackOrder />} />
 				<Route
 					path="/cart"
 					element={

@@ -51,7 +51,7 @@ const vendorDashboard = () => {
 				<div>
 					<div className="flex relative bg-[#DBE4EE]">
 						{activeMenu ? (
-							<div className="w-72 fixed sidebar bg-white ">
+							<div className="fixed bg-white w-72 sidebar ">
 								<VendorSidebar
 									showEcommerce={showEcommerce}
 									setShowEcommerce={setShowEcommerce}
@@ -76,7 +76,7 @@ const vendorDashboard = () => {
 								activeMenu ? 'md:ml-72' : 'flex-2'
 							}`}
 						>
-							<div className="fixed md:static bg-main-bg navbar w-full ">
+							<div className="fixed w-full md:static bg-main-bg navbar ">
 								<Navbar />
 							</div>
 

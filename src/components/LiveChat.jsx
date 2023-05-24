@@ -12,7 +12,8 @@ import envKeys from '../constants/keys';
 
 let socket;
 const user = localStorage.getItem('user');
-const others = JSON.parse(user)?.data.others;
+
+const others = JSON.parse(user)?.data?.others;
 
 const LiveChat = () => {
 	const url = envKeys.APP_URL;
@@ -60,7 +61,6 @@ const LiveChat = () => {
 		socket.on('message', (msg) => {
 			if (msg.text === 'welcome to Our public chat') {
 				// eslint-disable-next-line no-new, new-cap
-				// new toast(`${msg.text}`);
 			}
 
 			setMessages((prevMessages) => [...prevMessages, msg]);
@@ -93,10 +93,10 @@ const LiveChat = () => {
 	return (
 		others &&
 		showModel && (
-			<div className="fixed flex p-2 pr-3 bottom-20 rounded-2xl h-3/4 right-2 md:right-1 bg-gray z-40 w-3/4 md:w-1/3">
-				<div className="hidden md:flex flex-col space-y-3 w-1/3">
+			<div className="fixed z-40 flex w-3/4 p-2 pr-3 bottom-20 rounded-2xl h-3/4 right-2 md:right-1 bg-gray md:w-1/3">
+				<div className="flex-col hidden w-1/3 space-y-3 md:flex">
 					<div className="text-lg font-bold">Champions</div>
-					<div className=" text-sm font-semibold">Status:</div>
+					<div className="text-sm font-semibold ">Status:</div>
 					<div className="">{status}</div>
 					<div className="text-sm font-semibold">Active Users:</div>
 					<ul id="users" className="">
@@ -110,13 +110,13 @@ const LiveChat = () => {
 						))}
 					</ul>
 				</div>
-				<div className="flex flex-col  h-full w-full md:w-4/5">
+				<div className="flex flex-col w-full h-full md:w-4/5">
 					<Button
-						className="absolute top-2 right-2 font-bold"
+						className="absolute font-bold top-2 right-2"
 						handleClick={() => setShowModel(false)}
 						label={<RxCross2 size={28} className="text-primaryGreen" />}
 					/>
-					<div className="text-lg font-bold bg-lightYellow px-3 py-1">
+					<div className="px-3 py-1 text-lg font-bold bg-lightYellow">
 						<div className="flex items-center">Chat</div>
 					</div>
 
@@ -141,7 +141,7 @@ const LiveChat = () => {
 								ref={messageInput}
 								autoComplete="off"
 								placeholder="Type your message here..."
-								className="flex-1 px-3 py-1 mr-2 border border-gray rounded-md"
+								className="flex-1 px-3 py-1 mr-2 border rounded-md border-gray"
 							/>
 							<Button
 								buttontype="submit"
