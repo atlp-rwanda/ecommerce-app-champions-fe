@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineCancel } from 'react-icons/md';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-import { handleUserToken } from '../../redux/actions/token.action';
+import { handleToken } from '../../redux/actions/token.action';
 import {
 	getBuyerProfile,
 	getVendorProfile,
@@ -15,15 +15,14 @@ import { userProfileData } from '../../dummyData/dummy';
 import avatar from '../../dummyData/passport_photo.jpg';
 
 const UserProfile = () => {
-	const token = Cookies.get('token');
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [loggedinuser, setLoggedinuser] = useState('');
-	const { decodedToken } = useSelector((state) => state.token || {});
+	const { decodedToken, token } = useSelector((state) => state.token || {});
 	const { profile } = useSelector((state) => state.userProfile || {});
 	useEffect(() => {
-		dispatch(handleUserToken(token));
-	}, [dispatch, token]);
+		dispatch(handleToken());
+	}, [dispatch]);
 	useEffect(() => {
 		if (decodedToken) {
 			if (decodedToken?.role.roleName === 'buyer') {
