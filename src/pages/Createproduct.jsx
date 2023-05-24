@@ -83,7 +83,7 @@ const CreateProduct = ({ setIsOpen, setShowAddProduct }) => {
 		};
 	}, [product, imageFiles, setIsOpen, dispatch]);
 	return (
-		<div className="bg-[#EEF0F2] relative createProduct w-[1100px] sm:w-3/4  bg-white  flex flex-col overflow-auto   items-center p-10 my-20 ">
+		<div className="bg-[#EEF0F2] relative createProduct w-[1100px] sm:w-3/4  flex flex-col overflow-auto   items-center p-10 my-20 ">
 			<div className="absolute right-[80px] top-[10px] ">
 				<NotButton
 					icon={<MdOutlineCancel />}

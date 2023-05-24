@@ -47,6 +47,9 @@ export const deleteProduct = (productId, token) => async (dispatch) => {
 			position: toast.POSITION.TOP_RIGHT,
 		});
 	} catch (error) {
+		toast.error(`${error.message} `, {
+			position: toast.POSITION.TOP_RIGHT,
+		});
 		dispatch(deleteProductFail(error.message));
 	}
 };
@@ -59,6 +62,9 @@ export const fetchAvailableProducts = () => async (dispatch) => {
 
 		dispatch(getAvailableProductsSuccess(products));
 	} catch (error) {
+		toast.error(`${error.message} `, {
+			position: toast.POSITION.TOP_RIGHT,
+		});
 		dispatch(getAvailableProductsFail(error.message));
 	}
 };
@@ -71,6 +77,9 @@ export const getSingleProduct = (productId) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(getSingleProductFail(error.message));
 		}
 		return dispatch(getSingleProductFail(error.Error));
@@ -85,6 +94,9 @@ export const getRecommendedProducts = (productName) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(getrRecommenedProductsFail(error.message));
 		}
 		return dispatch(getrRecommenedProductsFail(error.Error));

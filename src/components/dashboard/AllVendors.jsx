@@ -30,7 +30,6 @@ const AllVendors = ({ vendor }) => {
 	const { token } = useSelector((state) => state.token);
 	const { loading } = useSelector((state) => state.role);
 	const dispatch = useDispatch();
-	const tokenn = Cookies.get('token');
 
 	const onClick = () => {
 		setVisible(true);
@@ -129,10 +128,6 @@ const AllVendors = ({ vendor }) => {
 								>
 									{item?.User?.active === true ? 'deactivate' : 'activate'}
 								</span>
-								<BsFillTrashFill
-									size={20}
-									className="text-lightRed cursor-pointer"
-								/>
 							</Table.Cell>
 						</Table.Row>
 					</Table.Body>
