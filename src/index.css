@@ -348,7 +348,7 @@
 .pagination-item {
 	display: inline-block;
 	margin: 6px;
-	padding: 5px;
+	padding: 6px;
 }
 .pagination-item:hover {
 	border-radius: 10%;
@@ -413,4 +413,8 @@
 	margin-top: 10%;
 	width: 100%;
 	justify-content: space-between;
+}
+.stars {
+	margin-bottom: 10px !important;
+	margin-top: 10px !important;
 }

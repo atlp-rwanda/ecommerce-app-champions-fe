@@ -74,7 +74,7 @@ function Sales() {
 							totalItemsCount={salesItems?.data?.getSales?.length}
 							pageRangeDisplayed={5}
 							onChange={handlePageChange}
-							itemClass="hover:bg-red pagination-item text-[#4B7F52] hover:text-[#1C1F33] cursor-pointer"
+							itemClass="hover:bg-[#16C172] pagination-item text-[#4B7F52] hover:text-[#1C1F33] cursor-pointer"
 							activeClass="font-bold"
 							activeLinkClass="font-bold"
 						/>
