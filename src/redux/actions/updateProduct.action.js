@@ -19,7 +19,7 @@ export const updateExistingProduct = (id, data, token) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
-			toast.error(`Something went wrong , Please try again `, {
+			toast.error(`${error.message} `, {
 				position: toast.POSITION.TOP_RIGHT,
 			});
 			return dispatch(updateFail(error.message));

@@ -20,7 +20,9 @@ export const createPermission = (token, data) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
-			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(createPermissionFail(error.message));
 		}
 		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
@@ -40,10 +42,14 @@ export const enableAndDisableUserPermission =
 			return res;
 		} catch (error) {
 			if (error) {
-				toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+				toast.error(`${error.message} `, {
+					position: toast.POSITION.TOP_RIGHT,
+				});
 				return dispatch(enableAndDisablePermissionFail(error.message));
 			}
-			toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(enableAndDisablePermissionFail(error.Error));
 		}
 	};

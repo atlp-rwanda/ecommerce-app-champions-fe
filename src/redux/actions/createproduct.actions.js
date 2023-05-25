@@ -19,7 +19,9 @@ export const createnewProduct = (Data, token) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
-			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(createFail(error.message));
 		}
 		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
