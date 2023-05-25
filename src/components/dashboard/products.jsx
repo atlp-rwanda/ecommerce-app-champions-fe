@@ -31,7 +31,6 @@ function Products() {
 	);
 	const [searchResults, setSearchResults] = useState(null);
 	const [selectedProduct, setSelectedProduct] = useState(null);
-	const navigate = useNavigate();
 
 	const token = Cookies.get('token');
 
