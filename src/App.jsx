@@ -23,6 +23,7 @@ import Footer from './components/Landingpage/Footer';
 import PaymentSuccesspage from './components/payment/payment';
 import Products from './components/dashboard/products';
 import Wishlist from './components/wishlist/Wishlist';
+import LoginSuccesspage from './pages/Googlelogin';
 
 function App() {
 	return (
@@ -43,7 +44,7 @@ function App() {
 					path="/cart"
 					element={
 						<>
-							<Topnav displaySearchBar />
+							<Topnav />
 							<CartPage />
 							<Footer />
 						</>
@@ -55,10 +56,10 @@ function App() {
 						<>
 							<Topnav />
 							<PaymentSuccesspage />
-							<Footer />
 						</>
 					}
 				/>
+				<Route path="/loginSuccess" element={<LoginSuccesspage />} />
 				<Route path="/product" element={<ProductPage />} />
 
 				<Route path="/product/:productId" element={<SingleProductPage />} />

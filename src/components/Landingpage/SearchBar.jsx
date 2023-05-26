@@ -10,10 +10,11 @@ const SearchBar = ({ handleSearch }) => {
 		if (searchParam.trim() === '') {
 			return;
 		}
-		handleSearch(searchParam);
+		const searchQuery = encodeURIComponent(searchParam);
+		handleSearch(searchQuery);
 	};
 	return (
-		<form onSubmit={() => handleSubmit()} className="w-full h-2/3">
+		<form onSubmit={handleSubmit} className="w-full h-2/3">
 			<div className="flex items-center space-x-1 w-full md:w-3/4 bg-white h-full rounded-full px-2 ">
 				<input
 					placeholder="Search for product.... "
@@ -21,7 +22,7 @@ const SearchBar = ({ handleSearch }) => {
 					name="search"
 					type="text"
 					autoComplete="true"
-					className="w-11/12 h-full border-none  rounded-full  appearance-none outline-none"
+					className="w-11/12 h-full border-none  rounded-full  appearance-none outline-none border-transparent focus:border-transparent focus:ring-0 bg-transparent"
 					onChange={(e) => setSearchParam(e.target.value)}
 					value={searchParam}
 				/>

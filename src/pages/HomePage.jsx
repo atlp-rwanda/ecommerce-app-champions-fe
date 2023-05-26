@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { BsChatText } from 'react-icons/bs';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import LiveChat from '../components/LiveChat';
 import Button from '../components/Button/Button';
@@ -13,12 +13,15 @@ import Topnav from '../components/Landingpage/topnav';
 import Footer from '../components/Landingpage/Footer';
 import Homeproduct from '../components/Landingpage/Availableproduct';
 import Banner from '../components/Landingpage/Banner';
-import { searchProducts } from '../redux/actions/searchProduct.action';
+import { fetchAvailableProducts } from '../redux/actions/product.action';
 
 const HomePage = () => {
 	const [showChat, setShowChat] = useState(false);
 	const { token } = useSelector((state) => state.token || {});
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const location = useLocation();
+
 	const toggleChat = () => {
 		if (!token) {
 			toast.warn('login first!', { position: 'top-right' });
@@ -31,11 +34,12 @@ const HomePage = () => {
 		dispatch(handleToken());
 	}, [dispatch]);
 
-	const handleSearch = (value, event) => {
-		event.preventDefault();
-		dispatch(searchProducts(value));
+	const handleSearch = (value) => {
+		const searchURL = new URLSearchParams(location.search);
+		searchURL.set('search', value);
+		navigate(`${location.pathname}?${searchURL}`);
+		dispatch(fetchAvailableProducts());
 	};
-
 	return (
 		<div className="">
 			{showChat && LiveChat ? <LiveChat /> : ''}
@@ -67,7 +71,6 @@ const HomePage = () => {
 					<div />
 				</div>
 			</div>
-
 			<Homeproduct />
 			<Footer />
 			<Button
