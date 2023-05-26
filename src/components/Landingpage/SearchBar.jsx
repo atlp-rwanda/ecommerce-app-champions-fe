@@ -1,21 +1,19 @@
+/* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
 
-const SearchBar = () => {
+const SearchBar = ({ handleSearch }) => {
 	const [searchParam, setSearchParam] = useState('');
-	const navigate = useNavigate();
-	const handleSearch = (event) => {
+
+	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (searchParam.trim() === '') {
 			return;
 		}
-		const searchQuery = encodeURIComponent(searchParam);
-		navigate(`/?search=${searchQuery}`);
-		setSearchParam('');
+		handleSearch(searchParam);
 	};
 	return (
-		<form onSubmit={handleSearch} className="w-full h-2/3">
+		<form onSubmit={() => handleSubmit()} className="w-full h-2/3">
 			<div className="flex items-center space-x-1 w-full md:w-3/4 bg-white h-full rounded-full px-2 ">
 				<input
 					placeholder="Search for product.... "
@@ -28,7 +26,10 @@ const SearchBar = () => {
 					value={searchParam}
 				/>
 				<button type="submit" className="p-0">
-					<FiSearch size={24} className="cursor-pointer w-full text-black" />
+					<FiSearch
+						size={24}
+						className="cursor-pointer w-full text-black font-bold"
+					/>
 				</button>
 			</div>
 		</form>

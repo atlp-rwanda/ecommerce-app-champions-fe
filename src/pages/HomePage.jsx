@@ -13,6 +13,7 @@ import Topnav from '../components/Landingpage/topnav';
 import Footer from '../components/Landingpage/Footer';
 import Homeproduct from '../components/Landingpage/Availableproduct';
 import Banner from '../components/Landingpage/Banner';
+import { searchProducts } from '../redux/actions/searchProduct.action';
 
 const HomePage = () => {
 	const [showChat, setShowChat] = useState(false);
@@ -30,14 +31,19 @@ const HomePage = () => {
 		dispatch(handleToken());
 	}, [dispatch]);
 
+	const handleSearch = (value, event) => {
+		event.preventDefault();
+		dispatch(searchProducts(value));
+	};
+
 	return (
 		<div className="">
 			{showChat && LiveChat ? <LiveChat /> : ''}
 
 			<Banner />
 			<div className="w-screen h-screen bg-lightYellow">
-				<Topnav displaySearchBar />
-				<div className="flex flex-col-reverse items-center justify-between w-full h-full px-8 md:flex-row">
+				<Topnav displaySearchBar handleSearch={handleSearch} />
+				<div className="w-full px-8 h-full  flex flex-col-reverse md:flex-row justify-between items-center">
 					<div className="flex flex-col space-y-4 md:space-y-7 h-1/2">
 						<h1 className="text-4xl font-bold md:text-6xl text-primaryGreen">
 							Shopping and Shipping Made Easier

@@ -12,7 +12,7 @@ import {
 	getAllWishlist,
 } from '../../redux/actions/wishList.action';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, className, btnclassName }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [clickedProductId, setClickedProductId] = useState(null);
 	const [showHeart, setShowHeart] = useState(false);

@@ -15,6 +15,7 @@ import Clothes from '../assets/clothes.jpg';
 import Shoes from '../assets/shoes.jpg';
 import Electronics from '../assets/electronics.jpg';
 import Cosmetics from '../assets/cosmetics.jpg';
+import { searchProducts } from '../redux/actions/searchProduct.action';
 
 export const ProductPage = () => {
 	const [products, setProducts] = useState([]);
@@ -37,11 +38,16 @@ export const ProductPage = () => {
 		}
 	}, [items]);
 
+	const handleSearch = (value) => {
+		dispatch(searchProducts(value));
+	};
+
 	return (
 		<div className="flex flex-col space-y-5">
 			<div className=" flex flex-col w-screen h-screen overflow-x-hidden">
 				<Topnav
 					displaySearchBar
+					handleSearch={handleSearch}
 					className="w-full bg-lightYellow px-8  flex  items-center justify-between h-16"
 				/>
 

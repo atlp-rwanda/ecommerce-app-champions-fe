@@ -1,23 +1,16 @@
 /* eslint-disable no-restricted-globals */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { AiFillStar } from 'react-icons/ai';
-import { FiHeart } from 'react-icons/fi';
-import Cookies from 'js-cookie';
-import { ToastContainer, toast } from 'react-toastify';
+import { Link, useLocation } from 'react-router-dom';
 import { fetchAvailableProducts } from '../../redux/actions/product.action';
 import Button from '../Button/Button';
 import LoadingSpinner from '../LoadingSpinner';
 import ProductCard from '../product/ProductCard';
+
 const Homeproduct = () => {
 	const [availableProducts, setAvailableProducts] = useState([]);
 	const { products } = useSelector((state) => state.products || {});
 	const { loading } = useSelector((state) => state.products || {});
-	const token = Cookies.get('token');
-
-	const [isLoading, setIsLoading] = useState(false);
-	const [clickedProductId, setClickedProductId] = useState(null);
 	const [selectedCategory, setSelectedCategory] = useState('All');
 
 	const location = useLocation();
