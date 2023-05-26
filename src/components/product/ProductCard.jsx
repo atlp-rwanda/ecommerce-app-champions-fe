@@ -11,7 +11,8 @@ import {
 	addItemToWishList,
 	getAllWishlist,
 } from '../../redux/actions/wishList.action';
-const ProductCard = ({ product }) => {
+
+const ProductCard = ({ product, className, btnclassName }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [clickedProductId, setClickedProductId] = useState(null);
 	const [showHeart, setShowHeart] = useState(false);
@@ -45,7 +46,7 @@ const ProductCard = ({ product }) => {
 		});
 	};
 	return (
-		<div className="card bg-[#EEF0F2] border-2 border-lightYellow rounded-md relative hover:scale-105  duration-200 ease-in-out ">
+		<div className="card bg-[#EEF0F2] border-2 border-lightYellow rounded-md relative hover:scale-105  duration-200 ease-in-out  p-1 ">
 			<div className="absolute top-1 right-1 flex items-center justify-center w-8 h-8 rounded-full ">
 				{showHeart && (
 					<FiHeart

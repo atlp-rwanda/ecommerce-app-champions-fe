@@ -30,7 +30,7 @@ const LoginPage = () => {
 				navigate('/admin');
 			} else if (res.data?.others?.RoleId === 3) {
 				navigate('/');
-			} else {
+			} else if (res.hashedOTP) {
 				navigate('/auth');
 			}
 		});

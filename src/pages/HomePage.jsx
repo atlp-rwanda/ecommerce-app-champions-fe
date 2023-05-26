@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { BsChatText } from 'react-icons/bs';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import LiveChat from '../components/LiveChat';
 import Button from '../components/Button/Button';
@@ -13,11 +13,15 @@ import Topnav from '../components/Landingpage/topnav';
 import Footer from '../components/Landingpage/Footer';
 import Homeproduct from '../components/Landingpage/Availableproduct';
 import Banner from '../components/Landingpage/Banner';
+import { fetchAvailableProducts } from '../redux/actions/product.action';
 
 const HomePage = () => {
 	const [showChat, setShowChat] = useState(false);
 	const { token } = useSelector((state) => state.token || {});
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const location = useLocation();
+
 	const toggleChat = () => {
 		if (!token) {
 			toast.warn('login first!', { position: 'top-right' });
@@ -30,14 +34,20 @@ const HomePage = () => {
 		dispatch(handleToken());
 	}, [dispatch]);
 
+	const handleSearch = (value) => {
+		const searchURL = new URLSearchParams(location.search);
+		searchURL.set('search', value);
+		navigate(`${location.pathname}?${searchURL}`);
+		dispatch(fetchAvailableProducts());
+	};
 	return (
 		<div className="">
 			{showChat && LiveChat ? <LiveChat /> : ''}
 
 			<Banner />
 			<div className="w-screen h-screen bg-lightYellow">
-				<Topnav displaySearchBar />
-				<div className="flex flex-col-reverse items-center justify-between w-full h-full px-8 md:flex-row">
+				<Topnav displaySearchBar handleSearch={handleSearch} />
+				<div className="w-full px-8 h-full  flex flex-col-reverse md:flex-row justify-between items-center">
 					<div className="flex flex-col space-y-4 md:space-y-7 h-1/2">
 						<h1 className="text-4xl font-bold md:text-6xl text-primaryGreen">
 							Shopping and Shipping Made Easier
@@ -61,7 +71,6 @@ const HomePage = () => {
 					<div />
 				</div>
 			</div>
-
 			<Homeproduct />
 			<Footer />
 			<Button

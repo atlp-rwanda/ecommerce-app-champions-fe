@@ -12,8 +12,9 @@ import envKeys from '../constants/keys';
 
 let socket;
 const user = localStorage.getItem('user');
+const parsedData = JSON.parse(user);
 
-const others = JSON.parse(user)?.data?.others;
+const others = parsedData?.data?.others ? parsedData?.data?.others : parsedData;
 
 const LiveChat = () => {
 	const url = envKeys.APP_URL;

@@ -19,7 +19,6 @@ export const login = (userData) => async (dispatch) => {
 			Cookies.set('name', res.data.others.firstName, { expires: 7 });
 			dispatch(loginSuccess(res));
 		} else if (res.loginOTP) {
-			console.log(res);
 			Cookies.set('loginOTP', res.loginOTP);
 			dispatch(loginSuccess(res));
 		} else if (res.passwordExpired) {
