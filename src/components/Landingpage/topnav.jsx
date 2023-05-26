@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { GrClose } from 'react-icons/gr';
 
 import { BiChevronDown } from 'react-icons/bi';
 import { AiOutlineLogout } from 'react-icons/ai';
@@ -17,7 +18,6 @@ import SearchBar from './SearchBar';
 const Topnav = ({ displaySearchBar, className }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-	const navigate = useNavigate();
 
 	const handleDropdown = () => {
 		setIsDropdownOpen(!isDropdownOpen);
@@ -53,10 +53,10 @@ const Topnav = ({ displaySearchBar, className }) => {
 			</div>
 
 			<button
-				className="block md:hidden text-primaryGreen right-7 "
+				className="block lg:hidden text-primaryGreen absolute right-7 z-11  "
 				onClick={toggleMenu}
 			>
-				<GiHamburgerMenu size={36} />
+				{showMenu ? <GrClose size={40} /> : <GiHamburgerMenu size={40} />}
 			</button>
 			<div className="flex-col items-center justify-end hidden w-11/12 h-full mx-auto lg:flex lg:flex-row">
 				{displaySearchBar && <SearchBar />}
@@ -110,12 +110,11 @@ const Topnav = ({ displaySearchBar, className }) => {
 					</button>
 				</div>
 			</div>
-
 			{showMenu && (
-				<div className="absolute z-10 flex flex-col items-center w-3/4 h-screen pt-10 border rounded shadow-lg lg:hidden mt-50 md:w-3/4 bg-gray top-7 right-7 ">
-					<div className="w-3/4 ">{displaySearchBar && <SearchBar />}</div>
-					<div className="flex items-center justify-center w-3/4 my-5">
-						<h1 className="font-bold middle:hidden text-primaryGreen">
+				<div className="flex h-screen lg:hidden pt-10 flex-col items-center mt-50  w-3/4 md:w-3/4  bg-gray absolute top-14 md:top-22 right-7 rounded border shadow-lg z-10 ">
+					<div className="w-3/4  ">{displaySearchBar && <SearchBar />}</div>
+					<div className="flex items-center justify-center my-5 w-3/4">
+						<h1 className=" md:hidden  font-bold  text-primaryGreen">
 							<Link to="/product">Products</Link>
 						</h1>
 					</div>
@@ -129,6 +128,12 @@ const Topnav = ({ displaySearchBar, className }) => {
 									<div className="absolute right-0 mt-2 bg-white border rounded shadow-lg top-7">
 										<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
 											<Link to="/Profile">Profile</Link>
+										</h1>
+										<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
+											<Link to="/order">Orders</Link>
+										</h1>
+										<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
+											<Link to="/wishlist">Wishlist</Link>
 										</h1>
 										<h1
 											className="flex px-4 py-2 font-bold text-gray-800 hover:bg-gray-200"

@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable no-restricted-globals */
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { AiFillStar } from 'react-icons/ai';
+import { FiHeart } from 'react-icons/fi';
+import Cookies from 'js-cookie';
+import { ToastContainer, toast } from 'react-toastify';
 import { fetchAvailableProducts } from '../../redux/actions/product.action';
 import Button from '../Button/Button';
 import LoadingSpinner from '../LoadingSpinner';
@@ -9,35 +14,90 @@ const Homeproduct = () => {
 	const [availableProducts, setAvailableProducts] = useState([]);
 	const { products } = useSelector((state) => state.products || {});
 	const { loading } = useSelector((state) => state.products || {});
+	const token = Cookies.get('token');
+
+	const [isLoading, setIsLoading] = useState(false);
+	const [clickedProductId, setClickedProductId] = useState(null);
+	const [selectedCategory, setSelectedCategory] = useState('All');
+
+	const location = useLocation();
+	const searchParams = new URLSearchParams(location.search);
+	const searchQuery = searchParams.get('search');
+
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchAvailableProducts());
 	}, [dispatch]);
 	useEffect(() => {
-		if (products) {
+		if (products && products?.items) {
+			const filteredProducts = products?.items.filter((product) =>
+				product.productName.includes(searchQuery)
+			);
+			setAvailableProducts(filteredProducts);
+			const cleanURL = window.location.href.split('?')[0];
+			history.replaceState(null, null, cleanURL);
+		}
+
+		if (searchQuery === null && products && products?.items) {
 			setAvailableProducts(products.items);
 		}
-	}, [products, products.items]);
+	}, [products, products.items, searchQuery]);
+
 	const product = availableProducts ? availableProducts.slice(0, 8) : [];
+
+	const filteredProducts =
+		selectedCategory === 'All'
+			? product
+			: product.filter((item) => item.Category.name === selectedCategory);
+
 	return (
 		<div className="w-full mx-auto px-8 py-4 ">
 			<h3 className="w-full font-bold text-3xl">Todays Best Deals for You!</h3>
 			<div className="grid grid-cols-2 middle:flex  gap-5 middle:w-full">
 				<Button
 					label="All"
-					className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-white font-bold my-4  w-28"
+					className={`flex items-center justify-center p-1 rounded-2xl ${
+						selectedCategory === 'All'
+							? 'bg-primaryGreen text-white'
+							: 'bg-brightGray text-black'
+					} my-4  w-28`}
+					onClick={() => setSelectedCategory('All')}
 				/>
 				<Button
 					label="clothes"
-					className="flex items-center justify-center p-1 rounded-2xl  bg-brightGray text-black  my-4  w-28"
+					className={`flex items-center justify-center p-1 rounded-2xl ${
+						selectedCategory === 'clothes'
+							? 'bg-primaryGreen text-white'
+							: 'bg-brightGray text-black'
+					} my-4  w-28`}
+					onClick={() => setSelectedCategory('clothes')}
 				/>
 				<Button
 					label="electronics"
-					className="flex items-center justify-center p-1 rounded-2xl  bg-brightGray text-black my-4  w-28"
+					className={`flex items-center justify-center p-1 rounded-2xl ${
+						selectedCategory === 'electronics'
+							? 'bg-primaryGreen text-white'
+							: 'bg-brightGray text-black'
+					} my-4  w-28`}
+					onClick={() => setSelectedCategory('electronics')}
 				/>
 				<Button
 					label="food"
-					className="flex items-center justify-center p-1 rounded-2xl  bg-brightGray text-black my-4  w-28"
+					className={`flex items-center justify-center p-1 rounded-2xl ${
+						selectedCategory === 'food'
+							? 'bg-primaryGreen text-white'
+							: 'bg-brightGray text-black'
+					} my-4  w-28`}
+					onClick={() => setSelectedCategory('food')}
+				/>
+				<Button
+					label="fashion"
+					className={`flex items-center justify-center p-1 rounded-2xl ${
+						selectedCategory === 'fashion'
+							? 'bg-primaryGreen text-white'
+							: 'bg-brightGray text-black'
+					} my-4  w-28`}
+					onClick={() => setSelectedCategory('fashion')}
 				/>
 				<Link
 					to="/product"
@@ -55,7 +115,7 @@ const Homeproduct = () => {
 							</div>
 						</div>
 					) : (
-						product?.map((item) => (
+						filteredProducts?.map((item) => (
 							<ProductCard key={item.productId} product={item} />
 						))
 					)}
