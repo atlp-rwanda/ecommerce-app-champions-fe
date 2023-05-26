@@ -71,7 +71,7 @@ function Products() {
 				<div className="m-2 md:m-10 mt-24 p-2 md:p-10 rounded-3xl">
 					<div className="productAdd">
 						<button
-							className="add rounded-[50px] px-[1.5em] py-[0.5em] bg-primaryGreen w-[200px] text-[#92E3A9] font-bold p-[20px],inset_0px_2px_1px_0px_rgba(255,255,255,0.75)] hover:bg-emerald-500  samsung:relative samsung:left-[-15px]"
+							className=" add rounded-[50px] px-[1.5em] py-[0.5em] bg-primaryGreen w-[200px] text-[#92E3A9] font-bold p-[20px],inset_0px_2px_1px_0px_rgba(255,255,255,0.75)] hover:bg-emerald-500  samsung:relative samsung:left-[-15px]"
 							onClick={() => setAddProductVisible(true)}
 						>
 							Add Product
@@ -117,11 +117,9 @@ function Products() {
 											<td>
 												{/* <Link to={`/SellerProductPage/${item.productId}`}> */}
 												<FaEye
-													className="text-[#8C271E] eye cursor-pointer rosy_brown rounded  h-5"
-													style={{ color: 'rosybrown' }}
+													className="  cursor-pointer "
 													onClick={() => handleGetSingleProduct(item.productId)}
 												/>
-												{/* </Link> */}
 											</td>
 										</tr>
 									))
@@ -147,12 +145,11 @@ function Products() {
 													className="delete text-red-600 cursor-pointer"
 													onClick={() => setSelectedProduct(item)}
 												/>
-											</td>
-											<td>
+												{/* </td> */}
+												{/* <td> */}
 												{/* <Link to={`/SellerProductPage/${item.productId}`}> */}
 												<FaEye
-													className="text-[#8C271E] eye cursor-pointer rosy_brown rounded  h-5"
-													style={{ color: 'rosybrown' }}
+													className="  cursor-pointer "
 													onClick={() => handleGetSingleProduct(item.productId)}
 												/>
 												{/* </Link> */}

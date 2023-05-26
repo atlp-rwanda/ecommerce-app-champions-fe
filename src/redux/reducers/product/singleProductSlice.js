@@ -19,7 +19,6 @@ const singleProductSlice = createSlice({
 			state.loading = false;
 			state.products = action.payload;
 			state.error = null;
-			state.setProductId = null;
 		},
 		getProductByIdFail: (state, action) => {
 			state.loading = false;

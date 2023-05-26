@@ -59,11 +59,41 @@ export const searchProd = (product) => {
 	});
 };
 
+export const enableProduct = (id, token) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/product/enable?searchParam=${id}`, {
+				headers: { token: `Bearer ${token}` },
+			})
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
+export const disableProduct = (id, token) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(`${url}/api/product/disable?searchParam=${id}`, {
+				headers: { token: `Bearer ${token}` },
+			})
+			.then((response) => resolve(response.data))
+			.catch((error) => {
+				if (error.response.data !== undefined) {
+					reject(error.response.data);
+				}
+				reject(error);
+			});
+	});
+};
 const api = {
 	getVendorProducts: (token) => {
 		return new Promise((resolve, reject) => {
 			axios
-				.get(`${url}/api/product/getAvailable`, {
+				.get(`${url}/api/product/get-seller-products`, {
 					headers: {
 						token: `Bearer ${token}`,
 					},

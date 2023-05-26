@@ -26,6 +26,8 @@ import vendorSlice from './vendor/vendorSlice';
 import paymentSlice from './pay/paymentSlice';
 import checkoutSlice from './pay/checkoutSlice';
 import wishlistSlice from './WishList/wishlistSlice';
+import enableProductSlice from './product/enableProductSlice';
+import disableProductSlice from './product/disableProductSlice';
 
 const rootReducer = combineReducers({
 	cart: cartSlice,
@@ -55,6 +57,8 @@ const rootReducer = combineReducers({
 	checkout: checkoutSlice,
 	orders: trackOrderSlice,
 	wishlist: wishlistSlice,
+	enableProduct: enableProductSlice,
+	disableProduct: disableProductSlice,
 });
 
 export default rootReducer;
