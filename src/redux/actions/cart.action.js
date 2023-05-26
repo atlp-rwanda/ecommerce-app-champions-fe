@@ -80,7 +80,9 @@ export const clearCart = (token) => async (dispatch) => {
 		});
 	} catch (error) {
 		if (error) {
-			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(clearCartFail(error.message));
 		}
 		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
@@ -100,10 +102,14 @@ export const removeItem = (id, token) => async (dispatch) => {
 		});
 	} catch (error) {
 		if (error) {
-			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(clearCartFail(error.message));
 		}
-		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+		toast.error(`${error.message} `, {
+			position: toast.POSITION.TOP_RIGHT,
+		});
 		return dispatch(clearCartFail(error.Error));
 	}
 };

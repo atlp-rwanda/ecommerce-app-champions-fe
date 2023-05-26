@@ -17,6 +17,7 @@ import Loader from '../components/vendorDashboard/Loader';
 import LiveChat from '../components/LiveChat';
 import { handleToken } from '../redux/actions/token.action';
 import Button from '../components/Button/Button';
+import Sales from '../components/vendorDashboard/Sales';
 
 const vendorDashboard = () => {
 	const { activeMenu } = useStateContext();
@@ -98,6 +99,7 @@ const vendorDashboard = () => {
 							<div>
 								{showEcommerce && <Ecommerce />}
 								{showProducts && <Products />}
+								{showSales && <Sales />}
 							</div>
 						</div>
 					</div>
