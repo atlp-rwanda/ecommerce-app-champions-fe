@@ -1,10 +1,9 @@
 import { toast } from 'react-toastify';
-
 import {
 	searchPending,
 	searchSuccess,
 	searchFail,
-} from '../reducers/product/searchProductSlice';
+} from '../reducers/product/productSlice';
 import { searchProduct } from '../../api/productApi';
 
 export const searchProducts = (id, data, token) => async (dispatch) => {

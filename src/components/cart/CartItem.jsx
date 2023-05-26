@@ -34,8 +34,8 @@ const CartItem = ({
 					<div className="flex flex-col  w-1/2 space-y-5">
 						<h4 className="font-bold">{product.productName}</h4>
 						<h3>
-							<span className="font-medium hidden md:block">Price: </span>${' '}
-							{product.productPrice}
+							<span className="font-medium hidden md:block">Price: </span>
+							{product.productPrice} RWF
 						</h3>
 					</div>
 					<div className="flex flex-col w-1/2 items-end space-y-5 mr-0 md:mr-4">
@@ -69,8 +69,8 @@ const CartItem = ({
 							</div>
 						</div>
 						<h3 className="flex">
-							<span className="font-medium hidden md:block">Total: </span> ${' '}
-							{product.productTotal}
+							<span className="font-medium hidden md:block">Total: </span>
+							{product.productTotal} RWF
 						</h3>
 					</div>
 				</div>

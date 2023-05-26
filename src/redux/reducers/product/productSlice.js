@@ -80,6 +80,19 @@ const productsSlice = createSlice({
 			state.products = null;
 			state.error = action.payload;
 		},
+		searchPending: (state) => {
+			state.loading = true;
+		},
+		searchSuccess: (state, action) => {
+			state.loading = false;
+			state.products = action.payload;
+			state.error = null;
+		},
+		searchFail: (state, action) => {
+			state.loading = false;
+			state.products = [];
+			state.error = action.payload;
+		},
 	},
 });
 
@@ -99,6 +112,9 @@ export const {
 	getrRecommenedProductsPending,
 	getrRecommenedProductsSuccess,
 	getrRecommenedProductsFail,
+	searchPending,
+	searchSuccess,
+	searchFail,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

@@ -36,7 +36,7 @@ const LoginPage = () => {
 			localStorage.setItem('user', JSON.stringify(user));
 		});
 	};
-	
+
 	return (
 		<div>
 			<div className="flex flex-row items-center w-screen h-screen space-x-0 md:space-x-0">

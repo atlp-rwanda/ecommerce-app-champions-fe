@@ -14,13 +14,13 @@ const CartCheckout = ({
 			{cart.data.total > 0 && (
 				<div className="flex justify-between">
 					<span>Shipping</span>
-					<span>$5.00</span>
+					<span>5000 RWF</span>
 				</div>
 			)}
 			<span className="border border-gray opacity-60">{}</span>
 			<div className="flex justify-between">
 				<span>Total</span>
-				<span className="font-bold">$ {cart.data.total}</span>
+				<span className="font-bold">{cart.data.total} RWF</span>
 			</div>
 			<div className="flex space-x-3 items-center w-full">
 				<Input
