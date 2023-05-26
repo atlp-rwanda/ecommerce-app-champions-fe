@@ -37,6 +37,22 @@ const LoginPage = () => {
 		});
 	};
 
+	useEffect(() => {
+		setTimeout(() => {
+			if (user?.data?.others?.RoleId === 1) {
+				localStorage.setItem('user', JSON.stringify(user));
+				return navigate('/admin');
+			}
+
+			if (user?.data?.others?.RoleId === 3) {
+				localStorage.setItem('user', JSON.stringify(user));
+				return navigate('/');
+			}
+
+			if (user?.hashedOTP) return navigate('/auth');
+		}, 8000);
+	}, [user]);
+
 	return (
 		<div>
 			<div className="flex flex-row items-center w-screen h-screen space-x-0 md:space-x-0">

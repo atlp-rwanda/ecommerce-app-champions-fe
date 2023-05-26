@@ -11,9 +11,6 @@ import { handleToken } from '../redux/actions/token.action';
 import envKeys from '../constants/keys';
 
 let socket;
-const user = localStorage.getItem('user');
-
-const others = JSON.parse(user)?.data?.others;
 
 const LiveChat = () => {
 	const url = envKeys.APP_URL;
@@ -24,6 +21,9 @@ const LiveChat = () => {
 	const [onlineUsers, setOnlineUsers] = useState([]);
 	const navigate = useNavigate();
 	const [showModel, setShowModel] = useState(true);
+	const { profile } = useSelector((state) => state.userProfile);
+
+	const others = profile?.data?.others;
 
 	if (others === 'undefined') {
 		navigate('/login');
