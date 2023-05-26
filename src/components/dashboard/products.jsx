@@ -13,10 +13,12 @@ import { AiFillDelete } from 'react-icons/ai';
 import { FaEye } from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
 import CreateProduct from '../../pages/Createproduct';
+import UpdateProduct from '../../pages/UpdateProduct';
 import SellerProductPage from '../../pages/SellerProductPage';
 import LoadingSpinner from '../LoadingSpinner';
 import SearchComponent from '../product/SearchProduct';
 import Header from '../vendorDashboard/Header';
+import { setUpdateProductId } from '../../redux/reducers/product/updateProductSlice';
 import { deleteProduct } from '../../redux/actions/product.action';
 import { getVendorProducts } from '../../redux/actions/vendor.product';
 import Loader from '../vendorDashboard/Loader';
@@ -29,7 +31,6 @@ function Products() {
 	);
 	const [searchResults, setSearchResults] = useState(null);
 	const [selectedProduct, setSelectedProduct] = useState(null);
-	const navigate = useNavigate();
 
 	const token = Cookies.get('token');
 
@@ -44,9 +45,15 @@ function Products() {
 		setSelectedProduct(null);
 	};
 	const [isAddProductVisible, setAddProductVisible] = useState(false);
+	const [isUpdateProductVisible, setUpdateProductVisible] = useState(false);
 
 	const handleEmptySearch = () => {
 		setSearchResults(null);
+	};
+
+	const handleUpdateProduct = (id) => {
+		dispatch(setUpdateProductId({ id }));
+		setUpdateProductVisible(true);
 	};
 
 	return (
@@ -91,7 +98,7 @@ function Products() {
 											<td>
 												<MdEdit
 													className="text-[#FF5A5F] cursor-pointer"
-													onClick={() => navigate(`/vendors/${item.productId}`)}
+													onClick={() => handleUpdateProduct(item.productId)}
 												/>
 											</td>
 											<td>
@@ -125,7 +132,7 @@ function Products() {
 											<td>
 												<BiEdit
 													className="edit text-[#FF5A5F] mr-2 cursor-pointer size={24}"
-													onClick={() => navigate(`/vendors/${item.productId}`)}
+													onClick={() => handleUpdateProduct(item.productId)}
 												/>
 											</td>
 											<td>
@@ -179,6 +186,11 @@ function Products() {
 				{isAddProductVisible && (
 					<div className="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-75 z-50 flex justify-center items-center">
 						<CreateProduct setShowAddProduct={setAddProductVisible} />
+					</div>
+				)}
+				{isUpdateProductVisible && (
+					<div className="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-75 z-50 flex justify-center items-center">
+						<UpdateProduct setShowUpdateProduct={setUpdateProductVisible} />
 					</div>
 				)}
 			</div>

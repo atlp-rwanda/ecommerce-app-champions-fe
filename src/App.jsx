@@ -12,7 +12,7 @@ import AdminDashboard from './pages/adminDashboard';
 import VendorDashboard from './pages/vendorDashboard';
 import CartPage from './pages/CartPage';
 import PageNotFound from './components/PageNotFound';
-import { UpdateProduct } from './pages/UpdateProduct';
+import UpdateProduct from './pages/UpdateProduct';
 import CreateProduct from './pages/Createproduct';
 import SingleProductPage from './pages/SingleProductPage';
 import { ProductPage } from './pages/ProductPage';

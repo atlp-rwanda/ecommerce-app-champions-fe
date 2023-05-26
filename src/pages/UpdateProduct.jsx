@@ -6,7 +6,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineCancel } from 'react-icons/md';
-import { useParams, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { RiCloseLine } from 'react-icons/ri';
@@ -27,22 +26,17 @@ const initialState = {
 	bonus: '',
 };
 
-export const UpdateProduct = () => {
-	const navigate = useNavigate();
-
-	const { id } = useParams();
+const UpdateProduct = ({ setShowUpdateProduct }) => {
+	const id = useSelector((state) => state.updateProduct.updateProductId);
 	const dispatch = useDispatch();
 	// const { items } = useSelector((state) => state.products.products);
 	const { vendorProducts } = useSelector((state) => state.vendorProducts);
 	const [formData, setFormData] = useState(initialState);
 	const [imageFiles, setImageFiles] = useState([]);
 	const [selectedImages, setSelectedImages] = useState([]);
-	const { isLoading, success } = useSelector((state) => state.updateProduct);
+	const { isLoading } = useSelector((state) => state.updateProduct);
 	const token = Cookies.get('token');
 
-	useEffect(() => {
-		dispatch(getVendorProducts(token));
-	}, [dispatch, token]);
 	const singleProduct = vendorProducts
 		? vendorProducts.find((product) => product.productId == id)
 		: null;
@@ -77,7 +71,11 @@ export const UpdateProduct = () => {
 		const formDat = new FormData();
 		Object.keys(formData).forEach((key) => formDat.append(key, formData[key]));
 		imageFiles.forEach((file) => formDat.append('productImage', file));
-		dispatch(updateExistingProduct(updateProductId, formDat, token));
+		dispatch(updateExistingProduct(updateProductId, formDat, token)).then(
+			() => {
+				dispatch(getVendorProducts(token));
+			}
+		);
 	};
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -112,17 +110,12 @@ export const UpdateProduct = () => {
 		};
 	}, [imageFiles]);
 
-	useEffect(() => {
-		if (success) {
-			setTimeout(() => {
-				setFormData({});
-				navigate('/vendors');
-			}, 5000);
-		}
-	}, [navigate, success]);
+	const handleUpdateProductClose = () => {
+		setShowUpdateProduct(false);
+	};
 
 	return (
-		<div className="bg-[#EEF0F2] relative createProduct flex flex-col m-5 md:m-20  p-10  bg-brightGray items-center justify-center">
+		<div className="bg-[#EEF0F2] relative createProduct flex flex-col m-5 md:m-20  p-10  items-center justify-center">
 			<div className="absolute right-[80px] top-[10px] ">
 				<NotButton
 					icon={<MdOutlineCancel />}
@@ -131,7 +124,7 @@ export const UpdateProduct = () => {
 					size="2xl"
 					borderRadius="50%"
 					className="cancel"
-					onClick={() => navigate(`/vendors`)}
+					onClick={handleUpdateProductClose}
 				/>
 			</div>
 			<div className="absolute left-[45px] top-[10px]">
@@ -283,7 +276,7 @@ export const UpdateProduct = () => {
 					/>
 					<Button
 						label="Cancel"
-						onClick={() => navigate(`/vendors`)}
+						onClick={handleUpdateProductClose}
 						className="flex items-center justify-center p-1 rounded-[50px] bg-[#c14953] font-bold my-2 w-28 px-[1.5em] py-[0.5em] w-[150px] text-[#D6CBC1] font-bold p-[20px],inset_0px_2px_1px_0px_rgba(255,255,255,0.75)] hover:bg-[#E3170A]"
 					/>
 				</div>
@@ -291,3 +284,5 @@ export const UpdateProduct = () => {
 		</div>
 	);
 };
+
+export default UpdateProduct;
