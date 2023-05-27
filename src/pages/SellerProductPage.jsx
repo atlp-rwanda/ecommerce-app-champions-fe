@@ -18,6 +18,8 @@ const SellerProductPage = ({ setShowSingleProduct }) => {
 	const id = useSelector((state) => state.singleProduct.setProductId);
 	const dispatch = useDispatch();
 	const { products, loading } = useSelector((state) => state.singleProduct);
+	const { isLoading } = useSelector((state) => state.enableProduct);
+	const { Loading } = useSelector((state) => state.disableProduct);
 	const { token } = useSelector((state) => state.token);
 	const navigate = useNavigate();
 
@@ -111,6 +113,7 @@ const SellerProductPage = ({ setShowSingleProduct }) => {
 
 									<Button
 										label="Disable"
+										loading={Loading}
 										className=" bg-rosy_brown text-center text-white px-2 py-1  rounded-full w-28"
 										handleClick={() => handleDisable(products?.item?.productId)}
 									/>
@@ -120,6 +123,7 @@ const SellerProductPage = ({ setShowSingleProduct }) => {
 									<p className="text-lg text-red-500">Out of stock</p>
 									<Button
 										label="Enable"
+										loading={isLoading}
 										className="bg-primaryGreen text-center text-white px-2 py-1 rounded-full w-28"
 										handleClick={() => handleEnable(products?.item?.productId)}
 									/>

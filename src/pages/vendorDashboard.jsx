@@ -14,7 +14,7 @@ import { useStateContext } from '../contexts/ContextProvider';
 import { getVendorProducts } from '../redux/actions/vendor.product';
 import { getNotifications } from '../redux/actions/notifications';
 import Loader from '../components/vendorDashboard/Loader';
-import varKeys from '../constants/keys';
+import Sales from '../components/vendorDashboard/Sales';
 
 const vendorDashboard = () => {
 	const token = Cookies.get('token');
@@ -83,6 +83,7 @@ const vendorDashboard = () => {
 							<div>
 								{showEcommerce && <Ecommerce />}
 								{showProducts && <Products />}
+								{showSales && <Sales />}
 							</div>
 						</div>
 					</div>

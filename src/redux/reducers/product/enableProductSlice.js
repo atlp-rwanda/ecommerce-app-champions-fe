@@ -3,7 +3,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-	loading: false,
+	isLoading: false,
 	error: null,
 	result: [],
 };
@@ -13,15 +13,15 @@ const enableProductSlice = createSlice({
 	initialState,
 	reducers: {
 		enablePending: (state) => {
-			state.loading = true;
+			state.isLoading = true;
 		},
 		enableSuccess: (state, action) => {
-			state.loading = false;
+			state.isLoading = false;
 			state.result = action.payload;
 			state.error = null;
 		},
 		enableFail: (state, action) => {
-			state.loading = false;
+			state.isLoading = false;
 			state.sucess = [];
 			state.error = action.payload;
 		},

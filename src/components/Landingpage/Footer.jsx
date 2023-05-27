@@ -40,7 +40,13 @@ const Footer = () => {
 				</div>
 
 				<div>
-					<img src={Logo} className="w-32 cursor-pointer md:w-40" alt="Logo" />
+					<Link to="/">
+						<img
+							src={Logo}
+							className="w-32 md:w-40 cursor-pointer"
+							alt="Logo"
+						/>
+					</Link>
 				</div>
 			</div>
 			<div className="flex items-center justify-between w-screen py-5 h-100 md:w-full bg-lightYellow px-7">

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineLogout, AiFillEdit } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Logo from '../../assets/Logo.svg';
 import profilePic from '../../assets/profilePic.jpg';
 import UserProfileDetails from './UserProfileDetails';
@@ -47,11 +47,18 @@ const UserProfile = () => {
 	if (!profile || loading === true) {
 		return (
 			<div>
-				<div className="flex items-center justify-between w-screen py-4 md:w-full bg-lightYellow px-7">
-					<img src={Logo} className="w-32 cursor-pointer md:w-40" alt="Logo" />
+				<div className="w-screen md:w-full bg-lightYellow px-7 py-4 flex justify-between items-center">
+					<Link to="/">
+						<img
+							src={Logo}
+							className="w-52 md:w-40 cursor-pointer"
+							alt="Logo"
+						/>
+					</Link>
 					<AiOutlineLogout
 						size={25}
 						className="cursor-pointer text-primaryGreen"
+						onClick={() => logout()}
 					/>
 				</div>
 				<div className="flex items-center justify-center w-full h-full mx-auto my-4">
@@ -61,9 +68,11 @@ const UserProfile = () => {
 		);
 	}
 	return (
-		<div className="flex flex-col w-screen">
-			<div className="flex items-center justify-between w-screen py-4 md:w-full bg-lightYellow px-7">
-				<img src={Logo} className="w-32 cursor-pointer md:w-40" alt="Logo" />
+		<div className="w-screen flex flex-col">
+			<div className="w-screen md:w-full bg-lightYellow px-7 py-4 flex justify-between items-center">
+				<Link to="/">
+					<img src={Logo} className="w-52 md:w-40 cursor-pointer" alt="Logo" />
+				</Link>
 				<AiOutlineLogout
 					size={25}
 					className="cursor-pointer text-primaryGreen"

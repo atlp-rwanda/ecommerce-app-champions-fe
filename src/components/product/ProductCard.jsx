@@ -11,7 +11,8 @@ import {
 	addItemToWishList,
 	getAllWishlist,
 } from '../../redux/actions/wishList.action';
-const ProductCard = ({ product }) => {
+
+const ProductCard = ({ product, className, btnclassName }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [clickedProductId, setClickedProductId] = useState(null);
 	const [showHeart, setShowHeart] = useState(false);
@@ -26,9 +27,6 @@ const ProductCard = ({ product }) => {
 		setIsLoading(true);
 		setClickedProductId(productId);
 		if (!token) {
-			toast.warn('you must login to add item to cart.', {
-				position: toast.POSITION.TOP_RIGHT,
-			});
 			setTimeout(() => {
 				navigate('/login');
 			}, 2000);
@@ -38,6 +36,8 @@ const ProductCard = ({ product }) => {
 	useEffect(() => {
 		if (token) {
 			setShowHeart(true);
+		} else {
+			setShowHeart(false);
 		}
 	}, [token]);
 	const handleWish = (id) => {
@@ -46,29 +46,36 @@ const ProductCard = ({ product }) => {
 		});
 	};
 	return (
-		<div className="card border-2 border-lightYellow rounded-md relative">
-			<div className="absolute top-1 right-1 flex items-center justify-center w-8 h-8 rounded-full bg-white">
+		<div className="card bg-[#EEF0F2] border-2 border-lightYellow rounded-md relative hover:scale-105  duration-200 ease-in-out  p-1 ">
+			<div className="absolute top-1 right-1 flex items-center justify-center w-8 h-8 rounded-full ">
 				{showHeart && (
 					<FiHeart
 						className="text-lightRed cursor-pointer"
 						onClick={() => handleWish(product.productId)}
+						style={{
+							transition: 'background-color 0.3s ease, transform 0.3s ease',
+						}}
 					/>
 				)}
 			</div>
 			<Link to={`/product/${product.productId}`}>
 				<img
-					className="h-48 w-full object-cover rounded-t-md-md"
+					className="h-60 w-full object-cover rounded-t-md-md"
 					src={product.productImage[0]}
 					alt={product.productName}
 				/>
 			</Link>
 			<div className="px-2 flex flex-col space-y-1 mb-1">
 				<div className="flex justify-between items-center">
-					<h1 className="font-bold">{product.productName}</h1>
-					<p className="font-bold">{product.productPrice} RWF</p>
+					<h1 className="font-bold text-[20px] text-[#0D2149]">
+						{product.productName}
+					</h1>
+					<p className="font-bold text-[20px] text-[#358600]">
+						{product.productPrice} RWF
+					</p>
 				</div>
 				<p>{product.productDescription.slice(0, 50)}...</p>
-				<div className="flex gap-1">
+				<div className="flex gap-1 stars">
 					<AiFillStar className="text-[#225F33]" />
 					<AiFillStar className="text-[#225F33]" />
 					<AiFillStar className="text-[#225F33]" />
@@ -77,11 +84,11 @@ const ProductCard = ({ product }) => {
 				</div>
 				<button
 					type="submit"
-					className="flex items-center justify-center p-1 rounded-2xl bg-gray text-black font-bold  w-28"
+					className="flex items-center justify-center p-1 rounded-2xl bg-primaryGreen text-[#92E3A9] hover:bg-emerald-500 font-bold  w-28"
 					onClick={(event) => handleClick(event, product.productId)}
 				>
 					{isLoading && clickedProductId === product.productId ? (
-						<LoadingSpinner className="w-6 h-6 mr-2 text-green" />
+						<LoadingSpinner className="w-6 h-6 mr-2" />
 					) : (
 						'Add to Cart'
 					)}

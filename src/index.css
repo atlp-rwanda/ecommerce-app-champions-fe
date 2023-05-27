@@ -197,7 +197,6 @@
 		#ffffff
 	) !important;
 }
-
 .edit {
 	color: #087e8b !important;
 	font-size: 20px !important;
@@ -346,6 +345,14 @@
 .three-balls .ball2 {
 	animation-delay: -0.08s;
 }
+.pagination-item {
+	display: inline-block;
+	margin: 6px;
+	padding: 6px;
+}
+.pagination-item:hover {
+	border-radius: 10%;
+}
 
 @keyframes bouncedelay {
 	0% {
@@ -406,4 +413,8 @@
 	margin-top: 10%;
 	width: 100%;
 	justify-content: space-between;
+}
+.stars {
+	margin-bottom: 10px !important;
+	margin-top: 10px !important;
 }
