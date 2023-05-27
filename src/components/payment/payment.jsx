@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RiCloseLine } from 'react-icons/ri';
 import { FiCheckCircle } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 import { paymentSuccessaction } from '../../redux/actions/payment.action';
 
 const PaymentSuccesspage = () => {
+	const { t } = useTranslation();
 	const searchParams = new URLSearchParams(useLocation().search);
 	const token = searchParams.get('token');
 	const paymentId = searchParams.get('paymentId');
@@ -44,9 +46,9 @@ const PaymentSuccesspage = () => {
 						<RiCloseLine size={24} />
 					</button>
 					<FiCheckCircle size={57} />
-					<h1>{payment.message}</h1>
+					<h1>{t('payment')}</h1>
 					<h2>
-						{payment.amountpaid} RWF {payment.payment_status}
+						{payment.amountpaid} RWF {t('paid')}
 					</h2>
 				</div>
 			)}

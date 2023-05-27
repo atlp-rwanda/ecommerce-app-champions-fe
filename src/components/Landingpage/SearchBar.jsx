@@ -1,8 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 
 const SearchBar = ({ handleSearch }) => {
+	const { t } = useTranslation();
 	const [searchParam, setSearchParam] = useState('');
 
 	const handleSubmit = (event) => {
@@ -17,7 +20,7 @@ const SearchBar = ({ handleSearch }) => {
 		<form onSubmit={handleSubmit} className="w-full h-2/3">
 			<div className="flex items-center space-x-1 w-full md:w-3/4 bg-white h-full rounded-full px-2 ">
 				<input
-					placeholder="Search for product.... "
+					placeholder={t('Search')}
 					id="search"
 					name="search"
 					type="text"

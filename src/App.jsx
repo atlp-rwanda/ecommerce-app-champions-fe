@@ -24,6 +24,7 @@ import PaymentSuccesspage from './components/payment/payment';
 import Products from './components/dashboard/products';
 import Wishlist from './components/wishlist/Wishlist';
 import LoginSuccesspage from './pages/Googlelogin';
+import './Translation-i18n/i18n';
 
 function App() {
 	return (
