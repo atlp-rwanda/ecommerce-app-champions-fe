@@ -36,9 +36,6 @@ export const enableAndDisableUserPermission =
 			dispatch(enableAndDisablePermissionPending());
 			const res = await enableDisablePermission(token, id, data);
 			dispatch(enableAndDisablePermissionSuccess(res));
-			toast.success('permission status changed.', {
-				position: toast.POSITION.TOP_RIGHT,
-			});
 			return res;
 		} catch (error) {
 			if (error) {
