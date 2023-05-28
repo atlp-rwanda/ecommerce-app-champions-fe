@@ -92,7 +92,6 @@ const LoginPage = () => {
 					</div>
 				</div>
 			</div>
-			<ToastContainer />
 		</div>
 	);
 };

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { RiNotification3Line } from 'react-icons/ri';
@@ -28,6 +28,8 @@ const NavButton = ({ customFunc, icon, color, dotColor }) => (
 );
 
 const Navbar = () => {
+	const { notifications } = useSelector((state) => state.notifications);
+	const [totalNotifications, setTotalNotifications] = useState(null);
 	const {
 		activeMenu,
 		setActiveMenu,
@@ -58,8 +60,23 @@ const Navbar = () => {
 		}
 	}, [screenSize]);
 
+	useEffect(() => {
+		if (notifications && Array.isArray(notifications)) {
+			const unRead = notifications.filter(
+				(notification) => !notification.isRead
+			);
+			const notificationsCount = unRead.length;
+			setTotalNotifications(notificationsCount);
+		}
+	}, [notifications]);
+
 	const handleActiveMenu = () => setActiveMenu(!activeMenu);
 	const { name } = useSelector((state) => state.token);
+
+	const handleNotificationClick = () => {
+		handleClick('notification');
+		setTotalNotifications(null);
+	};
 
 	return (
 		<div className="flex justify-between p-2 md:ml-6 md:mr-6 relative z-40">
@@ -72,11 +89,25 @@ const Navbar = () => {
 			<div className="flex">
 				<NavButton
 					title="Notification"
-					dotColor="rgb(254, 201, 15)"
-					customFunc={() => handleClick('notification')}
+					customFunc={handleNotificationClick}
 					color="#225F33"
 					icon={<RiNotification3Line />}
 				/>
+				<div
+					className="relative font-bold flex justify-start items-start cursor-pointer"
+					role="button"
+					tabIndex={0}
+					onClick={handleClick}
+				>
+					{totalNotifications > 0 ? (
+						<span className="absolute top-1 right-2 bg-[#c75151] text-white text-xs px-1 rounded-full">
+							{totalNotifications}
+						</span>
+					) : (
+						' '
+					)}
+				</div>
+
 				<div
 					className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
 					onClick={() => handleClick('userProfile')}
