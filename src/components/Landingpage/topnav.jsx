@@ -6,7 +6,6 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
-
 import { BiChevronDown } from 'react-icons/bi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +17,7 @@ import SearchBar from './SearchBar';
 const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
 	const navigate = useNavigate();
 
 	const handleDropdown = () => {
@@ -28,9 +28,7 @@ const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 		setShowMenu(!showMenu);
 	};
 	const dispatch = useDispatch();
-	const { decodedToken, token, name } = useSelector(
-		(state) => state.token || {}
-	);
+	const { token, name } = useSelector((state) => state.token || {});
 
 	const logout = () => {
 		dispatch(handleLogout());

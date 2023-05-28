@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import io from 'socket.io-client';
 import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import Navbar from '../components/vendorDashboard/Navbar';
@@ -13,8 +15,12 @@ import Ecommerce from '../components/vendorDashboard/Ecommerce';
 import { useStateContext } from '../contexts/ContextProvider';
 import { getVendorProducts } from '../redux/actions/vendor.product';
 import { getNotifications } from '../redux/actions/notifications';
+import { setNotifications } from '../redux/reducers/auth/notificationSlice';
 import Loader from '../components/vendorDashboard/Loader';
 import Sales from '../components/vendorDashboard/Sales';
+import varKeys from '../constants/keys';
+
+const url = varKeys.APP_URL;
 
 const vendorDashboard = () => {
 	const token = Cookies.get('token');
@@ -27,12 +33,23 @@ const vendorDashboard = () => {
 	const { loading: notLoading, error: notError } = useSelector(
 		(state) => state.notifications
 	);
+	const socket = io(url);
 
+	useEffect(() => {
+		socket.on('notification', (data) => {
+			toast.warn('New notification!', { position: 'top-right' });
+			dispatch(setNotifications(data));
+			console.log('Received notification:', data);
+		});
+
+		return () => {
+			socket.off('notification');
+		};
+	}, [socket]);
 	useEffect(() => {
 		dispatch(getVendorProducts(token));
 		dispatch(getNotifications());
 	}, [dispatch, token]);
-
 	useEffect(() => {
 		if (error) {
 			toast.error(error);
