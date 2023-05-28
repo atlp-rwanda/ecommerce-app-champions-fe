@@ -33,7 +33,7 @@ const UserProfile = () => {
 	}, [decodedToken, dispatch]);
 	useEffect(() => {
 		if (profile) {
-			setLoggedinuser(profile.data.others.firstName);
+			setLoggedinuser(profile.data?.others?.firstName);
 		}
 	}, [profile]);
 

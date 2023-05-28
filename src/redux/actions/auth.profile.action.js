@@ -29,6 +29,7 @@ export const updateBuyerProfile =
 			return res;
 		} catch (error) {
 			if (error) {
+				if (error.message === undefined) return;
 				toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
 				return dispatch(updateProfileFail(error.message));
 			}
@@ -49,6 +50,7 @@ export const updateVendorProfile =
 			return res;
 		} catch (error) {
 			if (error) {
+				if (error.message === undefined) return;
 				toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
 				return dispatch(updateProfileFail(error.message));
 			}

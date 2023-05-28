@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { toast } from 'react-toastify';
 import { newPermission, enableDisablePermission } from '../../api/permission';
 import {
@@ -20,6 +21,7 @@ export const createPermission = (token, data) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
+			if (error.message === undefined) return;
 			toast.error(`${error.message} `, {
 				position: toast.POSITION.TOP_RIGHT,
 			});
@@ -39,6 +41,7 @@ export const enableAndDisableUserPermission =
 			return res;
 		} catch (error) {
 			if (error) {
+				if (error.message === undefined) return;
 				toast.error(`${error.message} `, {
 					position: toast.POSITION.TOP_RIGHT,
 				});

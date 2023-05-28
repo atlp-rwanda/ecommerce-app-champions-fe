@@ -19,6 +19,10 @@ const TwoFactorAuth = () => {
 	const { loading, error, token, user } = useSelector(
 		(state) => state.auth || {}
 	);
+	useEffect(() => {
+		localStorage.setItem('user', JSON.stringify(user));
+		console.log('i am a user', user);
+	}, [user]);
 	const [seconds, setSeconds] = useState(300);
 	const navigate = useNavigate();
 	const handleSubmit = async (e) => {
@@ -44,12 +48,6 @@ const TwoFactorAuth = () => {
 		}, 1000);
 		return () => clearInterval(interval);
 	}, [seconds, dispatch, navigate]);
-
-	useEffect(() => {
-		if (user) {
-			localStorage.setItem('user', JSON.stringify(user));
-		}
-	}, [user]);
 
 	return (
 		<form data-testid="twofactorpage" onSubmit={handleSubmit}>

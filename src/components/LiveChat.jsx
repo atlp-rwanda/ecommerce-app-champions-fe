@@ -25,7 +25,6 @@ const LiveChat = () => {
 	const [onlineUsers, setOnlineUsers] = useState([]);
 	const navigate = useNavigate();
 	const [showModel, setShowModel] = useState(true);
-
 	if (others === 'undefined') {
 		navigate('/login');
 	}

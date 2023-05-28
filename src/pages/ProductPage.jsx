@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
@@ -7,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 import { Carousel } from 'flowbite-react';
 import { RiCloseLine } from 'react-icons/ri';
+import { useTranslation } from 'react-i18next';
 import { handleToken } from '../redux/actions/token.action';
 import { fetchAvailableProducts } from '../redux/actions/product.action';
 import Button from '../components/Button/Button';
@@ -19,6 +21,7 @@ import Shoes from '../assets/shoes.jpg';
 import Electronics from '../assets/electronics.jpg';
 import Cosmetics from '../assets/cosmetics.jpg';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Banner from '../components/Landingpage/Banner';
 
 export const ProductPage = () => {
 	const [availableProducts, setAvailableProducts] = useState([]);
@@ -26,6 +29,7 @@ export const ProductPage = () => {
 	const { loading } = useSelector((state) => state.products || {});
 	const [selectedCategory, setSelectedCategory] = useState('All');
 	const [isOpen, setIsOpen] = useState(true);
+	const { t } = useTranslation();
 
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -126,15 +130,13 @@ export const ProductPage = () => {
 						/>
 					</div>
 				</Carousel>
-				<div className="w-full px-8 h-1/6 ">
-					<h3 className="w-full font-bold text-3xl">
-						Todays Best Deals for You!
-					</h3>
+				<div className=" w-full px-8 h-1/6">
+					<h3 className="w-full font-bold text-3xl">{t('deal')}</h3>
 					{isOpen ? (
 						<>
 							<div className="grid grid-cols-2 middle:flex  gap-5 middle:w-full">
 								<Button
-									label="All"
+									label={t('All')}
 									className={`flex items-center justify-center p-1 rounded-2xl ${
 										selectedCategory === 'All'
 											? 'bg-primaryGreen text-white'
@@ -143,7 +145,7 @@ export const ProductPage = () => {
 									onClick={() => setSelectedCategory('All')}
 								/>
 								<Button
-									label="clothes"
+									label={t('clothes')}
 									className={`flex items-center justify-center p-1 rounded-2xl ${
 										selectedCategory === 'clothes'
 											? 'bg-primaryGreen text-white'
@@ -152,7 +154,7 @@ export const ProductPage = () => {
 									onClick={() => setSelectedCategory('clothes')}
 								/>
 								<Button
-									label="electronics"
+									label={t('electronics')}
 									className={`flex items-center justify-center p-1 rounded-2xl ${
 										selectedCategory === 'electronics'
 											? 'bg-primaryGreen text-white'
@@ -161,7 +163,7 @@ export const ProductPage = () => {
 									onClick={() => setSelectedCategory('electronics')}
 								/>
 								<Button
-									label="food"
+									label={t('food')}
 									className={`flex items-center justify-center p-1 rounded-2xl ${
 										selectedCategory === 'food'
 											? 'bg-primaryGreen text-white'
@@ -170,7 +172,7 @@ export const ProductPage = () => {
 									onClick={() => setSelectedCategory('food')}
 								/>
 								<Button
-									label="fashion"
+									label={t('fashion')}
 									className={`flex items-center justify-center p-1 rounded-2xl ${
 										selectedCategory === 'fashion'
 											? 'bg-primaryGreen text-white'
@@ -184,7 +186,7 @@ export const ProductPage = () => {
 									{!loading && filteredProducts?.length === 0 && (
 										<div className="flex justify-center items-center space-x-5">
 											<h1 className="  text-rosy_brown font-bold">
-												No Product Found !
+												{t('Notfound')}
 											</h1>
 											<button
 												type="submit"
@@ -215,7 +217,7 @@ export const ProductPage = () => {
 						<>
 							<div className="grid grid-cols-2 middle:flex  gap-5 middle:w-full">
 								<Button
-									label="All"
+									label={t('All')}
 									className={`flex items-center justify-center p-1 rounded-2xl ${
 										selectedCategory === 'All'
 											? 'bg-primaryGreen text-white'
@@ -224,7 +226,7 @@ export const ProductPage = () => {
 									onClick={() => setSelectedCategory('All')}
 								/>
 								<Button
-									label="clothes"
+									label={t('clothes')}
 									className={`flex items-center justify-center p-1 rounded-2xl ${
 										selectedCategory === 'clothes'
 											? 'bg-primaryGreen text-white'
@@ -233,7 +235,7 @@ export const ProductPage = () => {
 									onClick={() => setSelectedCategory('clothes')}
 								/>
 								<Button
-									label="electronics"
+									label={t('electronics')}
 									className={`flex items-center justify-center p-1 rounded-2xl ${
 										selectedCategory === 'electronics'
 											? 'bg-primaryGreen text-white'
@@ -242,7 +244,7 @@ export const ProductPage = () => {
 									onClick={() => setSelectedCategory('electronics')}
 								/>
 								<Button
-									label="food"
+									label={t('food')}
 									className={`flex items-center justify-center p-1 rounded-2xl ${
 										selectedCategory === 'food'
 											? 'bg-primaryGreen text-white'
@@ -251,7 +253,7 @@ export const ProductPage = () => {
 									onClick={() => setSelectedCategory('food')}
 								/>
 								<Button
-									label="fashion"
+									label={t('fashion')}
 									className={`flex items-center justify-center p-1 rounded-2xl ${
 										selectedCategory === 'fashion'
 											? 'bg-primaryGreen text-white'

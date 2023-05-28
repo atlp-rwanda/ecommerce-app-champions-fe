@@ -30,9 +30,6 @@ export const login = (userData) => async (dispatch) => {
 			Cookies.set('vendorToken', res.token);
 			dispatch(loginSuccess(res));
 		}
-		toast.success('login successful', {
-			position: toast.POSITION.TOP_RIGHT,
-		});
 		return res;
 	} catch (error) {
 		if (error && error.message.includes('password has expired')) {
