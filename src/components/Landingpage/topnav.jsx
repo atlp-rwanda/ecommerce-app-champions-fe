@@ -20,6 +20,7 @@ const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 	const { t } = useTranslation();
 	const [showMenu, setShowMenu] = useState(false);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
 	const navigate = useNavigate();
 
 	const handleDropdown = () => {
@@ -30,9 +31,7 @@ const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 		setShowMenu(!showMenu);
 	};
 	const dispatch = useDispatch();
-	const { decodedToken, token, name } = useSelector(
-		(state) => state.token || {}
-	);
+	const { token, name } = useSelector((state) => state.token || {});
 
 	const logout = () => {
 		dispatch(handleLogout());

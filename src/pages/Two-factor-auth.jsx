@@ -30,7 +30,9 @@ const TwoFactorAuth = () => {
 		try {
 			const isValid = await TwoFactorSchema.validate({ otp: OTP });
 			if (isValid) {
-				return dispatch(authAction(OTP));
+				return dispatch(authAction(OTP)).then((res) => {
+					if (res?.payload?.RoleId === 2) return navigate('/vendors');
+				});
 			}
 		} catch (error) {
 			setotpErrors(error.errors);
@@ -46,11 +48,6 @@ const TwoFactorAuth = () => {
 		}, 1000);
 		return () => clearInterval(interval);
 	}, [seconds, dispatch, navigate]);
-	// eslint-disable-next-line consistent-return
-	useEffect(() => {
-		if (user?.RoleId === 2) return navigate('/vendors');
-		if (user?.RoleId === 1) return navigate('/admin');
-	}, [user, navigate]);
 
 	return (
 		<form data-testid="twofactorpage" onSubmit={handleSubmit}>

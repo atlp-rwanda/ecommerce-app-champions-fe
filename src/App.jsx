@@ -71,7 +71,7 @@ function App() {
 				<Route path="/products" element={<Products />} />
 				<Route path="/wishlist" element={<Wishlist />} />
 				<Route
-					path="SellerProductPage/:productId"
+					path="/SellerProductPage/:productId"
 					element={<SellerProductPage />}
 				/>
 				<Route path="*" element={<PageNotFound />} />

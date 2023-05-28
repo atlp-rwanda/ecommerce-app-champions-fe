@@ -11,6 +11,10 @@ import { handleToken } from '../redux/actions/token.action';
 import envKeys from '../constants/keys';
 
 let socket;
+const user = localStorage.getItem('user');
+const parsedData = JSON.parse(user);
+
+const others = parsedData?.data?.others ? parsedData?.data?.others : parsedData;
 
 const LiveChat = () => {
 	const url = envKeys.APP_URL;
@@ -21,10 +25,6 @@ const LiveChat = () => {
 	const [onlineUsers, setOnlineUsers] = useState([]);
 	const navigate = useNavigate();
 	const [showModel, setShowModel] = useState(true);
-	const { profile } = useSelector((state) => state.userProfile);
-
-	const others = profile?.data?.others;
-
 	if (others === 'undefined') {
 		navigate('/login');
 	}
@@ -93,7 +93,7 @@ const LiveChat = () => {
 	return (
 		others &&
 		showModel && (
-			<div className="fixed z-40 flex w-3/4 p-2 pr-3 bottom-20 rounded-2xl h-3/4 right-2 md:right-1 bg-gray md:w-1/3">
+			<div className="fixed flex w-3/4 p-2 pr-3 bottom-20 rounded-2xl h-3/4 right-2 md:right-1 bg-gray md:w-1/3 z-50">
 				<div className="flex-col hidden w-1/3 space-y-3 md:flex">
 					<div className="text-lg font-bold">Champions</div>
 					<div className="text-sm font-semibold ">Status:</div>

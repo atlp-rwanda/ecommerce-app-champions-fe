@@ -25,32 +25,21 @@ const LoginPage = () => {
 
 	const handleLogin = (e) => {
 		e.preventDefault();
-		dispatch(login(loginState)).then(() => {
-			setTimeout(() => {
-				if (user?.data?.others?.RoleId === 1) return navigate('/admin');
-
-				if (user?.data?.others?.RoleId === 3) return navigate('/');
-
-				if (user?.hashedOTP) return navigate('/auth');
-			}, 7000);
-			localStorage.setItem('user', JSON.stringify(user));
+		dispatch(login(loginState)).then((res) => {
+			if (res.data?.others?.RoleId === 1) {
+				navigate('/admin');
+			} else if (res.data?.others?.RoleId === 3) {
+				navigate('/');
+			} else if (res.hashedOTP) {
+				navigate('/auth');
+			}
 		});
 	};
 
 	useEffect(() => {
-		setTimeout(() => {
-			if (user?.data?.others?.RoleId === 1) {
-				localStorage.setItem('user', JSON.stringify(user));
-				return navigate('/admin');
-			}
-
-			if (user?.data?.others?.RoleId === 3) {
-				localStorage.setItem('user', JSON.stringify(user));
-				return navigate('/');
-			}
-
-			if (user?.hashedOTP) return navigate('/auth');
-		}, 8000);
+		if (user) {
+			localStorage.setItem('user', JSON.stringify(user));
+		}
 	}, [user]);
 
 	return (
@@ -103,7 +92,6 @@ const LoginPage = () => {
 					</div>
 				</div>
 			</div>
-			<ToastContainer />
 		</div>
 	);
 };
