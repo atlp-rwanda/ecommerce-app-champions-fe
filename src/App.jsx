@@ -24,6 +24,7 @@ import PaymentSuccesspage from './components/payment/payment';
 import Products from './components/dashboard/products';
 import Wishlist from './components/wishlist/Wishlist';
 import LoginSuccesspage from './pages/Googlelogin';
+import './Translation-i18n/i18n';
 
 function App() {
 	return (
@@ -70,7 +71,7 @@ function App() {
 				<Route path="/products" element={<Products />} />
 				<Route path="/wishlist" element={<Wishlist />} />
 				<Route
-					path="SellerProductPage/:productId"
+					path="/SellerProductPage/:productId"
 					element={<SellerProductPage />}
 				/>
 				<Route path="*" element={<PageNotFound />} />

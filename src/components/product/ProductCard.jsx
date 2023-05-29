@@ -1,9 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiHeart } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiFillStar } from 'react-icons/ai';
+import { useTranslation } from 'react-i18next';
 import LoadingSpinner from '../LoadingSpinner';
 import { handleToken } from '../../redux/actions/token.action';
 import { addItemToCart } from '../../redux/actions/cart.action';
@@ -13,6 +15,7 @@ import {
 } from '../../redux/actions/wishList.action';
 
 const ProductCard = ({ product, className, btnclassName }) => {
+	const { t } = useTranslation();
 	const [isLoading, setIsLoading] = useState(false);
 	const [clickedProductId, setClickedProductId] = useState(null);
 	const [showHeart, setShowHeart] = useState(false);
@@ -90,7 +93,7 @@ const ProductCard = ({ product, className, btnclassName }) => {
 					{isLoading && clickedProductId === product.productId ? (
 						<LoadingSpinner className="w-6 h-6 mr-2" />
 					) : (
-						'Add to Cart'
+						<>{t('AddtoCart')}</>
 					)}
 				</button>
 			</div>

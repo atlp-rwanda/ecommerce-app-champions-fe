@@ -17,9 +17,6 @@ export const getAllVendors = (token) => async (dispatch) => {
 		dispatch(getVendorsPending());
 		const res = await allVendors(token);
 		dispatch(getVendorsSuccess(res));
-		toast.success('All Available Accounts Retrieved', {
-			position: toast.POSITION.TOP_RIGHT,
-		});
 		return res;
 	} catch (error) {
 		if (error) {

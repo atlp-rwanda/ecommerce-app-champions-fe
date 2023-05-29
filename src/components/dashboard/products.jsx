@@ -67,16 +67,15 @@ function Products() {
 			{loading ? (
 				<Loader />
 			) : (
-				<div className="m-2 md:m-10 mt-24 p-2 md:p-10 rounded-3xl">
-					<div className="productAdd">
-						<button
-							className=" add rounded-[50px] px-[1.5em] py-[0.5em] bg-primaryGreen w-[200px] text-[#92E3A9] font-bold p-[20px],inset_0px_2px_1px_0px_rgba(255,255,255,0.75)] hover:bg-emerald-500  samsung:relative samsung:left-[-15px]"
+				<div className="m-2 md:m-10 mt-24 p-2 md:p-10 rounded-3xl flex flex-col">
+					<div className="flex justify-between items-center">
+						<Header title="All Products" />
+						<Button
+							label="Add Product"
 							onClick={() => setAddProductVisible(true)}
-						>
-							Add Product
-						</button>
+							className="bg-primaryGreen text-white rounded-2xl py-2 text-center px-5"
+						/>
 					</div>
-					<Header title="All Products" />
 					<div className="overflow-x-auto text-[#1C1F33]">
 						{vendorProducts && (
 							<SearchComponent

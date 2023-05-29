@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { toast } from 'react-toastify';
 import varKeys from '../../constants/keys';
 
 const url = varKeys.APP_URL;
@@ -29,7 +28,28 @@ export const getNotifications = createAsyncThunk(
 		}
 	}
 );
+export const getBuyerNotifications = createAsyncThunk(
+	'getBuyerNotifications',
+	async () => {
+		try {
+			const response = await axios.get(
+				`${url}/api/notification/getBuyerNotifications`,
+				{
+					headers: {
+						token: `Bearer ${token}`,
+					},
+				}
+			);
 
+			return response.data;
+		} catch (error) {
+			if (error.response) {
+				return error.response.data;
+			}
+			return error.message;
+		}
+	}
+);
 export const deleteNotification = createAsyncThunk(
 	'deleteNotifications',
 	async (id) => {
@@ -42,9 +62,28 @@ export const deleteNotification = createAsyncThunk(
 					},
 				}
 			);
-			toast.success('Notification Deleted ', {
-				position: toast.POSITION.TOP_RIGHT,
-			});
+			return response.data;
+		} catch (error) {
+			if (error.response.data) {
+				return error.response.data;
+			}
+			return error.message;
+		}
+	}
+);
+export const markAllNotifications = createAsyncThunk(
+	'markAllNotifications',
+	async () => {
+		try {
+			const response = await axios.patch(
+				`${url}/api/notification/markAll`,
+				null,
+				{
+					headers: {
+						token: `Bearer ${token}`,
+					},
+				}
+			);
 			return response.data;
 		} catch (error) {
 			if (error.response.data) {

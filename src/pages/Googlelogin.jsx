@@ -5,8 +5,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { RiCloseLine } from 'react-icons/ri';
 import { FiCheckCircle } from 'react-icons/fi';
 import Cookies from 'js-cookie';
+import { useTranslation } from 'react-i18next';
 
 const LoginSuccesspage = () => {
+	const { t } = useTranslation();
 	const searchParams = new URLSearchParams(useLocation().search);
 	const token = searchParams.get('token');
 	const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +49,7 @@ const LoginSuccesspage = () => {
 						<RiCloseLine size={24} />
 					</button>
 					<FiCheckCircle size={57} />
-					<h1>You Loggedin with google </h1>
+					<h1>{t('loggedin')}</h1>
 				</div>
 			)}
 		</div>

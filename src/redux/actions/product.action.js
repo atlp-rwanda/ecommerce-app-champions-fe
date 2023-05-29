@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -32,6 +33,7 @@ export const fetchProducts = (token) => async (dispatch) => {
 
 		dispatch(getProductsSuccess(products));
 	} catch (error) {
+		if (error.message === undefined) return;
 		dispatch(getProductsFail(error.message));
 	}
 };
@@ -47,6 +49,7 @@ export const deleteProduct = (productId, token) => async (dispatch) => {
 			position: toast.POSITION.TOP_RIGHT,
 		});
 	} catch (error) {
+		if (error.message === undefined) return;
 		toast.error(`${error.message} `, {
 			position: toast.POSITION.TOP_RIGHT,
 		});
@@ -62,6 +65,7 @@ export const fetchAvailableProducts = () => async (dispatch) => {
 
 		dispatch(getAvailableProductsSuccess(products));
 	} catch (error) {
+		if (error.message === undefined) return;
 		toast.error(`${error.message} `, {
 			position: toast.POSITION.TOP_RIGHT,
 		});
@@ -77,6 +81,7 @@ export const getSingleProduct = (productId) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
+			if (error.message === undefined) return;
 			toast.error(`${error.message} `, {
 				position: toast.POSITION.TOP_RIGHT,
 			});
@@ -94,6 +99,7 @@ export const getRecommendedProducts = (productName) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
+			if (error.message === undefined) return;
 			toast.error(`${error.message} `, {
 				position: toast.POSITION.TOP_RIGHT,
 			});

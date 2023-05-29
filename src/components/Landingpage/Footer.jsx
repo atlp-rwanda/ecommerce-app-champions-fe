@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
 	AiFillFacebook,
 	AiFillTwitterSquare,
@@ -8,35 +9,36 @@ import {
 import Logo from '../../assets/Logo.svg';
 
 const Footer = () => {
+	const { t } = useTranslation();
 	return (
 		<div className="flex flex-col w-screen">
 			<div className="grid items-center justify-between grid-cols-2 px-8 py-5 w-fulll bg-lightYellow middle:grid-cols-3 md:grid-cols-4 ">
 				<div>
-					<h1 className="font-bold">Company</h1>
-					<p>About Us</p>
-					<p>Why Choose us</p>
-					<p>Pricing</p>
-					<p>Testimonial</p>
+					<h1 className="font-bold">{t('Company')}</h1>
+					<p>{t('About')}</p>
+					<p>{t('Why')}</p>
+					<p>{t('Pricing')}</p>
+					<p>{t('Testimonial')}</p>
 					<p>
-						<Link to="/vendor">Become vendor</Link>
+						<Link to="/vendor">{t('Become')}</Link>
 					</p>
 				</div>
 
 				<div>
-					<h1 className="font-bold">Resources</h1>
-					<p>Privacy Policy</p>
-					<p>Terms and Condition</p>
-					<p>Blog</p>
-					<p>Contact Us</p>
+					<h1 className="font-bold">{t('Resources')}</h1>
+					<p>{t('Privacy')}</p>
+					<p>{t('Terms')}</p>
+					<p>{t('Blog')}</p>
+					<p>{t('Contact')}</p>
 				</div>
 
 				<div>
-					<h1 className="font-bold">Product</h1>
-					<p>Trending products</p>
-					<p>Product Tracking</p>
-					<p>Time schedule</p>
-					<p>Shipping</p>
-					<p>Manufacturers</p>
+					<h1 className="font-bold">{t('Product')}</h1>
+					<p>{t('Trending')}</p>
+					<p>{t('ProductTracking')}</p>
+					<p>{t('Time')}</p>
+					<p>{t('Shipping')}</p>
+					<p>{t('Manufacturers')}</p>
 				</div>
 
 				<div>
@@ -51,7 +53,7 @@ const Footer = () => {
 			</div>
 			<div className="flex items-center justify-between w-screen py-5 h-100 md:w-full bg-lightYellow px-7">
 				<hr className="w-1/4 font-bold" />
-				<h1>Copyright &copy; 2023</h1>
+				<h1>{t('Copyright')} &copy; 2023</h1>
 				<span className="flex">
 					<AiFillFacebook size={24} />
 					<AiFillTwitterSquare size={24} />

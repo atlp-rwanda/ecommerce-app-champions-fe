@@ -14,9 +14,10 @@ export const login = (userData) => async (dispatch) => {
 	try {
 		dispatch(loginStart());
 		const res = await Userlogin(userData);
+		console.log('response', res);
 		if (res.token && !res.encodedOTP) {
 			Cookies.set('token', res.token, { expires: 7 });
-			Cookies.set('name', res.data.others.firstName, { expires: 7 });
+			Cookies.set('name', res.data?.others?.firstName, { expires: 7 });
 			dispatch(loginSuccess(res));
 		} else if (res.loginOTP) {
 			Cookies.set('loginOTP', res.loginOTP);
@@ -28,14 +29,11 @@ export const login = (userData) => async (dispatch) => {
 			Cookies.set('loginVendorid', res.user);
 			Cookies.set('loginOTP', res.encodedOTP);
 			Cookies.set('vendorToken', res.token);
-			Cookies.set('name', res.firstName, { expires: 7 });
 			dispatch(loginSuccess(res));
 		}
-		toast.success('login successful', {
-			position: toast.POSITION.TOP_RIGHT,
-		});
 		return res;
 	} catch (error) {
+		console.log('error', error);
 		if (error && error.message.includes('password has expired')) {
 			dispatch(passwordExpired());
 			Swal.fire({
@@ -58,6 +56,7 @@ export const login = (userData) => async (dispatch) => {
 			return dispatch(loginFail('Invalid Credentials.'));
 		}
 		if (error) {
+			console.log('error', error);
 			toast.error('invalid credentials', {
 				position: toast.POSITION.TOP_RIGHT,
 			});

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/button-has-type */
@@ -6,7 +7,7 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
-
+import { useTranslation } from 'react-i18next';
 import { BiChevronDown } from 'react-icons/bi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,8 +17,10 @@ import { handleToken, handleLogout } from '../../redux/actions/token.action';
 import SearchBar from './SearchBar';
 
 const Topnav = ({ displaySearchBar, className, handleSearch }) => {
+	const { t } = useTranslation();
 	const [showMenu, setShowMenu] = useState(false);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
 	const navigate = useNavigate();
 
 	const handleDropdown = () => {
@@ -28,9 +31,7 @@ const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 		setShowMenu(!showMenu);
 	};
 	const dispatch = useDispatch();
-	const { decodedToken, token, name } = useSelector(
-		(state) => state.token || {}
-	);
+	const { token, name } = useSelector((state) => state.token || {});
 
 	const logout = () => {
 		dispatch(handleLogout());
@@ -49,15 +50,21 @@ const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 					<img src={Logo} className="cursor-pointer w-52 md:w-40" alt="Logo" />
 				</Link>
 				<h1 className="hidden font-bold md:block text-primaryGreen">
-					<Link to="/product">Products</Link>
+					<Link to="/product">{t('products')}</Link>
 				</h1>
 			</div>
 
 			<button
-				className="block lg:hidden text-primaryGreen absolute right-7 z-11  "
+				className="block lg:hidden text-primaryGreen absolute right-7 z-30  "
 				onClick={toggleMenu}
 			>
-				{showMenu ? <GrClose size={40} /> : <GiHamburgerMenu size={40} />}
+				{showMenu ? (
+					<button className="absolute top-0 right-1 p-2  font-bold  ">
+						<GrClose size={30} />
+					</button>
+				) : (
+					<GiHamburgerMenu size={40} />
+				)}
 			</button>
 			<div className="flex-col items-center justify-end hidden w-11/12 h-full mx-auto lg:flex lg:flex-row">
 				{displaySearchBar && <SearchBar handleSearch={handleSearch} />}
@@ -70,13 +77,13 @@ const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 							{isDropdownOpen && (
 								<div className="absolute right-15 mt-11 bg-gray border rounded shadow-lg top-7 z-20">
 									<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
-										<Link to="/Profile">Profile</Link>
+										<Link to="/Profile">{t('Profile')}</Link>
 									</h1>
 									<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
-										<Link to="/order">Orders</Link>
+										<Link to="/order">{t('Orders')}</Link>
 									</h1>
 									<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
-										<Link to="/wishlist">Wishlist</Link>
+										<Link to="/wishlist">{t('Wishlist')}</Link>
 									</h1>
 									<h1
 										className="flex px-4 py-2 font-bold text-gray-800 hover:bg-gray-200"
@@ -86,7 +93,7 @@ const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 											size={25}
 											className="cursor-pointer text-primaryGreen"
 										/>
-										Logout
+										{t('Logout')}
 									</h1>
 								</div>
 							)}
@@ -99,7 +106,7 @@ const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 								to="/login"
 								className="flex items-center justify-center p-1 my-4 font-bold border rounded-2xl bg-brightGray text-primaryGreen w-28"
 							>
-								<Link to="/login">Login</Link>
+								<Link to="/login">{t('Login')}</Link>
 							</Link>
 						</div>
 					)}
@@ -118,7 +125,7 @@ const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 					</div>
 					<div className="flex items-center justify-center my-5 w-3/4">
 						<h1 className=" md:hidden  font-bold  text-primaryGreen">
-							<Link to="/product">Products</Link>
+							<Link to="/product">{t('products')}</Link>
 						</h1>
 					</div>
 					<div className="flex flex-col items-center justify-between w-1/4 mb-10 ">
@@ -130,13 +137,13 @@ const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 								{isDropdownOpen && (
 									<div className="absolute right-0 mt-2 bg-white border rounded shadow-lg top-7">
 										<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
-											<Link to="/Profile">Profile</Link>
+											<Link to="/Profile">{t('Profile')}</Link>
 										</h1>
 										<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
-											<Link to="/order">Orders</Link>
+											<Link to="/order">{t('Orders')}</Link>
 										</h1>
 										<h1 className="block px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
-											<Link to="/wishlist">Wishlist</Link>
+											<Link to="/wishlist">{t('Wishlist')}</Link>
 										</h1>
 										<h1
 											className="flex px-4 py-2 font-bold text-gray-800 hover:bg-gray-200"
@@ -146,7 +153,7 @@ const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 												size={25}
 												className="cursor-pointer text-primaryGreen"
 											/>
-											Logout
+											{t('Logout')}
 										</h1>
 									</div>
 								)}
@@ -154,7 +161,7 @@ const Topnav = ({ displaySearchBar, className, handleSearch }) => {
 						) : (
 							<div>
 								<h1 className="flex items-center justify-center p-1 my-4 font-bold border rounded-2xl bg-brightGray text-primaryGreen w-28">
-									<Link to="/login">Login</Link>
+									<Link to="/login">{t('Login')}</Link>
 								</h1>
 							</div>
 						)}
