@@ -49,7 +49,7 @@ const ProductCard = ({ product, className, btnclassName }) => {
 		});
 	};
 	return (
-		<div className="card bg-[#EEF0F2] border-2 border-lightYellow rounded-md relative hover:scale-105  duration-200 ease-in-out  p-1 ">
+		<div className="card bg-[#EEF0F2] border-2 border-lightYellow rounded-md relative hover:  duration-200 ease-in-out  p-1 ">
 			<div className="absolute top-1 right-1 flex items-center justify-center w-8 h-8 rounded-full ">
 				{showHeart && (
 					<FiHeart

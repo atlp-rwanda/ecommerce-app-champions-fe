@@ -19,6 +19,7 @@ import LoadingSpinner from '../LoadingSpinner';
 import SearchComponent from '../product/SearchProduct';
 import Header from '../vendorDashboard/Header';
 import { setUpdateProductId } from '../../redux/reducers/product/updateProductSlice';
+import { setProductId } from '../../redux/reducers/product/singleProductSlice';
 import { deleteProduct } from '../../redux/actions/product.action';
 import { getVendorProducts } from '../../redux/actions/vendor.product';
 import Loader from '../vendorDashboard/Loader';
@@ -46,6 +47,7 @@ function Products() {
 	};
 	const [isAddProductVisible, setAddProductVisible] = useState(false);
 	const [isUpdateProductVisible, setUpdateProductVisible] = useState(false);
+	const [isSingleProductVisible, setSingleProductVisible] = useState(false);
 
 	const handleEmptySearch = () => {
 		setSearchResults(null);
@@ -54,6 +56,10 @@ function Products() {
 	const handleUpdateProduct = (id) => {
 		dispatch(setUpdateProductId({ id }));
 		setUpdateProductVisible(true);
+	};
+	const handleGetSingleProduct = (id) => {
+		dispatch(setProductId({ id }));
+		setSingleProductVisible(true);
 	};
 
 	return (
@@ -107,13 +113,11 @@ function Products() {
 												/>
 											</td>
 											<td>
-												<Link to={`/productPage/${item.productId}`}>
-													<FaEye
-														className="text-[#8C271E] eye cursor-pointer rosy_brown rounded  h-5"
-														style={{ color: 'rosybrown' }}
-														onClick={() => setAddProductVisible(true)}
-													/>
-												</Link>
+												{/* <Link to={`/SellerProductPage/${item.productId}`}> */}
+												<FaEye
+													className="  cursor-pointer "
+													onClick={() => handleGetSingleProduct(item.productId)}
+												/>
 											</td>
 										</tr>
 									))
@@ -139,15 +143,14 @@ function Products() {
 													className="delete text-red-600 cursor-pointer"
 													onClick={() => setSelectedProduct(item)}
 												/>
-											</td>
-											<td>
-												<Link to={`/productPage/${item.productId}`}>
-													<FaEye
-														className="text-[#8C271E] cursor-pointer rosy_brown rounded  h-5"
-														style={{ color: 'rosybrown' }}
-														onClick={() => setAddProductVisible(true)}
-													/>
-												</Link>
+												{/* </td> */}
+												{/* <td> */}
+												{/* <Link to={`/SellerProductPage/${item.productId}`}> */}
+												<FaEye
+													className="  cursor-pointer "
+													onClick={() => handleGetSingleProduct(item.productId)}
+												/>
+												{/* </Link> */}
 											</td>
 										</tr>
 									))
@@ -190,6 +193,11 @@ function Products() {
 				{isUpdateProductVisible && (
 					<div className="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-75 z-50 flex justify-center items-center">
 						<UpdateProduct setShowUpdateProduct={setUpdateProductVisible} />
+					</div>
+				)}
+				{isSingleProductVisible && (
+					<div className="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-75 z-50 flex justify-center items-center">
+						<SellerProductPage setShowSingleProduct={setSingleProductVisible} />
 					</div>
 				)}
 			</div>
