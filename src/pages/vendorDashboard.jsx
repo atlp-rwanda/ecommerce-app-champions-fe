@@ -1,10 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-no-useless-fragment */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Cookies from 'js-cookie';
+import { BsChatText } from 'react-icons/bs';
+import io from 'socket.io-client';
 import { ToastContainer, toast } from 'react-toastify';
 import Navbar from '../components/vendorDashboard/Navbar';
 import VendorSidebar from '../components/vendorDashboard/vendorSidebar';
@@ -13,12 +12,17 @@ import Ecommerce from '../components/vendorDashboard/Ecommerce';
 import { useStateContext } from '../contexts/ContextProvider';
 import { getVendorProducts } from '../redux/actions/vendor.product';
 import { getNotifications } from '../redux/actions/notifications';
+import { setNotifications } from '../redux/reducers/auth/notificationSlice';
 import Loader from '../components/vendorDashboard/Loader';
+import LiveChat from '../components/LiveChat';
+import { handleToken } from '../redux/actions/token.action';
+import Button from '../components/Button/Button';
+import Sales from '../components/vendorDashboard/Sales';
 import varKeys from '../constants/keys';
 
+const url = varKeys.APP_URL;
+
 const vendorDashboard = () => {
-	const token = Cookies.get('token');
-	const dispatch = useDispatch();
 	const { activeMenu } = useStateContext();
 	const [showEcommerce, setShowEcommerce] = useState(true);
 	const [showSales, setShowSales] = useState(false);
@@ -27,12 +31,37 @@ const vendorDashboard = () => {
 	const { loading: notLoading, error: notError } = useSelector(
 		(state) => state.notifications
 	);
+	const { token } = useSelector((state) => state.token);
+	const [showChat, setShowChat] = useState(false);
 
+	const dispatch = useDispatch();
+	const toggleChat = () => {
+		if (!token) {
+			toast.warn('login first!', { position: 'top-right' });
+		}
+
+		setShowChat(!showChat);
+	};
+
+	useEffect(() => {
+		dispatch(handleToken());
+	}, [dispatch]);
+	const socket = io(url);
+
+	useEffect(() => {
+		socket.on('notification', (data) => {
+			toast.warn('New notification!', { position: 'top-right' });
+			dispatch(setNotifications(data));
+		});
+
+		return () => {
+			socket.off('notification');
+		};
+	}, [dispatch, socket]);
 	useEffect(() => {
 		dispatch(getVendorProducts(token));
 		dispatch(getNotifications());
 	}, [dispatch, token]);
-
 	useEffect(() => {
 		if (error) {
 			toast.error(error);
@@ -44,11 +73,11 @@ const vendorDashboard = () => {
 	}, [error, notError]);
 	return (
 		<>
-			<ToastContainer />
 			{loading || notLoading ? (
 				<Loader />
 			) : (
 				<div>
+					{showChat && LiveChat ? <LiveChat /> : ''}
 					<div className="flex relative bg-[#DBE4EE]">
 						{activeMenu ? (
 							<div className="fixed bg-white w-72 sidebar ">
@@ -83,9 +112,16 @@ const vendorDashboard = () => {
 							<div>
 								{showEcommerce && <Ecommerce />}
 								{showProducts && <Products />}
+								{showSales && <Sales />}
 							</div>
 						</div>
 					</div>
+					<Button
+						handleClick={toggleChat}
+						label={<BsChatText size={22} />}
+						className="fixed z-50 flex items-center justify-center font-bold text-white rounded-full bg-primaryGreen w-14 h-14 bottom-4 right-4"
+					/>
+					<ToastContainer />
 				</div>
 			)}
 		</>

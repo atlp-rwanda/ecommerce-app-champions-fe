@@ -1,18 +1,40 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react/button-has-type */
+import React, { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 
-const SearchBar = () => {
+const SearchBar = ({ handleSearch }) => {
+	const { t } = useTranslation();
+	const [searchParam, setSearchParam] = useState('');
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		if (searchParam.trim() === '') {
+			return;
+		}
+		const searchQuery = encodeURIComponent(searchParam);
+		handleSearch(searchQuery);
+	};
 	return (
-		<form className="w-full h-2/3">
+		<form onSubmit={handleSubmit} className="w-full h-2/3">
 			<div className="flex items-center space-x-1 w-full md:w-3/4 bg-white h-full rounded-full px-2 ">
 				<input
-					placeholder="Search for product.... "
+					placeholder={t('Search')}
 					id="search"
 					name="search"
 					type="text"
 					autoComplete="true"
-					className="w-11/12 h-full border-none  rounded-full  appearance-none outline-none"
+					className="w-11/12 h-full border-none  rounded-full  appearance-none outline-none border-transparent focus:border-transparent focus:ring-0 bg-transparent"
+					onChange={(e) => setSearchParam(e.target.value)}
+					value={searchParam}
 				/>
-				<FiSearch size={24} className="cursor-pointer w-1/12 text-black" />
+				<button type="submit" className="p-0">
+					<FiSearch
+						size={24}
+						className="cursor-pointer w-full text-black font-bold"
+					/>
+				</button>
 			</div>
 		</form>
 	);

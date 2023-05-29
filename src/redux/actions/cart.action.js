@@ -31,6 +31,9 @@ export const getCart = (token) => async (dispatch) => {
 		dispatch(getCartSuccess(res));
 	} catch (error) {
 		if (error) {
+			if (error.message === undefined) {
+				return;
+			}
 			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
 			return dispatch(getCartFail(error.message));
 		}
@@ -49,8 +52,11 @@ export const addItemToCart = (id, token) => async (dispatch) => {
 		});
 	} catch (error) {
 		if (error) {
+			if (error.message === undefined) {
+				return;
+			}
 			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
-			return dispatch(addToCartFail(error.message));
+			dispatch(addToCartFail(error.message));
 		}
 		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
 		return dispatch(addToCartFail(error.Error));
@@ -80,7 +86,12 @@ export const clearCart = (token) => async (dispatch) => {
 		});
 	} catch (error) {
 		if (error) {
-			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+			if (error.message === undefined) {
+				return;
+			}
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(clearCartFail(error.message));
 		}
 		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
@@ -100,10 +111,17 @@ export const removeItem = (id, token) => async (dispatch) => {
 		});
 	} catch (error) {
 		if (error) {
-			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+			if (error.message === undefined) {
+				return;
+			}
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(clearCartFail(error.message));
 		}
-		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+		toast.error(`${error.message} `, {
+			position: toast.POSITION.TOP_RIGHT,
+		});
 		return dispatch(clearCartFail(error.Error));
 	}
 };

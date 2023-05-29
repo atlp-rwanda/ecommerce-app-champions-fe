@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { toast } from 'react-toastify';
 import {
 	registerPending,
@@ -17,6 +18,7 @@ export const registerBuyer = (buyerData) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
+			if (error.message === undefined) return;
 			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
 			return dispatch(registerFail(error.message));
 		}
@@ -36,6 +38,7 @@ export const registerVendor = (vendorData) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
+			if (error.message === undefined) return;
 			toast.error(`${error.message}`, {
 				position: toast.POSITION.TOP_RIGHT,
 			});

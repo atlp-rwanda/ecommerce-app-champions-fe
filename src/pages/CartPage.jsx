@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import CartItem from '../components/cart/CartItem';
 import CartCheckout from '../components/cart/CartCheckout';
 import { handleToken } from '../redux/actions/token.action';
@@ -11,13 +12,13 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { paymentaction } from '../redux/actions/payment.action';
 
 const CartPage = () => {
-	const { token } = useSelector((state) => state.token);
 	const { cartItems, loading } = useSelector((state) => state.cart);
-	// eslint-disable-next-line no-unused-vars
-	const [cartQuantity, setCartQuantity] = useState();
 
 	const { checkout, isloading } = useSelector((state) => state.checkout);
 
+	const token = Cookies.get('token');
+	// eslint-disable-next-line no-unused-vars
+	const [cartQuantity, setCartQuantity] = useState();
 	const dispatch = useDispatch();
 	const handleClearCart = () => {
 		dispatch(clearCart(token)).then(() =>

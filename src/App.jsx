@@ -12,7 +12,7 @@ import AdminDashboard from './pages/adminDashboard';
 import VendorDashboard from './pages/vendorDashboard';
 import CartPage from './pages/CartPage';
 import PageNotFound from './components/PageNotFound';
-import { UpdateProduct } from './pages/UpdateProduct';
+import UpdateProduct from './pages/UpdateProduct';
 import CreateProduct from './pages/Createproduct';
 import SingleProductPage from './pages/SingleProductPage';
 import { ProductPage } from './pages/ProductPage';
@@ -23,6 +23,8 @@ import Footer from './components/Landingpage/Footer';
 import PaymentSuccesspage from './components/payment/payment';
 import Products from './components/dashboard/products';
 import Wishlist from './components/wishlist/Wishlist';
+import LoginSuccesspage from './pages/Googlelogin';
+import './Translation-i18n/i18n';
 
 function App() {
 	return (
@@ -43,7 +45,7 @@ function App() {
 					path="/cart"
 					element={
 						<>
-							<Topnav displaySearchBar />
+							<Topnav />
 							<CartPage />
 							<Footer />
 						</>
@@ -55,10 +57,10 @@ function App() {
 						<>
 							<Topnav />
 							<PaymentSuccesspage />
-							<Footer />
 						</>
 					}
 				/>
+				<Route path="/loginSuccess" element={<LoginSuccesspage />} />
 				<Route path="/product" element={<ProductPage />} />
 
 				<Route path="/product/:productId" element={<SingleProductPage />} />
@@ -69,7 +71,7 @@ function App() {
 				<Route path="/products" element={<Products />} />
 				<Route path="/wishlist" element={<Wishlist />} />
 				<Route
-					path="SellerProductPage/:productId"
+					path="/SellerProductPage/:productId"
 					element={<SellerProductPage />}
 				/>
 				<Route path="*" element={<PageNotFound />} />

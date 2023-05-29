@@ -25,17 +25,22 @@ const LoginPage = () => {
 
 	const handleLogin = (e) => {
 		e.preventDefault();
-		dispatch(login(loginState)).then(() => {
-			setTimeout(() => {
-				if (user?.data?.others?.RoleId === 1) return navigate('/admin');
-
-				if (user?.data?.others?.RoleId === 3) return navigate('/');
-
-				if (user?.hashedOTP) return navigate('/auth');
-			}, 7000);
-			localStorage.setItem('user', JSON.stringify(user));
+		dispatch(login(loginState)).then((res) => {
+			if (res.data?.others?.RoleId === 1) {
+				navigate('/admin');
+			} else if (res.data?.others?.RoleId === 3) {
+				navigate('/');
+			} else if (res.hashedOTP) {
+				navigate('/auth');
+			}
 		});
 	};
+
+	useEffect(() => {
+		if (user) {
+			localStorage.setItem('user', JSON.stringify(user));
+		}
+	}, [user]);
 
 	return (
 		<div>
@@ -87,7 +92,6 @@ const LoginPage = () => {
 					</div>
 				</div>
 			</div>
-			<ToastContainer />
 		</div>
 	);
 };

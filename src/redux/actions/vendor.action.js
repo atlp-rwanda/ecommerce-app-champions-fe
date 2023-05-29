@@ -17,15 +17,14 @@ export const getAllVendors = (token) => async (dispatch) => {
 		dispatch(getVendorsPending());
 		const res = await allVendors(token);
 		dispatch(getVendorsSuccess(res));
-		toast.success('All Available Accounts Retrieved', {
-			position: toast.POSITION.TOP_RIGHT,
-		});
 		return res;
 	} catch (error) {
 		if (error) {
 			return dispatch(getVendorsFail(error.message));
 		}
-		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+		toast.error(`${error.message} `, {
+			position: toast.POSITION.TOP_RIGHT,
+		});
 		return dispatch(getVendorsFail(error.Error));
 	}
 };
@@ -41,9 +40,14 @@ export const enableVendorAccount = (token, id) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(enableVendorFail(error.message));
 		}
-		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+		toast.error(`${error.message} `, {
+			position: toast.POSITION.TOP_RIGHT,
+		});
 		return dispatch(enableVendorFail(error.Error));
 	}
 };
@@ -59,8 +63,14 @@ export const disableVendorAccount = (token, id) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(disableVendorFail(error.message));
 		}
+		toast.error(`${error.message} `, {
+			position: toast.POSITION.TOP_RIGHT,
+		});
 		return dispatch(disableVendorFail(error.Error));
 	}
 };

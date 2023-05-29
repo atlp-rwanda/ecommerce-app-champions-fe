@@ -23,8 +23,11 @@ export const handleToken = () => (dispatch) => {
 export const handleLogout = () => (dispatch) => {
 	const token = Cookies.get('token');
 	dispatch(fetchToken(token));
-	localStorage.removeItem('user');
+	localStorage.clear();
 	Cookies.remove('token', { path: '/' });
 	Cookies.remove('name', { path: '/' });
+	Cookies.remove('vendorToken', { path: '/' });
+	Cookies.remove('loginOTP', { path: '/' });
+	Cookies.remove('loginVendorid', { path: '/' });
 	return null;
 };

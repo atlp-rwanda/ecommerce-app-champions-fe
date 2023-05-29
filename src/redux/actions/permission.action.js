@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { toast } from 'react-toastify';
 import { newPermission, enableDisablePermission } from '../../api/permission';
 import {
@@ -20,7 +21,10 @@ export const createPermission = (token, data) => async (dispatch) => {
 		return res;
 	} catch (error) {
 		if (error) {
-			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+			if (error.message === undefined) return;
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(createPermissionFail(error.message));
 		}
 		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
@@ -34,16 +38,18 @@ export const enableAndDisableUserPermission =
 			dispatch(enableAndDisablePermissionPending());
 			const res = await enableDisablePermission(token, id, data);
 			dispatch(enableAndDisablePermissionSuccess(res));
-			toast.success('permission status changed.', {
-				position: toast.POSITION.TOP_RIGHT,
-			});
 			return res;
 		} catch (error) {
 			if (error) {
-				toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+				if (error.message === undefined) return;
+				toast.error(`${error.message} `, {
+					position: toast.POSITION.TOP_RIGHT,
+				});
 				return dispatch(enableAndDisablePermissionFail(error.message));
 			}
-			toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });
+			toast.error(`${error.message} `, {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			return dispatch(enableAndDisablePermissionFail(error.Error));
 		}
 	};
