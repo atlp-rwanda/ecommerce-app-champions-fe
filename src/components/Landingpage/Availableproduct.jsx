@@ -54,7 +54,7 @@ const Homeproduct = () => {
 	const filteredProducts =
 		selectedCategory === 'All'
 			? product
-			: product.filter((item) => item.Category.name === selectedCategory);
+			: product.filter((item) => item?.Category?.name === selectedCategory);
 
 	const allproducts = products.items ? products.items.slice(0, 8) : [];
 	const getallproducts =
