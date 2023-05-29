@@ -115,7 +115,7 @@ function Products() {
 											<td>
 												{/* <Link to={`/SellerProductPage/${item.productId}`}> */}
 												<FaEye
-													className="  cursor-pointer "
+													className="relative top-[20px]  cursor-pointer "
 													onClick={() => handleGetSingleProduct(item.productId)}
 												/>
 											</td>
@@ -140,14 +140,14 @@ function Products() {
 											</td>
 											<td>
 												<AiFillDelete
-													className="delete text-red-600 cursor-pointer"
+													className="delete relative top-[8px] text-red-600 cursor-pointer"
 													onClick={() => setSelectedProduct(item)}
 												/>
 												{/* </td> */}
 												{/* <td> */}
 												{/* <Link to={`/SellerProductPage/${item.productId}`}> */}
 												<FaEye
-													className="  cursor-pointer "
+													className="relative left-10  top-[-11px] eyes cursor-pointer "
 													onClick={() => handleGetSingleProduct(item.productId)}
 												/>
 												{/* </Link> */}
