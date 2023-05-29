@@ -49,7 +49,7 @@ export const addItemToCart = (id, token) => async (dispatch) => {
 		});
 	} catch (error) {
 		if (error) {
-			toast.error(`${error.message}`, { position: toast.POSITION.TOP_RIGHT });
+			toast.error(`${error.error}`, { position: toast.POSITION.TOP_RIGHT });
 			return dispatch(addToCartFail(error.message));
 		}
 		toast.error(`${error.Error}`, { position: toast.POSITION.TOP_RIGHT });

@@ -18,7 +18,7 @@ export const paymentaction = () => async (dispatch) => {
 
 		dispatch(checkoutSuccess(res));
 	} catch (error) {
-		toast.error(`${error.message} `, {
+		toast.error(`${error.error} `, {
 			position: toast.POSITION.TOP_RIGHT,
 		});
 		dispatch(checkoutFail());

@@ -58,7 +58,6 @@ const Wishlist = () => {
 				<Loader />
 			) : (
 				<div>
-					<ToastContainer />
 					<Grid container spacing={3}>
 						{wishlistItems.wishlist.map((items) => (
 							<Grid item xs={12} sm={4} key={items.productId}>
